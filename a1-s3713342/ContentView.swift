@@ -8,9 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all) // set background black
+
+            VStack {
+                HStack {
+                    Text("Listening")
+                        .foregroundColor(.white) // white
+                    Text("Feed")
+                        .foregroundColor(.white) // white
+                    Text("Saved")
+                        .foregroundColor(.white) // white
+                    Text("Chat")
+                        .foregroundColor(.white) // white
+                }
+                .font(.headline)
+                Spacer() // to the top
+            }
+        }
     }
 }
 
@@ -19,3 +36,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
