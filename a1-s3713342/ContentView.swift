@@ -8,24 +8,44 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var viewSelection = 0
     
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all) // set background black
+            Color.black.edgesIgnoringSafeArea(.all) // set black background
 
             VStack {
                 HStack {
                     Text("Listening")
-                        .foregroundColor(.white) // white
+                        .foregroundColor(viewSelection == 0 ? .white : .gray)
                     Text("Feed")
-                        .foregroundColor(.white) // white
+                        .foregroundColor(viewSelection == 1 ? .white : .gray)
                     Text("Saved")
-                        .foregroundColor(.white) // white
+                        .foregroundColor(viewSelection == 2 ? .white : .gray)
                     Text("Chat")
-                        .foregroundColor(.white) // white
+                        .foregroundColor(viewSelection == 3 ? .white : .gray)
                 }
                 .font(.headline)
-                Spacer() // to the top
+                .padding()
+                
+                TabView(selection: $viewSelection) {
+                    Text("Listening")
+                    //rectengular and + button
+                        .tag(0)
+                        .foregroundColor(.white)
+                    Text("Feed")
+                    // some contracts
+                        .tag(1)
+                        .foregroundColor(.white)
+                    Text("Saved")
+                    
+                        .tag(2)
+                        .foregroundColor(.white)
+                    Text("Chat")
+                        .tag(3)
+                        .foregroundColor(.white)
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Hide indicator
             }
         }
     }
