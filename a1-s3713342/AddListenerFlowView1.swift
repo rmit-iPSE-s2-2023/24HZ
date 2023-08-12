@@ -12,7 +12,7 @@ struct AddListenerFlowView1: View {
     @State private var option2Selected: Bool = false
     @State private var option3Selected: Bool = false
     
-    @Binding var navigateToAddListenerFlow: Bool
+    @Binding var navigateToNext: Bool
 
     var body: some View {
         ZStack {
@@ -48,7 +48,7 @@ struct AddListenerFlowView1: View {
                 }
                 
                 if option1Selected || option2Selected || option3Selected {
-                    NavigationLink(destination: AddListenerFlowView2(navigateToAddListenerFlow: $navigateToAddListenerFlow)) {
+                    NavigationLink(destination: AddListenerFlowView2(navigateToNext: $navigateToNext)) {
                         Image("confirm")
                             //.resizable()
                             //.frame(width: 50, height: 50)
@@ -60,15 +60,5 @@ struct AddListenerFlowView1: View {
                 }
             }
         }
-    }
-}
-
-
-
-
-
-struct AddListenerFlowView1_Previews: PreviewProvider {
-    static var previews: some View {
-        AddListenerFlowView1(navigateToAddListenerFlow: .constant(true))
     }
 }

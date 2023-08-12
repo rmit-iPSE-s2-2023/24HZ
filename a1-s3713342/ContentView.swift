@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var viewSelection = 0
-    @State private var navigateToAddListenerFlow = false
+    @State private var navigateToNext = false
     
     var body: some View {
         NavigationView {
@@ -30,14 +30,14 @@ struct ContentView: View {
                     .padding()
 
                     TabView(selection: $viewSelection) {
-                        if !navigateToAddListenerFlow {
+                        if !navigateToNext {
                             VStack(spacing: 20) {
                                 Rectangle()
                                     .fill(Color.white)
                                     .frame(width: 350, height: 500) // width and height
                                     .cornerRadius(30) // radius
                                 
-                                NavigationLink(destination: AddListenerFlowView0(navigateToAddListenerFlow: $navigateToAddListenerFlow), isActive: $navigateToAddListenerFlow) {
+                                NavigationLink(destination: AddListenerFlowView0(navigateToNext: $navigateToNext), isActive: $navigateToNext) {
                                     Image("add-event")
                                 }
                                 .isDetailLink(false) // ensures that the back stack is cleared
@@ -45,7 +45,7 @@ struct ContentView: View {
                             .tag(0)
                             .foregroundColor(.white)
                         } else {
-                            AddListenerFlowView0(navigateToAddListenerFlow: $navigateToAddListenerFlow)
+                            AddListenerFlowView0(navigateToNext: $navigateToNext)
                                 .tag(0)
                                 .foregroundColor(.white)
                         }
@@ -76,3 +76,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

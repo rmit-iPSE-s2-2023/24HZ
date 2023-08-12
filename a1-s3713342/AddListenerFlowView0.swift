@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddListenerFlowView0: View {
     @State private var selectedOption: Int? // to track selected option
-    @Binding var navigateToAddListenerFlow: Bool
+    @Binding var navigateToNext: Bool
     
     var body: some View {
         ZStack {
@@ -35,7 +35,7 @@ struct AddListenerFlowView0: View {
                 }
 
                 if selectedOption == 1 {
-                    NavigationLink(destination: AddListenerFlowView1(navigateToAddListenerFlow: $navigateToAddListenerFlow)) {
+                    NavigationLink(destination: AddListenerFlowView1(navigateToNext: $navigateToNext)) {
                         Image("confirm")
                             //.resizable()
                             //.frame(width: 50, height: 50)
@@ -53,20 +53,5 @@ struct AddListenerFlowView0: View {
                 }
             }
         }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-struct AddListenerFlowView0_Previews: PreviewProvider {
-    static var previews: some View {
-        AddListenerFlowView0(navigateToAddListenerFlow: .constant(true))
     }
 }
