@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AddListenerFlowView0: View {
-    @State private var selectedOption: Int?// To track selected option
-    @State private var moveToNextView = false
-
+    @State private var selectedOption: Int? // to track selected option
+    @Binding var navigateToAddListenerFlow: Bool
+    
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all) // set black background
@@ -33,26 +33,40 @@ struct AddListenerFlowView0: View {
                             .brightness(selectedOption == 2 ? -0.5 : 0)
                     }
                 }
-                Button(action: {
-                    if selectedOption != nil {
-                        moveToNextView = true
+
+                if selectedOption == 1 {
+                    NavigationLink(destination: AddListenerFlowView1(navigateToAddListenerFlow: $navigateToAddListenerFlow)) {
+                        Image("confirm")
+                            //.resizable()
+                            //.frame(width: 50, height: 50)
                     }
-                }) {
+                } else if selectedOption == 2 {
+                    NavigationLink(destination: Text("custompage")) {
+                        Image("confirm")
+                            //.resizable()
+                            //.frame(width: 50, height: 50)
+                    }
+                } else {
                     Image("confirm")
                         //.resizable()
                         //.frame(width: 50, height: 50)
-                        
                 }
-            }
-            .fullScreenCover(isPresented: $moveToNextView) {
-                AddListenerFlowView1()
             }
         }
     }
 }
 
+
+
+
+
+
+
+
+
+
 struct AddListenerFlowView0_Previews: PreviewProvider {
     static var previews: some View {
-        AddListenerFlowView0()
+        AddListenerFlowView0(navigateToAddListenerFlow: .constant(true))
     }
 }

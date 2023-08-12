@@ -2,7 +2,7 @@
 //  AddListenerFlowView1.swift
 //  a1-s3713342
 //
-//  Created by 민철 on 2023/08/05.
+//  Created by 민철 on 2023/08/12.
 //
 
 import SwiftUI
@@ -11,7 +11,8 @@ struct AddListenerFlowView1: View {
     @State private var option1Selected: Bool = false
     @State private var option2Selected: Bool = false
     @State private var option3Selected: Bool = false
-    @State private var moveToNextView = false
+    
+    @Binding var navigateToAddListenerFlow: Bool
 
     var body: some View {
         ZStack {
@@ -45,15 +46,17 @@ struct AddListenerFlowView1: View {
                             .brightness(option3Selected ? -0.5 : 0)
                     }
                 }
-                Button(action: {
-                    moveToNextView = true
-                }) {
+                
+                if option1Selected || option2Selected || option3Selected {
+                    NavigationLink(destination: AddListenerFlowView2(navigateToAddListenerFlow: $navigateToAddListenerFlow)) {
+                        Image("confirm")
+                            //.resizable()
+                            //.frame(width: 50, height: 50)
+                    }
+                } else {
                     Image("confirm")
                         //.resizable()
                         //.frame(width: 50, height: 50)
-                }
-                .fullScreenCover(isPresented: $moveToNextView) {
-                    AddListenerFlowView2()
                 }
             }
         }
@@ -61,8 +64,11 @@ struct AddListenerFlowView1: View {
 }
 
 
+
+
+
 struct AddListenerFlowView1_Previews: PreviewProvider {
     static var previews: some View {
-        AddListenerFlowView1()
+        AddListenerFlowView1(navigateToAddListenerFlow: .constant(true))
     }
 }
