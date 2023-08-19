@@ -4,6 +4,7 @@
 //
 //  Created by 민철 on 2023/08/12.
 //
+
 import SwiftUI
 
 struct ContentView: View {
@@ -14,6 +15,7 @@ struct ContentView: View {
     
     @State private var viewSelection = 0
     @State private var navigateToNext = false
+    @State private var navigateToCustom = false // for custom page
     
     var body: some View {
         NavigationView {
@@ -54,7 +56,7 @@ struct ContentView: View {
                                     }
                                 }
                                 Spacer()
-                                NavigationLink(destination: AddListenerFlowView0(blocks: $blocks, notificationSettings: $notificationSettings, navigateToNext: $navigateToNext), isActive: $navigateToNext) {
+                                NavigationLink(destination: AddListenerFlowView0(blocks: $blocks, notificationSettings: $notificationSettings, navigateToNext: $navigateToNext, navigateToCustom: $navigateToCustom), isActive: $navigateToNext) {
                                     Image("add-event")
                                 }
                                 .isDetailLink(false) // ensures that the back stack is cleared

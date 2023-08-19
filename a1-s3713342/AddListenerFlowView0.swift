@@ -13,6 +13,7 @@ struct AddListenerFlowView0: View {
     
     @State var selectedOption: Int? = nil // to track selected option
     @Binding var navigateToNext: Bool
+    @Binding var navigateToCustom: Bool // for custom page
     
     var body: some View {
         ZStack {
@@ -50,7 +51,7 @@ struct AddListenerFlowView0: View {
                         Image("continue")
                     }
                 } else if selectedOption == 2 {
-                    NavigationLink(destination: Text("custompage")) {
+                    NavigationLink(destination: AddListenerFlowCustom1(navigateToCustom: $navigateToCustom)) {
                         Image("continue")
                     }
                 } else {
