@@ -4,10 +4,14 @@
 //
 //  Created by 민철 on 2023/08/12.
 //
-
 import SwiftUI
 
 struct ContentView: View {
+    @State var blocks: [BlockType] = []
+    @State var notificationSettings: [NotificationSetting] = [.eventsFeed]
+    //@Binding var blocks: [BlockType]
+    //@Binding var notificationSettings: [NotificationSetting]
+    
     @State private var viewSelection = 0
     @State private var navigateToNext = false
     
@@ -29,33 +33,90 @@ struct ContentView: View {
                     .font(.headline)
                     .padding()
 
+
                     TabView(selection: $viewSelection) {
-                        if !navigateToNext {
-                            VStack(spacing: 20) {
-                                Rectangle()
-                                    .fill(Color.white)
-                                    .frame(width: 350, height: 500) // width and height
-                                    .cornerRadius(30) // radius
-                                
-                                NavigationLink(destination: AddListenerFlowView0(navigateToNext: $navigateToNext), isActive: $navigateToNext) {
+                        // Listening tab
+                        ZStack {
+                            Color.black.edgesIgnoringSafeArea(.all)
+                            VStack {
+                                ForEach(blocks, id: \.self) { block in
+                                    NavigationLink(destination: BlockSettingView(block: block, notificationSettings: $notificationSettings)) {
+                                        HStack {
+                                            Image("block-generic")
+                                                .overlay(
+                                                    Text(block.rawValue)
+                                                        .foregroundColor(.black)  // color
+                                                        .font(.headline)          // fontsize
+                                                        .padding(.leading, 10),   // 10pt padding
+                                                    alignment: .leading
+                                                )
+                                        }
+                                    }
+                                }
+                                Spacer()
+                                NavigationLink(destination: AddListenerFlowView0(blocks: $blocks, notificationSettings: $notificationSettings, navigateToNext: $navigateToNext), isActive: $navigateToNext) {
                                     Image("add-event")
                                 }
                                 .isDetailLink(false) // ensures that the back stack is cleared
-                            }
-                            .tag(0)
-                            .foregroundColor(.white)
-                        } else {
-                            AddListenerFlowView0(navigateToNext: $navigateToNext)
-                                .tag(0)
-                                .foregroundColor(.white)
-                        }
 
+                            }
+                        }
+                        .tag(0)
+                        .foregroundColor(.white)
+                        
+                        // Other tabs
                         Text("Feed")
                             .tag(1)
                             .foregroundColor(.white)
-                        Text("Saved")
+                        // Saved tab
+                        ZStack {
+                            Color.black.edgesIgnoringSafeArea(.all)
+                            VStack(spacing: 20) {
+                                Text("Your saved events will show up on this page.")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.white)
+                                    .padding(.top, 50)
+                                Spacer()
+                                
+                                VStack(spacing: 15) {
+                                    Text("To save events:")
+                                        .foregroundColor(.white)
+                                        .font(.headline)
+                                    
+                                    Text("1. Navigate to Feed")
+                                        .foregroundColor(.white)
+                                    Text("2. Tap on an event")
+                                        .foregroundColor(.white)
+                                    Text("3. Tap “Save”")
+                                        .foregroundColor(.white)
+                                }
+                                .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                
+                                VStack(spacing: 15) {
+                                    Image("icon")
+                                        .resizable()
+                                        .frame(width: 100, height: 100) // Adjust this to fit the icon's aspect ratio
+                                    Text("<helper_animation>")
+                                        .foregroundColor(.white)
+                                }
+                                .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.white, lineWidth: 2)
+                                )
+                                
+                                Spacer()
+                            }
+                        }
+                            .padding(.horizontal)
+                            .background(Color.black.edgesIgnoringSafeArea(.all))
                             .tag(2)
                             .foregroundColor(.white)
+                        
                         Text("Chat")
                             .tag(3)
                             .foregroundColor(.white)
@@ -63,17 +124,15 @@ struct ContentView: View {
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Hide indicator
                 }
             }
+            .navigationBarHidden(true)
         }
     }
 }
-
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
 

@@ -8,56 +8,45 @@
 import SwiftUI
 
 struct AddListenerFlowView1: View {
-    @State private var option1Selected: Bool = false
-    @State private var option2Selected: Bool = false
-    @State private var option3Selected: Bool = false
+    @Binding var blocks: [BlockType]
+    @Binding var notificationSettings: [NotificationSetting]
     
+    @State private var selectedBlocks: [BlockType] = []
     @Binding var navigateToNext: Bool
-
+    
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all) // set black background
-            
-            VStack(spacing: 20) {
-                Button(action: {
-                    option1Selected.toggle()
-                }) {
-                    VStack {
-                        Image("preference-selector")
-                            .overlay(Text("Lmk about new Zora NFTs").foregroundColor(.black))
-                            .brightness(option1Selected ? -0.5 : 0)
-                    }
-                }
-                Button(action: {
-                    option2Selected.toggle()
-                }) {
-                    VStack {
-                        Image("preference-selector")
-                            .overlay(Text("Lmk about new Zora NFTs").foregroundColor(.black))
-                            .brightness(option2Selected ? -0.5 : 0)
-                    }
-                }
-                Button(action: {
-                    option3Selected.toggle()
-                }) {
-                    VStack {
-                        Image("preference-selector")
-                            .overlay(Text("Lmk about new Zora NFTs").foregroundColor(.black))
-                            .brightness(option3Selected ? -0.5 : 0)
-                    }
-                }
+            Color.black.edgesIgnoringSafeArea(.all)
+            //black background
+            VStack {
+                Spacer()
                 
-                if option1Selected || option2Selected || option3Selected {
-                    NavigationLink(destination: AddListenerFlowView2(navigateToNext: $navigateToNext)) {
-                        Image("confirm")
-                            //.resizable()
-                            //.frame(width: 50, height: 50)
+                Text("What would you like to listen for?")
+                    .foregroundColor(.white)
+                    .font(.system(size: 24))
+                
+                ForEach(BlockType.allCases, id: \.self) { block in
+                    Button(action: {
+                        if selectedBlocks.contains(block) {
+                            selectedBlocks.removeAll { $0 == block }
+                        } else {
+                            selectedBlocks.append(block)
+                        }
+                    }) {
+                        Image(selectedBlocks.contains(block) ? "checked=true" : "checked=false")
+                            .overlay(Text(block.rawValue).foregroundColor(.black))
+                    }
+                }
+                Spacer()
+                
+                if !selectedBlocks.isEmpty {
+                    NavigationLink(destination: AddListenerFlowView2(selectedBlocks: $selectedBlocks, blocks: $blocks, notificationSettings: $notificationSettings, navigateToNext: $navigateToNext)) {
+                        Image("continue")
                     }
                 } else {
-                    Image("confirm")
-                        //.resizable()
-                        //.frame(width: 50, height: 50)
+                    Image("continue")
                 }
+                
             }
         }
     }
