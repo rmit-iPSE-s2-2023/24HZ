@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "eventTypeId": 1,
+        "subscriptionTimestamp": 1685995566
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "eventTypeId": 11111,
+        "subscriptionTimestamp": 1685995566
+    },
+    {
+        "id": 3,
+        "userId": 2,
+        "eventTypeId": 2,
+        "subscriptionTimestamp": 1685995566
+    },
+    {
+        "id": 4,
+        "userId": 2,
+        "eventTypeId": 22222,
+        "subscriptionTimestamp": 1685995566
+    }
+]

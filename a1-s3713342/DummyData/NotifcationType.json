@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "daily email",
+        "description": "Email sent daily with a summary of events of the last 24 hours"
+    },
+    {
+        "id": 2,
+        "name": "every email",
+        "description": "Email sent every time an event occurs"
+    },
+    {
+        "id": 3,
+        "name": "24hz feed",
+        "description": "Manadatory notification displayed in the Feed page of the 24HZ app"
+    },
+    {
+        "id": 4,
+        "name": "mobile",
+        "description": "Mobile notification sent every time an event occurs"
+    },
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "smartContractId": 1,
+        "name": "MetadataChange",
+        "description": "",
+        "methodId": 1,
+        "abi": "foo"
+    },
+    {
+        "id": 2,
+        "smartContractId": 2,
+        "name": "MetadataChange",
+        "description": "",
+        "methodId": 1,
+        "abi": "bar"
+    },
+    {
+        "id": 11111,
+        "smartContractId": 0,
+        "name": "New Zora NFT",
+        "description": "",
+        "methodId": 0,
+        "abi": ""
+    },
+    {
+        "id": 22222,
+        "smartContractId": 0,
+        "name": "New Coin",
+        "description": "",
+        "methodId": 0,
+        "abi": ""
+    },
+    {
+        "id": 33333,
+        "smartContractId": 0,
+        "name": "New Custom NFT",
+        "description": "",
+        "methodId": 0,
+        "abi": ""
+    }
+]
