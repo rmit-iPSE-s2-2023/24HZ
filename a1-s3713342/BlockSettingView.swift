@@ -32,6 +32,8 @@ struct BlockSettingView: View {
     }
 }
 
+
+
 struct BlockSettingView_Previews: PreviewProvider {
     static var previews: some View {
         BlockSettingView(block: .zoraNFTs, notificationSettings: .constant([.eventsFeed]))
