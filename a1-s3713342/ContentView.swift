@@ -13,7 +13,7 @@ struct ContentView: View {
     //@Binding var blocks: [BlockType]
     //@Binding var notificationSettings: [NotificationSetting]
     
-    @State private var viewSelection = 0
+    @State private var viewSelection = 1
     @State private var navigateToNext = false
     @State private var navigateToCustom = false // for custom page
     
@@ -66,10 +66,19 @@ struct ContentView: View {
                         .tag(0)
                         .foregroundColor(.white)
                         
-                        // Other tabs
-                        Text("Feed")
-                            .tag(1)
-                            .foregroundColor(.white)
+                        // Last 24H Feed Tab
+                        VStack {
+                            Text("Events captured in the Last 24 Hours")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                            
+                            // Divide captured events by hour blocks
+                            Hourmark(label: "12:00")
+                            
+                            Spacer()
+                        }
+                        .tag(1)
+                        
                         // Saved tab
                         ZStack {
                             Color.black.edgesIgnoringSafeArea(.all)
