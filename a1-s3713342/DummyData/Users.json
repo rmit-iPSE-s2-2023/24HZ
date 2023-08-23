@@ -1,0 +1,16 @@
+[{
+    "id": 1,
+    "email": "alice@alice.com",
+    "password": "alicepass",
+    "name": "Alice",
+    "pfpurl": "https://elementals-images.azuki.com/f598226a-368d-46a3-b450-7225285c56f2.png",
+    "registrationTimestamp": 1672495261
+},
+{
+    "id": 2,
+    "email": "bob@bob.com",
+    "password": "bobpass",
+    "name": "Bob",
+    "pfpurl": "https://elementals-images.azuki.com/7156e5c6-5393-4da8-b384-85bee749f9b8.png",
+    "registrationTimestamp": 1675263722
+}]

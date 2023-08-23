@@ -8,12 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    let user: User?
+    let eventLogs: [EventLog]?
+    let currentTime: TimeInterval = Constants.dummyCurrentTimeInterval
+    
+    init() {
+        user = getDummyUser(userId: 1)
+        if let unwrappedUser = user {
+            eventLogs = getCapturedEventLogs(userId: unwrappedUser.id, toTimeInterval: Constants.dummyCurrentTimeInterval)
+        } else {
+            eventLogs = nil
+        }
+    }
+    
     @State var blocks: [BlockType] = []
     @State var notificationSettings: [NotificationSetting] = [.eventsFeed]
     //@Binding var blocks: [BlockType]
     //@Binding var notificationSettings: [NotificationSetting]
     
-    @State private var viewSelection = 0
+    @State private var viewSelection = 1
     @State private var navigateToNext = false
     @State private var navigateToCustom = false // for custom page
     
@@ -66,10 +79,41 @@ struct ContentView: View {
                         .tag(0)
                         .foregroundColor(.white)
                         
-                        // Other tabs
-                        Text("Feed")
-                            .tag(1)
-                            .foregroundColor(.white)
+                        // Last 24H Feed Tab
+                        ScrollView {
+                            VStack {
+                                if let unwrappedUser = user {
+                                    Text(unwrappedUser.email)
+                                        .foregroundColor(Color.white)
+                                } else {
+                                    Text("User not found")
+                                        .foregroundColor(Color.white)
+                                }
+                                
+                                if let unwrappedEventLogs = eventLogs {
+                                    Text("\(unwrappedEventLogs.count)")
+                                        .foregroundColor(Color.white)
+                                } else {
+                                    Text("0 Events found")
+                                        .foregroundColor(Color.white)
+                                }
+                                
+                                Text("Events captured in the Last 24 Hours")
+                                    .font(.largeTitle)
+                                    .foregroundColor(.white)
+                                
+                                // Divide captured EventLogs by hour blocks
+                                let timeIntervals = getTimeIntervalsForPast24Hours(from: currentTime)
+                                
+                                ForEach(timeIntervals, id: \.self) { timeInterval in
+                                    TimeSegment(toTimestamp: timeInterval, eventLogs: eventLogs)
+                                }
+                                
+                                Spacer()
+                            }
+                        }
+                        .tag(1)
+                        
                         // Saved tab
                         ZStack {
                             Color.black.edgesIgnoringSafeArea(.all)

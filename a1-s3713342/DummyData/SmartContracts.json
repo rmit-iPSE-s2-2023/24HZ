@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "address": "0x",
+        "chainId": 7777777,
+        "tokenName": "Contract A",
+        "tokenSymbol": "A",
+        "deploymentBlock": 1,
+        "deploymentTx": "0x",
+        "deploymentTimestamp": 1672495261
+    },
+    {
+        "id": 2,
+        "address": "0x",
+        "chainId": 7777777,
+        "tokenName": "Contract B",
+        "tokenSymbol": "B",
+        "deploymentBlock": 2,
+        "deploymentTx": "0x",
+        "deploymentTimestamp": 1675263722
+    }
+]
