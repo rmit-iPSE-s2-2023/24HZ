@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var user: User = getDummyUser()
+    @State var currentTime = Constants.dummyCurrentTimeInterval    // Should keep state; using Constant for purpose of prototype
+    
     @State var blocks: [BlockType] = []
     @State var notificationSettings: [NotificationSetting] = [.eventsFeed]
     @State private var viewSelection = 0
-    
     
     var body: some View {
         NavigationView {
@@ -25,7 +28,7 @@ struct ContentView: View {
                         ListeningTab(blocks: $blocks, notificationSettings: $notificationSettings)
                             .tag(0)
                         
-                        FeedTab()
+                        FeedTab(user: $user, currentTime: $currentTime)
                             .tag(1)
                         
                         SavedTab()

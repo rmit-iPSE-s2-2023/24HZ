@@ -9,39 +9,23 @@ import SwiftUI
 
 struct FeedTab: View {
     
-    let user: User?
-    let eventLogs: [EventLog]?
-    let currentTime: TimeInterval = Constants.dummyCurrentTimeInterval
+    @Binding var user: User
+    @Binding var currentTime: TimeInterval
+    @State private var eventLogs: [EventLog]?
     
-    init() {
-        user = getDummyUser(userId: 1)
-        if let unwrappedUser = user {
-            eventLogs = getCapturedEventLogs(userId: unwrappedUser.id, toTimeInterval: Constants.dummyCurrentTimeInterval)
-        } else {
-            eventLogs = nil
-        }
+    // Initialize the view with pre-loaded event logs
+    init(user: Binding<User>, currentTime: Binding<TimeInterval>) {
+        _user = user
+        _currentTime = currentTime
+        _eventLogs = State(initialValue: getCapturedEventLogs(userId: user.wrappedValue.id,
+                                                              toTimeInterval: Constants.dummyCurrentTimeInterval))
     }
-    
+
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             ScrollView {
                 VStack {
-                    if let unwrappedUser = user {
-                        Text(unwrappedUser.email)
-                            .foregroundColor(Color.white)
-                    } else {
-                        Text("User not found")
-                            .foregroundColor(Color.white)
-                    }
-                    
-                    if let unwrappedEventLogs = eventLogs {
-                        Text("\(unwrappedEventLogs.count)")
-                            .foregroundColor(Color.white)
-                    } else {
-                        Text("0 Events found")
-                            .foregroundColor(Color.white)
-                    }
                     
                     Text("Events captured in the Last 24 Hours")
                         .font(.largeTitle)
@@ -63,6 +47,9 @@ struct FeedTab: View {
 
 struct FeedTab_Previews: PreviewProvider {
     static var previews: some View {
-        FeedTab()
+        let user = getDummyUser() // Create a constant user for preview
+        let currentTime = Constants.dummyCurrentTimeInterval // Create a constant currentTime for preview
+        
+        return FeedTab(user: .constant(user), currentTime: .constant(currentTime))
     }
 }

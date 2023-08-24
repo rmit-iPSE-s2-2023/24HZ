@@ -36,6 +36,7 @@
 		B13019152A96CF480002064E /* TimeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019102A96CF480002064E /* TimeSegment.swift */; };
 		B13019162A96CF480002064E /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019112A96CF480002064E /* utils.swift */; };
 		B13019172A96CF480002064E /* Hourmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019122A96CF480002064E /* Hourmark.swift */; };
+		B13019192A96D83A0002064E /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019182A96D83A0002064E /* DummyData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		B13019102A96CF480002064E /* TimeSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSegment.swift; sourceTree = "<group>"; };
 		B13019112A96CF480002064E /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		B13019122A96CF480002064E /* Hourmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hourmark.swift; sourceTree = "<group>"; };
+		B13019182A96D83A0002064E /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				A22074622A7D5FF0002FD6CB /* a1_s3713342App.swift */,
 				A28E3FE92A9658C200BCD972 /* Tab */,
 				A22074642A7D5FF0002FD6CB /* ContentView.swift */,
+				B130190E2A96CF480002064E /* data.swift */,
 				A2B7E5492A91026C008912C9 /* BlockSettingView.swift */,
 				A2B7E5472A910240008912C9 /* DataModel.swift */,
 				A220747A2A7D8579002FD6CB /* AddListenerFlowView0.swift */,
@@ -123,7 +126,6 @@
 				A2E020832A7D9A9500B5BF3C /* AddListenerFlowView3.swift */,
 				B130190F2A96CF480002064E /* constants.swift */,
 				B13019122A96CF480002064E /* Hourmark.swift */,
-				B130190E2A96CF480002064E /* data.swift */,
 				B13019102A96CF480002064E /* TimeSegment.swift */,
 				B13019112A96CF480002064E /* utils.swift */,
 				A22074662A7D5FF3002FD6CB /* Assets.xcassets */,
@@ -162,6 +164,7 @@
 				B13018F92A96CECF0002064E /* SavedEvent.swift */,
 				B13018F62A96CECF0002064E /* SmartContract.swift */,
 				B13018FC2A96CECF0002064E /* User.swift */,
+				B13019182A96D83A0002064E /* DummyData.swift */,
 			);
 			name = Models;
 			path = "../../../Downloads/a1-s3713342-main/a1-s3713342/Models";
@@ -269,6 +272,7 @@
 				A28E3FF32A9658C300BCD972 /* FeedTab.swift in Sources */,
 				B13019172A96CF480002064E /* Hourmark.swift in Sources */,
 				A2B7E54A2A91026C008912C9 /* BlockSettingView.swift in Sources */,
+				B13019192A96D83A0002064E /* DummyData.swift in Sources */,
 				B13018FD2A96CECF0002064E /* SmartContract.swift in Sources */,
 				B13019132A96CF480002064E /* data.swift in Sources */,
 				A2E020822A7D97DF00B5BF3C /* AddListenerFlowView2.swift in Sources */,
