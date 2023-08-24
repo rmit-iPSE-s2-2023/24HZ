@@ -11,14 +11,13 @@ struct FeedTab: View {
     
     @Binding var user: User
     @Binding var currentTime: TimeInterval
-    @State private var eventLogs: [EventLog]?
+//    @State private var eventLogs: [EventLog]?
+    @State var eventData: [EventData] = getEventData()!
     
     // Initialize the view with pre-loaded event logs
     init(user: Binding<User>, currentTime: Binding<TimeInterval>) {
         _user = user
         _currentTime = currentTime
-        _eventLogs = State(initialValue: getCapturedEventLogs(userId: user.wrappedValue.id,
-                                                              toTimeInterval: Constants.dummyCurrentTimeInterval))
     }
 
     var body: some View {
@@ -35,7 +34,7 @@ struct FeedTab: View {
                     let timeIntervals = getTimeIntervalsForPast24Hours(from: currentTime)
                     
                     ForEach(timeIntervals, id: \.self) { timeInterval in
-                        TimeSegment(toTimestamp: timeInterval, eventLogs: eventLogs)
+                        TimeSegment(toTimestamp: timeInterval, eventData: eventData)
                     }
                     
                     Spacer()
