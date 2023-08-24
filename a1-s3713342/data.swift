@@ -7,7 +7,13 @@
 
 import Foundation
 
-func getDummyUser(userId: Int = 1) -> User? {
+func getDummyData(userId: Int = 1) -> DummyData {
+    let user = getDummyUser(userId: userId)
+    let eventLogs = getCapturedEventLogs(userId: userId, toTimeInterval: Constants.dummyCurrentTimeInterval)
+    return DummyData(user: user, eventLogs: eventLogs)
+}
+
+func getDummyUser(userId: Int = 1) -> User {
     guard let url = Bundle.main.url(forResource: "Users", withExtension: "json", subdirectory: "DummyData") else {
         fatalError("JSON file not found")
     }
@@ -21,11 +27,12 @@ func getDummyUser(userId: Int = 1) -> User? {
             user.id == userId
         }
         
-        return user[0]
+        return user.first!
         
     } catch {
         print("Error decoding JSON: \(error)")
-        return nil
+        fatalError("JSON file not found")
+//        return nil
     }
 }
 
