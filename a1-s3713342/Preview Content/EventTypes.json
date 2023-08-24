@@ -17,7 +17,7 @@
     },
     {
         "id": 11111,
-        "smartContractId": 0,
+        "smartContractId": 3,
         "name": "New Zora NFT",
         "description": "",
         "methodId": 0,
@@ -25,7 +25,7 @@
     },
     {
         "id": 22222,
-        "smartContractId": 0,
+        "smartContractId": 4,
         "name": "New Coin",
         "description": "",
         "methodId": 0,
@@ -33,7 +33,7 @@
     },
     {
         "id": 33333,
-        "smartContractId": 0,
+        "smartContractId": 5,
         "name": "New Custom NFT",
         "description": "",
         "methodId": 0,
