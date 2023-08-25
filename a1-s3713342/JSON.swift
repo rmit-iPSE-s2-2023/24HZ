@@ -39,7 +39,7 @@ func getEventData(userId: Int = 1, endTime: TimeInterval = Constants.dummyCurren
     let smartContractIds = Set(subscribedEventTypes.map { $0.smartContractId })
     let smartContracts = getSmartContracts(smartContractIds: smartContractIds)
     
-    let eventData = capturedEventLogs.map { capturedEventLog in
+    let eventData: [EventData] = capturedEventLogs.map { capturedEventLog in
         let eventType = subscribedEventTypes.first(where: {capturedEventLog.eventTypeId == $0.id})!
         let smartContract = smartContracts.first(where: {eventType.smartContractId == $0.id})!
         return EventData(userId: userId,
