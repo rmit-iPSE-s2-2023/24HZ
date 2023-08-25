@@ -128,18 +128,9 @@
 				A22074622A7D5FF0002FD6CB /* a1_s3713342App.swift */,
 				A28E3FE92A9658C200BCD972 /* Tabs */,
 				A22074642A7D5FF0002FD6CB /* ContentView.swift */,
-				A2B7E5492A91026C008912C9 /* BlockSettingView.swift */,
+				A28E3FEA2A9658C200BCD972 /* SwipeNavigation.swift */,
 				A2B7E5472A910240008912C9 /* DataModel.swift */,
-				A220747A2A7D8579002FD6CB /* AddListenerFlowView0.swift */,
-				A2B7E54F2A911EA4008912C9 /* AddListenerFlowCustom1.swift */,
-				A2B7E5512A911EB0008912C9 /* AddListenerFlowCustom2.swift */,
-				A220747C2A7D8C43002FD6CB /* AddListenerFlowView1.swift */,
-				A2E020812A7D97DF00B5BF3C /* AddListenerFlowView2.swift */,
-				A2E020832A7D9A9500B5BF3C /* AddListenerFlowView3.swift */,
 				B130190F2A96CF480002064E /* constants.swift */,
-				B13019122A96CF480002064E /* Hourmark.swift */,
-				B13019102A96CF480002064E /* TimeSegment.swift */,
-				B13019492A975B170002064E /* CapturedEventBlock.swift */,
 				B13019112A96CF480002064E /* utils.swift */,
 				A22074662A7D5FF3002FD6CB /* Assets.xcassets */,
 				A22074682A7D5FF3002FD6CB /* Preview Content */,
@@ -169,10 +160,6 @@
 				B1FDB7FE2A9962EF0087DA04 /* Saved */,
 				B1FDB7FD2A9962E70087DA04 /* Feed */,
 				B1FDB7FC2A9962DF0087DA04 /* Listening */,
-				A28E3FEA2A9658C200BCD972 /* SwipeNavigation.swift */,
-				A28E3FEB2A9658C200BCD972 /* SavedTab.swift */,
-				A28E3FED2A9658C200BCD972 /* ListeningTab.swift */,
-				A28E3FEE2A9658C200BCD972 /* FeedTab.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -205,6 +192,14 @@
 		B1FDB7FC2A9962DF0087DA04 /* Listening */ = {
 			isa = PBXGroup;
 			children = (
+				A28E3FED2A9658C200BCD972 /* ListeningTab.swift */,
+				A2B7E5492A91026C008912C9 /* BlockSettingView.swift */,
+				A220747A2A7D8579002FD6CB /* AddListenerFlowView0.swift */,
+				A2B7E54F2A911EA4008912C9 /* AddListenerFlowCustom1.swift */,
+				A2B7E5512A911EB0008912C9 /* AddListenerFlowCustom2.swift */,
+				A220747C2A7D8C43002FD6CB /* AddListenerFlowView1.swift */,
+				A2E020812A7D97DF00B5BF3C /* AddListenerFlowView2.swift */,
+				A2E020832A7D9A9500B5BF3C /* AddListenerFlowView3.swift */,
 			);
 			path = Listening;
 			sourceTree = "<group>";
@@ -212,6 +207,10 @@
 		B1FDB7FD2A9962E70087DA04 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				A28E3FEE2A9658C200BCD972 /* FeedTab.swift */,
+				B13019122A96CF480002064E /* Hourmark.swift */,
+				B13019102A96CF480002064E /* TimeSegment.swift */,
+				B13019492A975B170002064E /* CapturedEventBlock.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -219,6 +218,7 @@
 		B1FDB7FE2A9962EF0087DA04 /* Saved */ = {
 			isa = PBXGroup;
 			children = (
+				A28E3FEB2A9658C200BCD972 /* SavedTab.swift */,
 			);
 			path = Saved;
 			sourceTree = "<group>";
