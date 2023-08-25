@@ -51,18 +51,6 @@ struct SwipeNavigation: View {
                 }
             }
             
-            VStack {
-                Text("Chat")
-                    .foregroundColor(viewSelection == 3 ? .white : .gray)
-                    .onTapGesture { // click to move
-                        viewSelection = 3
-                    }
-                if viewSelection == 3 { // highlighter
-                    Rectangle()
-                        .frame(width: 60, height: 2)
-                        .foregroundColor(.blue)
-                }
-            }
         }
         .font(.headline)
         .padding()
