@@ -7,12 +7,6 @@
 
 import Foundation
 
-func getDummyData(userId: Int = 1) -> DummyData {
-    let user = getDummyUser(userId: userId)
-    let eventLogs = getCapturedEventLogs(userId: userId, toTimeInterval: Constants.dummyCurrentTimeInterval)
-    return DummyData(user: user, eventLogs: eventLogs)
-}
-
 func getRandomDummyEventData(userId: Int = 1, endTime: TimeInterval = Constants.dummyCurrentTimeInterval) -> EventData {
     print("Getting random dummy event data")
     let eventData = getEventData(userId: userId, endTime: endTime)!
