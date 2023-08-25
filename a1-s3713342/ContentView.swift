@@ -34,9 +34,6 @@ struct ContentView: View {
                         SavedTab()
                             .tag(2)
                         
-                        ChatTab()
-                            .tag(3)
-                        
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 }

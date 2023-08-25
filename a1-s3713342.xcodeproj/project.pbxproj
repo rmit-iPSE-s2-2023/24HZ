@@ -15,7 +15,6 @@
 		A220747D2A7D8C43002FD6CB /* AddListenerFlowView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220747C2A7D8C43002FD6CB /* AddListenerFlowView1.swift */; };
 		A28E3FEF2A9658C300BCD972 /* SwipeNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E3FEA2A9658C200BCD972 /* SwipeNavigation.swift */; };
 		A28E3FF02A9658C300BCD972 /* SavedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E3FEB2A9658C200BCD972 /* SavedTab.swift */; };
-		A28E3FF12A9658C300BCD972 /* ChatTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E3FEC2A9658C200BCD972 /* ChatTab.swift */; };
 		A28E3FF22A9658C300BCD972 /* ListeningTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E3FED2A9658C200BCD972 /* ListeningTab.swift */; };
 		A28E3FF32A9658C300BCD972 /* FeedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E3FEE2A9658C200BCD972 /* FeedTab.swift */; };
 		A2B7E5482A910240008912C9 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B7E5472A910240008912C9 /* DataModel.swift */; };
@@ -60,7 +59,6 @@
 		A220747C2A7D8C43002FD6CB /* AddListenerFlowView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListenerFlowView1.swift; sourceTree = "<group>"; };
 		A28E3FEA2A9658C200BCD972 /* SwipeNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeNavigation.swift; sourceTree = "<group>"; };
 		A28E3FEB2A9658C200BCD972 /* SavedTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTab.swift; sourceTree = "<group>"; };
-		A28E3FEC2A9658C200BCD972 /* ChatTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTab.swift; sourceTree = "<group>"; };
 		A28E3FED2A9658C200BCD972 /* ListeningTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListeningTab.swift; sourceTree = "<group>"; };
 		A28E3FEE2A9658C200BCD972 /* FeedTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTab.swift; sourceTree = "<group>"; };
 		A2B7E5472A910240008912C9 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -128,20 +126,11 @@
 				B130196E2A983AAA0002064E /* Models */,
 				B130191C2A96F2660002064E /* Enums */,
 				A22074622A7D5FF0002FD6CB /* a1_s3713342App.swift */,
-				A28E3FE92A9658C200BCD972 /* Tab */,
+				A28E3FE92A9658C200BCD972 /* Tabs */,
 				A22074642A7D5FF0002FD6CB /* ContentView.swift */,
-				A2B7E5492A91026C008912C9 /* BlockSettingView.swift */,
+				A28E3FEA2A9658C200BCD972 /* SwipeNavigation.swift */,
 				A2B7E5472A910240008912C9 /* DataModel.swift */,
-				A220747A2A7D8579002FD6CB /* AddListenerFlowView0.swift */,
-				A2B7E54F2A911EA4008912C9 /* AddListenerFlowCustom1.swift */,
-				A2B7E5512A911EB0008912C9 /* AddListenerFlowCustom2.swift */,
-				A220747C2A7D8C43002FD6CB /* AddListenerFlowView1.swift */,
-				A2E020812A7D97DF00B5BF3C /* AddListenerFlowView2.swift */,
-				A2E020832A7D9A9500B5BF3C /* AddListenerFlowView3.swift */,
 				B130190F2A96CF480002064E /* constants.swift */,
-				B13019122A96CF480002064E /* Hourmark.swift */,
-				B13019102A96CF480002064E /* TimeSegment.swift */,
-				B13019492A975B170002064E /* CapturedEventBlock.swift */,
 				B13019112A96CF480002064E /* utils.swift */,
 				A22074662A7D5FF3002FD6CB /* Assets.xcassets */,
 				A22074682A7D5FF3002FD6CB /* Preview Content */,
@@ -165,16 +154,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		A28E3FE92A9658C200BCD972 /* Tab */ = {
+		A28E3FE92A9658C200BCD972 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				A28E3FEA2A9658C200BCD972 /* SwipeNavigation.swift */,
-				A28E3FEB2A9658C200BCD972 /* SavedTab.swift */,
-				A28E3FEC2A9658C200BCD972 /* ChatTab.swift */,
-				A28E3FED2A9658C200BCD972 /* ListeningTab.swift */,
-				A28E3FEE2A9658C200BCD972 /* FeedTab.swift */,
+				B1FDB7FE2A9962EF0087DA04 /* Saved */,
+				B1FDB7FD2A9962E70087DA04 /* Feed */,
+				B1FDB7FC2A9962DF0087DA04 /* Listening */,
 			);
-			path = Tab;
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		B130191C2A96F2660002064E /* Enums */ = {
@@ -200,6 +187,40 @@
 				B13019762A983AAA0002064E /* NotificationType.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B1FDB7FC2A9962DF0087DA04 /* Listening */ = {
+			isa = PBXGroup;
+			children = (
+				A28E3FED2A9658C200BCD972 /* ListeningTab.swift */,
+				A2B7E5492A91026C008912C9 /* BlockSettingView.swift */,
+				A220747A2A7D8579002FD6CB /* AddListenerFlowView0.swift */,
+				A2B7E54F2A911EA4008912C9 /* AddListenerFlowCustom1.swift */,
+				A2B7E5512A911EB0008912C9 /* AddListenerFlowCustom2.swift */,
+				A220747C2A7D8C43002FD6CB /* AddListenerFlowView1.swift */,
+				A2E020812A7D97DF00B5BF3C /* AddListenerFlowView2.swift */,
+				A2E020832A7D9A9500B5BF3C /* AddListenerFlowView3.swift */,
+			);
+			path = Listening;
+			sourceTree = "<group>";
+		};
+		B1FDB7FD2A9962E70087DA04 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				A28E3FEE2A9658C200BCD972 /* FeedTab.swift */,
+				B13019122A96CF480002064E /* Hourmark.swift */,
+				B13019102A96CF480002064E /* TimeSegment.swift */,
+				B13019492A975B170002064E /* CapturedEventBlock.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		B1FDB7FE2A9962EF0087DA04 /* Saved */ = {
+			isa = PBXGroup;
+			children = (
+				A28E3FEB2A9658C200BCD972 /* SavedTab.swift */,
+			);
+			path = Saved;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,7 +311,6 @@
 				A28E3FF02A9658C300BCD972 /* SavedTab.swift in Sources */,
 				B130197B2A983AAA0002064E /* User.swift in Sources */,
 				A2E020842A7D9A9500B5BF3C /* AddListenerFlowView3.swift in Sources */,
-				A28E3FF12A9658C300BCD972 /* ChatTab.swift in Sources */,
 				B130194A2A975B170002064E /* CapturedEventBlock.swift in Sources */,
 				A28E3FF22A9658C300BCD972 /* ListeningTab.swift in Sources */,
 				A220747D2A7D8C43002FD6CB /* AddListenerFlowView1.swift in Sources */,
