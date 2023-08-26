@@ -7,18 +7,23 @@
 
 import SwiftUI
 
+// MARK: - Add Custom Listener Step 2
 struct AddListenerFlowCustom2: View {
     var body: some View {
         ZStack {
+            // Background color
             Color.black.edgesIgnoringSafeArea(.all)
+            
             VStack {
+                // Loading and information text
                 Text("Fetching event types..")
                     .foregroundColor(.white)
                 Text("(end of screen, need further development)")
-                // need info
                     .foregroundColor(.white)
+                
+                // Loading spinner
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .white)) //loading icon
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
             }
         }
     }

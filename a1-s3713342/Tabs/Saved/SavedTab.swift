@@ -14,7 +14,8 @@ struct SavedTab: View {
             // Your existing content for the saved tab
             VStack(spacing: 20) {
                 Text("Your saved events will show up on this page.")
-                    .font(.system(size: 24))
+                    .font(.system(size: 30))
+                    .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .padding(.top, 50)
                 Spacer()
@@ -58,5 +59,10 @@ struct SavedTab: View {
     }
 }
 
+struct SavedTab_Previews: PreviewProvider {
+    static var previews: some View {
+        SavedTab()
+    }
+}
 
 

@@ -10,25 +10,70 @@ import SwiftUI
 struct BlockSettingView: View {
     var block: BlockType
     @Binding var notificationSettings: [NotificationSetting]
+    @Binding var blocks: [BlockType]  // To update the blocks list
+    @State private var showingAlert = false  // To control the alert visibility
     
     var body: some View {
-        VStack {
-            Text(block.rawValue) // block name print
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-            List {
-                ForEach(NotificationSetting.allCases, id: \.self) { setting in
-                    Toggle(isOn: .constant(notificationSettings.contains(setting))) {
-                        Text(setting.rawValue)
+        ZStack {
+            // Background color
+            Color.black.edgesIgnoringSafeArea(.all)
+            
+            VStack(alignment: .leading) {
+                
+                // Display the block name at the top
+                Text(block.rawValue)
+                    .font(.system(size: 30))
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .padding(.leading)
+                
+                // List of notification settings toggles
+                List {
+                    ForEach(NotificationSetting.allCases, id: \.self) { setting in
+                        toggleView(for: setting)
                     }
-                    .disabled(setting == .eventsFeed)
                 }
+                .listStyle(PlainListStyle())
+                
+                // Pushes the delete button to the bottom
+                Spacer()
+                
+                // Delete button to remove the block
+                deleteButton
             }
-            .background(Color.black) // Set the background color of the List
-            .listStyle(PlainListStyle()) // This removes the default iOS List style which can interfere with custom styles
         }
-        .background(Color.black.edgesIgnoringSafeArea(.all)) // Ensure the background color covers the entire view
+    }
+    
+    // Function to create a Toggle view for each NotificationSetting
+    private func toggleView(for setting: NotificationSetting) -> some View {
+        Toggle(isOn: .constant(notificationSettings.contains(setting))) {
+            Text(setting.rawValue)
+                .foregroundColor(.black)
+        }
+        .disabled(setting == .eventsFeed)  // The 'eventsFeed' setting is always on and cannot be disabled
+    }
+    private var deleteButton: some View {
+        // Create a text-based button styled as a delete button
+        Text("Delete this listener")
+            .font(.system(size: 25))
+            .fontWeight(.semibold)
+            .foregroundColor(.red)
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .center)  // Center the text
+            .onTapGesture { showingAlert = true }  // Show alert when tapped
+            .alert(isPresented: $showingAlert) { createAlert() }  // Attach the alert
+    }
+
+    private func createAlert() -> Alert {
+        // Alert to confirm deletion
+        Alert(
+            title: Text("Confirmation"),  // Alert title
+            message: Text("Are you sure you want to delete this listener?"),  // Alert message
+            primaryButton: .destructive(Text("Yes")) {
+                blocks.removeAll { $0 == block }  // Remove block on confirmation
+            },
+            secondaryButton: .cancel(Text("No"))  // Cancel action
+        )
     }
 }
 
@@ -36,7 +81,16 @@ struct BlockSettingView: View {
 
 struct BlockSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        BlockSettingView(block: .zoraNFTs, notificationSettings: .constant([.eventsFeed]))
+        // dummydatas
+        let dummyNotificationSettings = [NotificationSetting.eventsFeed]
+        let dummyBlocks = [BlockType.zoraNFTs]
+        
+        // preview
+        BlockSettingView(
+            block: .zoraNFTs,
+            notificationSettings: .constant(dummyNotificationSettings),
+            blocks: .constant(dummyBlocks)
+        )
     }
 }
 

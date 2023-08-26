@@ -7,58 +7,70 @@
 
 import SwiftUI
 
+// MARK: - Step 0 of AddListenerFlow
 struct AddListenerFlowView0: View {
+    // Binding variables for parent view
     @Binding var blocks: [BlockType]
     @Binding var notificationSettings: [NotificationSetting]
     
-    @State var selectedOption: Int? = nil // to track selected option
+    // Local state variables
+    @State var selectedOption: Int? = nil // To track selected option
     @Binding var navigateToNext: Bool
-    @Binding var navigateToCustom: Bool // for custom page
+    @Binding var navigateToCustom: Bool // For custom page
     
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all) // set black background
+            // Background color
+            Color.black.edgesIgnoringSafeArea(.all)
             
             VStack {
-                //bar
+                // Empty space at top
                 Spacer()
                 
+                // Title Text
                 Text("What kind of listener would you like to add?")
                     .foregroundColor(.white)
                     .font(.system(size: 24))
 
-
+                // Option buttons
+                               createOptionButton(option: 1, text: "I want a generic event to listen to")
+                               createOptionButton(option: 2, text: "I have a specific contract to listen to")
                 
-                Button(action: {
-                    selectedOption = 1
-                }) {
-                    Image(selectedOption == 1 ? "checked=true" : "checked=false")
-                        .overlay(Text("I want a generic event to listen to").foregroundColor(.black))
-                }
-                
-                Button(action: {
-                    selectedOption = 2
-                }) {
-                    Image(selectedOption == 2 ? "checked=true" : "checked=false")
-                        .overlay(Text("I have a specific contract to listen to").foregroundColor(.black))
-                }
+                // Empty space at bottom
                 Spacer()
                 
-
-                
+                // Continue Button Logic
                 if selectedOption == 1 {
                     NavigationLink(destination: AddListenerFlowView1(blocks: $blocks, notificationSettings: $notificationSettings, navigateToNext: $navigateToNext)) {
-                        Image("continue")
+                        customContinueButton()
                     }
                 } else if selectedOption == 2 {
                     NavigationLink(destination: AddListenerFlowCustom1(navigateToCustom: $navigateToCustom)) {
-                        Image("continue")
+                        customContinueButton()
                     }
                 } else {
-                    Image("continue")
+                    customContinueButton().opacity(0.5) // Disable if no option selected
                 }
             }
         }
     }
+    
+    // Refactored option button
+    private func createOptionButton(option: Int, text: String) -> some View {
+        Button(action: { selectedOption = option }) {
+            customCheckButton(isChecked: selectedOption == option)
+                .overlay(Text(text).foregroundColor(.black))
+        }
+    }
 }
 
+struct AddListenerFlowView0_Previews: PreviewProvider {
+    static var previews: some View {
+        AddListenerFlowView0(
+            blocks: .constant([.coins, .zoraNFTs]), // Dummy data
+            notificationSettings: .constant([.eventsFeed, .onceADayEmail]), // Dummy data
+            navigateToNext: .constant(false), // Dummy data
+            navigateToCustom: .constant(false) // Dummy data
+        )
+    }
+}

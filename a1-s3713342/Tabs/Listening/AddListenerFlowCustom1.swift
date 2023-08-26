@@ -7,22 +7,24 @@
 
 import SwiftUI
 
+// MARK: - Add Custom Listener Step 1
 struct AddListenerFlowCustom1: View {
-    @State var contractAddress: String = ""
-    // the view automatically redraws when the value of this variable changes.
-    // `contractAddress` is intended to hold the user-inputted contract address, initialized as an empty string.
-    @State private var contractAddresses: [String] = [] // array to store the addresses
-    @Binding var navigateToCustom: Bool
-    
+    @State var contractAddress: String = ""  // Holds the user-inputted contract address
+    @State private var contractAddresses: [String] = []  // Array to store addresses
+    @Binding var navigateToCustom: Bool  // Controls navigation to the next view
+
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all) // black background
+            // Background color
+            Color.black.edgesIgnoringSafeArea(.all)
             
             VStack {
+                // Title text
                 Text("Enter contract address")
                     .foregroundColor(.white)
                     .font(.system(size: 24))
                 
+                // Text field for address input
                 HStack {
                     Text("Address")
                         .foregroundColor(.black)
@@ -31,16 +33,17 @@ struct AddListenerFlowCustom1: View {
                 .padding()
                 .background(Color.white)
                 
+                // Confirmation button
                 if !contractAddress.isEmpty {
                     Button(action: {
-                        contractAddresses.append(contractAddress) // Add the entered address to the array
-                        navigateToCustom = true
+                        contractAddresses.append(contractAddress)  // Append address
+                        navigateToCustom = true  // Navigate to next view
                     }) {
                         Image("confirm")
                     }
                     .background(
                         NavigationLink("", destination: AddListenerFlowCustom2(), isActive: $navigateToCustom)
-                            .opacity(0) // hide the NavigationLink
+                            .opacity(0)  // Hide the NavigationLink
                     )
                 } else {
                     Image("confirm")
