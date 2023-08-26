@@ -12,50 +12,51 @@ struct SwipeNavigation: View {
     
     var body: some View {
         HStack {
-            VStack {
-                Text("Listening")
-                    .foregroundColor(viewSelection == 0 ? .white : .gray)
-                    .onTapGesture { // click to move
-                        viewSelection = 0
-                    }
-                if viewSelection == 0 { // highlighter
+            Text("Listening")
+                .foregroundColor(viewSelection == 0 ? .white : .gray)
+                .overlay(
                     Rectangle()
                         .frame(width: 60, height: 2)
-                        .foregroundColor(.blue)
+                        .foregroundColor(viewSelection == 0 ? .blue : .clear)
+                        .offset(y: 10),
+                    alignment: .bottom
+                )
+                .onTapGesture { // click to move
+                    viewSelection = 0
                 }
-            }
             
-            VStack {
-                Text("Feed")
-                    .foregroundColor(viewSelection == 1 ? .white : .gray)
-                    .onTapGesture { // click to move
-                        viewSelection = 1
-                    }
-                if viewSelection == 1 { // highlighter
+            Text("Feed")
+                .foregroundColor(viewSelection == 1 ? .white : .gray)
+                .overlay(
                     Rectangle()
                         .frame(width: 60, height: 2)
-                        .foregroundColor(.blue)
+                        .foregroundColor(viewSelection == 1 ? .blue : .clear)
+                        .offset(y: 10),
+                    alignment: .bottom
+                )
+                .onTapGesture { // click to move
+                    viewSelection = 1
                 }
-            }
             
-            VStack {
-                Text("Saved")
-                    .foregroundColor(viewSelection == 2 ? .white : .gray)
-                    .onTapGesture { // click to move
-                        viewSelection = 2
-                    }
-                if viewSelection == 2 { // highlighter
+            Text("Saved")
+                .foregroundColor(viewSelection == 2 ? .white : .gray)
+                .overlay(
                     Rectangle()
                         .frame(width: 60, height: 2)
-                        .foregroundColor(.blue)
+                        .foregroundColor(viewSelection == 2 ? .blue : .clear)
+                        .offset(y: 10),
+                    alignment: .bottom
+                )
+                .onTapGesture { // click to move
+                    viewSelection = 2
                 }
-            }
-            
         }
         .font(.headline)
         .padding()
     }
 }
+
+
 
 struct SwipeNavigation_Previews: PreviewProvider {
     static var previews: some View {
