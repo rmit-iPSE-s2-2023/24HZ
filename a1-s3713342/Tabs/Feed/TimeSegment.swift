@@ -14,6 +14,7 @@ struct TimeSegment: View {
     let toTimestamp: TimeInterval
     let fromTimestamp: TimeInterval
     let date: Date
+    @State var selectedEvent: EventData?
     
     init(toTimestamp: TimeInterval, eventData events: [EventData]) {
         self.toTimestamp = toTimestamp
@@ -32,9 +33,31 @@ struct TimeSegment: View {
             Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
             ForEach(filteredEventData, id: \.eventLog.id) { event in
                 CapturedEventBlock(eventData: event)
+                    .onTapGesture {
+                        self.selectedEvent = event
+                    }
+            }
+            .sheet(item: $selectedEvent) { event in
+                EventDetailView(event: event)
             }
         }
-        .background(Color.black)
+//        .background(Color.black)
+        
+        
+//        VStack {
+//            Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
+//            List(filteredEventData) { event in
+//                CapturedEventBlock(eventData: event)
+//                    .onTapGesture {
+//                        self.selectedEvent = event
+//                    }
+//            }
+//            .background(Color.black)
+//            .sheet(item: $selectedEvent) { event in
+//                EventDetailView(event: event)
+//            }
+//        }
+        
     }
 }
 
