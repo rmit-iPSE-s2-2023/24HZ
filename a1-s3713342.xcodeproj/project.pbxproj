@@ -48,6 +48,7 @@
 		B130197C2A983AAA0002064E /* EventLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019742A983AAA0002064E /* EventLog.swift */; };
 		B130197D2A983AAA0002064E /* EventSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019752A983AAA0002064E /* EventSubscription.swift */; };
 		B130197E2A983AAA0002064E /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019762A983AAA0002064E /* NotificationType.swift */; };
+		B19E751A2A99B73C008E9FF4 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75192A99B73C008E9FF4 /* EventDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		B13019752A983AAA0002064E /* EventSubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSubscription.swift; sourceTree = "<group>"; };
 		B13019762A983AAA0002064E /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		B19E75132A99694B008E9FF4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B19E75192A99B73C008E9FF4 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				B13019122A96CF480002064E /* Hourmark.swift */,
 				B13019102A96CF480002064E /* TimeSegment.swift */,
 				B13019492A975B170002064E /* CapturedEventBlock.swift */,
+				B19E75192A99B73C008E9FF4 /* EventDetailView.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B19E751A2A99B73C008E9FF4 /* EventDetailView.swift in Sources */,
 				B13019782A983AAA0002064E /* EventData.swift in Sources */,
 				B130197C2A983AAA0002064E /* EventLog.swift in Sources */,
 				B13019772A983AAA0002064E /* SavedEvent.swift in Sources */,

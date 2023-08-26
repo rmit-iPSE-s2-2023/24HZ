@@ -28,6 +28,7 @@ struct CapturedEventBlock: View {
                 Spacer()
             }
             .frame(height: 80)
+
             
             Spacer()
             VStack {
@@ -38,7 +39,7 @@ struct CapturedEventBlock: View {
             
         }
         .padding(8)
-        .background(Color.purple)
+        .background(Color.orange)
         .cornerRadius(10)
         .padding(.leading, 40)
     }

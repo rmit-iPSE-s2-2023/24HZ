@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct EventData: Codable {
+struct EventData: Codable, Identifiable {
+    var id = UUID()
+    
     let userId: Int
     let eventTimestamp: TimeInterval
 //    let eventListenerType: String
