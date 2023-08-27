@@ -7,14 +7,16 @@
 
 import SwiftUI
 
-// Generic Block Button
+// Function for creating a generic block button
 func genericBlock(block: BlockType) -> some View {
     ZStack {
+        // Rounded Rectangle with white border
         RoundedRectangle(cornerRadius: 15)
             .stroke(Color.white, lineWidth: 2)
             .background(Color.black)
             .frame(width: 350, height: 70)
             .overlay(
+                // Block title
                 Text(block.rawValue)
                     .foregroundColor(.white)
                     .font(.largeTitle)
@@ -22,6 +24,7 @@ func genericBlock(block: BlockType) -> some View {
                 alignment: .leading
             )
             .overlay(
+                // 'Generic' label at top-right
                 ZStack {
                     RoundedRectangle(cornerRadius: 5)
                         .fill(LinearGradient(gradient: Gradient(colors: [Color.pink, Color.purple]), startPoint: .leading, endPoint: .trailing))
@@ -37,22 +40,24 @@ func genericBlock(block: BlockType) -> some View {
     }
 }
 
-
-// '+' Button
+// Function for creating a '+' button
 func plusButton() -> some View {
+    // '+' symbol
     Image(systemName: "plus")
         .font(.system(size: 40))
-        .frame(width: 60, height: 60)  // 너비와 높이를 동일하게 설정하여 원 형태가 되도록 합니다.
+        .frame(width: 60, height: 60)
         .foregroundColor(.white)
         .background(Color.black)
         .overlay(
-            Circle()  // 테두리를 원으로 설정
+            // Circular border
+            Circle()
                 .stroke(Color.white, lineWidth: 2)
         )
 }
 
-
+// Function for creating a custom continue button
 func customContinueButton() -> some View {
+    // Arrow symbol
     Image(systemName: "arrow.right")
         .font(.system(size: 40))
         .foregroundColor(.black)
@@ -62,23 +67,26 @@ func customContinueButton() -> some View {
         .cornerRadius(10)
 }
 
+// Function for creating a custom check button
 func customCheckButton(isChecked: Bool) -> some View {
     ZStack {
-        RoundedRectangle(cornerRadius: 10)  // 배경에 둥근 모서리의 직사각형
-            .fill(isChecked ? Color.green : Color.white)  // 체크 상태에 따라 배경색 변경
-            .frame(width: 400, height: 100)  // 크기 설정
+        // Background rectangle with rounded corners
+        RoundedRectangle(cornerRadius: 10)
+            .fill(isChecked ? Color.green : Color.white)
+            .frame(width: 400, height: 100)
         
         if isChecked {
-            //Little circle
+            // Small circle at top-right
             Circle()
                 .fill(Color.black)
                 .frame(width: 30, height: 30)
                 .offset(x: 180, y: -30)
             
-            //Checkmark
-            Image(systemName: "checkmark")  // 체크 상태일 경우 체크마크 아이콘 표시
-                .foregroundColor(.green)  // green
-                .offset(x: 180, y: -30)  // 오른쪽 위로 이동
+            // Checkmark icon
+            Image(systemName: "checkmark")
+                .foregroundColor(.green)
+                .offset(x: 180, y: -30)
         }
     }
 }
+
