@@ -45,21 +45,13 @@ struct ListeningTab: View {
                 }
                 
                 HStack {
-                    Text("here is what you're")
+                    Text("here is what you're listening to...")
                         .font(.largeTitle.bold())
                         .foregroundColor(.white)
                         .padding(.leading, 30) 
                     Spacer()
                 }
                 
-                HStack {
-                    Text("listening to...")
-                        .font(.system(size: 30))
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .padding(.leading, 30) 
-                    Spacer()
-                }
                 
                 // Content: Blocks or Placeholder
                 if blocks.isEmpty {
@@ -67,8 +59,7 @@ struct ListeningTab: View {
                     VStack {
                         Spacer()
                         Text("No blocks added")
-                            .font(.system(size: 30))
-                            .fontWeight(.regular)
+                            .font(.title2)
                             .foregroundColor(.gray)
                         Spacer()
                     }

@@ -27,11 +27,11 @@ struct AddListenerFlowView3: View {
                 // Display a success message
                 Text("Success!")
                     .foregroundColor(.white)
-                    .font(.largeTitle)
+                    .font(.title)
             }
             .onAppear {
-                // Execute the following code after a delay of 3 seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                // Execute the following code after a delay of 2 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     // Update the binding variables and navigate back
                     self.blocks = selectedBlocks
                     self.notificationSettings = selectedNotificationSettings

@@ -29,7 +29,7 @@ struct AddListenerFlowView2: View {
                 // Title
                 Text("How would you like to be notified?")
                     .foregroundColor(.white)
-                    .font(.system(size: 24))
+                    .font(.title)
                 
                 // Display selected blocks
                 Text(selectedBlocks.map { $0.rawValue }.joined(separator: " & "))

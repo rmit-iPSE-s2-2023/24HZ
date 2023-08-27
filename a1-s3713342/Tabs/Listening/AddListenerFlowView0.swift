@@ -30,11 +30,11 @@ struct AddListenerFlowView0: View {
                 // Title Text
                 Text("What kind of listener would you like to add?")
                     .foregroundColor(.white)
-                    .font(.system(size: 24))
-
+                    .font(.title)
+                
                 // Option buttons
-                               createOptionButton(option: 1, text: "I want a generic event to listen to")
-                               createOptionButton(option: 2, text: "I have a specific contract to listen to")
+                createOptionButton(option: 1, text: "I want a generic event to listen to")
+                createOptionButton(option: 2, text: "I have a specific contract to listen to")
                 
                 // Empty space at bottom
                 Spacer()

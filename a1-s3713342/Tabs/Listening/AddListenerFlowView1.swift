@@ -28,7 +28,7 @@ struct AddListenerFlowView1: View {
                 // Title
                 Text("What would you like to listen for?")
                     .foregroundColor(.white)
-                    .font(.system(size: 24))
+                    .font(.title)
                 
                 // List of options for blocks
                 ForEach(BlockType.allCases, id: \.self) { block in

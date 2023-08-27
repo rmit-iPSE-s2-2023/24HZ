@@ -22,7 +22,7 @@ struct AddListenerFlowCustom1: View {
                 // Title text
                 Text("Enter contract address")
                     .foregroundColor(.white)
-                    .font(.system(size: 24))
+                    .font(.title)
                 
                 // Text field for address input
                 HStack {

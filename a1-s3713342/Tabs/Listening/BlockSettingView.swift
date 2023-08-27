@@ -22,7 +22,7 @@ struct BlockSettingView: View {
                 
                 // Display the block name at the top
                 Text(block.rawValue)
-                    .font(.system(size: 30))
+                    .font(.largeTitle)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .padding(.leading)
@@ -55,8 +55,7 @@ struct BlockSettingView: View {
     private var deleteButton: some View {
         // Create a text-based button styled as a delete button
         Text("Delete this listener")
-            .font(.system(size: 25))
-            .fontWeight(.semibold)
+            .font(.title3)
             .foregroundColor(.red)
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)  // Center the text
