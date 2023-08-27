@@ -9,55 +9,73 @@ import SwiftUI
 
 struct TimeSegment: View {
     
-    // Parameters
+    /// Parameters
     var filteredEventData: [EventData]
     let toTimestamp: TimeInterval
-    let fromTimestamp: TimeInterval
-    let date: Date
     @State var selectedEvent: EventData?
     
     init(toTimestamp: TimeInterval, eventData events: [EventData]) {
         self.toTimestamp = toTimestamp
-        self.fromTimestamp = timeIntervalOfPreviousHourMark(toTimestamp: toTimestamp)
-        self.date = Date(timeIntervalSince1970: toTimestamp)
+        
         // Capture eventData in a local variable before using it in the closure
         self.filteredEventData = []
+        let fromTimestamp = timeIntervalOfPreviousHourMark(toTimestamp: toTimestamp)
         self.filteredEventData = events.filter { event in
-            return event.eventTimestamp < toTimestamp && event.eventTimestamp >= self.fromTimestamp
+            return event.eventTimestamp < toTimestamp && event.eventTimestamp >= fromTimestamp
         }
     }
     
     var body: some View {
+        
+        // Use custom layout for iOS 16+
+        if #available(iOS 16.0, *) {
+            IndentedWithHeaderLayout(indentSize: 50) {
+                
+                /// Hourmark label
+                Text(timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
+                    .font(.caption)
+                    .foregroundStyle(.gray)
 
-        VStack {
-            Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
-            ForEach(filteredEventData, id: \.eventLog.id) { event in
-                CapturedEventBlock(eventData: event)
-                    .onTapGesture {
-                        self.selectedEvent = event
-                    }
+                HorizontalDivider()
+
+                /// Array of event blocks
+                ForEach(filteredEventData, id: \.eventLog.id) { event in
+                    CapturedEventBlockIndentUnspecified(eventData: event)
+                        .onTapGesture {
+                            self.selectedEvent = event
+                        }
+                }
+                .sheet(item: $selectedEvent) { event in
+                    EventDetailView(event: event)
+                }
+
             }
-            .sheet(item: $selectedEvent) { event in
-                EventDetailView(event: event)
+
+        } else {    // fallback for iOS 15-
+            VStack {
+                Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
+                ForEach(filteredEventData, id: \.eventLog.id) { event in
+                    CapturedEventBlock(eventData: event)
+                        .onTapGesture {
+                            self.selectedEvent = event
+                        }
+                }
+                .sheet(item: $selectedEvent) { event in
+                    EventDetailView(event: event)
+                }
             }
         }
-//        .background(Color.black)
         
-        
-//        VStack {
-//            Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
-//            List(filteredEventData) { event in
-//                CapturedEventBlock(eventData: event)
-//                    .onTapGesture {
-//                        self.selectedEvent = event
-//                    }
-//            }
-//            .background(Color.black)
-//            .sheet(item: $selectedEvent) { event in
-//                EventDetailView(event: event)
-//            }
-//        }
-        
+    }
+
+}
+
+struct HorizontalDivider: View {
+    var body: some View {
+        VStack {
+            Divider()
+                .background(.gray)
+        }
     }
 }
 
@@ -68,38 +86,3 @@ struct TimeSegment_Previews: PreviewProvider {
     }
 }
 
-//struct EventLogListItemView: View {
-//
-//    let isGeneric: Bool
-//    let eventLog: EventLog
-//    let eventData: EventData
-//
-//    var body: some View {
-//        HStack {
-//            VStack(alignment: .leading) {
-//                let secondaryText = isGeneric ? "Generic EventType" : "Token Name"
-//                let primaryText = isGeneric ? "Token Name" : "EventType Name"
-//                Text(secondaryText)
-//                    .font(.body)
-//                    .foregroundColor(Color.white)
-//
-//                Text(primaryText)
-//                    .font(.title.bold())
-//                Spacer()
-//            }
-//            .frame(height: 80)
-//
-//            Spacer()
-//            VStack {
-//                Text("Generic")
-//                    .foregroundColor(Color.white)
-//                Text("ERC-721")
-//            }
-//
-//        }
-//        .padding(8)
-//        .background(Color.purple)
-//        .cornerRadius(10)
-//        .padding(.leading, 40)
-//    }
-//}

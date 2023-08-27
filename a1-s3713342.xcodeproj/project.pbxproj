@@ -48,7 +48,10 @@
 		B130197D2A983AAA0002064E /* EventSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019752A983AAA0002064E /* EventSubscription.swift */; };
 		B130197E2A983AAA0002064E /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019762A983AAA0002064E /* NotificationType.swift */; };
 		B19E751A2A99B73C008E9FF4 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75192A99B73C008E9FF4 /* EventDetailView.swift */; };
+		B19E751F2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */; };
+		B19E75232A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75222A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift */; };
 		B1B919AD2A9B0EE700DA837C /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B919AC2A9B0EE600DA837C /* utility.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,7 +98,10 @@
 		B13019762A983AAA0002064E /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		B19E75132A99694B008E9FF4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B19E75192A99B73C008E9FF4 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentedWithHeaderLayout.swift; sourceTree = "<group>"; };
+		B19E75222A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedEventBlockIndentUnspecified.swift; sourceTree = "<group>"; };
 		B1B919AC2A9B0EE600DA837C /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,7 @@
 		A22074612A7D5FF0002FD6CB /* a1-s3713342 */ = {
 			isa = PBXGroup;
 			children = (
+				B19E751D2A9AD7C6008E9FF4 /* Layouts */,
 				A22074622A7D5FF0002FD6CB /* a1_s3713342App.swift */,
 				A22074642A7D5FF0002FD6CB /* ContentView.swift */,
 				B130196E2A983AAA0002064E /* Models */,
@@ -195,6 +202,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		B19E751D2A9AD7C6008E9FF4 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */,
+			);
+			path = Layouts;
+			sourceTree = "<group>";
+		};
 		B1FDB7FC2A9962DF0087DA04 /* Listening */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +234,7 @@
 				B13019102A96CF480002064E /* TimeSegment.swift */,
 				B13019492A975B170002064E /* CapturedEventBlock.swift */,
 				B19E75192A99B73C008E9FF4 /* EventDetailView.swift */,
+				B19E75222A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -314,6 +330,7 @@
 				B130197C2A983AAA0002064E /* EventLog.swift in Sources */,
 				B13019772A983AAA0002064E /* SavedEvent.swift in Sources */,
 				A2B7E5482A910240008912C9 /* DataModel.swift in Sources */,
+				B19E75232A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift in Sources */,
 				A2B7E5522A911EB0008912C9 /* AddListenerFlowCustom2.swift in Sources */,
 				B13019692A977C2E0002064E /* JSON.swift in Sources */,
 				B13019202A96F33D0002064E /* GenericListenerType.swift in Sources */,
@@ -329,6 +346,7 @@
 				B13019152A96CF480002064E /* TimeSegment.swift in Sources */,
 				A2B7E5502A911EA4008912C9 /* AddListenerFlowCustom1.swift in Sources */,
 				A22074652A7D5FF0002FD6CB /* ContentView.swift in Sources */,
+				B19E751F2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift in Sources */,
 				B130191E2A96F2820002064E /* EventListenerType.swift in Sources */,
 				A220747B2A7D8579002FD6CB /* AddListenerFlowView0.swift in Sources */,
 				A28E3FF32A9658C300BCD972 /* FeedTab.swift in Sources */,
