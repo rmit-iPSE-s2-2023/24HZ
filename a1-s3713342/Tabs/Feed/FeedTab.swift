@@ -21,7 +21,7 @@ struct FeedTab: View {
                 VStack {
                     
                     Text("Events captured in the Last 24 Hours")
-                        .font(.largeTitle)
+                        .font(.largeTitle.bold())
                         .foregroundColor(.white)
                     
                     // Get an array of TimeIntervals to segment events by hour blocks
