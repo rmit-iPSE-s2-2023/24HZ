@@ -37,8 +37,7 @@ struct ListeningTab: View {
                 // Header
                 HStack {
                     Text("#USERNAME")
-                        .font(.system(size: 30))
-                        .fontWeight(.bold)
+                        .font(.largeTitle.bold())
                         .foregroundColor(.orange)
                         .padding(.leading, 30)
                     Spacer()
@@ -46,8 +45,7 @@ struct ListeningTab: View {
                 
                 HStack {
                     Text("here is what you're")
-                        .font(.system(size: 30))
-                        .fontWeight(.semibold)
+                        .font(.largeTitle.bold())
                         .foregroundColor(.white)
                         .padding(.leading, 30) 
                     Spacer()

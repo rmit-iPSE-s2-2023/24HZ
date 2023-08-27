@@ -14,7 +14,7 @@ struct SavedTab: View {
             // Your existing content for the saved tab
             VStack(spacing: 20) {
                 Text("Your saved events will show up on this page")
-                    .font(.system(size: 30))
+                    .font(.largeTitle.bold())
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 30)
