@@ -19,10 +19,14 @@ struct FeedTab: View {
             ScrollView {
                 
                 VStack {
-                    
-                    Text("Events captured in the Last 24 Hours")
-                        .font(.largeTitle.bold())
-                        .foregroundColor(.white)
+                    HStack {
+                        Text("Events captured in the Last 24 Hours")
+                            .multilineTextAlignment(.leading)
+                            .font(.largeTitle.bold())
+                            .foregroundColor(.white)
+                            .padding(.leading, 10)
+                        Spacer()
+                    }
                     
                     // Get an array of TimeIntervals to segment events by hour blocks
                     let timeIntervals = getTimeIntervalsForPast24Hours(from: currentTime)

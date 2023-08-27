@@ -11,34 +11,43 @@ struct SavedTab: View {
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            // Your existing content for the saved tab
+            
             VStack(spacing: 20) {
-                Text("Your saved events will show up on this page")
-                    .font(.largeTitle.bold())
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding(.top, 30)
+                HStack {
+                    Text("Your saved events will show up on this page")
+                        .multilineTextAlignment(.leading)
+                        .font(.largeTitle.bold())
+                        .foregroundColor(.white)
+                        .padding(.leading, 10)
+                    Spacer()
+                }
                 
                 VStack(alignment: .leading, spacing: 15) {
                     Text("To save events:")
                         .foregroundColor(.white)
-                        .font(.headline)
-                   
+                        .font(.title2)
+
+                    Text("1. Navigate to **Feed**")
+                        .foregroundColor(.white)
+                        .padding(.leading, 20)
                     
-                    Text("1. Navigate to Feed")
+                    Text("2. Tap on an _Event_")
                         .foregroundColor(.white)
-                    Text("2. Tap on an event")
+                        .padding(.leading, 20)
+
+                    Text("3. Tap _Save_")
                         .foregroundColor(.white)
-                    Text("3. Tap “Save”")
-                        .foregroundColor(.white)
+                        .padding(.leading, 20)
+
                 }
-                .frame(width: 350, height: 200, alignment: .leading)
-                .padding()
+                .frame(width: 330, alignment: .leading)
+                .padding(.vertical, 40)
+                .padding(.horizontal, 20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.white, lineWidth: 2)
                 )
-                
+
                 VStack(spacing: 15) {
                     Image("icon")
                         .resizable()
@@ -46,8 +55,9 @@ struct SavedTab: View {
                     Text("<helper_animation>")
                         .foregroundColor(.gray)
                 }
-                .frame(width: 350, height: 200)
-                .padding()
+                .frame(width: 330, height: 200)
+                .padding(.vertical, 40)
+                .padding(.horizontal, 20)
                 .overlay(
                     Rectangle()
                         .stroke(Color.white, lineWidth: 2)
@@ -56,7 +66,6 @@ struct SavedTab: View {
                 Spacer()
             }
         }
-        .padding(.horizontal)
         .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }

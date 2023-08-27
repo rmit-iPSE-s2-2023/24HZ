@@ -35,22 +35,32 @@ struct ListeningTab: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack {
-                // Header
+                
                 HStack {
                     Text(user.name + ",")
+                        .multilineTextAlignment(.leading)
                         .font(.largeTitle.bold())
                         .foregroundColor(.orange)
-                        .padding(.leading, 30)
+                        .padding(.leading, 10)
                     Spacer()
                 }
                 
                 HStack {
                     Text("here is what you're listening to...")
+                        .multilineTextAlignment(.leading)
                         .font(.largeTitle.bold())
                         .foregroundColor(.white)
-                        .padding(.leading, 30) 
+                        .padding(.leading, 10)
                     Spacer()
                 }
+                
+//                HStack {
+//                    Text("here is what you're listening to...")
+//                        .font(.largeTitle.bold())
+//                        .foregroundColor(.white)
+//                        .padding(.leading, 30) 
+//                    Spacer()
+//                }
                 
                 
                 // Content: Blocks or Placeholder
