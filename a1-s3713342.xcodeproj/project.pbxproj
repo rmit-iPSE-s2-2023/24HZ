@@ -51,7 +51,6 @@
 		B19E751F2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */; };
 		B19E75232A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75222A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift */; };
 		B1B919AD2A9B0EE700DA837C /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B919AC2A9B0EE600DA837C /* utility.swift */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,7 +100,6 @@
 		B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentedWithHeaderLayout.swift; sourceTree = "<group>"; };
 		B19E75222A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedEventBlockIndentUnspecified.swift; sourceTree = "<group>"; };
 		B1B919AC2A9B0EE600DA837C /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

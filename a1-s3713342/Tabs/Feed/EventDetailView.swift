@@ -9,15 +9,22 @@ import SwiftUI
 
 struct EventDetailView: View {
     
-    @Environment(\.dismiss) var dismiss
     var event: EventData
+    
+    @Environment(\.dismiss) var dismiss
+    let overlayHeight: CGFloat = 60
 
     var body: some View {
             
             ZStack {
+                
+                // MARK: - Background
                 LinearGradient(colors: [.orange, Color("gradientTrailingBrown")], startPoint: .top, endPoint: .bottomTrailing)
 
+                // MARK: - Event Details
                 VStack {
+                    
+                    /// Heading: Event type name
                     HStack {
                         Text("\(event.eventType.name)")
                             .foregroundStyle(.black)
@@ -27,12 +34,8 @@ struct EventDetailView: View {
                         Spacer()
                     }
                     
-                    VStack {
-                        HStack {
-                            Text("Smart Contract")
-                                .font(.callout.bold())
-                            Spacer()
-                        }
+                    /// Section showing Smart Contract details
+                    Section {
                         VStack {
                             HStack {
                                 Text("Name")
@@ -50,14 +53,16 @@ struct EventDetailView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.black, lineWidth: 2)
                         }
-                    }
-                    
-                    VStack {
+                    } header: {
                         HStack {
-                            Text("Event")
+                            Text("Smart Contract")
                                 .font(.callout.bold())
                             Spacer()
                         }
+                    }
+                    
+                    /// Section showing Event details
+                    Section {
                         VStack {
                             HStack {
                                 Text("Name")
@@ -90,12 +95,18 @@ struct EventDetailView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.black, lineWidth: 2)
                         }
+                    } header: {
+                        HStack {
+                            Text("Event")
+                                .font(.callout.bold())
+                            Spacer()
+                        }
                     }
                     
                     Spacer()
 
                     Button {
-                        //
+                        // TODO: - Adding event saving functionality.
                     } label: {
                         Text("Save")
                             .font(.title2)
@@ -116,11 +127,12 @@ struct EventDetailView: View {
 
                     
                 }
-                .padding(.top, 60)
+                .padding(.top, overlayHeight)
                 .padding([.bottom, .horizontal], 30)
 
             }
             .overlay(
+                /// Button overlay to dismiss presentation
                 VStack {
                     HStack {
                         Spacer()
@@ -135,43 +147,20 @@ struct EventDetailView: View {
                         .padding(.top, 8)
                         
                     }
-                    .frame(height: 60)
-//                    .background(.white)
+                    .frame(height: overlayHeight)
+
                     Spacer()
                 }
             )
-//            .background(.black).edgesIgnoringSafeArea(.all)
 
     }
 }
 
 struct EventDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let eventData = getEventData()
-        TimeSegment(toTimestamp: Constants.dummyCurrentTimeInterval, eventData: eventData!)
+        let event = getRandomDummyEventData()
+        EventDetailView(event: event)
     }
 }
 
-//struct EventDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EventDetailView()
-//    }
-//}
 
-// Custom GroupBox Style
-struct CustomBackground: GroupBoxStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        VStack {
-            HStack {
-                configuration.label
-                    .font(.headline)
-                Spacer()
-            }
-            
-            configuration.content
-        }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
-            .fill(.clear))
-    }
-}
