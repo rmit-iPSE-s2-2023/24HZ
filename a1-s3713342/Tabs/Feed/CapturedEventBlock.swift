@@ -38,17 +38,20 @@ struct CapturedEventBlock: View {
 
             
             Spacer()
-            VStack {
-                Text("New Token")
-                    .font(.callout.bold())
-                    .foregroundColor(Color.black)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(Color("newTokenBadge"))
-                    .clipShape(RoundedRectangle(cornerRadius: 50))
-                
-                Spacer()
+            if isGeneric {
+                VStack {
+                    Text("New Token")
+                        .font(.callout.bold())
+                        .foregroundColor(Color.black)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color("newTokenBadge"))
+                        .clipShape(RoundedRectangle(cornerRadius: 50))
+                    
+                    Spacer()
+                }
             }
+
             
         }
         .frame(height: 80)
