@@ -19,6 +19,8 @@ struct ListeningTab: View {
     // This allows the tab to know what kind of notifications are enabled.
     @Binding var notificationSettings: [NotificationSetting]
     
+    @Binding var user: User
+
     // State to manage navigation to the next view.
     // Triggered when the user wants to navigate to the next screen in a sequence.
     @State private var navigateToNext = false
@@ -29,14 +31,13 @@ struct ListeningTab: View {
     
     
     
-    
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack {
                 // Header
                 HStack {
-                    Text("#USERNAME")
+                    Text(user.name + ",")
                         .font(.largeTitle.bold())
                         .foregroundColor(.orange)
                         .padding(.leading, 30)
@@ -101,12 +102,13 @@ struct ListeningTab: View {
 
 struct ListeningTab_Previews: PreviewProvider {
     static var previews: some View {
+        let user = getDummyUser() // Create a constant user for preview
         Group {
             // Preview with no blocks
-            ListeningTab(blocks: .constant([]), notificationSettings: .constant([]))
+            ListeningTab(blocks: .constant([]), notificationSettings: .constant([]), user: .constant(user))
             
             // Preview with some sample blocks
-            ListeningTab(blocks: .constant([.zoraNFTs, .coins,.customNFTs]), notificationSettings: .constant([]))
+            ListeningTab(blocks: .constant([.zoraNFTs, .coins,.customNFTs]), notificationSettings: .constant([]), user: .constant(user))
         }
     }
 }

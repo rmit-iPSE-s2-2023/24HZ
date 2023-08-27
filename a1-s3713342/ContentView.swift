@@ -33,7 +33,7 @@ struct ContentView: View {
                     TabView(selection: $viewSelection) {
                         
                         // Listening Tab
-                        ListeningTab(blocks: $blocks, notificationSettings: $notificationSettings)
+                        ListeningTab(blocks: $blocks, notificationSettings: $notificationSettings, user: $user)
                             .tag(0)
                         
                         // Feed Tab
