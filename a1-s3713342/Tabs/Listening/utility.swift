@@ -2,7 +2,7 @@
 //  CustomContinueButton.swift
 //  a1-s3713342
 //
-//  Created by 민철 on 26/8/23.
+//  Created by Min on 26/8/23.
 //
 
 import SwiftUI
