@@ -22,6 +22,7 @@ The current project architecture is similar to the Container pattern found in Re
 - Models: contains data models of database objects
 - Enums: contains useful enums
 - Tabs: contains relevant views for each Tab
+- Layouts: contains custom layouts
 - Preview Content: contains dummy JSON data for prototyping purposes
 - `JSON.swift`: contains dummy data fetching code
 - `utils.swift`: contains utility code e.g. TimeInterval conversions
