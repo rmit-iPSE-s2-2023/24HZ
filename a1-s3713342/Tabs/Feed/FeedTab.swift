@@ -11,28 +11,23 @@ struct FeedTab: View {
     
     @Binding var user: User
     @Binding var currentTime: TimeInterval
-//    @State private var eventLogs: [EventLog]?
     @State var eventData: [EventData] = getEventData()!
-    
-    // Initialize the view with pre-loaded event logs
-    init(user: Binding<User>, currentTime: Binding<TimeInterval>) {
-        _user = user
-        _currentTime = currentTime
-    }
 
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             ScrollView {
+                
                 VStack {
                     
                     Text("Events captured in the Last 24 Hours")
                         .font(.largeTitle)
                         .foregroundColor(.white)
                     
-                    // Divide captured EventLogs by hour blocks
+                    // Get an array of TimeIntervals to segment events by hour blocks
                     let timeIntervals = getTimeIntervalsForPast24Hours(from: currentTime)
                     
+                    // Display captured events segmented by hour blocks
                     ForEach(timeIntervals, id: \.self) { timeInterval in
                         TimeSegment(toTimestamp: timeInterval, eventData: eventData)
                     }
