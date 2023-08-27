@@ -60,7 +60,7 @@ struct AddListenerFlowView1: View {
             }
         }) {
             customCheckButton(isChecked: selectedBlocks.contains(block))
-                .overlay(Text(block.rawValue).foregroundColor(.black))
+                .overlay(Text(block.rawValue).font(.title3.bold()).foregroundColor(.black))
         }
     }
 }

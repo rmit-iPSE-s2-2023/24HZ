@@ -14,10 +14,10 @@ enum BlockType: String, CaseIterable {
 }
 
 enum NotificationSetting: String, CaseIterable {
-    case eventsFeed = "I want events on my 24HZ feed"
-    case onceADayEmail = "I also want once-a-day email"
-    case emailEveryEvent = "I also want an email for every event"
-    case mobileNotifications = "I also want mobile notifications"
+    case eventsFeed = "I want events on my **24HZ Feed**"
+    case onceADayEmail = "I also want **Once-a-Day Email**"
+    case emailEveryEvent = "I also want an **Email for Every Event**"
+    case mobileNotifications = "I also want **Mobile Notifications**"
 }
 
 struct Block {

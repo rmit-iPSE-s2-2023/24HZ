@@ -66,7 +66,7 @@ struct AddListenerFlowView2: View {
             }
         }) {
             customCheckButton(isChecked: selectedNotificationSettings.contains(setting))
-                .overlay(Text(setting.rawValue).foregroundColor(.black))
+                .overlay(Text(try! AttributedString(markdown: setting.rawValue)).font(.title3).foregroundColor(.black))
         }
     }
 }

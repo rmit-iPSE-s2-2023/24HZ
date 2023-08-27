@@ -33,8 +33,8 @@ struct AddListenerFlowView0: View {
                     .font(.title)
                 
                 // Option buttons
-                createOptionButton(option: 1, text: "I want a generic event to listen to")
-                createOptionButton(option: 2, text: "I have a specific contract to listen to")
+                createOptionButton(option: 1, text: "I want a **generic event** to listen to")
+                createOptionButton(option: 2, text: "I have a **specific contract** to listen to")
                 
                 // Empty space at bottom
                 Spacer()
@@ -59,7 +59,7 @@ struct AddListenerFlowView0: View {
     private func createOptionButton(option: Int, text: String) -> some View {
         Button(action: { selectedOption = option }) {
             customCheckButton(isChecked: selectedOption == option)
-                .overlay(Text(text).foregroundColor(.black))
+                .overlay(Text(try! AttributedString(markdown: text)).font(.title3).foregroundColor(.black))
         }
     }
 }
