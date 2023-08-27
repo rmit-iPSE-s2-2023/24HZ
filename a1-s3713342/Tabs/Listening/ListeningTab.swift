@@ -9,11 +9,24 @@ import SwiftUI
 
 struct ListeningTab: View {
     
+    // MARK: - Properties
+    
+    // Binding to an array of blocks that the user has added.
+    // This will be a shared state between different views.
     @Binding var blocks: [BlockType]
+    
+    // Binding to an array of notification settings.
+    // This allows the tab to know what kind of notifications are enabled.
     @Binding var notificationSettings: [NotificationSetting]
+    
+    // State to manage navigation to the next view.
+    // Triggered when the user wants to navigate to the next screen in a sequence.
     @State private var navigateToNext = false
+    
+    // State to manage navigation to a custom view.
+    // Triggered when the user wants to navigate to a custom screen.
     @State private var navigateToCustom = false
-    @State private var arrowOffset: CGFloat = 0
+    
     
     
     
@@ -21,12 +34,13 @@ struct ListeningTab: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack {
+                // Header
                 HStack {
                     Text("#USERNAME")
                         .font(.system(size: 30))
                         .fontWeight(.bold)
-                        .foregroundColor(.purple)
-                        .padding(.leading, 30)  // 여기에 패딩 추가
+                        .foregroundColor(.orange)
+                        .padding(.leading, 30)
                     Spacer()
                 }
                 
@@ -35,7 +49,7 @@ struct ListeningTab: View {
                         .font(.system(size: 30))
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .padding(.leading, 30)  // 여기에 패딩 추가
+                        .padding(.leading, 30) 
                     Spacer()
                 }
                 
@@ -44,33 +58,23 @@ struct ListeningTab: View {
                         .font(.system(size: 30))
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .padding(.leading, 30)  // 여기에 패딩 추가
+                        .padding(.leading, 30) 
                     Spacer()
                 }
                 
-                // If user add no blocks, message is shown
+                // Content: Blocks or Placeholder
                 if blocks.isEmpty {
+                    // Placeholder for no blocks
                     VStack {
-                        Spacer() // 위쪽으로 밀어냄
+                        Spacer()
                         Text("No blocks added")
                             .font(.system(size: 30))
                             .fontWeight(.regular)
                             .foregroundColor(.gray)
-                        
-                        // User guide arrow
-                        Image(systemName: "arrow.down")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.gray)
-                            .offset(y: arrowOffset)
-                            .onAppear() {
-                                withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
-                                    arrowOffset = 200
-                                }
-                            }
                         Spacer()
                     }
                 } else {
+                    // List of blocks
                     ForEach(blocks, id: \.self) { block in
                         NavigationLink(destination: BlockSettingView(block: block, notificationSettings: $notificationSettings, blocks: $blocks)) {
                             genericBlock(block: block)
@@ -80,16 +84,14 @@ struct ListeningTab: View {
                 
                 Spacer()
                 
+                // Bottom Add Button
                 NavigationLink(destination: AddListenerFlowView0(blocks: $blocks, notificationSettings: $notificationSettings, navigateToNext: $navigateToNext, navigateToCustom: $navigateToCustom), isActive: $navigateToNext) {
-                    
                     HStack {
-                        //Spacer() // HStack의 오른쪽으로 밀어냄
-                        
-                        //Bottom button
+                        Spacer()
                         plusButton()
-                            .offset(y: -20)  // 위로 20 픽셀 올림
-                                            /*.padding(.bottom, 20)  // 아래쪽에 20픽셀 패딩
-                                            .padding(.trailing, 20)// 오른쪽에 20픽셀 패딩*/
+                            .offset(y: -20)
+                            .padding(.bottom, 20)
+                            .padding(.trailing, 20)
                     }
                 }
                 .isDetailLink(false)
@@ -103,10 +105,10 @@ struct ListeningTab_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             // Preview with no blocks
-             ListeningTab(blocks: .constant([]), notificationSettings: .constant([]))
+            ListeningTab(blocks: .constant([]), notificationSettings: .constant([]))
             
             // Preview with some sample blocks
-            /*ListeningTab(blocks: .constant([.zoraNFTs, .coins]), notificationSettings: .constant([]))*/
+            ListeningTab(blocks: .constant([.zoraNFTs, .coins,.customNFTs]), notificationSettings: .constant([]))
         }
     }
 }

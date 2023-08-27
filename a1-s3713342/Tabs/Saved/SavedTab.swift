@@ -13,17 +13,17 @@ struct SavedTab: View {
             Color.black.edgesIgnoringSafeArea(.all)
             // Your existing content for the saved tab
             VStack(spacing: 20) {
-                Text("Your saved events will show up on this page.")
+                Text("Your saved events will show up on this page")
                     .font(.system(size: 30))
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .padding(.top, 50)
-                Spacer()
+                    .padding(.top, 30)
                 
-                VStack(spacing: 15) {
+                VStack(alignment: .leading, spacing: 15) {
                     Text("To save events:")
                         .foregroundColor(.white)
                         .font(.headline)
+                   
                     
                     Text("1. Navigate to Feed")
                         .foregroundColor(.white)
@@ -32,6 +32,7 @@ struct SavedTab: View {
                     Text("3. Tap “Save”")
                         .foregroundColor(.white)
                 }
+                .frame(width: 350, height: 200, alignment: .leading)
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
@@ -41,13 +42,14 @@ struct SavedTab: View {
                 VStack(spacing: 15) {
                     Image("icon")
                         .resizable()
-                        .frame(width: 100, height: 100) // Adjust this to fit the icon's aspect ratio
+                        .frame(width: 100, height: 70) // Adjust this to fit the icon's aspect ratio
                     Text("<helper_animation>")
-                        .foregroundColor(.white)
+                        .foregroundColor(.gray)
                 }
+                .frame(width: 350, height: 200)
                 .padding()
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10)
+                    Rectangle()
                         .stroke(Color.white, lineWidth: 2)
                 )
                 
