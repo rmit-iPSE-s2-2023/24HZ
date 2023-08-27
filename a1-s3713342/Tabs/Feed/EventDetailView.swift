@@ -19,7 +19,7 @@ struct EventDetailView: View {
             ZStack {
                 
                 // MARK: - Background
-                LinearGradient(colors: [.orange, Color("gradientTrailingBrown")], startPoint: .top, endPoint: .bottomTrailing)
+                LinearGradient(colors: [.orange, Color("gradientTrailingBrown")], startPoint: .top, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)
 
                 // MARK: - Event Details
                 VStack {
