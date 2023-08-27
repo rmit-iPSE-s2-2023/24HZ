@@ -30,7 +30,7 @@
 		B130191E2A96F2820002064E /* EventListenerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B130191D2A96F2820002064E /* EventListenerType.swift */; };
 		B13019202A96F33D0002064E /* GenericListenerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B130191F2A96F33D0002064E /* GenericListenerType.swift */; };
 		B13019222A96F4E00002064E /* ERCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019212A96F4E00002064E /* ERCType.swift */; };
-		B130194A2A975B170002064E /* CapturedEventBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019492A975B170002064E /* CapturedEventBlock.swift */; };
+		B130194A2A975B170002064E /* CapturedEventBlockPadded.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019492A975B170002064E /* CapturedEventBlockPadded.swift */; };
 		B130195E2A9777590002064E /* SavedEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = B13019562A9777590002064E /* SavedEvents.json */; };
 		B130195F2A9777590002064E /* SmartContracts.json in Resources */ = {isa = PBXBuildFile; fileRef = B13019572A9777590002064E /* SmartContracts.json */; };
 		B13019602A9777590002064E /* EventTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = B13019582A9777590002064E /* EventTypes.json */; };
@@ -49,7 +49,7 @@
 		B130197E2A983AAA0002064E /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13019762A983AAA0002064E /* NotificationType.swift */; };
 		B19E751A2A99B73C008E9FF4 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75192A99B73C008E9FF4 /* EventDetailView.swift */; };
 		B19E751F2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */; };
-		B19E75232A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75222A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift */; };
+		B19E75232A9AF89A008E9FF4 /* CapturedEventBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75222A9AF89A008E9FF4 /* CapturedEventBlock.swift */; };
 		B1B919AD2A9B0EE700DA837C /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B919AC2A9B0EE600DA837C /* utility.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +78,7 @@
 		B130191D2A96F2820002064E /* EventListenerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListenerType.swift; sourceTree = "<group>"; };
 		B130191F2A96F33D0002064E /* GenericListenerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericListenerType.swift; sourceTree = "<group>"; };
 		B13019212A96F4E00002064E /* ERCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERCType.swift; sourceTree = "<group>"; };
-		B13019492A975B170002064E /* CapturedEventBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedEventBlock.swift; sourceTree = "<group>"; };
+		B13019492A975B170002064E /* CapturedEventBlockPadded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedEventBlockPadded.swift; sourceTree = "<group>"; };
 		B13019562A9777590002064E /* SavedEvents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SavedEvents.json; sourceTree = "<group>"; };
 		B13019572A9777590002064E /* SmartContracts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SmartContracts.json; sourceTree = "<group>"; };
 		B13019582A9777590002064E /* EventTypes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EventTypes.json; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		B19E75132A99694B008E9FF4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B19E75192A99B73C008E9FF4 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentedWithHeaderLayout.swift; sourceTree = "<group>"; };
-		B19E75222A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedEventBlockIndentUnspecified.swift; sourceTree = "<group>"; };
+		B19E75222A9AF89A008E9FF4 /* CapturedEventBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedEventBlock.swift; sourceTree = "<group>"; };
 		B1B919AC2A9B0EE600DA837C /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,9 +230,9 @@
 				A28E3FEE2A9658C200BCD972 /* FeedTab.swift */,
 				B13019122A96CF480002064E /* Hourmark.swift */,
 				B13019102A96CF480002064E /* TimeSegment.swift */,
-				B13019492A975B170002064E /* CapturedEventBlock.swift */,
+				B13019492A975B170002064E /* CapturedEventBlockPadded.swift */,
 				B19E75192A99B73C008E9FF4 /* EventDetailView.swift */,
-				B19E75222A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift */,
+				B19E75222A9AF89A008E9FF4 /* CapturedEventBlock.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -328,7 +328,7 @@
 				B130197C2A983AAA0002064E /* EventLog.swift in Sources */,
 				B13019772A983AAA0002064E /* SavedEvent.swift in Sources */,
 				A2B7E5482A910240008912C9 /* DataModel.swift in Sources */,
-				B19E75232A9AF89A008E9FF4 /* CapturedEventBlockIndentUnspecified.swift in Sources */,
+				B19E75232A9AF89A008E9FF4 /* CapturedEventBlock.swift in Sources */,
 				A2B7E5522A911EB0008912C9 /* AddListenerFlowCustom2.swift in Sources */,
 				B13019692A977C2E0002064E /* JSON.swift in Sources */,
 				B13019202A96F33D0002064E /* GenericListenerType.swift in Sources */,
@@ -336,7 +336,7 @@
 				A28E3FF02A9658C300BCD972 /* SavedTab.swift in Sources */,
 				B130197B2A983AAA0002064E /* User.swift in Sources */,
 				A2E020842A7D9A9500B5BF3C /* AddListenerFlowView3.swift in Sources */,
-				B130194A2A975B170002064E /* CapturedEventBlock.swift in Sources */,
+				B130194A2A975B170002064E /* CapturedEventBlockPadded.swift in Sources */,
 				A28E3FF22A9658C300BCD972 /* ListeningTab.swift in Sources */,
 				A220747D2A7D8C43002FD6CB /* AddListenerFlowView1.swift in Sources */,
 				A28E3FEF2A9658C300BCD972 /* SwipeNavigation.swift in Sources */,

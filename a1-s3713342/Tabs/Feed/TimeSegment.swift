@@ -40,7 +40,7 @@ struct TimeSegment: View {
 
                 /// Array of event blocks
                 ForEach(filteredEventData, id: \.eventLog.id) { event in
-                    CapturedEventBlockIndentUnspecified(eventData: event)
+                    CapturedEventBlock(eventData: event)
                         .onTapGesture {
                             self.selectedEvent = event
                         }
@@ -55,7 +55,7 @@ struct TimeSegment: View {
             VStack {
                 Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
                 ForEach(filteredEventData, id: \.eventLog.id) { event in
-                    CapturedEventBlock(eventData: event)
+                    CapturedEventBlockPadded(eventData: event)
                         .onTapGesture {
                             self.selectedEvent = event
                         }
