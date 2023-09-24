@@ -51,7 +51,20 @@
 		B19E751F2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */; };
 		B19E75232A9AF89A008E9FF4 /* CapturedEventBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75222A9AF89A008E9FF4 /* CapturedEventBlock.swift */; };
 		B1B919AD2A9B0EE700DA837C /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B919AC2A9B0EE600DA837C /* utility.swift */; };
+		B1BE37782AC0147600104A4A /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37772AC0147600104A4A /* RPC.swift */; };
+		B1BE377A2AC0159200104A4A /* ThirdWebRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37792AC0159200104A4A /* ThirdWebRPC.swift */; };
+		B1BE37822AC01BE900104A4A /* ThirdWebRPCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37812AC01BE900104A4A /* ThirdWebRPCTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B1BE37832AC01BE900104A4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A22074572A7D5FF0002FD6CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A220745E2A7D5FF0002FD6CB;
+			remoteInfo = 24HZ;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A220745F2A7D5FF0002FD6CB /* 24HZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24HZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,10 +113,21 @@
 		B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentedWithHeaderLayout.swift; sourceTree = "<group>"; };
 		B19E75222A9AF89A008E9FF4 /* CapturedEventBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedEventBlock.swift; sourceTree = "<group>"; };
 		B1B919AC2A9B0EE600DA837C /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
+		B1BE37772AC0147600104A4A /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
+		B1BE37792AC0159200104A4A /* ThirdWebRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdWebRPC.swift; sourceTree = "<group>"; };
+		B1BE377F2AC01BE900104A4A /* 24HZTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 24HZTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1BE37812AC01BE900104A4A /* ThirdWebRPCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdWebRPCTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A220745C2A7D5FF0002FD6CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1BE377C2AC01BE900104A4A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -118,6 +142,7 @@
 			children = (
 				B19E75132A99694B008E9FF4 /* README.md */,
 				A22074612A7D5FF0002FD6CB /* 24HZ */,
+				B1BE37802AC01BE900104A4A /* 24HZTests */,
 				A22074602A7D5FF0002FD6CB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -126,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				A220745F2A7D5FF0002FD6CB /* 24HZ.app */,
+				B1BE377F2AC01BE900104A4A /* 24HZTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,6 +205,8 @@
 		B11153D72AB9203D00033780 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				B1BE37772AC0147600104A4A /* RPC.swift */,
+				B1BE37792AC0159200104A4A /* ThirdWebRPC.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -214,6 +242,14 @@
 				B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */,
 			);
 			path = Layouts;
+			sourceTree = "<group>";
+		};
+		B1BE37802AC01BE900104A4A /* 24HZTests */ = {
+			isa = PBXGroup;
+			children = (
+				B1BE37812AC01BE900104A4A /* ThirdWebRPCTests.swift */,
+			);
+			path = 24HZTests;
 			sourceTree = "<group>";
 		};
 		B1FDB7FC2A9962DF0087DA04 /* Listening */ = {
@@ -273,6 +309,24 @@
 			productReference = A220745F2A7D5FF0002FD6CB /* 24HZ.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B1BE377E2AC01BE900104A4A /* 24HZTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1BE37852AC01BE900104A4A /* Build configuration list for PBXNativeTarget "24HZTests" */;
+			buildPhases = (
+				B1BE377B2AC01BE900104A4A /* Sources */,
+				B1BE377C2AC01BE900104A4A /* Frameworks */,
+				B1BE377D2AC01BE900104A4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1BE37842AC01BE900104A4A /* PBXTargetDependency */,
+			);
+			name = 24HZTests;
+			productName = 24HZTests;
+			productReference = B1BE377F2AC01BE900104A4A /* 24HZTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -280,11 +334,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					A220745E2A7D5FF0002FD6CB = {
 						CreatedOnToolsVersion = 13.2;
+					};
+					B1BE377E2AC01BE900104A4A = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = A220745E2A7D5FF0002FD6CB;
 					};
 				};
 			};
@@ -302,6 +360,7 @@
 			projectRoot = "";
 			targets = (
 				A220745E2A7D5FF0002FD6CB /* 24HZ */,
+				B1BE377E2AC01BE900104A4A /* 24HZTests */,
 			);
 		};
 /* End PBXProject section */
@@ -320,6 +379,13 @@
 				B13019642A9777590002064E /* NotifcationType.json in Resources */,
 				B13019632A9777590002064E /* EventLogs.json in Resources */,
 				B13019602A9777590002064E /* EventTypes.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1BE377D2AC01BE900104A4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,10 +409,12 @@
 				B13019222A96F4E00002064E /* ERCType.swift in Sources */,
 				A28E3FF02A9658C300BCD972 /* SavedTab.swift in Sources */,
 				B130197B2A983AAA0002064E /* User.swift in Sources */,
+				B1BE377A2AC0159200104A4A /* ThirdWebRPC.swift in Sources */,
 				A2E020842A7D9A9500B5BF3C /* AddListenerFlowView3.swift in Sources */,
 				B130194A2A975B170002064E /* CapturedEventBlockPadded.swift in Sources */,
 				A28E3FF22A9658C300BCD972 /* ListeningTab.swift in Sources */,
 				A220747D2A7D8C43002FD6CB /* AddListenerFlowView1.swift in Sources */,
+				B1BE37782AC0147600104A4A /* RPC.swift in Sources */,
 				A28E3FEF2A9658C300BCD972 /* SwipeNavigation.swift in Sources */,
 				B130197A2A983AAA0002064E /* EventType.swift in Sources */,
 				B13019152A96CF480002064E /* TimeSegment.swift in Sources */,
@@ -368,7 +436,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1BE377B2AC01BE900104A4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1BE37822AC01BE900104A4A /* ThirdWebRPCTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B1BE37842AC01BE900104A4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A220745E2A7D5FF0002FD6CB /* 24HZ */;
+			targetProxy = B1BE37832AC01BE900104A4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A220746B2A7D5FF3002FD6CB /* Debug */ = {
@@ -545,6 +629,50 @@
 			};
 			name = Release;
 		};
+		B1BE37862AC01BE900104A4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "rmit-iPSE-s2-2023.-4HZTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/24HZ.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/24HZ";
+			};
+			name = Debug;
+		};
+		B1BE37872AC01BE900104A4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "rmit-iPSE-s2-2023.-4HZTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/24HZ.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/24HZ";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -562,6 +690,15 @@
 			buildConfigurations = (
 				A220746E2A7D5FF3002FD6CB /* Debug */,
 				A220746F2A7D5FF3002FD6CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1BE37852AC01BE900104A4A /* Build configuration list for PBXNativeTarget "24HZTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1BE37862AC01BE900104A4A /* Debug */,
+				B1BE37872AC01BE900104A4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
