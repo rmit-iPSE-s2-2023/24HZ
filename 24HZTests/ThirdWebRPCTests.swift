@@ -37,5 +37,62 @@ final class ThirdWebRPCTests: XCTestCase {
             XCTFail("Expected block objects but failed: \(error).")
         }
     }
+    
+    /// Testing finding new contract deployments within give block range
+    /// Test cases:
+    /// 1. Number of new contract deployments found in given block range is correct
+    /// 2. `to` field in `TransactionObject` is `nil` (as it should be for transactions that created new contracts)
+    func testFilteringForNewContractDeployments() async throws {
+        /// DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
+        let blockCount = 1000
+        let fromBlock = 4311000
+        let toBlock = fromBlock + blockCount - 1
+        do {
+            let blockObjects = try await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock)
+            print("Filtering for new contract deplyoments between in block range:\n\(fromBlock), \(toBlock)")
+            /// Filter for  new deployment TransactionObjects; whose `to` field is `nil`
+            let deployTxs = blockObjects.flatMap { blockObject in
+                return blockObject.transactions.filter { tx in
+                    return tx.to == nil
+                }
+            }
+            print(deployTxs)
+            XCTAssertEqual(deployTxs.count, 3)
+            XCTAssertEqual(deployTxs.first!.to, nil)
+        } catch {
+            XCTFail("Expected block objects but failed: \(error).")
+        }
+    }
+    
+    /// Testing finding new contract deployments within give block range
+    /// Test cases:
+    /// 1. Number of `TransactionReceiptObject` returned matches number of deploy transactions found in given block range
+    /// 2. `to
+    func testTransactionReceipts() async throws {
+        /// DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
+        let blockCount = 1000
+        let fromBlock = 4311000
+        let toBlock = fromBlock + blockCount - 1
+        do {
+            let blockObjects = try await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock)
+            print("Filtering for new contract deplyoments between in block range:\n\(fromBlock), \(toBlock)")
+            /// Filter for  new deployment TransactionObjects; whose `to` field is `nil`
+            let deployTxs = blockObjects.flatMap { blockObject in
+                return blockObject.transactions.filter { tx in
+                    return tx.to == nil
+                }
+            }
+            print(deployTxs.count)
+            /// Map `TransactionObject`s to trasaction hashes
+            let deployTxHashes = deployTxs.map { txObj in
+                return txObj.hash
+            }
+            /// Get `TransactionReceipt`s for each new contract deployment transaction to access new contract's address
+            let txReceiptObjects = try await rpc.getTransactionReceipts(txHashes: deployTxHashes)
+            XCTAssertEqual(deployTxs.count, txReceiptObjects.count)
+        } catch {
+            XCTFail("Expected block objects but failed: \(error).")
+        }
+    }
 
 }
