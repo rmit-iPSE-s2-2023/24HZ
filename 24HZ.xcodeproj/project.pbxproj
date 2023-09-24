@@ -51,9 +51,10 @@
 		B19E751F2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */; };
 		B19E75232A9AF89A008E9FF4 /* CapturedEventBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E75222A9AF89A008E9FF4 /* CapturedEventBlock.swift */; };
 		B1B919AD2A9B0EE700DA837C /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B919AC2A9B0EE600DA837C /* utility.swift */; };
-		B1BE37782AC0147600104A4A /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37772AC0147600104A4A /* RPC.swift */; };
+		B1BE37782AC0147600104A4A /* RPCProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37772AC0147600104A4A /* RPCProtocol.swift */; };
 		B1BE377A2AC0159200104A4A /* ThirdWebRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37792AC0159200104A4A /* ThirdWebRPC.swift */; };
 		B1BE37822AC01BE900104A4A /* ThirdWebRPCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37812AC01BE900104A4A /* ThirdWebRPCTests.swift */; };
+		B1BE37892AC0386900104A4A /* EventsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37882AC0386900104A4A /* EventsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,10 +114,11 @@
 		B19E751E2A9AD7EC008E9FF4 /* IndentedWithHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentedWithHeaderLayout.swift; sourceTree = "<group>"; };
 		B19E75222A9AF89A008E9FF4 /* CapturedEventBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedEventBlock.swift; sourceTree = "<group>"; };
 		B1B919AC2A9B0EE600DA837C /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
-		B1BE37772AC0147600104A4A /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
+		B1BE37772AC0147600104A4A /* RPCProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCProtocol.swift; sourceTree = "<group>"; };
 		B1BE37792AC0159200104A4A /* ThirdWebRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdWebRPC.swift; sourceTree = "<group>"; };
 		B1BE377F2AC01BE900104A4A /* 24HZTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 24HZTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BE37812AC01BE900104A4A /* ThirdWebRPCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdWebRPCTests.swift; sourceTree = "<group>"; };
+		B1BE37882AC0386900104A4A /* EventsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,8 +207,9 @@
 		B11153D72AB9203D00033780 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				B1BE37772AC0147600104A4A /* RPC.swift */,
+				B1BE37772AC0147600104A4A /* RPCProtocol.swift */,
 				B1BE37792AC0159200104A4A /* ThirdWebRPC.swift */,
+				B1BE37882AC0386900104A4A /* EventsProvider.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -409,12 +412,13 @@
 				B13019222A96F4E00002064E /* ERCType.swift in Sources */,
 				A28E3FF02A9658C300BCD972 /* SavedTab.swift in Sources */,
 				B130197B2A983AAA0002064E /* User.swift in Sources */,
+				B1BE37892AC0386900104A4A /* EventsProvider.swift in Sources */,
 				B1BE377A2AC0159200104A4A /* ThirdWebRPC.swift in Sources */,
 				A2E020842A7D9A9500B5BF3C /* AddListenerFlowView3.swift in Sources */,
 				B130194A2A975B170002064E /* CapturedEventBlockPadded.swift in Sources */,
 				A28E3FF22A9658C300BCD972 /* ListeningTab.swift in Sources */,
 				A220747D2A7D8C43002FD6CB /* AddListenerFlowView1.swift in Sources */,
-				B1BE37782AC0147600104A4A /* RPC.swift in Sources */,
+				B1BE37782AC0147600104A4A /* RPCProtocol.swift in Sources */,
 				A28E3FEF2A9658C300BCD972 /* SwipeNavigation.swift in Sources */,
 				B130197A2A983AAA0002064E /* EventType.swift in Sources */,
 				B13019152A96CF480002064E /* TimeSegment.swift in Sources */,
