@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A22074632A7D5FF0002FD6CB /* a1_s3713342App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22074622A7D5FF0002FD6CB /* a1_s3713342App.swift */; };
+		A22074632A7D5FF0002FD6CB /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22074622A7D5FF0002FD6CB /* Main.swift */; };
 		A22074652A7D5FF0002FD6CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22074642A7D5FF0002FD6CB /* ContentView.swift */; };
 		A22074672A7D5FF3002FD6CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A22074662A7D5FF3002FD6CB /* Assets.xcassets */; };
 		A220746A2A7D5FF3002FD6CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A22074692A7D5FF3002FD6CB /* Preview Assets.xcassets */; };
@@ -54,8 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A220745F2A7D5FF0002FD6CB /* a1-s3713342.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "a1-s3713342.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A22074622A7D5FF0002FD6CB /* a1_s3713342App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = a1_s3713342App.swift; sourceTree = "<group>"; };
+		A220745F2A7D5FF0002FD6CB /* 24HZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24HZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A22074622A7D5FF0002FD6CB /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		A22074642A7D5FF0002FD6CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A22074662A7D5FF3002FD6CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A22074692A7D5FF3002FD6CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				B19E75132A99694B008E9FF4 /* README.md */,
-				A22074612A7D5FF0002FD6CB /* a1-s3713342 */,
+				A22074612A7D5FF0002FD6CB /* 24HZ */,
 				A22074602A7D5FF0002FD6CB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,16 +125,17 @@
 		A22074602A7D5FF0002FD6CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A220745F2A7D5FF0002FD6CB /* a1-s3713342.app */,
+				A220745F2A7D5FF0002FD6CB /* 24HZ.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A22074612A7D5FF0002FD6CB /* a1-s3713342 */ = {
+		A22074612A7D5FF0002FD6CB /* 24HZ */ = {
 			isa = PBXGroup;
 			children = (
+				B11153D72AB9203D00033780 /* Networking */,
 				B19E751D2A9AD7C6008E9FF4 /* Layouts */,
-				A22074622A7D5FF0002FD6CB /* a1_s3713342App.swift */,
+				A22074622A7D5FF0002FD6CB /* Main.swift */,
 				A22074642A7D5FF0002FD6CB /* ContentView.swift */,
 				B130196E2A983AAA0002064E /* Models */,
 				B130191C2A96F2660002064E /* Enums */,
@@ -147,7 +148,7 @@
 				A22074682A7D5FF3002FD6CB /* Preview Content */,
 				B13019682A977C2E0002064E /* JSON.swift */,
 			);
-			path = "a1-s3713342";
+			path = 24HZ;
 			sourceTree = "<group>";
 		};
 		A22074682A7D5FF3002FD6CB /* Preview Content */ = {
@@ -173,6 +174,13 @@
 				B1FDB7FC2A9962DF0087DA04 /* Listening */,
 			);
 			path = Tabs;
+			sourceTree = "<group>";
+		};
+		B11153D72AB9203D00033780 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		B130191C2A96F2660002064E /* Enums */ = {
@@ -248,9 +256,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A220745E2A7D5FF0002FD6CB /* a1-s3713342 */ = {
+		A220745E2A7D5FF0002FD6CB /* 24HZ */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A220746D2A7D5FF3002FD6CB /* Build configuration list for PBXNativeTarget "a1-s3713342" */;
+			buildConfigurationList = A220746D2A7D5FF3002FD6CB /* Build configuration list for PBXNativeTarget "24HZ" */;
 			buildPhases = (
 				A220745B2A7D5FF0002FD6CB /* Sources */,
 				A220745C2A7D5FF0002FD6CB /* Frameworks */,
@@ -260,9 +268,9 @@
 			);
 			dependencies = (
 			);
-			name = "a1-s3713342";
+			name = 24HZ;
 			productName = "a1-s3713342";
-			productReference = A220745F2A7D5FF0002FD6CB /* a1-s3713342.app */;
+			productReference = A220745F2A7D5FF0002FD6CB /* 24HZ.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -280,7 +288,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A220745A2A7D5FF0002FD6CB /* Build configuration list for PBXProject "a1-s3713342" */;
+			buildConfigurationList = A220745A2A7D5FF0002FD6CB /* Build configuration list for PBXProject "24HZ" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -293,7 +301,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A220745E2A7D5FF0002FD6CB /* a1-s3713342 */,
+				A220745E2A7D5FF0002FD6CB /* 24HZ */,
 			);
 		};
 /* End PBXProject section */
@@ -353,7 +361,7 @@
 				A2E020822A7D97DF00B5BF3C /* AddListenerFlowView2.swift in Sources */,
 				B130197E2A983AAA0002064E /* NotificationType.swift in Sources */,
 				B13019142A96CF480002064E /* constants.swift in Sources */,
-				A22074632A7D5FF0002FD6CB /* a1_s3713342App.swift in Sources */,
+				A22074632A7D5FF0002FD6CB /* Main.swift in Sources */,
 				B13019162A96CF480002064E /* utils.swift in Sources */,
 				B130197D2A983AAA0002064E /* EventSubscription.swift in Sources */,
 				B13019792A983AAA0002064E /* SmartContract.swift in Sources */,
@@ -486,7 +494,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"a1-s3713342/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "24HZ/Preview\\ Content";
+				DEVELOPMENT_TEAM = 3KK2DSH34L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -499,7 +508,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "None.a1-s3713342";
+				PRODUCT_BUNDLE_IDENTIFIER = None.24HZ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -514,7 +523,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"a1-s3713342/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "24HZ/Preview\\ Content";
+				DEVELOPMENT_TEAM = 3KK2DSH34L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -527,7 +537,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "None.a1-s3713342";
+				PRODUCT_BUNDLE_IDENTIFIER = None.24HZ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -538,7 +548,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A220745A2A7D5FF0002FD6CB /* Build configuration list for PBXProject "a1-s3713342" */ = {
+		A220745A2A7D5FF0002FD6CB /* Build configuration list for PBXProject "24HZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A220746B2A7D5FF3002FD6CB /* Debug */,
@@ -547,7 +557,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A220746D2A7D5FF3002FD6CB /* Build configuration list for PBXNativeTarget "a1-s3713342" */ = {
+		A220746D2A7D5FF3002FD6CB /* Build configuration list for PBXNativeTarget "24HZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A220746E2A7D5FF3002FD6CB /* Debug */,
