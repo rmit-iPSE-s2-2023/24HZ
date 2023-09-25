@@ -12,6 +12,7 @@ import web3
 
 /// This implementation of ``EventsProvider`` uses the `web3.swift` Swift Package for some Ethereum convenience methods
 class DefaultEventsProvider : EventsProvider {
+    // MARK: Property/s
     var chainId: ChainID
     
     private let client: EthereumHttpClient
@@ -33,6 +34,7 @@ class DefaultEventsProvider : EventsProvider {
 }
 
 extension DefaultEventsProvider {
+    // MARK: Error/s
     enum EventsProviderError: Error {
         case rpcError(message: String)
         case encodeError(message: String)
@@ -52,7 +54,6 @@ extension DefaultEventsProvider {
     /// toBlock: The higher number in block range (inclusive)
     /// forInterfaces: An array of interface Ids in hex Data format
     /// Note: Users should not be aware of interface types. This is to make the right requests in the backend for different token types
-    // TODO: Implement functionality to filter for interfaces (erc-20, erc-721, erc-1155 etc.)
     func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent] {
         /// RPC Call1: Get ``BlockObject``s for given block range
         guard let blockObjects = try? await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock) else {
