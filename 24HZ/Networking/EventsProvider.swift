@@ -18,11 +18,32 @@ protocol EventsProvider {
     var chainId: ChainID { get set }
     
     // MARK: Protocol method/s
-    func getCurrentBlockNumber() async throws -> Int
-    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent]
-    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataUpdateEvent]]
-    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEvent]
     
+    /// Returns the current block number for set chainId
+    func getCurrentBlockNumber() async throws -> Int
+    
+    /// Returns all ``NewTokenEvent`` in given block range for specified interfaceIds
+    /// - Parameters:
+    ///   - fromBlock: The lower bound of block range (inclusive)
+    ///   - toBlock: The upper bound of block range (inclusive)
+    ///   - forInterfaces: ``ERCInterfaceId`` to query for
+    // TODO: Can refactor forInterfaces data type to be ERCInterfaceId type and convert to useful type in implementation
+    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent]
+    
+    /// Returns all ``MetadataEvent`` in given block range for specified contract addresses
+    /// - Parameters:
+    ///   - fromBlock: The lower bound of block range (inclusive)
+    ///   - toBlock: The upper bound of block range (inclusive)
+    ///   - forContracts: Contract addresses to query for
+    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataUpdateEvent]]
+    
+    /// Returns all ``MintEvent`` in given block range for specified contract addresses
+    /// - Parameters:
+    ///   - fromBlock: The lower bound of block range (inclusive)
+    ///   - toBlock: The upper bound of block range (inclusive)
+    ///   - forContracts: Contract addresses to query for
+    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MintCommentEvent]]
+
     // Currently out of scope
 //    func getSalesUpdateEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [SalesUpdateEvent]
 }
