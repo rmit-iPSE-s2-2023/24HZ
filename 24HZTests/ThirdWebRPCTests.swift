@@ -59,7 +59,7 @@ final class ThirdWebRPCTests: XCTestCase {
         let fromBlock = 4350000
         let toBlock = fromBlock + blockCount - 1
         do {
-            let blockObjects = try await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock)
+            _ = try await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock)
             XCTFail("Expected function to throw")
         } catch {
             print(error)
