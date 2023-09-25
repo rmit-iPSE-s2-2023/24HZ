@@ -38,8 +38,10 @@ final class DefaultEventsProviderTests: XCTestCase {
         let blockCount = 1000
         let fromBlock = 4047777
         let toBlock = fromBlock + blockCount - 1
+        
+        let interfaceIds = [ERCInterfaceId.erc1155.rawValue.web3.hexData!, ERCInterfaceId.erc20.rawValue.web3.hexData!, ERCInterfaceId.erc721.rawValue.web3.hexData!]
         do {
-            let newDeploymentEvents = try await eventsProvider.getNewTokenEvents(fromBlock: fromBlock, toBlock: toBlock, forInterfaces: nil)
+            let newDeploymentEvents = try await eventsProvider.getNewTokenEvents(fromBlock: fromBlock, toBlock: toBlock, forInterfaces: interfaceIds)
             print(newDeploymentEvents)
         } catch {
             XCTFail("Expected new deployment events but failed: \(error).")

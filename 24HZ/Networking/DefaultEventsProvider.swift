@@ -50,10 +50,10 @@ extension DefaultEventsProvider {
     /// Returns information about new contract deployment events within given block range for specified interfaces if any.
     /// fromBlock: The lower number in block range (inclusive)
     /// toBlock: The higher number in block range (inclusive)
-    /// forInterfaces: An array of interface Ids
+    /// forInterfaces: An array of interface Ids in hex Data format
     /// Note: Users should not be aware of interface types. This is to make the right requests in the backend for different token types
     // TODO: Implement functionality to filter for interfaces (erc-20, erc-721, erc-1155 etc.)
-    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces: [String]?) async throws -> [NewTokenEvent] {
+    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent] {
         /// RPC Call1: Get ``BlockObject``s for given block range
         guard let blockObjects = try? await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock) else {
             throw EventsProviderError.rpcError(message: "rpc.getBlocksInRange failed.")
@@ -77,7 +77,7 @@ extension DefaultEventsProvider {
             txReceipt.contractAddress
         }
         print("DEBUG: deployContractAddresses: \(deployContractAddresses)")
-        let interfaceIds = [ERCInterfaceId.erc1155.rawValue.web3.hexData!, ERCInterfaceId.erc20.rawValue.web3.hexData!, ERCInterfaceId.erc721.rawValue.web3.hexData!]
+
         let tokenContracts = try await rpc.filterContractsWithInterfaceSupport(contractAddresses: deployContractAddresses, interfaceIds: interfaceIds)
         /// Filter txReceipts checking if its contractAddress is a key in tokenContracts
         let newTokenEvents = deployTxReceipts.compactMap { txReceipt in

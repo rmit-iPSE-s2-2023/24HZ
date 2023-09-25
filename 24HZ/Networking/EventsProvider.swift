@@ -19,7 +19,7 @@ protocol EventsProvider {
     
     // MARK: Protocol method/s
     func getCurrentBlockNumber() async throws -> Int
-    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces: [String]?) async throws -> [NewTokenEvent]
+    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent]
     func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataUpdateEvent]
     func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEvent]
     
