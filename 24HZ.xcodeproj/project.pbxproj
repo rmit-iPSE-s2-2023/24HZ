@@ -60,6 +60,7 @@
 		B1BE37902AC03E5600104A4A /* DefaultEventsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE378F2AC03E5600104A4A /* DefaultEventsProviderTests.swift */; };
 		B1BE37932AC03F9300104A4A /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B1BE37922AC03F9300104A4A /* web3.swift */; };
 		B1BE37952AC1B51B00104A4A /* MetadataEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37942AC1B51B00104A4A /* MetadataEvent.swift */; };
+		B1BE37982AC2392900104A4A /* MintEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37972AC2392900104A4A /* MintEvent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		B1BE378D2AC03BB800104A4A /* DefaultEventsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEventsProvider.swift; sourceTree = "<group>"; };
 		B1BE378F2AC03E5600104A4A /* DefaultEventsProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEventsProviderTests.swift; sourceTree = "<group>"; };
 		B1BE37942AC1B51B00104A4A /* MetadataEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataEvent.swift; sourceTree = "<group>"; };
+		B1BE37972AC2392900104A4A /* MintEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		A22074612A7D5FF0002FD6CB /* 24HZ */ = {
 			isa = PBXGroup;
 			children = (
+				B1BE37992AC243DE00104A4A /* Core Data */,
 				B11153D72AB9203D00033780 /* Networking */,
 				B19E751D2A9AD7C6008E9FF4 /* Layouts */,
 				A22074622A7D5FF0002FD6CB /* Main.swift */,
@@ -233,6 +236,7 @@
 				B130191F2A96F33D0002064E /* GenericListenerType.swift */,
 				B13019212A96F4E00002064E /* ERCType.swift */,
 				B1BE37942AC1B51B00104A4A /* MetadataEvent.swift */,
+				B1BE37972AC2392900104A4A /* MintEvent.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -274,6 +278,13 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B1BE37992AC243DE00104A4A /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 		B1FDB7FC2A9962DF0087DA04 /* Listening */ = {
@@ -441,6 +452,7 @@
 				B13019202A96F33D0002064E /* GenericListenerType.swift in Sources */,
 				B13019222A96F4E00002064E /* ERCType.swift in Sources */,
 				A28E3FF02A9658C300BCD972 /* SavedTab.swift in Sources */,
+				B1BE37982AC2392900104A4A /* MintEvent.swift in Sources */,
 				B130197B2A983AAA0002064E /* User.swift in Sources */,
 				B1BE37892AC0386900104A4A /* EventsProvider.swift in Sources */,
 				B1BE377A2AC0159200104A4A /* ThirdWebRPC.swift in Sources */,
