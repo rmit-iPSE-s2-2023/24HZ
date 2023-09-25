@@ -59,6 +59,7 @@
 		B1BE378E2AC03BB800104A4A /* DefaultEventsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE378D2AC03BB800104A4A /* DefaultEventsProvider.swift */; };
 		B1BE37902AC03E5600104A4A /* DefaultEventsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE378F2AC03E5600104A4A /* DefaultEventsProviderTests.swift */; };
 		B1BE37932AC03F9300104A4A /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B1BE37922AC03F9300104A4A /* web3.swift */; };
+		B1BE37952AC1B51B00104A4A /* MetadataEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37942AC1B51B00104A4A /* MetadataEvent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,7 @@
 		B1BE37882AC0386900104A4A /* EventsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsProvider.swift; sourceTree = "<group>"; };
 		B1BE378D2AC03BB800104A4A /* DefaultEventsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEventsProvider.swift; sourceTree = "<group>"; };
 		B1BE378F2AC03E5600104A4A /* DefaultEventsProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEventsProviderTests.swift; sourceTree = "<group>"; };
+		B1BE37942AC1B51B00104A4A /* MetadataEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +232,7 @@
 				B130191D2A96F2820002064E /* EventListenerType.swift */,
 				B130191F2A96F33D0002064E /* GenericListenerType.swift */,
 				B13019212A96F4E00002064E /* ERCType.swift */,
+				B1BE37942AC1B51B00104A4A /* MetadataEvent.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				B13019172A96CF480002064E /* Hourmark.swift in Sources */,
 				A2B7E54A2A91026C008912C9 /* BlockSettingView.swift in Sources */,
 				A2E020822A7D97DF00B5BF3C /* AddListenerFlowView2.swift in Sources */,
+				B1BE37952AC1B51B00104A4A /* MetadataEvent.swift in Sources */,
 				B130197E2A983AAA0002064E /* NotificationType.swift in Sources */,
 				B13019142A96CF480002064E /* constants.swift in Sources */,
 				A22074632A7D5FF0002FD6CB /* Main.swift in Sources */,
