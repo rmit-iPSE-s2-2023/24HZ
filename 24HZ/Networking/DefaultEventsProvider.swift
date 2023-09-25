@@ -110,8 +110,67 @@ extension DefaultEventsProvider {
         return newTokenEventsWithTokenInfo
     }
     
-    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataUpdateEvent] {
-        fatalError("implement getMetadataEvents")
+    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataUpdateEvent]] {
+        /// Create an array of relevant event types conforming to ``ABIEvent``
+        var abiEventTypes: [ABIEvent.Type] = []
+        abiEventTypes.append(MetadataEvent.ContractMetadataUpdated.self)
+        abiEventTypes.append(MetadataEvent.DescriptionUpdated.self)
+        abiEventTypes.append(MetadataEvent.MediaURIsUpdated.self)
+        abiEventTypes.append(MetadataEvent.MetadataUpdated.self)
+        /// Create array of function signatures for orTopics
+        let signatures = try abiEventTypes.map { abiEventType in
+            return try abiEventType.signature()
+        }
+        /// Create array of encoded contract addresses for contracts
+        // FIXME: Is this step necessary? Debug by printing encodedContractAddresses and see if it's different from original string
+        var encodedContractAddresses = [String]()
+        if let contracts {
+            encodedContractAddresses = try contracts.map({ contractAddress in
+                guard let encodedAddress = try? ABIEncoder.encode(EthereumAddress(contractAddress)).bytes else {
+                    throw EventsProviderError.encodeError(message: "Ethereum address encoding fail")
+                }
+                return String(hexFromBytes: encodedAddress)
+            })
+        }
+        /// Create orTopics array
+        let orTopics = [signatures, encodedContractAddresses]
+        /// Download
+        let result = try await client.getEvents(addresses: nil, orTopics: orTopics, fromBlock: EthereumBlock(rawValue: fromBlock), toBlock: EthereumBlock(rawValue: toBlock), eventTypes: abiEventTypes)
+        /// Wrangle
+        let events = result.events
+        guard !events.isEmpty else {
+            print("No events found.")
+            return [:]
+        }
+        // FIXME: Debugging
+        print("getMetadataEvents result.events.count: \(events.count)")
+        print("getMetadataEvents result.logs.count: \(result.logs.count)")
+        let metadataUpdateEvents = events.map { event in
+            /// Downcast ABIEvent to subtypes to access instance properties
+            /// - get token contract address
+            // FIXME: Maybe switch is better here -> Don't have to use .zero if there is a default case with fatalerror or throw?
+            var tokenContractAddress: EthereumAddress = .zero
+            if let descriptionUpdatedEvent: MetadataEvent.DescriptionUpdated = event as? MetadataEvent.DescriptionUpdated {
+                tokenContractAddress = descriptionUpdatedEvent.target
+            } else if let mediaURIsUpdatedEvent: MetadataEvent.MediaURIsUpdated = event as? MetadataEvent.MediaURIsUpdated {
+                tokenContractAddress = mediaURIsUpdatedEvent.target
+            } else if let contractMetadataUpdatedEvent: MetadataEvent.ContractMetadataUpdated = event as? MetadataEvent.ContractMetadataUpdated {
+                tokenContractAddress = contractMetadataUpdatedEvent.updated
+            } else if let metadataUpdatedEvent: MetadataEvent.MetadataUpdated = event as? MetadataEvent.MetadataUpdated {
+                tokenContractAddress = metadataUpdatedEvent.target
+            }
+            let metadataEvent = MetadataUpdateEvent(contractAddress: tokenContractAddress.asString(), blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash)
+            return metadataEvent
+        }
+        /// Create dictionary to return results keyed by contract address
+        var eventsDict: [String: [MetadataUpdateEvent]] = [:]
+
+        metadataUpdateEvents.forEach { metadataUpdateEvent in
+            eventsDict[metadataUpdateEvent.contractAddress, default: []].append(metadataUpdateEvent)
+        }
+        return eventsDict
+        /// Note: tokenName and tokenSymbol should be fetched when user adds new listener for a specified contract address.
+
     }
     
     func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEvent] {
