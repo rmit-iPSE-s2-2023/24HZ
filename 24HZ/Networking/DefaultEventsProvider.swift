@@ -6,11 +6,15 @@
 // 
 
 
-
 import Foundation
 import web3
 
-/// This implementation of ``EventsProvider`` uses the `web3.swift` Swift Package for some Ethereum convenience methods
+/// Default implementation of ``EventsProvider``
+/// This implementation of ``EventsProvider`` uses the `web3.swift` Swift Package for some Ethereum convenience methods:
+/// - Encoding/decoding hex data; hexadecimal (base-16) format
+/// - ABIType abstractions
+/// - RPC call abstractions
+/// Most RPC calls are made using custom batch JSON-RPC methods provided by an ``RPCProtocol`` adopter
 class DefaultEventsProvider : EventsProvider {
     // MARK: Property/s
     var chainId: ChainID
@@ -44,16 +48,13 @@ extension DefaultEventsProvider {
 
 extension DefaultEventsProvider {
     // MARK: Protocol method implementation/s
+    ///Default implementation of ``EventsProvider/getCurrentBlockNumber()``
     func getCurrentBlockNumber() async throws -> Int {
         let currentBlock = try await self.client.eth_blockNumber()
         return currentBlock
     }
     
-    /// Returns information about new contract deployment events within given block range for specified interfaces if any.
-    /// fromBlock: The lower number in block range (inclusive)
-    /// toBlock: The higher number in block range (inclusive)
-    /// forInterfaces: An array of interface Ids in hex Data format
-    /// Note: Users should not be aware of interface types. This is to make the right requests in the backend for different token types
+    /// Default implementation of ``EventsProvider/getNewTokenEvents(fromBlock:toBlock:forInterfaces:)``
     func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent] {
         /// RPC Call1: Get ``BlockObject``s for given block range
         guard let blockObjects = try? await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock) else {
@@ -111,6 +112,7 @@ extension DefaultEventsProvider {
         return newTokenEventsWithTokenInfo
     }
     
+    /// Default Implementation of ``EventsProvider/getMetadataEvents(fromBlock:toBlock:forContracts:)``
     func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataUpdateEvent]] {
         /// Create an array of relevant event types conforming to ``ABIEvent``
         var abiEventTypes: [ABIEvent.Type] = []
@@ -123,7 +125,6 @@ extension DefaultEventsProvider {
             return try abiEventType.signature()
         }
         /// Create array of encoded contract addresses for contracts
-        // FIXME: Is this step necessary? Debug by printing encodedContractAddresses and see if it's different from original string
         var encodedContractAddresses = [String]()
         if let contracts {
             encodedContractAddresses = try contracts.map({ contractAddress in
@@ -143,7 +144,6 @@ extension DefaultEventsProvider {
             print("No events found.")
             return [:]
         }
-        // FIXME: Debugging
         print("getMetadataEvents result.events.count: \(events.count)")
         print("getMetadataEvents result.logs.count: \(result.logs.count)")
         let metadataUpdateEvents = events.map { event in
@@ -171,14 +171,56 @@ extension DefaultEventsProvider {
         }
         return eventsDict
         /// Note: tokenName and tokenSymbol should be fetched when user adds new listener for a specified contract address.
+    }
+    
+    /// Default Implementation of ``EventsProvider/getMintCommentEvents(fromBlock:toBlock:forContracts:)``
+    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MintCommentEvent]] {
+        /// ABIEvent types that are relevant to Mint with Comments
+        var abiEventTypes = [ABIEvent.Type]()
+        abiEventTypes.append(MintEvent.MintComment.self)
+        /// Array of function signatures to use as orTopics parameter in RPC call
+        let signatures = try abiEventTypes.map { abiEventType in
+            return try abiEventType.signature()
+        }
+        /// Array of encoded contract addresses for contracts
+        var encodedContractAddresses = [String]()
+        if let contracts {
+            encodedContractAddresses = try contracts.map({ contractAddress in
+                guard let encodedAddress = try? ABIEncoder.encode(EthereumAddress(contractAddress)).bytes else {
+                    throw EventsProviderError.encodeError(message: "Ethereum address encoding fail")
+                }
+                return String(hexFromBytes: encodedAddress)
+            })
+        }
+        /// orTopics array
+        let orTopics = [signatures, [], encodedContractAddresses]
+        /// RPC Call to get relevant events
+        let result = try await client.getEvents(addresses: nil, orTopics: orTopics, fromBlock: EthereumBlock(rawValue: fromBlock), toBlock: EthereumBlock(rawValue: toBlock), eventTypes: abiEventTypes)
+        /// Array of filtered ABIEvents
+        let events = result.events
+        // FIXME: Debugging
+        print("getMintCommentEvents result.events.count: \(events.count)")
+        print("getMintCommentEvents result.logs.count: \(result.logs.count)")
+        let mintCommentEvents = events.map { event in
+            /// Downcast ABIEvent to subtypes to access instance properties:
+            /// - get comment
+            // FIXME: Maybe switch is better here -> Don't have to use default value ("") if there is a default case with fatalerror or throw?
+            var comment: String = ""
+            if let mintCommentEvent: MintEvent.MintComment = event as? MintEvent.MintComment {
+                comment = mintCommentEvent.comment
+            }
+            let mintCommentEvent = MintCommentEvent(comment: comment, contractAddress: event.log.address.asString(), blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash)
+            return mintCommentEvent
+        }
+        /// Create dictionary to return results keyed by contract address
+        var eventsDict: [String: [MintCommentEvent]] = [:]
 
+        mintCommentEvents.forEach { mintCommentEvent in
+            eventsDict[mintCommentEvent.contractAddress, default: []].append(mintCommentEvent)
+        }
+        return eventsDict
+        /// Note: tokenName and tokenSymbol should be fetched when user adds new listener for a specified contract address.
     }
-    
-    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEvent] {
-        fatalError("implement getMintCommentEvents")
-    }
-    
-    
 }
 
 extension DefaultEventsProvider {
