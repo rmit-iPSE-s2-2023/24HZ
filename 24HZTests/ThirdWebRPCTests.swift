@@ -8,6 +8,7 @@
 
 
 import XCTest
+import web3
 @testable import _4HZ   // importing 24HZ; first number gets replaced with "_"
 
 final class ThirdWebRPCTests: XCTestCase {
@@ -15,8 +16,17 @@ final class ThirdWebRPCTests: XCTestCase {
     var rpc: ThirdWebRPC!
     
     /// Example Zora Contracts
+    /// 1155
     let opepenThreadition = "0x6d2C45390B2A0c24d278825c5900A1B1580f9722"
+    /// 721
     let allure = "0x53cb0B849491590CaB2cc44AF8c20e68e21fc36D"
+    /// 20
+    enum ERC20ExampleContracts: String {
+        case merk = "0xD838D5b87439e17B0194fd43e37300cD99Aa3DE0"
+        case mara = "0x661d1Fa0aAE29e6608a877627e49A058CAaE0285"
+        case dlgate = "0x9513EB990A7162D8e508D550dFE4E3719805eE95"
+        case weth = "0x4200000000000000000000000000000000000006"    // this contract does not support ERC-165 it seems!
+    }
 
     override func setUp() {
         super.setUp()
@@ -134,6 +144,64 @@ final class ThirdWebRPCTests: XCTestCase {
             XCTAssertEqual(tokenInfos.count, contractAddresses.count)
         } catch {
             XCTFail("Expected token name but failed: \(error)")
+        }
+    }
+    
+    func testInterfaceSupportFor721() async throws {
+        let interfaceId = ERCInterfaceId.erc721.rawValue.web3.hexData!
+        do {
+            let result = try await rpc.checkSupportsInterface(contractAddress: allure, interfaceId: interfaceId)
+            XCTAssertTrue(result)
+            
+        } catch {
+            XCTFail("Expected check interface support but failed: \(error)")
+        }
+    }
+    func testInterfaceSupportFor1155() async throws {
+        let interfaceId = ERCInterfaceId.erc1155.rawValue.web3.hexData!
+        do {
+            let result = try await rpc.checkSupportsInterface(contractAddress: opepenThreadition, interfaceId: interfaceId)
+            XCTAssertTrue(result)
+            
+        } catch {
+            XCTFail("Expected check interface support but failed: \(error)")
+        }
+    }
+    func testInterfaceSupportFor20() async throws {
+        let contractAddress = ERC20ExampleContracts.dlgate.rawValue
+        let interfaceId20 = ERCInterfaceId.erc20.rawValue.web3.hexData!
+        do {
+            let result20 = try await rpc.checkSupportsInterface(contractAddress: contractAddress, interfaceId: interfaceId20)
+            XCTAssertTrue(result20)
+            
+        } catch {
+            XCTFail("Expected check interface support but failed: \(error)")
+        }
+        let interfaceId721 = ERCInterfaceId.erc721.rawValue.web3.hexData!
+        do {
+            let result721 = try await rpc.checkSupportsInterface(contractAddress: contractAddress, interfaceId: interfaceId721)
+            XCTAssertFalse(result721)
+        } catch {
+            XCTFail("Expected check interface support but failed: \(error)")
+        }
+        let interfaceId1155 = ERCInterfaceId.erc1155.rawValue.web3.hexData!
+        do {
+            let result1155 = try await rpc.checkSupportsInterface(contractAddress: contractAddress, interfaceId: interfaceId1155)
+            XCTAssertFalse(result1155)
+
+        } catch {
+            XCTFail("Expected check interface support but failed: \(error)")
+        }
+    }
+    
+    
+    func testFilterContractsWithInterfaceSupport() async throws {
+        let interfaceIds = [ERCInterfaceId.erc1155.rawValue.web3.hexData!, ERCInterfaceId.erc20.rawValue.web3.hexData!, ERCInterfaceId.erc721.rawValue.web3.hexData!]
+        do {
+            let results = try await rpc.filterContractsWithInterfaceSupport(contractAddresses: [opepenThreadition, allure, ERC20ExampleContracts.dlgate.rawValue], interfaceIds: interfaceIds)
+            print(results)
+        } catch {
+            XCTFail("Expected check interface support but failed: \(error)")
         }
     }
 
