@@ -41,7 +41,7 @@ extension DefaultEventsProvider {
 }
 
 extension DefaultEventsProvider {
-    
+    // MARK: Protocol method implementation/s
     func getCurrentBlockNumber() async throws -> Int {
         let currentBlock = try await self.client.eth_blockNumber()
         return currentBlock
@@ -53,56 +53,61 @@ extension DefaultEventsProvider {
     /// forInterfaces: An array of interface Ids
     /// Note: Users should not be aware of interface types. This is to make the right requests in the backend for different token types
     // TODO: Implement functionality to filter for interfaces (erc-20, erc-721, erc-1155 etc.)
-    func getNewDeploymentEvents(fromBlock: Int, toBlock: Int, forInterfaces: [String]?) async throws -> [NewDeploymentEvent] {
+    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces: [String]?) async throws -> [NewTokenEvent] {
         /// RPC Call1: Get ``BlockObject``s for given block range
         guard let blockObjects = try? await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock) else {
             throw EventsProviderError.rpcError(message: "rpc.getBlocksInRange failed.")
         }
         /// Filter for  new deployment ``TransactionObject``/s; whose `to` field is `nil`
-        let deployTransactionObjects = blockObjects.flatMap { blockObject in
+        let deployTxObjects = blockObjects.flatMap { blockObject in
             return blockObject.transactions.filter { tx in
                 return tx.to == nil
             }
         }
         /// Map ``TransactionObject``/s to trasaction hashes
-        let deployTransactionHashes = deployTransactionObjects.map { txObj in
+        let deployTxHashes = deployTxObjects.map { txObj in
             return txObj.hash
         }
         /// RPC Call2: Get ``TransactionReceiptObject``/s using deployment transaction hashes
-        guard let txReceipts = try? await rpc.getTransactionReceipts(txHashes: deployTransactionHashes) else {
+        guard let deployTxReceipts = try? await rpc.getTransactionReceipts(txHashes: deployTxHashes) else {
             throw EventsProviderError.rpcError(message: "rpc.getTransactionReceipts failed.")
         }
-        print(txReceipts)
-        /// Create array to store ``NewDeploymentEvent``/s
-        var newDeploymentEvents: [NewDeploymentEvent] = []
-        for txReceipt in txReceipts {
-            // TODO: may need to convert blocknumber to Core Data compatible type for sorting when trying to work out the latest queried block for an event listener. However, this can be done in the Core Data layer
-//            guard let blockNumber = Int(txObj.blockNumber, radix: 16) else {
-//                print("Hex to Int conversion failed.")
-//                fatalError("Hex to Int conversion failed.")
-//            }
-            let newDeploymentEvent = NewDeploymentEvent(contractAddress: txReceipt.contractAddress, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, txHash: txReceipt.transactionHash)
-            newDeploymentEvents.append(newDeploymentEvent)
+        /// RPC Call3: Filter ``TransactionReceiptObject``/s that support one of ``ERCInterfaceId``
+        let deployContractAddresses = deployTxReceipts.map { txReceipt in
+            txReceipt.contractAddress
         }
-        /// Get TokenInfo for each event
-        var updatedNewDeploymentEvents: [NewDeploymentEvent] = []
+        print("DEBUG: deployContractAddresses: \(deployContractAddresses)")
+        let interfaceIds = [ERCInterfaceId.erc1155.rawValue.web3.hexData!, ERCInterfaceId.erc20.rawValue.web3.hexData!, ERCInterfaceId.erc721.rawValue.web3.hexData!]
+        let tokenContracts = try await rpc.filterContractsWithInterfaceSupport(contractAddresses: deployContractAddresses, interfaceIds: interfaceIds)
+        /// Filter txReceipts checking if its contractAddress is a key in tokenContracts
+        let newTokenEvents = deployTxReceipts.compactMap { txReceipt in
+            if let interfaceInfo = tokenContracts[txReceipt.contractAddress] {
+                let newTokenEvent = NewTokenEvent(contractAddress: txReceipt.contractAddress, tokenType: interfaceInfo.ercInterfaceId, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, txHash: txReceipt.transactionHash)
+                return newTokenEvent
+            } else {
+                return nil
+            }
+        }
+        /// Create array to store ``NewDeploymentEvent``/s
+        // FIXME: Instead of creating a new array we could potentially do this with inout
+        var newTokenEventsWithTokenInfo: [NewTokenEvent] = []
+        /// RPC Call 4: Finally, get token name and token symbol for new token events
         switch self.chainId {
         case ChainID.zora:
-            let newDeploymentContractAddresses = newDeploymentEvents.map { event in
+            let newTokenAddresses = newTokenEvents.map { event in
                 event.contractAddress
             }
-            let tokenInfos = try await rpc.getTokenInfos(contractAddresses: newDeploymentContractAddresses)
-            for event in newDeploymentEvents {
-                var updatedEvent = event
-                updatedEvent.tokenName = tokenInfos[event.contractAddress]?.name
-                updatedEvent.tokenSymbol = tokenInfos[event.contractAddress]?.symbol
-                updatedNewDeploymentEvents.append(updatedEvent)
-            }
+            let tokenInfos = try await rpc.getTokenInfos(contractAddresses: newTokenAddresses)
+            newTokenEventsWithTokenInfo = newTokenEvents.map({ newTokenEvent in
+                var newTokenEventWithTokenInfo = newTokenEvent
+                newTokenEventWithTokenInfo.tokenName = tokenInfos[newTokenEvent.contractAddress]?.name
+                newTokenEventWithTokenInfo.tokenSymbol = tokenInfos[newTokenEvent.contractAddress]?.symbol
+                return newTokenEventWithTokenInfo
+            })
         case ChainID.eth:
-            print("eth")
+            fatalError("implement getting tokenInfo for eth chain")
         }
-        return updatedNewDeploymentEvents
-        
+        return newTokenEventsWithTokenInfo
     }
     
     func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataUpdateEvent] {
@@ -117,7 +122,8 @@ extension DefaultEventsProvider {
 }
 
 extension DefaultEventsProvider {
-    func getTokenInfoViaMulticall(newDeploymentEvents: [NewDeploymentEvent]) async throws -> [NewDeploymentEvent] {
+    // MARK: Private method/s
+    private func getTokenInfoViaMulticall(newDeploymentEvents: [NewTokenEvent]) async throws -> [NewTokenEvent] {
         /// Create a Multicall to get the token name and symbol for each newly deployed contract address
         /// Note: Multicall only seems to work with ABI functions (`eth_call`) and not any old RPC call
         /// Note: Multicall is **NOT** implemented for Zora so we must use custom batch RPC call for Zora

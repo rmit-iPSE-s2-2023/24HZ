@@ -19,7 +19,7 @@ protocol EventsProvider {
     
     // MARK: Protocol method/s
     func getCurrentBlockNumber() async throws -> Int
-    func getNewDeploymentEvents(fromBlock: Int, toBlock: Int, forInterfaces: [String]?) async throws -> [NewDeploymentEvent]
+    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces: [String]?) async throws -> [NewTokenEvent]
     func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataUpdateEvent]
     func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEvent]
     
@@ -32,13 +32,13 @@ enum ChainID : Int {
     case zora = 7777777
 }
 
-struct NewDeploymentEvent {
+struct NewTokenEvent {
 //    let eventType: EventType = .newContract
     let eventType: String = "newDeployment"
 
     // MARK: Instance property/s
     var contractAddress: String
-    var tokenType: String?  // FIXME: Implement this part
+    var tokenType: ERCInterfaceId
     var tokenName: String?
     var tokenSymbol: String?
     
