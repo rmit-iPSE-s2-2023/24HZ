@@ -7,11 +7,15 @@
 
 
 import Foundation
+import web3
 
 /// This implementation uses RPC endpoints provided by Third Web
+/// Dependencies: web3.swift (to encode ABI functions)
 /// Reference: https://thirdweb.com/dashboard/infrastructure/rpc-edge
 struct ThirdWebRPC : RPCProtocol {
     var url: URL
+    
+    static let maxBatchSize = 1000  // Max batch size limit is 1000 for Third Web RPC Edge
     
     init(chainName: String) {
         guard let url = URL(string: "https://\(chainName).rpc.thirdweb.com") else {
@@ -24,9 +28,12 @@ struct ThirdWebRPC : RPCProtocol {
 extension ThirdWebRPC {
     // MARK: Errors
     enum ThirdWebRPCError : Error {
+        case exceedsMaxBatchSizeError
         case rpcRequestSerializationError
         case httpResponseError(message: String)
         case responseDataDecodeError
+        case abiDecodeError(message: String)
+        case dictionarySaveError
     }
 }
 
@@ -35,6 +42,10 @@ extension ThirdWebRPC {
     
     /// Get block headers for a given block range to access transactions and look for contract creation transactions
     func getBlocksInRange(fromBlock: Int, toBlock: Int) async throws -> [BlockObject] {
+        /// Make sure block range is valid
+        guard toBlock - fromBlock + 1 <= ThirdWebRPC.maxBatchSize else {
+            throw ThirdWebRPCError.exceedsMaxBatchSizeError
+        }
         /// Form JSON-RPC request body
         let jsonRpcRequests: [[String: Any]] = (fromBlock...toBlock).map { blockNumber in
             [
@@ -57,11 +68,15 @@ extension ThirdWebRPC {
         request.httpBody = requestData
         /// Try download data
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard response is HTTPURLResponse else {
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw ThirdWebRPCError.httpResponseError(message: "No HTTP URL Response.\nReceived response: \(response)")
+        }
+        if httpResponse.statusCode != 200 {
+            throw ThirdWebRPCError.httpResponseError(message: "Not 200. Status code: \(httpResponse.statusCode). data: \(String(describing: String(data: data, encoding: .utf8)))")
         }
         /// Decode downloaded data
         guard let decodedData = try? JSONDecoder().decode([BlockObject].self, from: data) else {
+            print("data: \(String(describing: String(data: data, encoding: .utf8)))")
             throw ThirdWebRPCError.responseDataDecodeError
         }
         /// Return data as [BlockObject]
@@ -95,8 +110,11 @@ extension ThirdWebRPC {
         request.httpBody = requestData
         /// Try download data
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard response is HTTPURLResponse else {
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw ThirdWebRPCError.httpResponseError(message: "No HTTP URL Response.\nReceived response: \(response)")
+        }
+        if httpResponse.statusCode != 200 {
+            throw ThirdWebRPCError.httpResponseError(message: "Not 200. Status code: \(httpResponse.statusCode). data: \(String(describing: String(data: data, encoding: .utf8)))")
         }
         /// Decode downloaded data
         guard let decodedData = try? JSONDecoder().decode([TransactionReceiptObject].self, from: data) else {
@@ -105,4 +123,169 @@ extension ThirdWebRPC {
         /// Return data as [TransactionReceiptObject]
         return decodedData
     }
+}
+
+extension ThirdWebRPC {
+    
+    // TODO: Need to filter for contracts that supports erc-20/721/1155 interface
+    func getTokenInfos(contractAddresses: [String]) async throws -> [String: TokenInfo] {
+        /// Create encoder to encode name function
+        let nameEncoder = ABIFunctionEncoder("name")
+        /// Encode ABI function to encoder
+        /// Note: For name and symbol functions:
+        /// - These have the same ABI signatures for 20s, 721s, and 1155s
+        /// Note: Here, we're just using the web3.swift library for convenience encoding/decoding so it does not matter what contract address we pass in but we need to pass in something for the sake of initializing the struct
+        let nameFunc = ERC721MetadataFunctions.name(contract: EthereumAddress(contractAddresses.first!))    // contractName doens't matter here, so just passing in any value
+        try nameFunc.encode(to: nameEncoder)
+        /// Store encodedData to variable
+        let nameData = try nameEncoder.encoded()
+        /// Create encoder to encode symbol function
+        let symbolEncoder = ABIFunctionEncoder("symbol")
+        /// Encode ABI function to encoder
+        let symbolFunc = ERC721MetadataFunctions.symbol(contract: EthereumAddress(contractAddresses.first!))    // contractName doens't matter here, so just passing in any value
+        try symbolFunc.encode(to: symbolEncoder)
+        /// Store encodedData to variable
+        let symbolData = try symbolEncoder.encoded()
+        /// Form batch JSON-RPC request body
+        let jsonRpcRequests: [[String: Any]] = contractAddresses.flatMap({ contractAddress in
+            return [
+                [
+                    "jsonrpc": "2.0",
+                    "method": "eth_call",
+                    "params": [
+                        [
+                            "to": contractAddress,
+                            "data": nameData.web3.hexString
+                        ] as [String: Any],
+                        "latest"
+                    ] as [Any],
+                    "id": contractAddress + "_name"
+                ],
+                [
+                    "jsonrpc": "2.0",
+                    "method": "eth_call",
+                    "params": [
+                        [
+                            "to": contractAddress,
+                            "data": symbolData.web3.hexString
+                        ] as [String: Any],
+                        "latest"
+                    ] as [Any],
+                    "id": contractAddress + "_symbol"
+                ],
+            ]
+        })
+        /// Serialize request body
+        guard let requestData = try? JSONSerialization.data(withJSONObject: jsonRpcRequests) else {
+            throw ThirdWebRPCError.rpcRequestSerializationError
+        }
+        /// Create URLRequest
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = requestData
+        /// Try download data
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw ThirdWebRPCError.httpResponseError(message: "No HTTP URL Response.\nReceived response: \(response)")
+        }
+        if httpResponse.statusCode != 200 {
+            throw ThirdWebRPCError.httpResponseError(message: "Not 200. Status code: \(httpResponse.statusCode). data: \(String(describing: String(data: data, encoding: .utf8)))")
+        }
+        /// Decode data to RPC Response data
+        guard let decodedData = try? JSONDecoder().decode([RPCResponseData].self, from: data) else {
+            print(String(describing: String(data: data, encoding: .utf8)))
+            throw ThirdWebRPCError.responseDataDecodeError
+        }
+        print(String(describing: String(data: data, encoding: .utf8)))
+        var tokenInfos: [String: TokenInfo] = [:]
+        contractAddresses.forEach { contractAddress in
+            tokenInfos[contractAddress] = TokenInfo(contractAddress: contractAddress)
+        }
+        /// Decode each result
+        try decodedData.forEach { rpcResponseData in
+            /// Determine which contract it's for
+            let contractAddress = rpcResponseData.id.components(separatedBy: "_")[0]
+            let function = rpcResponseData.id.components(separatedBy: "_")[1]
+            var tokenInfo = tokenInfos[contractAddress]
+            switch function {
+            case "name":
+                guard let nameResponse = (try? ERC20Responses.nameResponse(data: rpcResponseData.result)) else {
+                    throw ThirdWebRPCError.abiDecodeError(message: "Failed to decode hex string result to String.")
+                }
+                tokenInfo?.name = nameResponse.value
+                tokenInfos[contractAddress] = tokenInfo
+            case "symbol":
+                guard let symbolResponse = (try? ERC20Responses.symbolResponse(data: rpcResponseData.result)) else {
+                    throw ThirdWebRPCError.abiDecodeError(message: "Failed to decode hex string result to String.")
+                }
+                tokenInfo?.symbol = symbolResponse.value
+                tokenInfos[contractAddress] = tokenInfo
+            default:
+                throw ThirdWebRPCError.dictionarySaveError
+            }
+        }
+        return tokenInfos
+    }
+    
+    func getTokenName(contractAddress: String) async throws -> String {
+        /// Create encoder to encode ABI function
+        let encoder = ABIFunctionEncoder("name")
+        /// Encode ABI function to encoder
+        let nameFunc = ERC721MetadataFunctions.name(contract: EthereumAddress(contractAddress))
+        try nameFunc.encode(to: encoder)
+        /// Store encodedData to variable
+        let encodedData = try encoder.encoded()
+        /// Form JSON-RPC request body
+        let jsonRpcRequest: [String: Any] = [
+            "jsonrpc": "2.0",
+            "method": "eth_call",
+            "params": [
+                [
+                    "to": contractAddress,
+                    "data": encodedData.web3.hexString
+                ] as [String: Any],
+                "latest"
+            ] as [Any],
+            "id": 1 // Use a unique ID based on the block number
+        ]
+        /// Serialize request body
+        guard let requestData = try? JSONSerialization.data(withJSONObject: jsonRpcRequest) else {
+            throw ThirdWebRPCError.rpcRequestSerializationError
+        }
+        /// Create URLRequest
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = requestData
+        /// Try download data
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw ThirdWebRPCError.httpResponseError(message: "No HTTP URL Response.\nReceived response: \(response)")
+        }
+        if httpResponse.statusCode != 200 {
+            throw ThirdWebRPCError.httpResponseError(message: "Not 200. Status code: \(httpResponse.statusCode). data: \(String(describing: String(data: data, encoding: .utf8)))")
+        }
+        /// Decode data to RPC Response data
+        guard let decodedData = try? JSONDecoder().decode(RPCResponseData.self, from: data) else {
+            print(String(describing: String(data: data, encoding: .utf8)))
+            throw ThirdWebRPCError.responseDataDecodeError
+        }
+        /// Decode result hex string to String
+        guard let nameResponse = (try? ERC20Responses.nameResponse(data: decodedData.result)) else {
+            throw ThirdWebRPCError.abiDecodeError(message: "Failed to decode hex string result to String.")
+        }
+        return nameResponse.value
+    }
+}
+
+struct RPCResponseData: Codable {
+    let result: String
+    let id: String
+}
+
+struct TokenInfo {
+    let contractAddress: String
+    var name: String?
+    var symbol: String?
 }
