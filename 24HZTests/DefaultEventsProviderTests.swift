@@ -32,17 +32,19 @@ final class DefaultEventsProviderTests: XCTestCase {
         }
     }
     
-    // TODO: Currently throwing for contracts that don't have name/symbol functions i.e. not erc-20/721/1155
-    func testGetNewDeployments() async throws {
+    /// Testing ``DefaultEventsProvider.getNewTokenEvents``
+    func testGetNewTokenEvents() async throws {
+        /// DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
         let blockCount = 1000
-        let fromBlock = 4311000
+        let fromBlock = 4047777
         let toBlock = fromBlock + blockCount - 1
         do {
-            let newDeploymentEvents = try await eventsProvider.getNewDeploymentEvents(fromBlock: fromBlock, toBlock: toBlock, forInterfaces: nil)
+            let newDeploymentEvents = try await eventsProvider.getNewTokenEvents(fromBlock: fromBlock, toBlock: toBlock, forInterfaces: nil)
             print(newDeploymentEvents)
         } catch {
             XCTFail("Expected new deployment events but failed: \(error).")
         }
     }
+
 
 }
