@@ -24,6 +24,7 @@ protocol RPCProtocol {
     // MARK: Methods
     func getBlocksInRange(fromBlock: Int, toBlock: Int) async throws -> [BlockObject]
     func getTransactionReceipts(txHashes: [String]) async throws -> [TransactionReceiptObject]
+    func getTokenInfos(contractAddresses: [String]) async throws -> [String: TokenInfo]
 }
 
 // MARK: - JSON Response Objects
