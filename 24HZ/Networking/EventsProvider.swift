@@ -20,7 +20,7 @@ protocol EventsProvider {
     // MARK: Protocol method/s
     func getCurrentBlockNumber() async throws -> Int
     func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent]
-    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataUpdateEvent]
+    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataUpdateEvent]]
     func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEvent]
     
     // Currently out of scope
@@ -34,7 +34,7 @@ enum ChainID : Int {
 
 struct NewTokenEvent {
 //    let eventType: EventType = .newContract
-    let eventType: String = "newDeployment"
+    let eventType: String = "New Token"
 
     // MARK: Instance property/s
     var contractAddress: String
@@ -49,7 +49,7 @@ struct NewTokenEvent {
 
 struct MetadataUpdateEvent {
 //    let eventType: EventType = .newContract
-    let eventType: String = "metadataUpdate"
+    let eventType: String = "Metadata Update"
 
     // MARK: Instance property/s
     var contractAddress: String
@@ -64,7 +64,7 @@ struct MetadataUpdateEvent {
 
 struct MintCommentEvent {
 //    let eventType: EventType = .newContract
-    let eventType: String = "mintComment"
+    let eventType: String = "Mint Comment"
     
     // MARK: Event specific property/s
     var comment: String?
