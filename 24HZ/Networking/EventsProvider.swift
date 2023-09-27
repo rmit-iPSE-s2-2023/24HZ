@@ -28,21 +28,21 @@ protocol EventsProvider {
     ///   - toBlock: The upper bound of block range (inclusive)
     ///   - forInterfaces: ``ERCInterfaceId`` to query for
     // TODO: Can refactor forInterfaces data type to be ERCInterfaceId type and convert to useful type in implementation
-    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent]
+    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEventStruct]
     
     /// Returns all ``MetadataEvent`` in given block range for specified contract addresses
     /// - Parameters:
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
     ///   - forContracts: Contract addresses to query for
-    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataUpdateEvent]]
+    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataEventStruct]]
     
     /// Returns all ``MintEvent`` in given block range for specified contract addresses
     /// - Parameters:
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
     ///   - forContracts: Contract addresses to query for
-    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MintCommentEvent]]
+    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MintCommentEventStruct]]
 
     // Currently out of scope
 //    func getSalesUpdateEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [SalesUpdateEvent]
@@ -53,22 +53,22 @@ enum ChainID : Int {
     case zora = 7777777
 }
 
-struct NewTokenEvent {
-//    let eventType: EventType = .newContract
-    let eventType: String = "New Token"
-
-    // MARK: Instance property/s
+struct NewTokenEventStruct {
+    /// MO: Event property/s
     var contractAddress: String
-    var tokenType: ERCInterfaceId
+    var ercInterfaceId: ERCInterfaceId
     var tokenName: String?
     var tokenSymbol: String?
     
     var blockNumber: String
     var blockHash: String
     var txHash: String
+    
+    /// MO: NewTokenEvent property/s
+    var deployerAddress: String
 }
 
-struct MetadataUpdateEvent {
+struct MetadataEventStruct {
 //    let eventType: EventType = .newContract
     let eventType: String = "Metadata Update"
 
@@ -83,7 +83,7 @@ struct MetadataUpdateEvent {
     var txHash: String?
 }
 
-struct MintCommentEvent {
+struct MintCommentEventStruct {
 //    let eventType: EventType = .newContract
     let eventType: String = "Mint Comment"
     

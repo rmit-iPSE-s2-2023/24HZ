@@ -16,6 +16,7 @@ import web3
 /// - RPC call abstractions
 /// Most RPC calls are made using custom batch JSON-RPC methods provided by an ``RPCProtocol`` adopter
 class DefaultEventsProvider : EventsProvider {
+    
     // MARK: Property/s
     var chainId: ChainID
     
@@ -55,7 +56,7 @@ extension DefaultEventsProvider {
     }
     
     /// Default implementation of ``EventsProvider/getNewTokenEvents(fromBlock:toBlock:forInterfaces:)``
-    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEvent] {
+    func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEventStruct] {
         /// RPC Call1: Get ``BlockObject``s for given block range
         guard let blockObjects = try? await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock) else {
             throw EventsProviderError.rpcError(message: "rpc.getBlocksInRange failed.")
@@ -71,6 +72,7 @@ extension DefaultEventsProvider {
             return txObj.hash
         }
         /// RPC Call2: Get ``TransactionReceiptObject``/s using deployment transaction hashes
+        /// TransactionReceipts contain the contractAddress if the transaction created a new contract. Unfortunately, the transaction objects returned in RPC Call1 does not include this info.
         guard let deployTxReceipts = try? await rpc.getTransactionReceipts(txHashes: deployTxHashes) else {
             throw EventsProviderError.rpcError(message: "rpc.getTransactionReceipts failed.")
         }
@@ -79,12 +81,12 @@ extension DefaultEventsProvider {
             txReceipt.contractAddress
         }
         print("DEBUG: deployContractAddresses: \(deployContractAddresses)")
-
+        /// Returns dictionary keyed by contract address and ``InterfaceInfo`` value
         let tokenContracts = try await rpc.filterContractsWithInterfaceSupport(contractAddresses: deployContractAddresses, interfaceIds: interfaceIds)
         /// Filter txReceipts checking if its contractAddress is a key in tokenContracts
         let newTokenEvents = deployTxReceipts.compactMap { txReceipt in
             if let interfaceInfo = tokenContracts[txReceipt.contractAddress] {
-                let newTokenEvent = NewTokenEvent(contractAddress: txReceipt.contractAddress, tokenType: interfaceInfo.ercInterfaceId, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, txHash: txReceipt.transactionHash)
+                let newTokenEvent = NewTokenEventStruct(contractAddress: txReceipt.contractAddress, ercInterfaceId: interfaceInfo.ercInterfaceId, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, txHash: txReceipt.transactionHash, deployerAddress: txReceipt.from)
                 return newTokenEvent
             } else {
                 return nil
@@ -92,7 +94,7 @@ extension DefaultEventsProvider {
         }
         /// Create array to store ``NewDeploymentEvent``/s
         // FIXME: Instead of creating a new array we could potentially do this with inout
-        var newTokenEventsWithTokenInfo: [NewTokenEvent] = []
+        var newTokenEventsWithTokenInfo: [NewTokenEventStruct] = []
         /// RPC Call 4: Finally, get token name and token symbol for new token events
         switch self.chainId {
         case ChainID.zora:
@@ -113,13 +115,13 @@ extension DefaultEventsProvider {
     }
     
     /// Default Implementation of ``EventsProvider/getMetadataEvents(fromBlock:toBlock:forContracts:)``
-    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataUpdateEvent]] {
+    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataEventStruct]] {
         /// Create an array of relevant event types conforming to ``ABIEvent``
         var abiEventTypes: [ABIEvent.Type] = []
-        abiEventTypes.append(MetadataEvent.ContractMetadataUpdated.self)
-        abiEventTypes.append(MetadataEvent.DescriptionUpdated.self)
-        abiEventTypes.append(MetadataEvent.MediaURIsUpdated.self)
-        abiEventTypes.append(MetadataEvent.MetadataUpdated.self)
+        abiEventTypes.append(MetadataEventABI.ContractMetadataUpdated.self)
+        abiEventTypes.append(MetadataEventABI.DescriptionUpdated.self)
+        abiEventTypes.append(MetadataEventABI.MediaURIsUpdated.self)
+        abiEventTypes.append(MetadataEventABI.MetadataUpdated.self)
         /// Create array of function signatures for orTopics
         let signatures = try abiEventTypes.map { abiEventType in
             return try abiEventType.signature()
@@ -151,20 +153,20 @@ extension DefaultEventsProvider {
             /// - get token contract address
             // FIXME: Maybe switch is better here -> Don't have to use .zero if there is a default case with fatalerror or throw?
             var tokenContractAddress: EthereumAddress = .zero
-            if let descriptionUpdatedEvent: MetadataEvent.DescriptionUpdated = event as? MetadataEvent.DescriptionUpdated {
+            if let descriptionUpdatedEvent: MetadataEventABI.DescriptionUpdated = event as? MetadataEventABI.DescriptionUpdated {
                 tokenContractAddress = descriptionUpdatedEvent.target
-            } else if let mediaURIsUpdatedEvent: MetadataEvent.MediaURIsUpdated = event as? MetadataEvent.MediaURIsUpdated {
+            } else if let mediaURIsUpdatedEvent: MetadataEventABI.MediaURIsUpdated = event as? MetadataEventABI.MediaURIsUpdated {
                 tokenContractAddress = mediaURIsUpdatedEvent.target
-            } else if let contractMetadataUpdatedEvent: MetadataEvent.ContractMetadataUpdated = event as? MetadataEvent.ContractMetadataUpdated {
+            } else if let contractMetadataUpdatedEvent: MetadataEventABI.ContractMetadataUpdated = event as? MetadataEventABI.ContractMetadataUpdated {
                 tokenContractAddress = contractMetadataUpdatedEvent.updated
-            } else if let metadataUpdatedEvent: MetadataEvent.MetadataUpdated = event as? MetadataEvent.MetadataUpdated {
+            } else if let metadataUpdatedEvent: MetadataEventABI.MetadataUpdated = event as? MetadataEventABI.MetadataUpdated {
                 tokenContractAddress = metadataUpdatedEvent.target
             }
-            let metadataEvent = MetadataUpdateEvent(contractAddress: tokenContractAddress.asString(), blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash)
+            let metadataEvent = MetadataEventStruct(contractAddress: tokenContractAddress.asString(), blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash)
             return metadataEvent
         }
         /// Create dictionary to return results keyed by contract address
-        var eventsDict: [String: [MetadataUpdateEvent]] = [:]
+        var eventsDict: [String: [MetadataEventStruct]] = [:]
 
         metadataUpdateEvents.forEach { metadataUpdateEvent in
             eventsDict[metadataUpdateEvent.contractAddress, default: []].append(metadataUpdateEvent)
@@ -174,10 +176,10 @@ extension DefaultEventsProvider {
     }
     
     /// Default Implementation of ``EventsProvider/getMintCommentEvents(fromBlock:toBlock:forContracts:)``
-    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MintCommentEvent]] {
+    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MintCommentEventStruct]] {
         /// ABIEvent types that are relevant to Mint with Comments
         var abiEventTypes = [ABIEvent.Type]()
-        abiEventTypes.append(MintEvent.MintComment.self)
+        abiEventTypes.append(MintCommentEventABI.MintComment.self)
         /// Array of function signatures to use as orTopics parameter in RPC call
         let signatures = try abiEventTypes.map { abiEventType in
             return try abiEventType.signature()
@@ -206,14 +208,14 @@ extension DefaultEventsProvider {
             /// - get comment
             // FIXME: Maybe switch is better here -> Don't have to use default value ("") if there is a default case with fatalerror or throw?
             var comment: String = ""
-            if let mintCommentEvent: MintEvent.MintComment = event as? MintEvent.MintComment {
+            if let mintCommentEvent: MintCommentEventABI.MintComment = event as? MintCommentEventABI.MintComment {
                 comment = mintCommentEvent.comment
             }
-            let mintCommentEvent = MintCommentEvent(comment: comment, contractAddress: event.log.address.asString(), blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash)
+            let mintCommentEvent = MintCommentEventStruct(comment: comment, contractAddress: event.log.address.asString(), blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash)
             return mintCommentEvent
         }
         /// Create dictionary to return results keyed by contract address
-        var eventsDict: [String: [MintCommentEvent]] = [:]
+        var eventsDict: [String: [MintCommentEventStruct]] = [:]
 
         mintCommentEvents.forEach { mintCommentEvent in
             eventsDict[mintCommentEvent.contractAddress, default: []].append(mintCommentEvent)
@@ -225,7 +227,7 @@ extension DefaultEventsProvider {
 
 extension DefaultEventsProvider {
     // MARK: Private method/s
-    private func getTokenInfoViaMulticall(newDeploymentEvents: [NewTokenEvent]) async throws -> [NewTokenEvent] {
+    private func getTokenInfoViaMulticall(newDeploymentEvents: [NewTokenEventStruct]) async throws -> [NewTokenEventStruct] {
         /// Create a Multicall to get the token name and symbol for each newly deployed contract address
         /// Note: Multicall only seems to work with ABI functions (`eth_call`) and not any old RPC call
         /// Note: Multicall is **NOT** implemented for Zora so we must use custom batch RPC call for Zora

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="class">
+        <attribute name="blockHash" attributeType="String"/>
+        <attribute name="blockNumber" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="contractAddress" attributeType="String"/>
+        <attribute name="ercInterfaceId" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="saved" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="tokenName" optional="YES" attributeType="String"/>
+        <attribute name="tokenSymbol" optional="YES" attributeType="String"/>
+        <attribute name="transactionHash" attributeType="String"/>
+        <relationship name="capturedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Listener" inverseName="capturedEvents" inverseEntity="Listener"/>
+    </entity>
+    <entity name="ExistingTokenListener" representedClassName="ExistingTokenListener" parentEntity="Listener" syncable="YES" codeGenerationType="class">
+        <attribute name="contractAddress" optional="YES" attributeType="String"/>
+        <attribute name="listeningForMetadataEvents" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="listeningForMintCommentEvents" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="tokenName" optional="YES" attributeType="String"/>
+        <attribute name="tokenSymbol" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Listener" representedClassName="Listener" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isListening" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="capturedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="capturedBy" inverseEntity="Event"/>
+    </entity>
+    <entity name="MetadataEvent" representedClassName="MetadataEvent" parentEntity="Event" syncable="YES" codeGenerationType="class">
+        <attribute name="updatedAnimationURI" optional="YES" attributeType="String"/>
+        <attribute name="updatedContractURI" optional="YES" attributeType="String"/>
+        <attribute name="updatedFreezeAt" optional="YES" attributeType="String"/>
+        <attribute name="updatedImageURI" optional="YES" attributeType="String"/>
+        <attribute name="updatedMetadataBase" optional="YES" attributeType="String"/>
+        <attribute name="updatedMetadataExtension" optional="YES" attributeType="String"/>
+        <attribute name="updatedName" optional="YES" attributeType="String"/>
+        <attribute name="updatedNewDescription" optional="YES" attributeType="String"/>
+        <attribute name="updatedURI" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="MintCommentEvent" representedClassName="MintCommentEvent" parentEntity="Event" syncable="YES" codeGenerationType="class">
+        <attribute name="mintComment" optional="YES" attributeType="String"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="NewTokenEvent" representedClassName="NewTokenEvent" parentEntity="Event" syncable="YES" codeGenerationType="class">
+        <attribute name="deployerAddress" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="NewTokenListener" representedClassName="NewTokenListener" parentEntity="Listener" syncable="YES" codeGenerationType="class">
+        <attribute name="ercInterfaceId" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="ercInterfaceId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>
