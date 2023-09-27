@@ -28,13 +28,6 @@ protocol RPCProtocol {
     func filterContractsWithInterfaceSupport(contractAddresses: [String], interfaceIds: [Data]) async throws -> [String: InterfaceInfo]
 }
 
-enum ERCInterfaceId: String {
-    case erc20 = "0x36372b07"
-    case erc721 = "0x80ac58cd"
-    case erc721metadata = "0x5b5e139f"
-    case erc1155 = "0xd9b67a26"
-}
-
 // MARK: - JSON Response Objects
 struct BlockObject: Codable {
     let number: String
