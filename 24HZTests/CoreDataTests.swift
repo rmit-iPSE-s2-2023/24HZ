@@ -88,10 +88,38 @@ final class CoreDataTests: XCTestCase {
         let allExistingTokenListeners = try self.context.fetch(.init(entityName: "ExistingTokenListener"))
         XCTAssertEqual(allExistingTokenListeners.count, 2)
         let allListeners = try self.context.fetch(.init(entityName: "Listener"))
-        print(allListeners)
         XCTAssertEqual(allListeners.count, 2)
         let onlyMetadataEnabledListeners = try self.context.fetch(NSFetchRequests.metadataEnabledExistingTokenListeners)
         print(onlyMetadataEnabledListeners)
         XCTAssertEqual(onlyMetadataEnabledListeners.count, 1)
+    }
+    
+    func testMintCommentEnabledExistingTokenListenersNSFetchRequest() throws {
+        /// Create 2 new ``ExistingTokenListener`` entities
+        /// 1) ``ExistingTokenListener`` with `\.listeningforMintCommentEvents` set to `true`
+        let existingTokenListener = ExistingTokenListener(context: self.context)
+        /// ``Listener`` parent entity attribute/s
+        existingTokenListener.id = UUID()
+        existingTokenListener.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        existingTokenListener.contractAddress = "0xa"
+        existingTokenListener.listeningForMetadataEvents = true
+        existingTokenListener.listeningForMintCommentEvents = true
+        /// 2) ``ExistingTokenListener`` with `\.listeningforMintCommentEvents` set to `false`
+        let existingTokenListener2 = ExistingTokenListener(context: self.context)
+        /// ``Listener`` parent entity attribute/s
+        existingTokenListener2.id = UUID()
+        existingTokenListener2.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        existingTokenListener2.contractAddress = "0xb"
+        existingTokenListener2.listeningForMetadataEvents = true
+        existingTokenListener2.listeningForMintCommentEvents = false
+        let allExistingTokenListeners = try self.context.fetch(.init(entityName: "ExistingTokenListener"))
+        XCTAssertEqual(allExistingTokenListeners.count, 2)
+        let allListeners = try self.context.fetch(.init(entityName: "Listener"))
+        XCTAssertEqual(allListeners.count, 2)
+        let onlyMintCommentEnabledListeners = try self.context.fetch(NSFetchRequests.mintCommentEnabledExistingTokenListeners)
+        print(onlyMintCommentEnabledListeners)
+        XCTAssertEqual(onlyMintCommentEnabledListeners.count, 1)
     }
 }
