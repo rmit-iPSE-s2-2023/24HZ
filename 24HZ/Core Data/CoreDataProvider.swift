@@ -89,33 +89,38 @@ extension CoreDataProvider {
         let interfaceIds = newTokenListeners.compactMap { newTokenListener in
             return newTokenListener.ercInterfaceId!.web3.hexData!
         }
-        /// EventsProvider Call 2: Get ``NewTokenEventStruct``/s
-        do {
-            let newTokenEventStructs = try await self.eventsProvider.getNewTokenEvents(fromBlock: fromBlock, toBlock: currentBlockNumber, forInterfaces: interfaceIds)
-            print("New token events captured: \(newTokenEventStructs.count)")
-            /// Create ``NewTokenEvent`` Core Data managed objects  for each ``NewTokenEventStruct``
-            for newTokenEventStruct in newTokenEventStructs {
-                /// Create ``NewTokenEvent`` MO in context
-                let newTokenEvent = NewTokenEvent(context: self.container.viewContext)
-                /// Set ``Event`` parent entity attribute/s:
-                newTokenEvent.blockHash = newTokenEventStruct.blockHash
-                newTokenEvent.blockNumber = Int64(newTokenEventStruct.blockNumber.dropFirst(2), radix: 16)!
-                newTokenEvent.contractAddress = newTokenEventStruct.contractAddress
-                newTokenEvent.id = UUID()
-                newTokenEvent.saved = false
-                newTokenEvent.timestamp = Date()    // TODO: This should be timestamp of event's block
-                newTokenEvent.tokenName = newTokenEventStruct.tokenName
-                newTokenEvent.tokenSymbol = newTokenEventStruct.tokenSymbol
-                newTokenEvent.transactionHash = newTokenEventStruct.txHash
-                /// Set ``Event`` parent entity relationship/s
-                newTokenEvent.capturedBy = newTokenListeners.first(where: { newTokenListener in
-                    return newTokenListener.ercInterfaceId == newTokenEventStruct.ercInterfaceId.rawValue
-                })
-                /// Set ``NewTokenEvent`` attribute/s
-                newTokenEvent.deployerAddress = newTokenEventStruct.deployerAddress
+        /// Only make call the EventsProvider if there is at least 1 enabled ``NewTokenListener``
+        if !interfaceIds.isEmpty {
+            /// EventsProvider Call 2: Get ``NewTokenEventStruct``/s
+            do {
+                let newTokenEventStructs = try await self.eventsProvider.getNewTokenEvents(fromBlock: fromBlock, toBlock: currentBlockNumber, forInterfaces: interfaceIds)
+                print("New token events captured: \(newTokenEventStructs.count)")
+                /// Create ``NewTokenEvent`` Core Data managed objects  for each ``NewTokenEventStruct``
+                for newTokenEventStruct in newTokenEventStructs {
+                    /// Create ``NewTokenEvent`` MO in context
+                    let newTokenEvent = NewTokenEvent(context: self.container.viewContext)
+                    /// Set ``Event`` parent entity attribute/s:
+                    newTokenEvent.blockHash = newTokenEventStruct.blockHash
+                    newTokenEvent.blockNumber = Int64(newTokenEventStruct.blockNumber.dropFirst(2), radix: 16)!
+                    newTokenEvent.contractAddress = newTokenEventStruct.contractAddress
+                    newTokenEvent.id = UUID()
+                    newTokenEvent.saved = false
+                    newTokenEvent.timestamp = Date()    // TODO: This should be timestamp of event's block
+                    newTokenEvent.tokenName = newTokenEventStruct.tokenName
+                    newTokenEvent.tokenSymbol = newTokenEventStruct.tokenSymbol
+                    newTokenEvent.transactionHash = newTokenEventStruct.txHash
+                    /// Set ``Event`` parent entity relationship/s
+                    newTokenEvent.capturedBy = newTokenListeners.first(where: { newTokenListener in
+                        return newTokenListener.ercInterfaceId == newTokenEventStruct.ercInterfaceId.rawValue
+                    })
+                    /// Set ``NewTokenEvent`` attribute/s
+                    newTokenEvent.deployerAddress = newTokenEventStruct.deployerAddress
+                }
+            } catch {
+                print(error)
             }
-        } catch {
-            print(error)
+        } else {
+            print("No NewTokenListeners enabled.")
         }
         /// 2) Getting ``MetadataEvent``/s
         /// Fetch ``ExistingTokenListener``/s where listeningForMetadata is true
@@ -123,77 +128,89 @@ extension CoreDataProvider {
         let metadataListenerContractAddresses = metadataListeners.map { metadataListener in
             return metadataListener.contractAddress!
         }
-        do {
+        if !metadataListenerContractAddresses.isEmpty {
             /// EventsProvider Call 3: Get ``MetadataEventStruct``/s
-            let metadataEventStructs = try await self.eventsProvider.getMetadataEvents(fromBlock: fromBlock, toBlock: currentBlockNumber, forContracts: metadataListenerContractAddresses)
-            print("New metadata events captured: \(metadataEventStructs.count)")
-            for metadataEventStruct in metadataEventStructs {
-                /// Create ``MetadataEvent`` in context
-                let metadataEvent = MetadataEvent(context: context)
-                /// Set ``Event`` parent entity attribute/s:
-                metadataEvent.blockHash = metadataEventStruct.blockHash
-                metadataEvent.blockNumber = Int64(metadataEventStruct.blockNumber.dropFirst(2), radix: 16)!
-                metadataEvent.contractAddress = metadataEventStruct.contractAddress
-                metadataEvent.id = UUID()
-                metadataEvent.saved = false
-                metadataEvent.timestamp = Date()    // TODO: This should be timestamp of event's block
-                metadataEvent.tokenName = metadataEventStruct.tokenName
-                metadataEvent.tokenSymbol = metadataEventStruct.tokenSymbol
-                metadataEvent.transactionHash = metadataEventStruct.txHash
-                /// Set ``Event`` parent entity relationship/s
-                metadataEvent.capturedBy = metadataListeners.first(where: { metadataListener in
-                    return metadataListener.contractAddress == metadataEventStruct.contractAddress
-                })
-                /// Set ``MetadataEvent`` attribute/s
-                metadataEvent.abiEventName = metadataEventStruct.abiEventName
-                metadataEvent.updatedAnimationURI = metadataEventStruct.updatedAnimationURI
-                metadataEvent.updatedContractURI = metadataEventStruct.updatedContractURI
-                metadataEvent.updatedFreezeAt = metadataEventStruct.updatedFreezeAt ?? 0
-                metadataEvent.updatedImageURI = metadataEventStruct.updatedImageURI
-                metadataEvent.updatedMetadataBase = metadataEventStruct.updatedMetadataBase
-                metadataEvent.updatedMetadataExtension = metadataEventStruct.updatedMetadataExtension
-                metadataEvent.updatedName = metadataEventStruct.updatedName
-                metadataEvent.updatedNewDescription = metadataEventStruct.updatedNewDescription
-                metadataEvent.updatedURI = metadataEventStruct.updatedURI
+            do {
+                let metadataEventStructs = try await self.eventsProvider.getMetadataEvents(fromBlock: fromBlock, toBlock: currentBlockNumber, forContracts: metadataListenerContractAddresses)
+                print("New metadata events captured: \(metadataEventStructs.count)")
+                for metadataEventStruct in metadataEventStructs {
+                    /// Create ``MetadataEvent`` in context
+                    let metadataEvent = MetadataEvent(context: context)
+                    /// Set ``Event`` parent entity attribute/s:
+                    metadataEvent.blockHash = metadataEventStruct.blockHash
+                    metadataEvent.blockNumber = Int64(metadataEventStruct.blockNumber.dropFirst(2), radix: 16)!
+                    metadataEvent.contractAddress = metadataEventStruct.contractAddress
+                    metadataEvent.id = UUID()
+                    metadataEvent.saved = false
+                    metadataEvent.timestamp = Date()    // TODO: This should be timestamp of event's block
+                    metadataEvent.tokenName = metadataEventStruct.tokenName
+                    metadataEvent.tokenSymbol = metadataEventStruct.tokenSymbol
+                    metadataEvent.transactionHash = metadataEventStruct.txHash
+                    /// Set ``Event`` parent entity relationship/s
+                    metadataEvent.capturedBy = metadataListeners.first(where: { metadataListener in
+                        return metadataListener.contractAddress == metadataEventStruct.contractAddress
+                    })
+                    /// Set ``MetadataEvent`` attribute/s
+                    metadataEvent.abiEventName = metadataEventStruct.abiEventName
+                    metadataEvent.updatedAnimationURI = metadataEventStruct.updatedAnimationURI
+                    metadataEvent.updatedContractURI = metadataEventStruct.updatedContractURI
+                    metadataEvent.updatedFreezeAt = metadataEventStruct.updatedFreezeAt ?? 0
+                    metadataEvent.updatedImageURI = metadataEventStruct.updatedImageURI
+                    metadataEvent.updatedMetadataBase = metadataEventStruct.updatedMetadataBase
+                    metadataEvent.updatedMetadataExtension = metadataEventStruct.updatedMetadataExtension
+                    metadataEvent.updatedName = metadataEventStruct.updatedName
+                    metadataEvent.updatedNewDescription = metadataEventStruct.updatedNewDescription
+                    metadataEvent.updatedURI = metadataEventStruct.updatedURI
+                }
+            } catch {
+                print(error)
             }
-        } catch {
-            print(error)
+        } else {
+            print("No ExistingTokenListeners enabled for MetadataEvents")
         }
         /// 3) Getting ``MintCommentEvent``/s
         let mintCommentListeners = try context.fetch(NSFetchRequests.mintCommentEnabledExistingTokenListeners)
         let mintCommentListenerContractAddresses = mintCommentListeners.map { mintCommentListener in
             return mintCommentListener.contractAddress!
         }
-        do {
+        if !mintCommentListenerContractAddresses.isEmpty {
             /// EventsProvider Call 4: Get ``MintCommentEventStruct``/s
-            let mintCommentEventStructs = try await self.eventsProvider.getMintCommentEvents(fromBlock: fromBlock, toBlock: currentBlockNumber, forContracts: mintCommentListenerContractAddresses)
-            print("New mint comment events captured: \(mintCommentEventStructs.count)")
-            for mintCommentEventStruct in mintCommentEventStructs {
-                /// Create ``MintCommentEvent`` in context
-                let mintEvent = MintCommentEvent(context: context)
-                /// Set ``Event`` parent entity attribute/s:
-                mintEvent.blockHash = mintCommentEventStruct.blockHash
-                mintEvent.blockNumber = Int64(mintCommentEventStruct.blockNumber.dropFirst(2), radix: 16)!
-                mintEvent.contractAddress = mintCommentEventStruct.contractAddress
-                mintEvent.id = UUID()
-                mintEvent.saved = false
-                mintEvent.timestamp = Date()    // TODO: This should be timestamp of event's block
-                mintEvent.tokenName = mintCommentEventStruct.tokenName
-                mintEvent.tokenSymbol = mintCommentEventStruct.tokenSymbol
-                mintEvent.transactionHash = mintCommentEventStruct.txHash
-                /// Set ``Event`` parent entity relationship/s
-                mintEvent.capturedBy = mintCommentListeners.first(where: { mintCommentListener in
-                    return mintCommentListener.contractAddress == mintCommentEventStruct.contractAddress
-                })
-                /// Set ``MintCommentEvent`` attribute/s
-                mintEvent.abiEventName = mintCommentEventStruct.abiEventName
-                mintEvent.mintComment = mintCommentEventStruct.mintComment
-                mintEvent.quantity = mintCommentEventStruct.quantity ?? 0
+            do {
+                let mintCommentEventStructs = try await self.eventsProvider.getMintCommentEvents(fromBlock: fromBlock, toBlock: currentBlockNumber, forContracts: mintCommentListenerContractAddresses)
+                print("New mint comment events captured: \(mintCommentEventStructs.count)")
+                for mintCommentEventStruct in mintCommentEventStructs {
+                    /// Create ``MintCommentEvent`` in context
+                    let mintEvent = MintCommentEvent(context: context)
+                    /// Set ``Event`` parent entity attribute/s:
+                    mintEvent.blockHash = mintCommentEventStruct.blockHash
+                    mintEvent.blockNumber = Int64(mintCommentEventStruct.blockNumber.dropFirst(2), radix: 16)!
+                    mintEvent.contractAddress = mintCommentEventStruct.contractAddress
+                    mintEvent.id = UUID()
+                    mintEvent.saved = false
+                    mintEvent.timestamp = Date()    // TODO: This should be timestamp of event's block
+                    mintEvent.tokenName = mintCommentEventStruct.tokenName
+                    mintEvent.tokenSymbol = mintCommentEventStruct.tokenSymbol
+                    mintEvent.transactionHash = mintCommentEventStruct.txHash
+                    /// Set ``Event`` parent entity relationship/s
+                    mintEvent.capturedBy = mintCommentListeners.first(where: { mintCommentListener in
+                        return mintCommentListener.contractAddress == mintCommentEventStruct.contractAddress
+                    })
+                    /// Set ``MintCommentEvent`` attribute/s
+                    mintEvent.abiEventName = mintCommentEventStruct.abiEventName
+                    mintEvent.mintComment = mintCommentEventStruct.mintComment
+                    mintEvent.quantity = mintCommentEventStruct.quantity ?? 0
+                }
+            } catch {
+                print(error)
             }
-        } catch {
-            print(error)
+        } else {
+            print("No ExistingTokenListeners enabled for MintCommentEvents.")
         }
         /// Save current viewContext to persistent container
-        try self.container.viewContext.save()
+        if context.hasChanges {
+            try context.save()
+        } else {
+            print("Context does not have any changes. Skipped saving.")
+        }
     }
 }
