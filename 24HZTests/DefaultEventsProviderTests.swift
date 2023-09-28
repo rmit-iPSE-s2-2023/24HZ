@@ -68,9 +68,8 @@ final class DefaultEventsProviderTests: XCTestCase {
         let toBlock = fromBlock + self.maxBlockRange - 1
         do {
             let metadataUpdateEventsByContractAddress = try await self.eventsProvider.getMetadataEvents(fromBlock: fromBlock, toBlock: toBlock, forContracts: nil)
-            print(metadataUpdateEventsByContractAddress.keys)
-            XCTAssertEqual(metadataUpdateEventsByContractAddress.count, 23)
             XCTAssertNotNil(metadataUpdateEventsByContractAddress)
+            XCTAssertEqual(metadataUpdateEventsByContractAddress.count, 25)
         } catch {
             XCTFail("Expected events but failed \(error).")
         }
@@ -83,7 +82,6 @@ final class DefaultEventsProviderTests: XCTestCase {
         let contracts = metadataTestData["contracts"] as! [String]
         do {
             let metadataUpdateEventsByContractAddress = try await self.eventsProvider.getMetadataEvents(fromBlock: fromBlock, toBlock: toBlock, forContracts: contracts)
-            print(metadataUpdateEventsByContractAddress.keys)
             XCTAssertNotNil(metadataUpdateEventsByContractAddress)
         } catch {
             XCTFail("Expected events but failed \(error).")

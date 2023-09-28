@@ -42,7 +42,7 @@ protocol EventsProvider {
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
     ///   - forContracts: Contract addresses to query for
-    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MintCommentEventStruct]]
+    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEventStruct]
 
     // Currently out of scope
 //    func getSalesUpdateEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [SalesUpdateEvent]
@@ -96,21 +96,18 @@ struct MetadataEventStruct {
 }
 
 struct MintCommentEventStruct {
-//    let eventType: EventType = .newContract
-    let eventType: String = "Mint Comment"
-    
-    // MARK: Event specific property/s
-    var comment: String?
-
-    // MARK: Instance property/s
+    /// MO ``Event`` attribute/s
     var contractAddress: String
-    var tokenType: String?  // FIXME: Implement this part
     var tokenName: String?
     var tokenSymbol: String?
-    
     var blockNumber: String
     var blockHash: String?
     var txHash: String?
+    
+    /// MO: ``MintComment`` attribute/s
+    var abiEventName: String
+    var mintComment: String?
+    var quantity: Int64?
 }
 
 // Currently out of scope

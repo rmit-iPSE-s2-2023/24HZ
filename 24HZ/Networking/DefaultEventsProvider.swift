@@ -189,7 +189,7 @@ extension DefaultEventsProvider {
     }
     
     /// Default Implementation of ``EventsProvider/getMintCommentEvents(fromBlock:toBlock:forContracts:)``
-    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MintCommentEventStruct]] {
+    func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEventStruct] {
         /// ABIEvent types that are relevant to Mint with Comments
         var abiEventTypes = [ABIEvent.Type]()
         abiEventTypes.append(MintCommentEventABI.MintComment.self)
@@ -216,24 +216,28 @@ extension DefaultEventsProvider {
         // FIXME: Debugging
         print("getMintCommentEvents result.events.count: \(events.count)")
         print("getMintCommentEvents result.logs.count: \(result.logs.count)")
-        let mintCommentEvents = events.map { event in
+        let mintCommentEvents = events.compactMap { event in
             /// Downcast ABIEvent to subtypes to access instance properties:
             /// - get comment
-            // FIXME: Maybe switch is better here -> Don't have to use default value ("") if there is a default case with fatalerror or throw?
-            var comment: String = ""
+            /// - get quantity
+            var mintCommentEventStruct = MintCommentEventStruct(contractAddress: event.log.address.asString(), blockNumber: event.log.blockNumber.stringValue, abiEventName: "")
             if let mintCommentEvent: MintCommentEventABI.MintComment = event as? MintCommentEventABI.MintComment {
-                comment = mintCommentEvent.comment
+                mintCommentEventStruct.mintComment = mintCommentEvent.comment
+                mintCommentEventStruct.quantity = Int64(exactly: mintCommentEvent.quantity)
+                mintCommentEventStruct.abiEventName = MintCommentEventABI.MintComment.name
+                return mintCommentEventStruct
+            } else {
+                return nil
             }
-            let mintCommentEvent = MintCommentEventStruct(comment: comment, contractAddress: event.log.address.asString(), blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash)
-            return mintCommentEvent
         }
+        return mintCommentEvents
         /// Create dictionary to return results keyed by contract address
-        var eventsDict: [String: [MintCommentEventStruct]] = [:]
-
-        mintCommentEvents.forEach { mintCommentEvent in
-            eventsDict[mintCommentEvent.contractAddress, default: []].append(mintCommentEvent)
-        }
-        return eventsDict
+//        var eventsDict: [String: [MintCommentEventStruct]] = [:]
+//
+//        mintCommentEvents.forEach { mintCommentEvent in
+//            eventsDict[mintCommentEvent.contractAddress, default: []].append(mintCommentEvent)
+//        }
+//        return eventsDict
         /// Note: tokenName and tokenSymbol should be fetched when user adds new listener for a specified contract address.
     }
 }
