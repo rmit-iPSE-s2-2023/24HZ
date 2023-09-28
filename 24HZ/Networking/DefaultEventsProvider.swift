@@ -86,7 +86,7 @@ extension DefaultEventsProvider {
         /// Filter txReceipts checking if its contractAddress is a key in tokenContracts
         let newTokenEvents = deployTxReceipts.compactMap { txReceipt in
             if let interfaceInfo = tokenContracts[txReceipt.contractAddress] {
-                let newTokenEvent = NewTokenEventStruct(contractAddress: txReceipt.contractAddress, ercInterfaceId: interfaceInfo.ercInterfaceId, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, txHash: txReceipt.transactionHash, deployerAddress: txReceipt.from)
+                let newTokenEvent = NewTokenEventStruct(ercInterfaceId: interfaceInfo.ercInterfaceId, contractAddress: txReceipt.contractAddress, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, txHash: txReceipt.transactionHash, deployerAddress: txReceipt.from)
                 return newTokenEvent
             } else {
                 return nil
@@ -115,7 +115,7 @@ extension DefaultEventsProvider {
     }
     
     /// Default Implementation of ``EventsProvider/getMetadataEvents(fromBlock:toBlock:forContracts:)``
-    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataEventStruct]] {
+    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataEventStruct] {
         /// Create an array of relevant event types conforming to ``ABIEvent``
         var abiEventTypes: [ABIEvent.Type] = []
         abiEventTypes.append(MetadataEventABI.ContractMetadataUpdated.self)
@@ -144,34 +144,47 @@ extension DefaultEventsProvider {
         let events = result.events
         guard !events.isEmpty else {
             print("No events found.")
-            return [:]
+            return []
         }
         print("getMetadataEvents result.events.count: \(events.count)")
         print("getMetadataEvents result.logs.count: \(result.logs.count)")
-        let metadataUpdateEvents = events.map { event in
+        let metadataEventStructs = events.map { event in
             /// Downcast ABIEvent to subtypes to access instance properties
             /// - get token contract address
             // FIXME: Maybe switch is better here -> Don't have to use .zero if there is a default case with fatalerror or throw?
-            var tokenContractAddress: EthereumAddress = .zero
+            var metadataEventStruct = MetadataEventStruct(contractAddress: "", blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash, abiEventName: "")
             if let descriptionUpdatedEvent: MetadataEventABI.DescriptionUpdated = event as? MetadataEventABI.DescriptionUpdated {
-                tokenContractAddress = descriptionUpdatedEvent.target
+                metadataEventStruct.contractAddress = descriptionUpdatedEvent.target.asString()
+                metadataEventStruct.abiEventName = MetadataEventABI.DescriptionUpdated.name
+                metadataEventStruct.updatedNewDescription = descriptionUpdatedEvent.newDescription
             } else if let mediaURIsUpdatedEvent: MetadataEventABI.MediaURIsUpdated = event as? MetadataEventABI.MediaURIsUpdated {
-                tokenContractAddress = mediaURIsUpdatedEvent.target
+                metadataEventStruct.contractAddress = mediaURIsUpdatedEvent.target.asString()
+                metadataEventStruct.abiEventName = MetadataEventABI.MediaURIsUpdated.name
+                metadataEventStruct.updatedAnimationURI = mediaURIsUpdatedEvent.animationURI
+                metadataEventStruct.updatedImageURI = mediaURIsUpdatedEvent.imageURI
             } else if let contractMetadataUpdatedEvent: MetadataEventABI.ContractMetadataUpdated = event as? MetadataEventABI.ContractMetadataUpdated {
-                tokenContractAddress = contractMetadataUpdatedEvent.updated
+                metadataEventStruct.contractAddress = contractMetadataUpdatedEvent.updated.asString()
+                metadataEventStruct.abiEventName = MetadataEventABI.ContractMetadataUpdated.name
+                metadataEventStruct.updatedURI = contractMetadataUpdatedEvent.uri
+                metadataEventStruct.updatedName = contractMetadataUpdatedEvent.name
             } else if let metadataUpdatedEvent: MetadataEventABI.MetadataUpdated = event as? MetadataEventABI.MetadataUpdated {
-                tokenContractAddress = metadataUpdatedEvent.target
+                metadataEventStruct.contractAddress = metadataUpdatedEvent.target.asString()
+                metadataEventStruct.abiEventName = MetadataEventABI.MetadataUpdated.name
+                metadataEventStruct.updatedContractURI = metadataUpdatedEvent.contractURI
+                metadataEventStruct.updatedFreezeAt = Int64(exactly: metadataUpdatedEvent.freezeAt)
+                metadataEventStruct.updatedMetadataBase = metadataUpdatedEvent.metadataBase
+                metadataEventStruct.updatedMetadataExtension = metadataUpdatedEvent.metadataExtension
             }
-            let metadataEvent = MetadataEventStruct(contractAddress: tokenContractAddress.asString(), blockNumber: event.log.blockNumber.stringValue, blockHash: event.log.blockHash, txHash: event.log.transactionHash)
-            return metadataEvent
+            return metadataEventStruct
         }
         /// Create dictionary to return results keyed by contract address
-        var eventsDict: [String: [MetadataEventStruct]] = [:]
-
-        metadataUpdateEvents.forEach { metadataUpdateEvent in
-            eventsDict[metadataUpdateEvent.contractAddress, default: []].append(metadataUpdateEvent)
-        }
-        return eventsDict
+//        var eventsDict: [String: [MetadataEventStruct]] = [:]
+//
+//        metadataUpdateEvents.forEach { metadataUpdateEvent in
+//            eventsDict[metadataUpdateEvent.contractAddress, default: []].append(metadataUpdateEvent)
+//        }
+//        return eventsDict
+        return metadataEventStructs
         /// Note: tokenName and tokenSymbol should be fetched when user adds new listener for a specified contract address.
     }
     

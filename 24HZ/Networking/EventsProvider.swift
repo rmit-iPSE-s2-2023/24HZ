@@ -22,7 +22,7 @@ protocol EventsProvider {
     /// Returns the current block number for set chainId
     func getCurrentBlockNumber() async throws -> Int
     
-    /// Returns all ``NewTokenEvent`` in given block range for specified interfaceIds
+    /// Returns all ``NewTokenEventStruct``/s in given block range for specified interfaceIds
     /// - Parameters:
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
@@ -30,14 +30,14 @@ protocol EventsProvider {
     // TODO: Can refactor forInterfaces data type to be ERCInterfaceId type and convert to useful type in implementation
     func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEventStruct]
     
-    /// Returns all ``MetadataEvent`` in given block range for specified contract addresses
+    /// Returns all ``MetadataEventStruct``/s in given block range for specified contract addresses
     /// - Parameters:
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
     ///   - forContracts: Contract addresses to query for
-    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [String: [MetadataEventStruct]]
+    func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataEventStruct]
     
-    /// Returns all ``MintEvent`` in given block range for specified contract addresses
+    /// Returns all ``MintCommentEventStruct``/s in given block range for specified contract addresses
     /// - Parameters:
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
@@ -54,9 +54,11 @@ enum ChainID : Int {
 }
 
 struct NewTokenEventStruct {
-    /// MO: Event property/s
-    var contractAddress: String
+    
+    /// MO: ``Event`` attribute/s
     var ercInterfaceId: ERCInterfaceId
+
+    var contractAddress: String
     var tokenName: String?
     var tokenSymbol: String?
     
@@ -64,23 +66,33 @@ struct NewTokenEventStruct {
     var blockHash: String
     var txHash: String
     
-    /// MO: NewTokenEvent property/s
+    /// MO: ``NewTokenEvent`` attribute/s
     var deployerAddress: String
 }
 
 struct MetadataEventStruct {
-//    let eventType: EventType = .newContract
-    let eventType: String = "Metadata Update"
 
-    // MARK: Instance property/s
+    /// MO ``Event`` attribute/s
     var contractAddress: String
-    var tokenType: String?  // FIXME: Implement this part
     var tokenName: String?
     var tokenSymbol: String?
-    
     var blockNumber: String
     var blockHash: String?
     var txHash: String?
+    
+    /// MO: ``MetadataEvent`` attribute/s
+    var abiEventName: String
+    var updatedAnimationURI: String?
+    var updatedContractURI: String?
+    var updatedFreezeAt: Int64?
+    var updatedImageURI: String?
+    var updatedMetadataBase: String?
+    var updatedMetadataExtension: String?
+    var updatedName: String?
+    var updatedNewDescription: String?
+    var updatedURI: String?
+    
+    
 }
 
 struct MintCommentEventStruct {
