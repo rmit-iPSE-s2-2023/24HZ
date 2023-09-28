@@ -54,15 +54,6 @@ struct ListeningTab: View {
                     Spacer()
                 }
                 
-//                HStack {
-//                    Text("here is what you're listening to...")
-//                        .font(.largeTitle.bold())
-//                        .foregroundColor(.white)
-//                        .padding(.leading, 30) 
-//                    Spacer()
-//                }
-                
-                
                 // Content: Blocks or Placeholder
                 if blocks.isEmpty {
                     // Placeholder for no blocks

@@ -384,7 +384,7 @@ extension ThirdWebRPC {
                 ] as [String: Any],
                 "latest"
             ] as [Any],
-            "id": 1 // Use a unique ID based on the block number
+            "id": contractAddress /// Use a unique **string** here for decoder
         ]
         /// Serialize request body
         guard let requestData = try? JSONSerialization.data(withJSONObject: jsonRpcRequest) else {

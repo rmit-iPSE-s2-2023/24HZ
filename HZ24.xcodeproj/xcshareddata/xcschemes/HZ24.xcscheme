@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A220745E2A7D5FF0002FD6CB"
-               BuildableName = "24HZ.app"
-               BlueprintName = "24HZ"
-               ReferencedContainer = "container:24HZ.xcodeproj">
+               BuildableName = "HZ24.app"
+               BlueprintName = "HZ24"
+               ReferencedContainer = "container:HZ24.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B1BE377E2AC01BE900104A4A"
-               BuildableName = "24HZTests.xctest"
-               BlueprintName = "24HZTests"
-               ReferencedContainer = "container:24HZ.xcodeproj">
+               BuildableName = "HZ24Tests.xctest"
+               BlueprintName = "HZ24Tests"
+               ReferencedContainer = "container:HZ24.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A220745E2A7D5FF0002FD6CB"
-            BuildableName = "24HZ.app"
-            BlueprintName = "24HZ"
-            ReferencedContainer = "container:24HZ.xcodeproj">
+            BuildableName = "HZ24.app"
+            BlueprintName = "HZ24"
+            ReferencedContainer = "container:HZ24.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,9 +74,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A220745E2A7D5FF0002FD6CB"
-            BuildableName = "24HZ.app"
-            BlueprintName = "24HZ"
-            ReferencedContainer = "container:24HZ.xcodeproj">
+            BuildableName = "HZ24.app"
+            BlueprintName = "HZ24"
+            ReferencedContainer = "container:HZ24.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

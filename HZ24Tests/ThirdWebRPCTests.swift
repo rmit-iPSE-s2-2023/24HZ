@@ -9,7 +9,7 @@
 
 import XCTest
 import web3
-@testable import _4HZ   // importing 24HZ; first number gets replaced with "_"
+@testable import HZ24
 
 final class ThirdWebRPCTests: XCTestCase {
 

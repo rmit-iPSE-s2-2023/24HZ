@@ -9,7 +9,7 @@
 
 import XCTest
 import CoreData
-@testable import _4HZ
+@testable import HZ24
 
 final class CoreDataTests: XCTestCase {
     

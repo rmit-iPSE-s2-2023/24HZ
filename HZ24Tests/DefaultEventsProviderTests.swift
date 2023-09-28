@@ -8,7 +8,7 @@
 
 
 import XCTest
-@testable import _4HZ
+@testable import HZ24
 
 final class DefaultEventsProviderTests: XCTestCase {
 
