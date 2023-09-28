@@ -25,4 +25,13 @@ enum NSFetchRequests {
         request.predicate = compoundPredicate
         return request
     }
+    static var mintCommentEnabledExistingTokenListeners: NSFetchRequest<ExistingTokenListener> {
+        let request: NSFetchRequest<ExistingTokenListener> = ExistingTokenListener.fetchRequest()
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "listeningForMintCommentEvents == %@", NSNumber(value: true)),
+            NSPredicate(format: "isListening == %@", NSNumber(value: true))
+        ])
+        request.predicate = compoundPredicate
+        return request
+    }
 }
