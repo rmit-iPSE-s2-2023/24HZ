@@ -9,9 +9,12 @@
 import Foundation
 import web3
 
+/// An implementation of ``RPCProtocol``
 /// This implementation uses RPC endpoints provided by Third Web
 /// Dependencies: web3.swift (to encode ABI functions)
-/// Reference: https://thirdweb.com/dashboard/infrastructure/rpc-edge
+/// References:
+/// Third Web: https://thirdweb.com/dashboard/infrastructure/rpc-edge
+/// web3.swift: https://github.com/argentlabs/web3.swift
 struct ThirdWebRPC : RPCProtocol {
     var url: URL
     
