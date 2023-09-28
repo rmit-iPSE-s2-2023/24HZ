@@ -156,10 +156,43 @@ extension CoreDataProvider {
                 metadataEvent.updatedNewDescription = metadataEventStruct.updatedNewDescription
                 metadataEvent.updatedURI = metadataEventStruct.updatedURI
             }
-
+        } catch {
+            print(error)
         }
-        
-        
+        /// 3) Getting ``MintCommentEvent``/s
+        let mintCommentListeners = try context.fetch(NSFetchRequests.mintCommentEnabledExistingTokenListeners)
+        let mintCommentListenerContractAddresses = mintCommentListeners.map { mintCommentListener in
+            return mintCommentListener.contractAddress!
+        }
+        do {
+            /// EventsProvider Call 4: Get ``MintCommentEventStruct``/s
+            let mintCommentEventStructs = try await self.eventsProvider.getMintCommentEvents(fromBlock: fromBlock, toBlock: currentBlockNumber, forContracts: mintCommentListenerContractAddresses)
+            print("New mint comment events captured: \(mintCommentEventStructs.count)")
+            for mintCommentEventStruct in mintCommentEventStructs {
+                /// Create ``MintCommentEvent`` in context
+                let mintEvent = MintCommentEvent(context: context)
+                /// Set ``Event`` parent entity attribute/s:
+                mintEvent.blockHash = mintCommentEventStruct.blockHash
+                mintEvent.blockNumber = Int64(mintCommentEventStruct.blockNumber.dropFirst(2), radix: 16)!
+                mintEvent.contractAddress = mintCommentEventStruct.contractAddress
+                mintEvent.id = UUID()
+                mintEvent.saved = false
+                mintEvent.timestamp = Date()    // TODO: This should be timestamp of event's block
+                mintEvent.tokenName = mintCommentEventStruct.tokenName
+                mintEvent.tokenSymbol = mintCommentEventStruct.tokenSymbol
+                mintEvent.transactionHash = mintCommentEventStruct.txHash
+                /// Set ``Event`` parent entity relationship/s
+                mintEvent.capturedBy = mintCommentListeners.first(where: { mintCommentListener in
+                    return mintCommentListener.contractAddress == mintCommentEventStruct.contractAddress
+                })
+                /// Set ``MintCommentEvent`` attribute/s
+                mintEvent.abiEventName = mintCommentEventStruct.abiEventName
+                mintEvent.mintComment = mintCommentEventStruct.mintComment
+                mintEvent.quantity = mintCommentEventStruct.quantity ?? 0
+            }
+        } catch {
+            print(error)
+        }
         /// Save current viewContext to persistent container
         try self.container.viewContext.save()
     }
