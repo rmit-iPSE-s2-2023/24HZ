@@ -38,6 +38,7 @@
         <attribute name="updatedURI" optional="YES" attributeType="String"/>
     </entity>
     <entity name="MintCommentEvent" representedClassName="MintCommentEvent" parentEntity="Event" syncable="YES" codeGenerationType="class">
+        <attribute name="abiEventName" optional="YES" attributeType="String"/>
         <attribute name="mintComment" optional="YES" attributeType="String"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
