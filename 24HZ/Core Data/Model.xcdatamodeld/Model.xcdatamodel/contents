@@ -14,9 +14,9 @@
         <relationship name="capturedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Listener" inverseName="capturedEvents" inverseEntity="Listener"/>
     </entity>
     <entity name="ExistingTokenListener" representedClassName="ExistingTokenListener" parentEntity="Listener" syncable="YES" codeGenerationType="class">
-        <attribute name="contractAddress" optional="YES" attributeType="String"/>
-        <attribute name="listeningForMetadataEvents" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="listeningForMintCommentEvents" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="contractAddress" attributeType="String"/>
+        <attribute name="listeningForMetadataEvents" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="listeningForMintCommentEvents" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="tokenName" optional="YES" attributeType="String"/>
         <attribute name="tokenSymbol" optional="YES" attributeType="String"/>
     </entity>
@@ -26,9 +26,10 @@
         <relationship name="capturedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="capturedBy" inverseEntity="Event"/>
     </entity>
     <entity name="MetadataEvent" representedClassName="MetadataEvent" parentEntity="Event" syncable="YES" codeGenerationType="class">
+        <attribute name="abiEventName" optional="YES" attributeType="String"/>
         <attribute name="updatedAnimationURI" optional="YES" attributeType="String"/>
         <attribute name="updatedContractURI" optional="YES" attributeType="String"/>
-        <attribute name="updatedFreezeAt" optional="YES" attributeType="String"/>
+        <attribute name="updatedFreezeAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updatedImageURI" optional="YES" attributeType="String"/>
         <attribute name="updatedMetadataBase" optional="YES" attributeType="String"/>
         <attribute name="updatedMetadataExtension" optional="YES" attributeType="String"/>
