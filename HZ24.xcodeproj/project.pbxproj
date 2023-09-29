@@ -44,7 +44,7 @@
 		B1B504CA2AC5A3B600DA66B7 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048F2AC5A3B600DA66B7 /* Main.swift */; };
 		B1B504CB2AC5A3B600DA66B7 /* SavedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504932AC5A3B600DA66B7 /* SavedTab.swift */; };
 		B1B504CC2AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504952AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift */; };
-		B1B504CD2AC5A3B600DA66B7 /* AddListenerSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504962AC5A3B600DA66B7 /* AddListenerSuccess.swift */; };
+		B1B504CD2AC5A3B600DA66B7 /* Success.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504962AC5A3B600DA66B7 /* Success.swift */; };
 		B1B504CE2AC5A3B600DA66B7 /* BlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504972AC5A3B600DA66B7 /* BlockSettingView.swift */; };
 		B1B504CF2AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504982AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift */; };
 		B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504992AC5A3B600DA66B7 /* ListeningTab.swift */; };
@@ -117,7 +117,7 @@
 		B1B5048F2AC5A3B600DA66B7 /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		B1B504932AC5A3B600DA66B7 /* SavedTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTab.swift; sourceTree = "<group>"; };
 		B1B504952AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewTokenListenerTypeSelection.swift; sourceTree = "<group>"; };
-		B1B504962AC5A3B600DA66B7 /* AddListenerSuccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerSuccess.swift; sourceTree = "<group>"; };
+		B1B504962AC5A3B600DA66B7 /* Success.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Success.swift; sourceTree = "<group>"; };
 		B1B504972AC5A3B600DA66B7 /* BlockSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSettingView.swift; sourceTree = "<group>"; };
 		B1B504982AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowCustom2.swift; sourceTree = "<group>"; };
 		B1B504992AC5A3B600DA66B7 /* ListeningTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListeningTab.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 				B1B5049C2AC5A3B600DA66B7 /* AddListenerFlowRoot.swift */,
 				B1B504952AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift */,
 				B1B5049A2AC5A3B600DA66B7 /* AddListenerNotificationTypeSelection.swift */,
-				B1B504962AC5A3B600DA66B7 /* AddListenerSuccess.swift */,
+				B1B504962AC5A3B600DA66B7 /* Success.swift */,
 			);
 			path = AddListenerFlow;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 				B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */,
 				B1B504D82AC5A3B600DA66B7 /* CapturedEventBlock.swift in Sources */,
 				B1B504DB2AC5A3B600DA66B7 /* SwipeNavigation.swift in Sources */,
-				B1B504CD2AC5A3B600DA66B7 /* AddListenerSuccess.swift in Sources */,
+				B1B504CD2AC5A3B600DA66B7 /* Success.swift in Sources */,
 				B1B504CC2AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift in Sources */,
 				B1B504C82AC5A3B600DA66B7 /* JSON.swift in Sources */,
 				B1B504B22AC5A3B600DA66B7 /* MetadataEventABI.swift in Sources */,
