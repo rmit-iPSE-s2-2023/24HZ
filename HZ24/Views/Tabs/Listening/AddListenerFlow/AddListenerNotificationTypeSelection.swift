@@ -50,7 +50,7 @@ struct AddListenerNotificationTypeSelection: View {
                 /// Navigate user to success screen **AND** save ``NewTokenListener`` in context to store
                 /// Note: Using deprecated `NavigationLink` variant as `NavigationStack` is unavailable for target iOS version
                 NavigationLink("Save", isActive: Binding<Bool>(get: { goToNextScreen }, set: { goToNextScreen = $0; print("Navigating to next screen"); saveNewTokenListeners() })) {
-                    AddListenerSuccess()
+                    Success()
                 }
             }
         }
