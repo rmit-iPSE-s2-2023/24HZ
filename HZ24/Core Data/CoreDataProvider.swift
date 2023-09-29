@@ -50,6 +50,12 @@ class CoreDataProvider {
         let provider = CoreDataProvider(inMemory: true)
         let viewContext = provider.container.viewContext
         // TODO: Create dummy CapturedEvents e.g. fetch events from last 1000 blocks?
+        /// Add ``NewTokenListener`` for Coins
+        let newTokenListener = NewTokenListener(context: viewContext)
+        newTokenListener.id = UUID()
+        newTokenListener.isListening = true
+        newTokenListener.ercInterfaceId = ERCInterfaceId.erc20.rawValue
+        try! viewContext.save()
         // e.g. CapturedEvent.makePreviews()
         return provider
     }()
