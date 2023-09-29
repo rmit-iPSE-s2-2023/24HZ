@@ -7,66 +7,121 @@
 
 import SwiftUI
 
-// MARK: - Step 2 of AddListenerFlow
+// MARK: - Last step of AddListener flow
+/// User selects how they would like event notifications delivered
+// TODO: Implement functionality for emails and push notifications
+// FIXME: Currently events are only loaded in ``FeedTab``
 struct AddListenerNotificationTypeSelection: View {
-    // Binding variables for parent view
-    @Binding var selectedBlocks: [BlockType]
-    @Binding var blocks: [BlockType]
-    @Binding var notificationSettings: [NotificationSetting]
     
-    // Local state variables
-    @State var selectedNotificationSettings: [NotificationSetting] = [.eventsFeed]
-    @Binding var navigateToNext: Bool
+    /// Get a reference to viewContext
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    /// Notification preference or user to specify
+    @State private var selectedNotificationSettings: [NotificationSetting] = [.eventsFeed]
+    @State private var showAlert = false
+    @State private var saveError = false
+    @State private var noChanges = false
+    @State private var goToNextScreen = false
 
     var body: some View {
         ZStack {
-            // Set black background
+            /// Background
             Color.black.edgesIgnoringSafeArea(.all)
             
             VStack {
-                Spacer() // Empty space at the top
+                Spacer()
                 
-                // Title
-                Text("How would you like to be notified?")
-                    .foregroundColor(.white)
-                    .font(.title)
+                /// Form question
+                HStack {
+                    Text("How would you like to be notified?")
+                        .foregroundColor(.white)
+                        .font(.title)
+                    Spacer()
+                }
+//                .frame(maxWidth: .infinity)
                 
-                // Display selected blocks
-                Text(selectedBlocks.map { $0.rawValue }.joined(separator: " & "))
-                
-                // List of options for notification settings
-                ForEach(NotificationSetting.allCases, id: \.self) { setting in
-                    createNotificationSettingButton(setting: setting)
+                /// List of options for notification settings
+                ForEach(NotificationSetting.allCases, id: \.self) { option in
+                    NotificationOption(option: option)
                 }
                 
                 Spacer() // Empty space at the bottom
                 
-                // Continue Button
-                if selectedNotificationSettings != [.eventsFeed] {
-                    NavigationLink(destination: AddListenerSuccess(selectedBlocks: $selectedBlocks, notificationSettings: $notificationSettings, blocks: $blocks, selectedNotificationSettings: $selectedNotificationSettings, navigateToNext: $navigateToNext)) {
-                        customContinueButton()
-                    }
-                } else {
-                    customContinueButton().opacity(0.5)  // Disable the button if no option is selected
+                /// Navigate user to success screen **AND** save ``NewTokenListener`` in context to store
+                /// Note: Using deprecated `NavigationLink` variant as `NavigationStack` is unavailable for target iOS version
+                NavigationLink("Save", isActive: Binding<Bool>(get: { goToNextScreen }, set: { goToNextScreen = $0; print("Navigating to next screen"); saveNewTokenListeners() })) {
+                    AddListenerSuccess()
                 }
             }
+        }
+        // FIXME: Debugging
+        .onAppear {
+            print(viewContext.hasChanges)
+        }
+    }
+    
+    // MARK: Core Data
+    private func saveNewTokenListeners() {
+        if viewContext.hasChanges {
+            do {
+                try viewContext.save()
+            } catch {
+                saveError.toggle()
+            }
+        } else {
+            noChanges.toggle()
         }
     }
     
     // Refactored notification setting button
-    private func createNotificationSettingButton(setting: NotificationSetting) -> some View {
+    private func NotificationOption(option: NotificationSetting) -> some View {
         Button(action: {
-            // Toggle selection state for the notification setting
-            if setting != .eventsFeed {
-                if selectedNotificationSettings.contains(setting) {
-                    selectedNotificationSettings.removeAll { $0 == setting }
-                } else {
-                    selectedNotificationSettings.append(setting)
-                }
+            // FIXME: Implement functionality for email/push notifications
+            if option != .eventsFeed {
+                showAlert.toggle()
             }
         }) {
-            CheckableFormOption(isChecked: selectedNotificationSettings.contains(setting))
-                .overlay(Text(try! AttributedString(markdown: setting.rawValue)).font(.title3).foregroundColor(.black))
+            CheckableFormOption(isChecked: selectedNotificationSettings.contains(option))
+                .overlay(Text(try! AttributedString(markdown: option.rawValue)).font(.title3).foregroundColor(.black))
+        }
+        .opacity(option == NotificationSetting.eventsFeed ? 1 : 0.5)
+        .alert("Currently not supported", isPresented: $showAlert, presenting: "hello") { details in
+            Button {
+                //
+            } label: {
+                Text("OK")
+            }
         }
     }
 }
+
+// MARK: - NotificationSetting options
+enum NotificationSetting: String, CaseIterable {
+    case eventsFeed = "I want events on my **24HZ Feed**"
+    case onceADayEmail = "I also want **Once-a-Day Email**"
+    case emailEveryEvent = "I also want an **Email for Every Event**"
+    case mobileNotifications = "I also want **Mobile Notifications**"
+}
+
+// MARK: - Previews
+struct AddListenerNotificationTypeSelection_Previews: PreviewProvider {
+    
+    static let coreDataProvider = CoreDataProvider.preview
+    
+    static var previews: some View {
+        
+        /// Wrapped view to enable navigation
+        NavigationView {
+            AddListenerNotificationTypeSelection()
+        }
+        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+        .previewDisplayName("Wrapped in NavView")
+        
+        /// Unwrapped view for meaningful view debugging with: `Editor > Canvas > Show Selection`
+        AddListenerNotificationTypeSelection()
+        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+        .previewDisplayName("Unwrapped")
+        
+    }
+}
+
