@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Step 2 of AddListenerFlow
-struct AddListenerFlowView2: View {
+struct AddListenerNotificationTypeSelection: View {
     // Binding variables for parent view
     @Binding var selectedBlocks: [BlockType]
     @Binding var blocks: [BlockType]
@@ -43,7 +43,7 @@ struct AddListenerFlowView2: View {
                 
                 // Continue Button
                 if selectedNotificationSettings != [.eventsFeed] {
-                    NavigationLink(destination: AddListenerFlowView3(selectedBlocks: $selectedBlocks, notificationSettings: $notificationSettings, blocks: $blocks, selectedNotificationSettings: $selectedNotificationSettings, navigateToNext: $navigateToNext)) {
+                    NavigationLink(destination: AddListenerSuccess(selectedBlocks: $selectedBlocks, notificationSettings: $notificationSettings, blocks: $blocks, selectedNotificationSettings: $selectedNotificationSettings, navigateToNext: $navigateToNext)) {
                         customContinueButton()
                     }
                 } else {
@@ -65,7 +65,7 @@ struct AddListenerFlowView2: View {
                 }
             }
         }) {
-            customCheckButton(isChecked: selectedNotificationSettings.contains(setting))
+            CheckableFormOption(isChecked: selectedNotificationSettings.contains(setting))
                 .overlay(Text(try! AttributedString(markdown: setting.rawValue)).font(.title3).foregroundColor(.black))
         }
     }

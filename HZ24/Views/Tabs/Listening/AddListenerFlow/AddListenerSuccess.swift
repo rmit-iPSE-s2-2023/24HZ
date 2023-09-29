@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Final Step of AddListenerFlow
-struct AddListenerFlowView3: View {
+struct AddListenerSuccess: View {
     // Binding variables for parent view
     @Binding var selectedBlocks: [BlockType]
     @Binding var notificationSettings: [NotificationSetting]

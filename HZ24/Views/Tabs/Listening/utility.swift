@@ -41,19 +41,6 @@ func genericBlock(block: BlockType) -> some View {
 }
 
 // Function for creating a '+' button
-func plusButton() -> some View {
-    // '+' symbol
-    Image(systemName: "plus")
-        .font(.system(size: 40))
-        .frame(width: 60, height: 60)
-        .foregroundColor(.white)
-        .background(Color.black)
-        .overlay(
-            // Circular border
-            Circle()
-                .stroke(Color.white, lineWidth: 2)
-        )
-}
 
 // Function for creating a custom continue button
 func customContinueButton() -> some View {
@@ -68,7 +55,7 @@ func customContinueButton() -> some View {
 }
 
 // Function for creating a custom check button
-func customCheckButton(isChecked: Bool) -> some View {
+func CheckableFormOption(isChecked: Bool = false) -> some View {
     ZStack {
         // Background rectangle with rounded corners
         RoundedRectangle(cornerRadius: 10)

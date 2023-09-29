@@ -43,14 +43,14 @@
 		B1B504C92AC5A3B600DA66B7 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048E2AC5A3B600DA66B7 /* utils.swift */; };
 		B1B504CA2AC5A3B600DA66B7 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048F2AC5A3B600DA66B7 /* Main.swift */; };
 		B1B504CB2AC5A3B600DA66B7 /* SavedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504932AC5A3B600DA66B7 /* SavedTab.swift */; };
-		B1B504CC2AC5A3B600DA66B7 /* AddListenerFlowView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504952AC5A3B600DA66B7 /* AddListenerFlowView1.swift */; };
-		B1B504CD2AC5A3B600DA66B7 /* AddListenerFlowView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504962AC5A3B600DA66B7 /* AddListenerFlowView3.swift */; };
+		B1B504CC2AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504952AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift */; };
+		B1B504CD2AC5A3B600DA66B7 /* AddListenerSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504962AC5A3B600DA66B7 /* AddListenerSuccess.swift */; };
 		B1B504CE2AC5A3B600DA66B7 /* BlockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504972AC5A3B600DA66B7 /* BlockSettingView.swift */; };
 		B1B504CF2AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504982AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift */; };
 		B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504992AC5A3B600DA66B7 /* ListeningTab.swift */; };
-		B1B504D12AC5A3B600DA66B7 /* AddListenerFlowView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049A2AC5A3B600DA66B7 /* AddListenerFlowView2.swift */; };
+		B1B504D12AC5A3B600DA66B7 /* AddListenerNotificationTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049A2AC5A3B600DA66B7 /* AddListenerNotificationTypeSelection.swift */; };
 		B1B504D22AC5A3B600DA66B7 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049B2AC5A3B600DA66B7 /* utility.swift */; };
-		B1B504D32AC5A3B600DA66B7 /* AddListenerFlowView0.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049C2AC5A3B600DA66B7 /* AddListenerFlowView0.swift */; };
+		B1B504D32AC5A3B600DA66B7 /* AddListenerFlowRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049C2AC5A3B600DA66B7 /* AddListenerFlowRoot.swift */; };
 		B1B504D42AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049D2AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift */; };
 		B1B504D52AC5A3B600DA66B7 /* CapturedEventBlockPadded.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049F2AC5A3B600DA66B7 /* CapturedEventBlockPadded.swift */; };
 		B1B504D62AC5A3B600DA66B7 /* Hourmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504A02AC5A3B600DA66B7 /* Hourmark.swift */; };
@@ -116,14 +116,14 @@
 		B1B5048E2AC5A3B600DA66B7 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		B1B5048F2AC5A3B600DA66B7 /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		B1B504932AC5A3B600DA66B7 /* SavedTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTab.swift; sourceTree = "<group>"; };
-		B1B504952AC5A3B600DA66B7 /* AddListenerFlowView1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowView1.swift; sourceTree = "<group>"; };
-		B1B504962AC5A3B600DA66B7 /* AddListenerFlowView3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowView3.swift; sourceTree = "<group>"; };
+		B1B504952AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewTokenListenerTypeSelection.swift; sourceTree = "<group>"; };
+		B1B504962AC5A3B600DA66B7 /* AddListenerSuccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerSuccess.swift; sourceTree = "<group>"; };
 		B1B504972AC5A3B600DA66B7 /* BlockSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSettingView.swift; sourceTree = "<group>"; };
 		B1B504982AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowCustom2.swift; sourceTree = "<group>"; };
 		B1B504992AC5A3B600DA66B7 /* ListeningTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListeningTab.swift; sourceTree = "<group>"; };
-		B1B5049A2AC5A3B600DA66B7 /* AddListenerFlowView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowView2.swift; sourceTree = "<group>"; };
+		B1B5049A2AC5A3B600DA66B7 /* AddListenerNotificationTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerNotificationTypeSelection.swift; sourceTree = "<group>"; };
 		B1B5049B2AC5A3B600DA66B7 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
-		B1B5049C2AC5A3B600DA66B7 /* AddListenerFlowView0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowView0.swift; sourceTree = "<group>"; };
+		B1B5049C2AC5A3B600DA66B7 /* AddListenerFlowRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowRoot.swift; sourceTree = "<group>"; };
 		B1B5049D2AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowCustom1.swift; sourceTree = "<group>"; };
 		B1B5049F2AC5A3B600DA66B7 /* CapturedEventBlockPadded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturedEventBlockPadded.swift; sourceTree = "<group>"; };
 		B1B504A02AC5A3B600DA66B7 /* Hourmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hourmark.swift; sourceTree = "<group>"; };
@@ -293,14 +293,11 @@
 		B1B504942AC5A3B600DA66B7 /* Listening */ = {
 			isa = PBXGroup;
 			children = (
-				B1B504952AC5A3B600DA66B7 /* AddListenerFlowView1.swift */,
-				B1B504962AC5A3B600DA66B7 /* AddListenerFlowView3.swift */,
+				B1B504DE2AC65EDF00DA66B7 /* AddListenerFlow */,
 				B1B504972AC5A3B600DA66B7 /* BlockSettingView.swift */,
 				B1B504982AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift */,
 				B1B504992AC5A3B600DA66B7 /* ListeningTab.swift */,
-				B1B5049A2AC5A3B600DA66B7 /* AddListenerFlowView2.swift */,
 				B1B5049B2AC5A3B600DA66B7 /* utility.swift */,
-				B1B5049C2AC5A3B600DA66B7 /* AddListenerFlowView0.swift */,
 				B1B5049D2AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift */,
 			);
 			path = Listening;
@@ -325,6 +322,17 @@
 				B1B504A72AC5A3B600DA66B7 /* IndentedWithHeaderLayout.swift */,
 			);
 			path = Layouts;
+			sourceTree = "<group>";
+		};
+		B1B504DE2AC65EDF00DA66B7 /* AddListenerFlow */ = {
+			isa = PBXGroup;
+			children = (
+				B1B5049C2AC5A3B600DA66B7 /* AddListenerFlowRoot.swift */,
+				B1B504952AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift */,
+				B1B5049A2AC5A3B600DA66B7 /* AddListenerNotificationTypeSelection.swift */,
+				B1B504962AC5A3B600DA66B7 /* AddListenerSuccess.swift */,
+			);
+			path = AddListenerFlow;
 			sourceTree = "<group>";
 		};
 		B1BE37802AC01BE900104A4A /* HZ24Tests */ = {
@@ -470,7 +478,7 @@
 				B1B504BA2AC5A3B600DA66B7 /* SmartContract.swift in Sources */,
 				B1B504BB2AC5A3B600DA66B7 /* EventType.swift in Sources */,
 				B1B504AD2AC5A3B600DA66B7 /* Model.xcdatamodeld in Sources */,
-				B1B504D12AC5A3B600DA66B7 /* AddListenerFlowView2.swift in Sources */,
+				B1B504D12AC5A3B600DA66B7 /* AddListenerNotificationTypeSelection.swift in Sources */,
 				B1B504D42AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift in Sources */,
 				B1B504AF2AC5A3B600DA66B7 /* DefaultEventsProvider.swift in Sources */,
 				B1B504B12AC5A3B600DA66B7 /* EventsProvider.swift in Sources */,
@@ -481,8 +489,8 @@
 				B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */,
 				B1B504D82AC5A3B600DA66B7 /* CapturedEventBlock.swift in Sources */,
 				B1B504DB2AC5A3B600DA66B7 /* SwipeNavigation.swift in Sources */,
-				B1B504CD2AC5A3B600DA66B7 /* AddListenerFlowView3.swift in Sources */,
-				B1B504CC2AC5A3B600DA66B7 /* AddListenerFlowView1.swift in Sources */,
+				B1B504CD2AC5A3B600DA66B7 /* AddListenerSuccess.swift in Sources */,
+				B1B504CC2AC5A3B600DA66B7 /* AddNewTokenListenerTypeSelection.swift in Sources */,
 				B1B504C82AC5A3B600DA66B7 /* JSON.swift in Sources */,
 				B1B504B22AC5A3B600DA66B7 /* MetadataEventABI.swift in Sources */,
 				B1B504C92AC5A3B600DA66B7 /* utils.swift in Sources */,
@@ -502,7 +510,7 @@
 				B1B504BF2AC5A3B600DA66B7 /* NotificationType.swift in Sources */,
 				B1B504BC2AC5A3B600DA66B7 /* User.swift in Sources */,
 				B1B504D62AC5A3B600DA66B7 /* Hourmark.swift in Sources */,
-				B1B504D32AC5A3B600DA66B7 /* AddListenerFlowView0.swift in Sources */,
+				B1B504D32AC5A3B600DA66B7 /* AddListenerFlowRoot.swift in Sources */,
 				B1B504DC2AC5A3B600DA66B7 /* IndentedWithHeaderLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
