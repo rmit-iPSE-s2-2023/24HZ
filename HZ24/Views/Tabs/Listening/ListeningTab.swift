@@ -80,7 +80,7 @@ struct ListeningTab: View {
                 
                 Spacer()
                 
-                /// Navigate user to AddEventListener flow
+                /// Navigate user to root of `AddEventListener` flow
                 NavigationLink(destination: AddListenerFlowRoot(), isActive: $navigateToNext) {
                     HStack {
                         Spacer()
