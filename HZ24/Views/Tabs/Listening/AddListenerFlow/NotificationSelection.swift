@@ -11,7 +11,7 @@ import SwiftUI
 /// User selects how they would like event notifications delivered
 // TODO: Implement functionality for emails and push notifications
 // FIXME: Currently events are only loaded in ``FeedTab``
-struct AddListenerNotificationTypeSelection: View {
+struct NotificationSelection: View {
     
     /// Get a reference to viewContext
     @Environment(\.managedObjectContext) private var viewContext
@@ -112,13 +112,13 @@ struct AddListenerNotificationTypeSelection_Previews: PreviewProvider {
         
         /// Wrapped view to enable navigation
         NavigationView {
-            AddListenerNotificationTypeSelection()
+            NotificationSelection()
         }
         .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         .previewDisplayName("Wrapped in NavView")
         
         /// Unwrapped view for meaningful view debugging with: `Editor > Canvas > Show Selection`
-        AddListenerNotificationTypeSelection()
+        NotificationSelection()
         .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         .previewDisplayName("Unwrapped")
         

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Step 1 of AddListener flow for NewTokenListener
-struct AddNewTokenListenerTypeSelection: View {
+struct TokenTypeSelection: View {
     
     /// Get a reference to viewContext
     @Environment(\.managedObjectContext) private var viewContext
@@ -52,7 +52,7 @@ struct AddNewTokenListenerTypeSelection: View {
                 /// Navigate user to next screen **AND** simulatenously perform action. Not using `.simulatenousGesture` here as user may navigate with accessibility features so will have to target multiple gestures.
                 /// Note: Using deprecated `NavigationLink` variant as `NavigationStack` is unavailable for target iOS version
                 NavigationLink("Continue", isActive: Binding<Bool>(get: { goToNextScreen }, set: { goToNextScreen = $0; print("Navigating to next screen"); createNewTokenListeners() })) {
-                    AddListenerNotificationTypeSelection()
+                    NotificationSelection()
                 }
             }
             // FIXME: Not sure if .alert is the right way to inform user here..
@@ -119,7 +119,7 @@ struct AddNewTokenListenerTypeSelection_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            AddNewTokenListenerTypeSelection()
+            TokenTypeSelection()
         }
         .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
     }

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Step 0 of AddListener flow
 /// This is the start (or root) of an `AddListener` flow.
 /// Here, the user selects either the the flow for adding a ``NewTokenListener`` or ``ExistingTokenListener``
-struct AddListenerFlowRoot: View {
+struct ListenerTypeSelection: View {
     
     var body: some View {
         ZStack {
@@ -28,7 +28,7 @@ struct AddListenerFlowRoot: View {
                 /// Option to add ``NewTokenListener``
                 NavigationLink {
                     /// Navigate user to add ``NewTokenListener`` root
-                    AddNewTokenListenerTypeSelection()
+                    TokenTypeSelection()
                 } label: {
                     FormOption(markdown: "Listen for **new token** releases")
                 }
@@ -55,7 +55,7 @@ struct AddListenerFlowRoot: View {
 struct AddListenerFlowRoot_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AddListenerFlowRoot()
+            ListenerTypeSelection()
             
         }
     }
