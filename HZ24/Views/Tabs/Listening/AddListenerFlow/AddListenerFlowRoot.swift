@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-// MARK: - Step 0 of AddListenerFlow
+// MARK: - Step 0 of AddListener flow
+/// This is the start (or root) of an `AddListener` flow.
+/// Here, the user selects either the the flow for adding a ``NewTokenListener`` or ``ExistingTokenListener``
 struct AddListenerFlowRoot: View {
     
     var body: some View {
@@ -25,17 +27,17 @@ struct AddListenerFlowRoot: View {
                 
                 /// Option to add ``NewTokenListener``
                 NavigationLink {
-                    /// Take user to add ``NewTokenListener`` root
+                    /// Navigate user to add ``NewTokenListener`` root
                     AddNewTokenListenerTypeSelection()
                 } label: {
-                    FormOption(text: "Listen for **new token** releases")
+                    FormOption(markdown: "Listen for **new token** releases")
                 }
                 
                 /// Option to add ``ExistingTokenListener``
                 NavigationLink {
-                    /// Take user to add ``ExistingTokenListener`` root
+                    /// Navigate user to add ``ExistingTokenListener`` root
                 } label: {
-                    FormOption(text: "Listen to events for an **existing token**")
+                    FormOption(markdown: "Listen to events for an **existing token**")
                 }
 
                 Spacer()
@@ -43,10 +45,10 @@ struct AddListenerFlowRoot: View {
         }
     }
     
-    // Refactored option button
-    private func FormOption(text: String) -> some View {
+    /// Form Option button
+    private func FormOption(markdown: String) -> some View {
         CheckableFormOption(isChecked: false)
-            .overlay(Text(try! AttributedString(markdown: text)).font(.title3).foregroundColor(.black))
+            .overlay(Text(try! AttributedString(markdown: markdown)).font(.title3).foregroundColor(.black))
     }
 }
 
@@ -54,6 +56,7 @@ struct AddListenerFlowRoot_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             AddListenerFlowRoot()
+            
         }
     }
 }
