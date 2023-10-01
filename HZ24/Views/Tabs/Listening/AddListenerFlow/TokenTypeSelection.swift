@@ -88,7 +88,9 @@ struct TokenTypeSelection: View {
         // Create and insert objects into context
         for ercInterfaceId in ercInterfaceIds {
             let newTokenListener = NewTokenListener(context: viewContext)
-            newTokenListener.id = UUID()
+            /// ``Listener`` parent entity attribute/s
+            newTokenListener.createdAt = Date()
+            newTokenListener.displayTitle = ercInterfaceId.displayTitle
             newTokenListener.isListening = true
             newTokenListener.ercInterfaceId = ercInterfaceId.rawValue
         }
