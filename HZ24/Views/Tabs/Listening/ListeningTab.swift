@@ -6,20 +6,19 @@
 //
 
 import SwiftUI
+import CoreData
+import Combine
 
 struct ListeningTab: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
     // MARK: - Properties
     
     // Binding to an array of blocks that the user has added.
     // This will be a shared state between different views.
     // TODO: This should be Core Data ``Listener``s
-    @Binding var listeners: [BlockType]
-    
-    // Binding to an array of notification settings.
-    // This allows the tab to know what kind of notifications are enabled.
-    // TODO: For now, disable dailyemail/allemail/push
-    @Binding var notificationSettings: [NotificationSetting]
+    @FetchRequest(entity: Listener.entity(), sortDescriptors: [])
+    private var listeners: FetchedResults<Listener>
     
     // TODO: Get rid of this, no user info will be stored
     @Binding var user: User
@@ -59,22 +58,22 @@ struct ListeningTab: View {
                     Spacer()
                 }
                 
-                // Content: Blocks or Placeholder
-                if listeners.isEmpty {
-                    // Placeholder for no blocks
+                if !listeners.isEmpty {
+                    /// List of listeners
+                    ForEach(listeners, id: \.self) { listener in
+                        NavigationLink(destination: ListenerSettings(listener: listener)) {
+                            ListenerRowItem(listener: listener)
+                        }
+                    }
+
+                } else {
+                    /// Placeholder if user has no listeners
                     VStack {
                         Spacer()
                         Text("No listeners added")
                             .font(.title2)
                             .foregroundColor(.gray)
                         Spacer()
-                    }
-                } else {
-                    // List of blocks
-                    ForEach(listeners, id: \.self) { block in
-                        NavigationLink(destination: BlockSettingView(block: block, notificationSettings: $notificationSettings, blocks: $listeners)) {
-                            genericBlock(block: block)
-                        }
                     }
                 }
                 
@@ -96,16 +95,14 @@ struct ListeningTab: View {
     }
 }
 
-
+// MARK: - Previews
 struct ListeningTab_Previews: PreviewProvider {
+    static let coreDataProvider = CoreDataProvider.preview
+    static let user = getDummyUser() // Create a constant user for preview
     static var previews: some View {
-        let user = getDummyUser() // Create a constant user for preview
-        Group {
-            // Preview with no blocks
-            ListeningTab(listeners: .constant([]), notificationSettings: .constant([]), user: .constant(user))
-            
-            // Preview with some sample blocks
-            ListeningTab(listeners: .constant([.zoraNFTs, .coins,.customNFTs]), notificationSettings: .constant([]), user: .constant(user))
+        // Must wrap in NavigationView to prevent "No entity found" warnings
+        NavigationView {
+            ListeningTab(user: .constant(user))        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         }
     }
 }
