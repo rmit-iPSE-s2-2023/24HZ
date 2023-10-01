@@ -21,7 +21,8 @@
         <attribute name="tokenSymbol" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Listener" representedClassName="Listener" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="displayTitle" optional="YES" attributeType="String"/>
         <attribute name="isListening" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="capturedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="capturedBy" inverseEntity="Event"/>
     </entity>
