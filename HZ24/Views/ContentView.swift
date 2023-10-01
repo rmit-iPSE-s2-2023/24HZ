@@ -33,7 +33,7 @@ struct ContentView: View {
                     TabView(selection: $viewSelection) {
                         
                         // Listening Tab
-                        ListeningTab(listeners: $blocks, notificationSettings: $notificationSettings, user: $user)
+                        ListeningTab(user: $user)
                             .tag(0)
                         
                         // Feed Tab
@@ -56,8 +56,10 @@ struct ContentView: View {
 
 
 struct ContentView_Previews: PreviewProvider {
+    static let coreDataProvider = CoreDataProvider.preview
     static var previews: some View {
         ContentView()
+            .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
     }
 }
 

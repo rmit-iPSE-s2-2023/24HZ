@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-// Function for creating a generic block button
-func genericBlock(block: BlockType) -> some View {
-    ZStack {
+/// Listener displayed as a row item in a `List` view
+/// Parameters:
+/// - listener: Core Data managed object: ``Listener``
+func ListenerRowItem(listener: Listener) -> some View {
+    return ZStack {
         // Rounded Rectangle with white border
         RoundedRectangle(cornerRadius: 15)
             .stroke(Color.white, lineWidth: 2)
@@ -17,7 +19,7 @@ func genericBlock(block: BlockType) -> some View {
             .frame(width: 350, height: 70)
             .overlay(
                 // Block title
-                Text(block.rawValue)
+                Text(listener.displayTitle ?? "Unknown")
                     .foregroundColor(.white)
                     .font(.largeTitle)
                     .padding(.leading, 10),
@@ -39,6 +41,8 @@ func genericBlock(block: BlockType) -> some View {
             )
     }
 }
+
+
 
 // Function for creating a '+' button
 
