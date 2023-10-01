@@ -52,8 +52,11 @@ class CoreDataProvider {
         // TODO: Create dummy CapturedEvents e.g. fetch events from last 1000 blocks?
         /// Add ``NewTokenListener`` for Coins
         let newTokenListener = NewTokenListener(context: viewContext)
-        newTokenListener.id = UUID()
+        /// ``Listener`` parent entity attribute/s
+        newTokenListener.createdAt = Date()
+        newTokenListener.displayTitle = ERCInterfaceId.erc20.displayTitle
         newTokenListener.isListening = true
+        /// ``NewTokenListener`` attribute/s
         newTokenListener.ercInterfaceId = ERCInterfaceId.erc20.rawValue
         try! viewContext.save()
         // e.g. CapturedEvent.makePreviews()
