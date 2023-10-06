@@ -29,6 +29,7 @@ struct TimeSegment: View {
         
         // Use custom layout for iOS 16+
         if #available(iOS 16.0, *) {
+#if swift(>=5.5) && canImport(_Concurrency) && canImport(Layout)
             IndentedWithHeaderLayout(indentSize: 50) {
                 
                 /// Hourmark label
@@ -50,7 +51,8 @@ struct TimeSegment: View {
                 }
 
             }
-
+            #endif
+            
         } else {    // fallback for iOS 15-
             VStack {
                 Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))

@@ -5,16 +5,7 @@
 //  Created by Jin on 2023-08-27.
 //
 
-import SwiftUI
-
-/// A custom layout with a header that contains two elements.
-/// The first two subviews are displayed as a header with the first
-/// element in the header indented.
-/// The remaining subviews (if any) will be indented based on
-/// the given indentSize
-///
-
-#if swift(>=5.5) // Check for Swift 5.5 and Layout support
+#if swift(>=5.5) && canImport(_Concurrency) && canImport(Layout) // Check for Swift 5.5 and Layout support
 @available(iOS 16.0, *)
 struct IndentedWithHeaderLayout: Layout {
     
