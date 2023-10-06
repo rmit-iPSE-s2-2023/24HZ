@@ -27,7 +27,7 @@ struct Success: View {
                 // FIXME: Look into the "pop-to-root" SwiftUI pattern
                 NavigationLink("", isActive: $goToNextScreen) {
                     ContentView()
-                        .navigationBarBackButtonHidden()
+                        .navigationBarBackButtonHidden(true)
                 }
                 
             }
