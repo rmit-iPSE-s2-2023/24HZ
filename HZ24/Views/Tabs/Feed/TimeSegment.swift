@@ -26,19 +26,18 @@ struct TimeSegment: View {
     }
     
     var body: some View {
-        
         // Use custom layout for iOS 16+
+        #if swift(>=5.5) && canImport(_Concurrency) && canImport(Layout)
         if #available(iOS 16.0, *) {
-#if swift(>=5.5) && canImport(_Concurrency) && canImport(Layout)
             IndentedWithHeaderLayout(indentSize: 50) {
                 
                 /// Hourmark label
                 Text(timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
                     .font(.caption)
                     .foregroundStyle(.gray)
-
+                
                 HorizontalDivider()
-
+                
                 /// Array of event blocks
                 ForEach(filteredEventData, id: \.eventLog.id) { event in
                     CapturedEventBlock(eventData: event)
@@ -49,25 +48,26 @@ struct TimeSegment: View {
                 .sheet(item: $selectedEvent) { event in
                     EventDetailView(event: event)
                 }
-
+                
             }
-            #endif
-            
-        } else {    // fallback for iOS 15-
-            VStack {
-                Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
-                ForEach(filteredEventData, id: \.eventLog.id) { event in
-                    CapturedEventBlockPadded(eventData: event)
-                        .onTapGesture {
-                            self.selectedEvent = event
-                        }
-                }
-                .sheet(item: $selectedEvent) { event in
-                    EventDetailView(event: event)
-                }
-            }
+        } else {
+                EmptyView()
         }
-        
+        #endif
+            
+        // fallback for iOS 15-
+        VStack {
+            Hourmark(label: timeIntervalToHourmarkLabel(timeInterval: toTimestamp))
+            ForEach(filteredEventData, id: \.eventLog.id) { event in
+                CapturedEventBlockPadded(eventData: event)
+                    .onTapGesture {
+                        self.selectedEvent = event
+                    }
+            }
+            .sheet(item: $selectedEvent) { event in
+                EventDetailView(event: event)
+            }
+            }
     }
 
 }
