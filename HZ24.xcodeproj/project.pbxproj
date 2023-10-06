@@ -65,6 +65,8 @@
 		B1BE37822AC01BE900104A4A /* ThirdWebRPCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37812AC01BE900104A4A /* ThirdWebRPCTests.swift */; };
 		B1BE37902AC03E5600104A4A /* DefaultEventsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE378F2AC03E5600104A4A /* DefaultEventsProviderTests.swift */; };
 		B1DE65FC2AC9329D00BED08E /* ListenerEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FB2AC9329D00BED08E /* ListenerEnable.swift */; };
+		B1DE65FE2ACF522500BED08E /* EnterContractAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FD2ACF522500BED08E /* EnterContractAddress.swift */; };
+		B1DE66002AD0143E00BED08E /* SelectEventTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FF2AD0143E00BED08E /* SelectEventTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +140,8 @@
 		B1BE37812AC01BE900104A4A /* ThirdWebRPCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdWebRPCTests.swift; sourceTree = "<group>"; };
 		B1BE378F2AC03E5600104A4A /* DefaultEventsProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEventsProviderTests.swift; sourceTree = "<group>"; };
 		B1DE65FB2AC9329D00BED08E /* ListenerEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerEnable.swift; sourceTree = "<group>"; };
+		B1DE65FD2ACF522500BED08E /* EnterContractAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterContractAddress.swift; sourceTree = "<group>"; };
+		B1DE65FF2AD0143E00BED08E /* SelectEventTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEventTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +336,8 @@
 				B1B504952AC5A3B600DA66B7 /* TokenTypeSelection.swift */,
 				B1B5049A2AC5A3B600DA66B7 /* NotificationSelection.swift */,
 				B1B504962AC5A3B600DA66B7 /* Success.swift */,
+				B1DE65FD2ACF522500BED08E /* EnterContractAddress.swift */,
+				B1DE65FF2AD0143E00BED08E /* SelectEventTypes.swift */,
 			);
 			path = AddListenerFlow;
 			sourceTree = "<group>";
@@ -468,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1DE66002AD0143E00BED08E /* SelectEventTypes.swift in Sources */,
 				B1B504D22AC5A3B600DA66B7 /* utility.swift in Sources */,
 				B1B504A92AC5A3B600DA66B7 /* constants.swift in Sources */,
 				B1B504CF2AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift in Sources */,
@@ -501,6 +508,7 @@
 				B1B504D72AC5A3B600DA66B7 /* TimeSegment.swift in Sources */,
 				B1B504B42AC5A3B600DA66B7 /* GenericListenerType.swift in Sources */,
 				B1B504BE2AC5A3B600DA66B7 /* EventSubscription.swift in Sources */,
+				B1DE65FE2ACF522500BED08E /* EnterContractAddress.swift in Sources */,
 				B1B504AC2AC5A3B600DA66B7 /* NSFetchRequests.swift in Sources */,
 				B1B504CE2AC5A3B600DA66B7 /* ListenerSettings.swift in Sources */,
 				B1B504DD2AC5A3B600DA66B7 /* ContentView.swift in Sources */,

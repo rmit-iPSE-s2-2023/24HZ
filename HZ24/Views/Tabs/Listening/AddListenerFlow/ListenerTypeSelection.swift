@@ -36,6 +36,7 @@ struct ListenerTypeSelection: View {
                 /// Option to add ``ExistingTokenListener``
                 NavigationLink {
                     /// Navigate user to add ``ExistingTokenListener`` root
+                    EnterContractAddress()
                 } label: {
                     FormOption(markdown: "Listen to events for an **existing token**")
                 }
