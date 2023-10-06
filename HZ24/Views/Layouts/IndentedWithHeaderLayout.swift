@@ -5,6 +5,8 @@
 //  Created by Jin on 2023-08-27.
 //
 
+import SwiftUI
+
 #if swift(>=5.5) && canImport(_Concurrency) && canImport(Layout) // Check for Swift 5.5 and Layout support
 @available(iOS 16.0, *)
 struct IndentedWithHeaderLayout: Layout {
