@@ -476,7 +476,8 @@ struct RPCResponseData: Codable {
     let id: String
 }
 
-struct TokenInfo {
+struct TokenInfo: Identifiable {
+    let id = UUID()
     let contractAddress: String
     var name: String?
     var symbol: String?
