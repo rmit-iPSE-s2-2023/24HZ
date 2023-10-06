@@ -242,31 +242,35 @@ extension ThirdWebRPC {
     // MARK: Private method/s
     func filterContractsWithInterfaceSupport(contractAddresses: [String], interfaceIds: [Data]) async throws -> [String: InterfaceInfo] {
         // TODO: For each contract, check for interface support on 20/721/1155. Aggregate responses by true results and return a dictionary keyed by contract address for object with contract address and its ERCType/ERCInterfaceId
-        let jsonRpcRequests: [[String: Any]] = try contractAddresses.flatMap({ contractAddress in
+        let jsonRpcRequests: [[String: Any]] = contractAddresses.flatMap { contractAddress -> [[String: Any]] in
             /// Create encoder to encode supportsInterface function for ERc-20
-            let interfaceRequests = try interfaceIds.map { interfaceId in
-                let encoder = ABIFunctionEncoder("supportsInterface")
-                /// Encode ABI function to encoder
-                let supportsInterfaceFunc = ERC165Functions.supportsInterface(contract: EthereumAddress(contractAddress), interfaceId: interfaceId)
-                try supportsInterfaceFunc.encode(to: encoder)
-                /// Store encodedData to variable
-                let encodedData = try encoder.encoded()
-                let request: [String: Any] = [
-                    "jsonrpc": "2.0",
-                    "method": "eth_call",
-                    "params": [
-                        [
-                            "to": contractAddress,
-                            "data": encodedData.web3.hexString
-                        ] as [String: Any],
-                        "latest"
-                    ] as [Any],
-                    "id": contractAddress + "_" + interfaceId.web3.hexString
-                ]
-                return request
+            return interfaceIds.compactMap { interfaceId -> [String: Any]? in
+                do {
+                    let encoder = ABIFunctionEncoder("supportsInterface")
+                    /// Encode ABI function to encoder
+                    let supportsInterfaceFunc = ERC165Functions.supportsInterface(contract: EthereumAddress(contractAddress), interfaceId: interfaceId)
+                    try supportsInterfaceFunc.encode(to: encoder)
+                    /// Store encodedData to variable
+                    let encodedData = try encoder.encoded()
+                    let request: [String: Any] = [
+                        "jsonrpc": "2.0",
+                        "method": "eth_call",
+                        "params": [
+                            [
+                                "to": contractAddress,
+                                "data": encodedData.web3.hexString
+                            ] as [String: Any],
+                            "latest"
+                        ] as [Any],
+                        "id": contractAddress + "_" + interfaceId.web3.hexString
+                    ]
+                    return request
+                } catch {
+                    print("An error occurred while processing contract \(contractAddress) with interfaceId \(interfaceId.web3.hexString): \(error)")
+                    return nil
+                }
             }
-            return interfaceRequests
-        })
+        }
         /// Serialize request body
         guard let requestData = try? JSONSerialization.data(withJSONObject: jsonRpcRequests) else {
             throw ThirdWebRPCError.rpcRequestSerializationError
