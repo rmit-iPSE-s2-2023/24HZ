@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2AEBE872AD091570056AB1F /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A2AEBE862AD091570056AB1F /* web3.swift */; };
 		B1AD3B8F2AC4370700912CF5 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */; };
 		B1B504A92AC5A3B600DA66B7 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504682AC5A3B600DA66B7 /* constants.swift */; };
 		B1B504AA2AC5A3B600DA66B7 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504692AC5A3B600DA66B7 /* DataModel.swift */; };
@@ -62,9 +63,7 @@
 		B1B504DC2AC5A3B600DA66B7 /* IndentedWithHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504A72AC5A3B600DA66B7 /* IndentedWithHeaderLayout.swift */; };
 		B1B504DD2AC5A3B600DA66B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504A82AC5A3B600DA66B7 /* ContentView.swift */; };
 		B1BE37822AC01BE900104A4A /* ThirdWebRPCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE37812AC01BE900104A4A /* ThirdWebRPCTests.swift */; };
-		B1BE378C2AC03B0200104A4A /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B1BE378B2AC03B0200104A4A /* web3.swift */; };
 		B1BE37902AC03E5600104A4A /* DefaultEventsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE378F2AC03E5600104A4A /* DefaultEventsProviderTests.swift */; };
-		B1BE37932AC03F9300104A4A /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B1BE37922AC03F9300104A4A /* web3.swift */; };
 		B1DE65FC2AC9329D00BED08E /* ListenerEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FB2AC9329D00BED08E /* ListenerEnable.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1BE378C2AC03B0200104A4A /* web3.swift in Frameworks */,
+				A2AEBE872AD091570056AB1F /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +153,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1BE37932AC03F9300104A4A /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +370,7 @@
 			);
 			name = HZ24;
 			packageProductDependencies = (
-				B1BE378B2AC03B0200104A4A /* web3.swift */,
+				A2AEBE862AD091570056AB1F /* web3.swift */,
 			);
 			productName = "a1-s3713342";
 			productReference = A220745F2A7D5FF0002FD6CB /* HZ24.app */;
@@ -393,7 +391,6 @@
 			);
 			name = HZ24Tests;
 			packageProductDependencies = (
-				B1BE37922AC03F9300104A4A /* web3.swift */,
 			);
 			productName = 24HZTests;
 			productReference = B1BE377F2AC01BE900104A4A /* HZ24Tests.xctest */;
@@ -428,7 +425,7 @@
 			);
 			mainGroup = A22074562A7D5FF0002FD6CB;
 			packageReferences = (
-				B1BE378A2AC03B0200104A4A /* XCRemoteSwiftPackageReference "web3.swift" */,
+				A2AEBE852AD091570056AB1F /* XCRemoteSwiftPackageReference "web3" */,
 			);
 			productRefGroup = A22074602A7D5FF0002FD6CB /* Products */;
 			projectDirPath = "";
@@ -793,25 +790,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B1BE378A2AC03B0200104A4A /* XCRemoteSwiftPackageReference "web3.swift" */ = {
+		A2AEBE852AD091570056AB1F /* XCRemoteSwiftPackageReference "web3" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/argentlabs/web3.swift.git";
+			repositoryURL = "https://github.com/argentlabs/web3.swift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B1BE378B2AC03B0200104A4A /* web3.swift */ = {
+		A2AEBE862AD091570056AB1F /* web3.swift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B1BE378A2AC03B0200104A4A /* XCRemoteSwiftPackageReference "web3.swift" */;
-			productName = web3.swift;
-		};
-		B1BE37922AC03F9300104A4A /* web3.swift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B1BE378A2AC03B0200104A4A /* XCRemoteSwiftPackageReference "web3.swift" */;
+			package = A2AEBE852AD091570056AB1F /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;
 		};
 /* End XCSwiftPackageProductDependency section */

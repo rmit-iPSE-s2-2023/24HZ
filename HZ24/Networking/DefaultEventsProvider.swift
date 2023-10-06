@@ -84,7 +84,7 @@ extension DefaultEventsProvider {
         /// Returns dictionary keyed by contract address and ``InterfaceInfo`` value
         let tokenContracts = try await rpc.filterContractsWithInterfaceSupport(contractAddresses: deployContractAddresses, interfaceIds: interfaceIds)
         /// Filter txReceipts checking if its contractAddress is a key in tokenContracts
-        let newTokenEvents = deployTxReceipts.compactMap { txReceipt in
+        let newTokenEvents: [NewTokenEventStruct] = deployTxReceipts.compactMap { txReceipt -> NewTokenEventStruct? in
             if let interfaceInfo = tokenContracts[txReceipt.contractAddress] {
                 let newTokenEvent = NewTokenEventStruct(ercInterfaceId: interfaceInfo.ercInterfaceId, contractAddress: txReceipt.contractAddress, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, txHash: txReceipt.transactionHash, deployerAddress: txReceipt.from)
                 return newTokenEvent
@@ -128,13 +128,13 @@ extension DefaultEventsProvider {
         }
         /// Create array of encoded contract addresses for contracts
         var encodedContractAddresses = [String]()
-        if let contracts {
-            encodedContractAddresses = try contracts.map({ contractAddress in
+        if let validContracts = contracts {
+            encodedContractAddresses = try validContracts.map { contractAddress -> String in
                 guard let encodedAddress = try? ABIEncoder.encode(EthereumAddress(contractAddress)).bytes else {
                     throw EventsProviderError.encodeError(message: "Ethereum address encoding fail")
                 }
                 return String(hexFromBytes: encodedAddress)
-            })
+            }
         }
         /// Create orTopics array
         let orTopics = [signatures, encodedContractAddresses]
@@ -148,7 +148,7 @@ extension DefaultEventsProvider {
         }
         print("getMetadataEvents result.events.count: \(events.count)")
         print("getMetadataEvents result.logs.count: \(result.logs.count)")
-        let metadataEventStructs = events.map { event in
+        let metadataEventStructs: [MetadataEventStruct] = events.map { event -> MetadataEventStruct in
             /// Downcast ABIEvent to subtypes to access instance properties
             /// - get token contract address
             // FIXME: Maybe switch is better here -> Don't have to use .zero if there is a default case with fatalerror or throw?
@@ -199,13 +199,13 @@ extension DefaultEventsProvider {
         }
         /// Array of encoded contract addresses for contracts
         var encodedContractAddresses = [String]()
-        if let contracts {
-            encodedContractAddresses = try contracts.map({ contractAddress in
+        if let validContracts = contracts {
+            encodedContractAddresses = try validContracts.map { contractAddress -> String in
                 guard let encodedAddress = try? ABIEncoder.encode(EthereumAddress(contractAddress)).bytes else {
                     throw EventsProviderError.encodeError(message: "Ethereum address encoding fail")
                 }
                 return String(hexFromBytes: encodedAddress)
-            })
+            }
         }
         /// orTopics array
         let orTopics = [signatures, [], encodedContractAddresses]
@@ -216,7 +216,7 @@ extension DefaultEventsProvider {
         // FIXME: Debugging
         print("getMintCommentEvents result.events.count: \(events.count)")
         print("getMintCommentEvents result.logs.count: \(result.logs.count)")
-        let mintCommentEvents = events.compactMap { event in
+        let mintCommentEvents: [MintCommentEventStruct] = events.compactMap { event -> MintCommentEventStruct? in
             /// Downcast ABIEvent to subtypes to access instance properties:
             /// - get comment
             /// - get quantity
