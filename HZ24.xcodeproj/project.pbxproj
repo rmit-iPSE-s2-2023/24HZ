@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A2AEBE872AD091570056AB1F /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A2AEBE862AD091570056AB1F /* web3.swift */; };
+		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
+		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
 		B1AD3B8F2AC4370700912CF5 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */; };
 		B1B504A92AC5A3B600DA66B7 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504682AC5A3B600DA66B7 /* constants.swift */; };
 		B1B504AA2AC5A3B600DA66B7 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504692AC5A3B600DA66B7 /* DataModel.swift */; };
@@ -67,6 +69,10 @@
 		B1DE65FC2AC9329D00BED08E /* ListenerEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FB2AC9329D00BED08E /* ListenerEnable.swift */; };
 		B1DE65FE2ACF522500BED08E /* EnterContractAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FD2ACF522500BED08E /* EnterContractAddress.swift */; };
 		B1DE66002AD0143E00BED08E /* SelectEventTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FF2AD0143E00BED08E /* SelectEventTypes.swift */; };
+		B1DE66022AD1015200BED08E /* FeedTabWithCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66012AD1015200BED08E /* FeedTabWithCoreData.swift */; };
+		B1DE66052AD1024E00BED08E /* TimeSegmentWithCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66042AD1024E00BED08E /* TimeSegmentWithCoreData.swift */; };
+		B1DE66072AD1028A00BED08E /* HorizontalDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66062AD1028A00BED08E /* HorizontalDivider.swift */; };
+		B1DE66092AD10B3000BED08E /* EventDetailViewWithCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66082AD10B3000BED08E /* EventDetailViewWithCoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +87,8 @@
 
 /* Begin PBXFileReference section */
 		A220745F2A7D5FF0002FD6CB /* HZ24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZ24.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B140E9062AD1143700519526 /* EventRowItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRowItem.swift; sourceTree = "<group>"; };
+		B140E9082AD15C7500519526 /* PreviewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewModels.swift; sourceTree = "<group>"; };
 		B19E75132A99694B008E9FF4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		B1B504682AC5A3B600DA66B7 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
@@ -142,6 +150,10 @@
 		B1DE65FB2AC9329D00BED08E /* ListenerEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerEnable.swift; sourceTree = "<group>"; };
 		B1DE65FD2ACF522500BED08E /* EnterContractAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterContractAddress.swift; sourceTree = "<group>"; };
 		B1DE65FF2AD0143E00BED08E /* SelectEventTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEventTypes.swift; sourceTree = "<group>"; };
+		B1DE66012AD1015200BED08E /* FeedTabWithCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTabWithCoreData.swift; sourceTree = "<group>"; };
+		B1DE66042AD1024E00BED08E /* TimeSegmentWithCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSegmentWithCoreData.swift; sourceTree = "<group>"; };
+		B1DE66062AD1028A00BED08E /* HorizontalDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalDivider.swift; sourceTree = "<group>"; };
+		B1DE66082AD10B3000BED08E /* EventDetailViewWithCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewWithCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +265,7 @@
 		B1B504842AC5A3B600DA66B7 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				B140E9082AD15C7500519526 /* PreviewModels.swift */,
 				B1B504852AC5A3B600DA66B7 /* SavedEvents.json */,
 				B1B504862AC5A3B600DA66B7 /* SmartContracts.json */,
 				B1B504872AC5A3B600DA66B7 /* EventTypes.json */,
@@ -311,12 +324,14 @@
 		B1B5049E2AC5A3B600DA66B7 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				B1DE66032AD1023200BED08E /* FeedWithCoreData */,
 				B1B5049F2AC5A3B600DA66B7 /* CapturedEventBlockPadded.swift */,
 				B1B504A02AC5A3B600DA66B7 /* Hourmark.swift */,
 				B1B504A12AC5A3B600DA66B7 /* TimeSegment.swift */,
 				B1B504A22AC5A3B600DA66B7 /* CapturedEventBlock.swift */,
 				B1B504A32AC5A3B600DA66B7 /* FeedTab.swift */,
 				B1B504A42AC5A3B600DA66B7 /* EventDetailView.swift */,
+				B1DE66062AD1028A00BED08E /* HorizontalDivider.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -357,6 +372,17 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B1DE66032AD1023200BED08E /* FeedWithCoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B140E9062AD1143700519526 /* EventRowItem.swift */,
+				B1DE66082AD10B3000BED08E /* EventDetailViewWithCoreData.swift */,
+				B1DE66042AD1024E00BED08E /* TimeSegmentWithCoreData.swift */,
+				B1DE66012AD1015200BED08E /* FeedTabWithCoreData.swift */,
+			);
+			path = FeedWithCoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,23 +513,29 @@
 				B1B504AD2AC5A3B600DA66B7 /* Model.xcdatamodeld in Sources */,
 				B1B504D12AC5A3B600DA66B7 /* NotificationSelection.swift in Sources */,
 				B1B504D42AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift in Sources */,
+				B1DE66052AD1024E00BED08E /* TimeSegmentWithCoreData.swift in Sources */,
 				B1B504AF2AC5A3B600DA66B7 /* DefaultEventsProvider.swift in Sources */,
 				B1B504B12AC5A3B600DA66B7 /* EventsProvider.swift in Sources */,
 				B1B504B92AC5A3B600DA66B7 /* EventData.swift in Sources */,
 				B1B504AE2AC5A3B600DA66B7 /* RPCProtocol.swift in Sources */,
 				B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */,
 				B1B504B62AC5A3B600DA66B7 /* EventListenerType.swift in Sources */,
+				B1DE66092AD10B3000BED08E /* EventDetailViewWithCoreData.swift in Sources */,
 				B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */,
+				B140E9072AD1143700519526 /* EventRowItem.swift in Sources */,
 				B1B504D82AC5A3B600DA66B7 /* CapturedEventBlock.swift in Sources */,
 				B1B504DB2AC5A3B600DA66B7 /* SwipeNavigation.swift in Sources */,
 				B1B504CD2AC5A3B600DA66B7 /* Success.swift in Sources */,
 				B1B504CC2AC5A3B600DA66B7 /* TokenTypeSelection.swift in Sources */,
+				B1DE66072AD1028A00BED08E /* HorizontalDivider.swift in Sources */,
 				B1B504C82AC5A3B600DA66B7 /* JSON.swift in Sources */,
 				B1B504B22AC5A3B600DA66B7 /* MetadataEventABI.swift in Sources */,
 				B1B504C92AC5A3B600DA66B7 /* utils.swift in Sources */,
 				B1B504DA2AC5A3B600DA66B7 /* EventDetailView.swift in Sources */,
+				B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */,
 				B1B504D52AC5A3B600DA66B7 /* CapturedEventBlockPadded.swift in Sources */,
 				B1DE65FC2AC9329D00BED08E /* ListenerEnable.swift in Sources */,
+				B1DE66022AD1015200BED08E /* FeedTabWithCoreData.swift in Sources */,
 				B1B504B82AC5A3B600DA66B7 /* SavedEvent.swift in Sources */,
 				B1B504D72AC5A3B600DA66B7 /* TimeSegment.swift in Sources */,
 				B1B504B42AC5A3B600DA66B7 /* GenericListenerType.swift in Sources */,
@@ -671,6 +703,7 @@
 				DEVELOPMENT_ASSET_PATHS = "HZ24/Preview\\ Content";
 				DEVELOPMENT_TEAM = 3KK2DSH34L;
 				ENABLE_PREVIEWS = YES;
+				"EXCLUDED_SOURCE_FILE_NAMES[arch=*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
