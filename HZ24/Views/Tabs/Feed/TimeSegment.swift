@@ -72,15 +72,6 @@ struct TimeSegment: View {
 
 }
 
-struct HorizontalDivider: View {
-    var body: some View {
-        VStack {
-            Divider()
-                .background(.gray)
-        }
-    }
-}
-
 struct TimeSegment_Previews: PreviewProvider {
     static var previews: some View {
         let eventData = getEventData()
