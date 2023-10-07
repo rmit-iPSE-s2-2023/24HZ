@@ -265,7 +265,6 @@ struct EventDetailViewWithCoreData: View {
                         dismiss()
                     } label: {
                         Image(systemName: "xmark")
-                            .foregroundStyle(.black)
                     }
                 }
             }
