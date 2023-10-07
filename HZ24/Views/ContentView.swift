@@ -9,50 +9,44 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var user: User = getDummyUser()
-    @State var currentTime = Constants.dummyCurrentTimeInterval    // Should keep state; using Constant for purpose of prototype
+    // FIXME: Should be removed
+    @State private var user: User = getDummyUser()
     
-    // States related to blocks and notifications
-    @State var blocks: [BlockType] = []
-    @State var notificationSettings: [NotificationSetting] = [.eventsFeed]
-    
-    // State for tab view selection
-    @State private var viewSelection = 0
+    /// State for `TabView`
+    /// - keeps track of which tab the user is currently viewing
+    @State private var selectedTab = 0
     
     var body: some View {
         NavigationView {
-            ZStack {
-                // Background Color
-                Color.black.edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    // Custom navigation bar
-                    SwipeNavigation(viewSelection: $viewSelection)
                     
-                    // Tab contents
-                    TabView(selection: $viewSelection) {
+                    // MARK: Nav bar
+                    SwipeNavigation(viewSelection: $selectedTab)
+                    
+                    // MARK: Tab contents
+                    TabView(selection: $selectedTab) {
                         
-                        // Listening Tab
+                        /// Listening Tab
                         ListeningTab(user: $user)
                             .tag(0)
                         
-                        // Feed Tab
-                        FeedTab(user: $user, currentTime: $currentTime)
+                        /// Feed Tab
+                        FeedTabWithCoreData()
                             .tag(1)
                         
-                        // Saved Tab
+                        /// Saved Tab
                         SavedTab()
                             .tag(2)
                         
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 }
-            }
-            .navigationBarHidden(true)  // Hide the default navigation bar
+                .navigationBarHidden(true)  // Hide the default navigation bar
         }
+        .preferredColorScheme(.dark)
     }
 }
-
 
 
 struct ContentView_Previews: PreviewProvider {
