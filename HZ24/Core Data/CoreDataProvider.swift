@@ -73,6 +73,22 @@ class CoreDataProvider {
         existingTokenListener.tokenName = "Opepen Threadition"
         existingTokenListener.tokenSymbol = ""
         
+        /// Add sample ``NewTokenEvent``
+        let newTokenEvent = NewTokenEvent(context: viewContext)
+        /// ``Event`` parent entity attribute/s
+        newTokenEvent.blockHash = "0x"
+        newTokenEvent.blockNumber = Int64(1)
+        newTokenEvent.contractAddress = "0xabc"
+        newTokenEvent.ercInterfaceId = ERCInterfaceId.erc20.rawValue
+        newTokenEvent.id = UUID()
+        newTokenEvent.saved = false
+        newTokenEvent.timestamp = Date()
+        newTokenEvent.tokenName = "Preview Token1"
+        newTokenEvent.tokenSymbol = "PRE"
+        newTokenEvent.transactionHash = "0x"
+        /// ``NewTokenEvent`` attribute/s
+        newTokenEvent.deployerAddress = "0xdeployer"
+        
         /// Save to store
         try! viewContext.save()
         // e.g. CapturedEvent.makePreviews()
