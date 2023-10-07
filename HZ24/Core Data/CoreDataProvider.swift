@@ -49,6 +49,7 @@ class CoreDataProvider {
     static var preview: CoreDataProvider = {
         let provider = CoreDataProvider(inMemory: true)
         let viewContext = provider.container.viewContext
+        
         // TODO: Create dummy CapturedEvents e.g. fetch events from last 1000 blocks?
         /// Add ``NewTokenListener`` for Coins
         let newTokenListener = NewTokenListener(context: viewContext)
@@ -58,6 +59,21 @@ class CoreDataProvider {
         newTokenListener.isListening = true
         /// ``NewTokenListener`` attribute/s
         newTokenListener.ercInterfaceId = ERCInterfaceId.erc20.rawValue
+        
+        /// Add sample ``ExistingTokenListener``
+        let existingTokenListener = ExistingTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        existingTokenListener.createdAt = Date()
+        existingTokenListener.displayTitle = "Opepen Threadition"
+        existingTokenListener.isListening = true
+        /// ``ExistingTokenListener`` attribute/s
+        existingTokenListener.contractAddress = "0x6d2C45390B2A0c24d278825c5900A1B1580f9722"
+        existingTokenListener.listeningForMetadataEvents = true
+        existingTokenListener.listeningForMintCommentEvents = true
+        existingTokenListener.tokenName = "Opepen Threadition"
+        existingTokenListener.tokenSymbol = ""
+        
+        /// Save to store
         try! viewContext.save()
         // e.g. CapturedEvent.makePreviews()
         return provider
