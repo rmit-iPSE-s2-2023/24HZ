@@ -50,16 +50,10 @@ class CoreDataProvider {
         let provider = CoreDataProvider(inMemory: true)
         let viewContext = provider.container.viewContext
         
-        // TODO: Create dummy CapturedEvents e.g. fetch events from last 1000 blocks?
-        /// Add ``NewTokenListener`` for Coins
-        let newTokenListener = NewTokenListener(context: viewContext)
-        /// ``Listener`` parent entity attribute/s
-        newTokenListener.createdAt = Date()
-        newTokenListener.displayTitle = ERCInterfaceId.erc20.displayTitle
-        newTokenListener.isListening = true
-        /// ``NewTokenListener`` attribute/s
-        newTokenListener.ercInterfaceId = ERCInterfaceId.erc20.rawValue
-        
+        // TODO: Create dummy ``Event``/s e.g. fetch events from last 1000 blocks?
+        /// Add preview ``NewTokenListener``/s
+        PreviewModels.makePreviewNewTokenListeners(viewContext: viewContext)
+
         /// Add sample ``ExistingTokenListener``
         let existingTokenListener = ExistingTokenListener(context: viewContext)
         /// ``Listener`` parent entity attribute/s
@@ -104,7 +98,7 @@ class CoreDataProvider {
 
 extension CoreDataProvider {
     // MARK: Error/s
-    enum CoreDataError: Error {
+    enum CoreDataProviderError: Error {
         case rpcFetchError(msg: String)
         case noEventsCaptured
     }
@@ -114,15 +108,19 @@ extension CoreDataProvider {
     /// Fetches events for all event listeners that the user is listening to, and imports it into Core Data.
     // FIXME: At the moment, it just assumes there is no events fetched at all. This must be fixed to only query blocks that have not been queried already.
     func fetchData() async throws {
+        let context = self.container.viewContext
+        
+        // MARK: Block range
         /// Firstly, establish the block range to query for new events
         /// EventsProvider Call 1: Get current block number
         guard let currentBlockNumber = try? await self.eventsProvider.getCurrentBlockNumber() else {
-            throw CoreDataError.rpcFetchError(msg: "fetchData: Failed to fetch current block number.")
+            throw CoreDataProviderError.rpcFetchError(msg: "fetchData: Failed to fetch current block number.")
         }
         let fromBlock = currentBlockNumber - self.fullFetchBlockRange + 1
         /// Secondly, make 3 calls to the ``EventsProvider`` to get ``NewTokenEvent``/s, ``MetadataEvent``/s, and ``MintCommentEvent``/s
         // FIXME: Should make background context; just using viewContext for now
-        let context = self.container.viewContext
+        
+        // MARK: "New token" events
         /// 1) Getting ``NewTokenEvent``/s
         /// Fetch ``NewTokenListener``/s where isListening is true
         let newTokenListeners: [NewTokenListener] = try context.fetch(NSFetchRequests.enabledNewTokenListeners)
@@ -146,7 +144,7 @@ extension CoreDataProvider {
                     newTokenEvent.contractAddress = newTokenEventStruct.contractAddress
                     newTokenEvent.id = UUID()
                     newTokenEvent.saved = false
-                    newTokenEvent.timestamp = Date()    // TODO: This should be timestamp of event's block
+                    newTokenEvent.timestamp = newTokenEventStruct.timestamp
                     newTokenEvent.tokenName = newTokenEventStruct.tokenName
                     newTokenEvent.tokenSymbol = newTokenEventStruct.tokenSymbol
                     newTokenEvent.transactionHash = newTokenEventStruct.txHash
@@ -163,6 +161,8 @@ extension CoreDataProvider {
         } else {
             print("No NewTokenListeners enabled.")
         }
+        
+        // MARK: "Metadata update" events
         /// 2) Getting ``MetadataEvent``/s
         /// Fetch ``ExistingTokenListener``/s where listeningForMetadata is true
         let metadataListeners = try context.fetch(NSFetchRequests.metadataEnabledExistingTokenListeners)
@@ -209,6 +209,8 @@ extension CoreDataProvider {
         } else {
             print("No ExistingTokenListeners enabled for MetadataEvents")
         }
+        
+        // MARK: "Mint w/ comment" events
         /// 3) Getting ``MintCommentEvent``/s
         let mintCommentListeners = try context.fetch(NSFetchRequests.mintCommentEnabledExistingTokenListeners)
         let mintCommentListenerContractAddresses = mintCommentListeners.map { mintCommentListener in
