@@ -23,7 +23,9 @@ struct SavedTab: View {
                 }
                 
                 // PageView for the tutorials
-                PageView()
+                PageView(pages: tutorials.map { Tutorials(tutorial: $0) })
+                    .aspectRatio(3 / 2, contentMode: .fit)
+
 
 
                 VStack(spacing: 15) {
