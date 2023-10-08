@@ -22,31 +22,9 @@ struct SavedTab: View {
                     Spacer()
                 }
                 
-                VStack(alignment: .leading, spacing: 15) {
-                    Text("To save events:")
-                        .foregroundColor(.white)
-                        .font(.title2)
+                // PageView for the tutorials
+                PageView()
 
-                    Text("1. Navigate to **Feed**")
-                        .foregroundColor(.white)
-                        .padding(.leading, 20)
-                    
-                    Text("2. Tap on an _Event_")
-                        .foregroundColor(.white)
-                        .padding(.leading, 20)
-
-                    Text("3. Tap _Save_")
-                        .foregroundColor(.white)
-                        .padding(.leading, 20)
-
-                }
-                .frame(width: 330, alignment: .leading)
-                .padding(.vertical, 40)
-                .padding(.horizontal, 20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.white, lineWidth: 2)
-                )
 
                 VStack(spacing: 15) {
                     Image("icon")
