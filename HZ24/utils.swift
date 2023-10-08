@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - TimeInterval conversions
 func timeIntervalOfPreviousHourMark(toTimestamp: TimeInterval) -> TimeInterval {
     let date = Date(timeIntervalSince1970: toTimestamp)
     
@@ -58,6 +59,41 @@ func getTimeIntervalsForPast24Hours(from time: TimeInterval) -> [TimeInterval] {
     return timeIntervals
 }
 
+// MARK: - Date Conversions
+/// Formats a TimeInterval to a display String
+func dateToHourmarkLabel(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HH:mm"
+    let hourmarkLabel = dateFormatter.string(from: date)
+    return hourmarkLabel
+}
 
-//let timestamp = Date().timeIntervalSince1970 // Current timestamp
-//let previousHourTimestamp = timeIntervalOfPreviousHourMark(from: timestamp)
+func getDateIntervalsForPast24Hours(fromDate date: Date) -> [Date] {
+    
+    let finalHourmarkDate = dateOfPreviousHourMark(to: date)
+    
+    let secondsInHour: TimeInterval = 60 * 60
+    let twentyFourHoursInSeconds: TimeInterval = 24 * secondsInHour
+    
+    let endTime = finalHourmarkDate.timeIntervalSince1970
+    let startTime = endTime - twentyFourHoursInSeconds
+    
+    var dateIntervals: [Date] = [date]
+    
+    var currentTime = endTime
+    while currentTime >= startTime {
+        dateIntervals.append(Date(timeIntervalSince1970: currentTime))
+        currentTime -= secondsInHour
+    }
+    
+    return dateIntervals
+}
+
+func dateOfPreviousHourMark(to date: Date) -> Date {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+    return calendar.date(from: components) ?? date
+}
+
+
+
