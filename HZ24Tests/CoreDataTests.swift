@@ -23,9 +23,11 @@ final class CoreDataTests: XCTestCase {
         print(coreDataProvider.container.persistentStoreDescriptions)
     }
     
+    /// Test preview ``Listener``/s are loading properly
+    /// - should match number of listeners added in ``CoreDataProvider``
     func testPreviewEntities() throws {
         let previewListeners = try self.context.fetch(.init(entityName: "Listener"))
-        XCTAssertEqual(previewListeners.count, 1)
+        XCTAssertEqual(previewListeners.count, 4)
     }
     
     /// Trivial test to just make sure Core Data is playing nicely and project is building properly
@@ -33,8 +35,10 @@ final class CoreDataTests: XCTestCase {
         var newTokenListeners: [NewTokenListener]
         /// Initially, there should only be ONE NewTokenListeners in store
         newTokenListeners = try self.context.fetch(.init(entityName: "NewTokenListener"))
+        let beforeCount = newTokenListeners.count
         XCTAssertFalse(self.context.hasChanges)
-        XCTAssertEqual(newTokenListeners.count, 1)
+        
+        /// Create new entity in context
         let newTokenListener = NewTokenListener(context: self.context)
         /// MO: Listener property/s
         newTokenListener.createdAt = Date()
@@ -43,12 +47,9 @@ final class CoreDataTests: XCTestCase {
         /// MO: NewTokenListener property/s
         newTokenListener.ercInterfaceId = ERCInterfaceId.erc721.rawValue
         XCTAssertTrue(self.context.hasChanges)
+        
         newTokenListeners = try self.context.fetch(.init(entityName: "NewTokenListener"))
-        XCTAssertEqual(newTokenListeners.count, 2)
-        print(newTokenListener)
-        newTokenListeners.forEach { newTokenListener in
-            print(newTokenListener.ercInterfaceId ?? "no ercInterfaceId")
-        }
+        XCTAssertEqual(newTokenListeners.count, beforeCount + 1)
     }
     
     func testEnabledNewTokenListenersNSFetchRequest() throws {
