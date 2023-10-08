@@ -28,10 +28,18 @@ protocol RPCProtocol {
     func filterContractsWithInterfaceSupport(contractAddresses: [String], interfaceIds: [Data]) async throws -> [String: InterfaceInfo]
 }
 
+
+// MARK: Errors
+enum RPCError : Error {
+    case decodeError
+}
+
+
 // MARK: - JSON Response Objects
 struct BlockObject: Codable {
     let number: String
     let hash: String
+    let timestamp: Date
     let transactions: [TransactionObject]
     
     enum CodingKeys: String, CodingKey {
@@ -40,6 +48,7 @@ struct BlockObject: Codable {
     enum ResultCodingKeys: String, CodingKey {
         case number
         case hash
+        case timestamp
         case transactions
     }
     
@@ -49,6 +58,11 @@ struct BlockObject: Codable {
         number = try result.decode(String.self, forKey: .number)
         hash = try result.decode(String.self, forKey: .hash)
         transactions = try result.decode([TransactionObject].self, forKey: .transactions)
+        guard let timestampRaw = try? result.decode(String.self, forKey: .timestamp),
+              let timeInterval = TimeInterval(timestampRaw) else {
+            throw RPCError.decodeError
+        }
+        timestamp = Date(timeIntervalSince1970: timeInterval)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -57,6 +71,7 @@ struct BlockObject: Codable {
         var result = container.nestedContainer(keyedBy: ResultCodingKeys.self, forKey: .result)
         try result.encode(number, forKey: .number)
         try result.encode(hash, forKey: .hash)
+        try result.encode(Int(timestamp.timeIntervalSince1970).web3.hexString, forKey: .timestamp)
         try result.encode(transactions, forKey: .transactions)
     }
 }
