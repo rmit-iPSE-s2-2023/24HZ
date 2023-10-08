@@ -10,6 +10,7 @@
 		A2AEBE872AD091570056AB1F /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A2AEBE862AD091570056AB1F /* web3.swift */; };
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
+		B196C2722AD244EC005528B0 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B196C2712AD244EC005528B0 /* web3.swift */; };
 		B1AD3B8F2AC4370700912CF5 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */; };
 		B1B504A92AC5A3B600DA66B7 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504682AC5A3B600DA66B7 /* constants.swift */; };
 		B1B504AA2AC5A3B600DA66B7 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504692AC5A3B600DA66B7 /* DataModel.swift */; };
@@ -169,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B196C2722AD244EC005528B0 /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +425,7 @@
 			);
 			name = HZ24Tests;
 			packageProductDependencies = (
+				B196C2712AD244EC005528B0 /* web3.swift */,
 			);
 			productName = 24HZTests;
 			productReference = B1BE377F2AC01BE900104A4A /* HZ24Tests.xctest */;
@@ -760,6 +763,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KK2DSH34L;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
@@ -783,6 +787,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KK2DSH34L;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
@@ -843,6 +848,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		A2AEBE862AD091570056AB1F /* web3.swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2AEBE852AD091570056AB1F /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
+		};
+		B196C2712AD244EC005528B0 /* web3.swift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A2AEBE852AD091570056AB1F /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;

@@ -9,12 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     
+    var coredataProvider: CoreDataProvider = .shared
+    
     // FIXME: Should be removed
     @State private var user: User = getDummyUser()
     
     /// State for `TabView`
     /// - keeps track of which tab the user is currently viewing
     @State private var selectedTab = 0
+    
+    private func fetchData() async {
+        do {
+            try await coredataProvider.fetchData()
+        } catch {
+            print(error)
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -34,6 +44,9 @@ struct ContentView: View {
                         /// Feed Tab
                         FeedTabWithCoreData()
                             .tag(1)
+                            .refreshable {
+                                await fetchData()
+                            }
                         
                         /// Saved Tab
                         SavedTab()
@@ -45,6 +58,9 @@ struct ContentView: View {
                 .navigationBarHidden(true)  // Hide the default navigation bar
         }
         .preferredColorScheme(.dark)
+        .task {
+            await fetchData()
+        }
     }
 }
 
@@ -52,7 +68,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static let coreDataProvider = CoreDataProvider.preview
     static var previews: some View {
-        ContentView()
+        ContentView(coredataProvider: coreDataProvider)
             .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
     }
 }
