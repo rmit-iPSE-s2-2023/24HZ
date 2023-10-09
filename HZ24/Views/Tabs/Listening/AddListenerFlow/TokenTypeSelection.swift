@@ -28,42 +28,40 @@ struct TokenTypeSelection: View {
     
     // MARK: Return body
     var body: some View {
-        ZStack {
-            /// Background
-            Color.black.edgesIgnoringSafeArea(.all)
+        
+        VStack {
+            Spacer()
             
-            VStack {
-                Spacer()
-                
-                /// Form question
-                Text("What would you like to listen for?")
-                    .foregroundColor(.white)
-                    .font(.title)
-                
-                /// ``NewTokenListener``'s ``ERCInterfaceId`` options
-                /// Note: ``ERCInterfaceId``/s for ``NewtokenListener``/s that user has already opted in to should be pre-selected here
-                /// "Listen for new Coins"
-                NewTokenListenerTypeOption(markdown: "New **Coins**", ercInterfaceIds: [ERCInterfaceId.erc20], toggleState: $addCoins)
-                /// "Listen for new Media Works"
-                NewTokenListenerTypeOption(markdown: "New **Media Works**", ercInterfaceIds: [ERCInterfaceId.erc721, ERCInterfaceId.erc1155], toggleState: $addMediaWorks)
-                
-                Spacer()
-                
-                /// Navigate user to next screen **AND** simulatenously perform action. Not using `.simulatenousGesture` here as user may navigate with accessibility features so will have to target multiple gestures.
-                /// Note: Using deprecated `NavigationLink` variant as `NavigationStack` is unavailable for target iOS version
-                NavigationLink("Continue", isActive: Binding<Bool>(get: { goToNextScreen }, set: { goToNextScreen = $0; print("Navigating to next screen"); createNewTokenListeners() })) {
-                    NotificationSelection()
-                }
-            }
-            // FIXME: Not sure if .alert is the right way to inform user here..
-            .alert("Already listening", isPresented: $showAlert, presenting: "hello") { details in
-                Button {
-                    //
-                } label: {
-                    Text("OK")
-                }
+            /// Form question
+            Text("What would you like to listen for?")
+                .font(.title)
+            
+            /// ``NewTokenListener``'s ``ERCInterfaceId`` options
+            /// Note: ``ERCInterfaceId``/s for ``NewtokenListener``/s that user has already opted in to should be pre-selected here
+            /// "Listen for new Coins"
+            NewTokenListenerTypeOption(markdown: "New **Coins**", ercInterfaceIds: [ERCInterfaceId.erc20], toggleState: $addCoins)
+            /// "Listen for new Media Works"
+            NewTokenListenerTypeOption(markdown: "New **Media Works**", ercInterfaceIds: [ERCInterfaceId.erc721, ERCInterfaceId.erc1155], toggleState: $addMediaWorks)
+            
+            Spacer()
+            
+            /// Navigate user to next screen **AND** simulatenously perform action. Not using `.simulatenousGesture` here as user may navigate with accessibility features so will have to target multiple gestures.
+            /// Note: Using deprecated `NavigationLink` variant as `NavigationStack` is unavailable for target iOS version
+            NavigationLink("Continue", isActive: Binding<Bool>(get: { goToNextScreen }, set: { goToNextScreen = $0; print("Navigating to next screen"); createNewTokenListeners() })) {
+                NotificationSelection()
             }
         }
+        // FIXME: Not sure if .alert is the right way to inform user here..
+        .alert("Already listening", isPresented: $showAlert, presenting: "hello") { details in
+            Button {
+                //
+            } label: {
+                Text("OK")
+            }
+        }
+        .preferredColorScheme(.dark)
+        .navigationTitle("Select token type")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     // MARK: Validations
@@ -104,7 +102,7 @@ struct TokenTypeSelection: View {
             if alreadyListeningTo(ercInterfaceIds: ercInterfaceIds) {
                 showAlert.toggle()
             } else {
-            /// Toggle the corresponding state.
+                /// Toggle the corresponding state.
                 toggleState.wrappedValue.toggle()
             }
         }) {

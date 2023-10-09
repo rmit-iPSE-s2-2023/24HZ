@@ -22,42 +22,40 @@ struct NotificationSelection: View {
     @State private var saveError = false
     @State private var noChanges = false
     @State private var goToNextScreen = false
-
+    
     var body: some View {
-        ZStack {
-            /// Background
-            Color.black.edgesIgnoringSafeArea(.all)
+        
+        VStack {
+            Spacer()
             
-            VStack {
+            /// Form question
+            HStack {
+                Text("How would you like to be notified?")
+                    .foregroundColor(.white)
+                    .font(.title)
                 Spacer()
-                
-                /// Form question
-                HStack {
-                    Text("How would you like to be notified?")
-                        .foregroundColor(.white)
-                        .font(.title)
-                    Spacer()
-                }
-//                .frame(maxWidth: .infinity)
-                
-                /// List of options for notification settings
-                ForEach(NotificationSetting.allCases, id: \.self) { option in
-                    NotificationOption(option: option)
-                }
-                
-                Spacer() // Empty space at the bottom
-                
-                /// Navigate user to success screen **AND** save ``NewTokenListener`` in context to store
-                /// Note: Using deprecated `NavigationLink` variant as `NavigationStack` is unavailable for target iOS version
-                NavigationLink("Save", isActive: Binding<Bool>(get: { goToNextScreen }, set: { goToNextScreen = $0; print("Navigating to next screen"); saveNewTokenListeners() })) {
-                    Success()
-                }
             }
+            
+            /// List of options for notification settings
+            ForEach(NotificationSetting.allCases, id: \.self) { option in
+                NotificationOption(option: option)
+            }
+            
+            Spacer()
+            
+            /// Navigate user to success screen **AND** save ``NewTokenListener`` in context to store
+            /// Note: Using deprecated `NavigationLink` variant as `NavigationStack` is unavailable for target iOS version
+            NavigationLink("Save", isActive: Binding<Bool>(get: { goToNextScreen }, set: { goToNextScreen = $0; print("Navigating to next screen"); saveNewTokenListeners() })) {
+                Success()
+            }
+            
+            Spacer()
+            
         }
-        // FIXME: Debugging
-        .onAppear {
-            print(viewContext.hasChanges)
-        }
+        .padding()
+        .preferredColorScheme(.dark)
+        .navigationTitle("Select notifications")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     // MARK: Core Data
@@ -119,8 +117,8 @@ struct AddListenerNotificationTypeSelection_Previews: PreviewProvider {
         
         /// Unwrapped view for meaningful view debugging with: `Editor > Canvas > Show Selection`
         NotificationSelection()
-        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
-        .previewDisplayName("Unwrapped")
+            .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+            .previewDisplayName("Unwrapped")
         
     }
 }

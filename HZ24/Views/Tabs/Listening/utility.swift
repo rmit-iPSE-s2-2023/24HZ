@@ -15,12 +15,10 @@ func ListenerRowItem(listener: Listener) -> some View {
         // Rounded Rectangle with white border
         RoundedRectangle(cornerRadius: 15)
             .stroke(Color.white, lineWidth: 2)
-            .background(Color.black)
             .frame(width: 350, height: 70)
             .overlay(
                 // Block title
                 Text(listener.displayTitle ?? "Unknown")
-                    .foregroundColor(.white)
                     .font(.largeTitle)
                     .padding(.leading, 10),
                 alignment: .leading
@@ -33,7 +31,6 @@ func ListenerRowItem(listener: Listener) -> some View {
                         .frame(width: 60, height: 20)
                     
                     Text("Generic")
-                        .foregroundColor(.white)
                         .font(.caption)
                 }
                 .padding([.top, .trailing], 10),
@@ -64,7 +61,7 @@ func CheckableFormOption(isChecked: Bool = false) -> some View {
         // Background rectangle with rounded corners
         RoundedRectangle(cornerRadius: 10)
             .fill(isChecked ? Color.green : Color.white)
-            .frame(width: 400, height: 100)
+            .frame(height: 100)
         
         if isChecked {
             // Small circle at top-right

@@ -13,37 +13,36 @@ import SwiftUI
 struct ListenerTypeSelection: View {
     
     var body: some View {
-        ZStack {
-            /// Background
-            Color.black.edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                Spacer()
-                
-                /// Form question
-                Text("What kind of listener would you like to add?")
-                    .foregroundColor(.white)
-                    .font(.title)
-                
-                /// Option to add ``NewTokenListener``
-                NavigationLink {
-                    /// Navigate user to add ``NewTokenListener`` root
-                    TokenTypeSelection()
-                } label: {
-                    FormOption(markdown: "Listen for **new token** releases")
-                }
-                
-                /// Option to add ``ExistingTokenListener``
-                NavigationLink {
-                    /// Navigate user to add ``ExistingTokenListener`` root
-                    EnterContractAddress()
-                } label: {
-                    FormOption(markdown: "Listen to events for an **existing token**")
-                }
 
-                Spacer()
+        VStack {
+            Spacer()
+            
+            /// Form question
+            Text("What kind of listener would you like to add?")
+                .font(.title)
+            
+            /// Option to add ``NewTokenListener``
+            NavigationLink {
+                /// Navigate user to add ``NewTokenListener`` root
+                TokenTypeSelection()
+            } label: {
+                FormOption(markdown: "Listen for **new token** releases")
             }
+            
+            /// Option to add ``ExistingTokenListener``
+            NavigationLink {
+                /// Navigate user to add ``ExistingTokenListener`` root
+                EnterContractAddress()
+            } label: {
+                FormOption(markdown: "Listen to events for an **existing token**")
+            }
+
+            Spacer()
         }
+        .preferredColorScheme(.dark)
+        .navigationTitle("Select listener type")
+        .navigationBarTitleDisplayMode(.inline)
+
     }
     
     /// Form Option button
@@ -57,7 +56,6 @@ struct AddListenerFlowRoot_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ListenerTypeSelection()
-            
         }
     }
 }

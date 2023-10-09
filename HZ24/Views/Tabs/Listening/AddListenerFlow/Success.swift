@@ -12,33 +12,29 @@ struct Success: View {
     
     let user = getDummyUser() // Create a constant user for preview
     @State private var goToNextScreen = false
-
+    
     var body: some View {
-        ZStack {
-            // Set the background color to black
-            Color.black.edgesIgnoringSafeArea(.all)
+        
+        VStack {
+            // Display a success message
+            Text("Success!")
+                .font(.title2)
             
-            VStack {
-                // Display a success message
-                Text("Success!")
-                    .foregroundColor(.white)
-                    .font(.title)
-                
-                // FIXME: Look into the "pop-to-root" SwiftUI pattern
-                NavigationLink("", isActive: $goToNextScreen) {
-                    ContentView()
-                        .navigationBarBackButtonHidden(true)
-                }
-                
+            // FIXME: Look into the "pop-to-root" SwiftUI pattern
+            NavigationLink("", isActive: $goToNextScreen) {
+                ContentView()
+                    .navigationBarBackButtonHidden(true)
             }
-            .onAppear {
-//                 Execute the following code after a delay of 2 seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    // Update the binding variables and navigate back
-                    goToNextScreen = true
-                }
+            
+        }
+        .onAppear {
+            //                 Execute the following code after a delay of 2 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                // Update the binding variables and navigate back
+                goToNextScreen = true
             }
         }
+        .preferredColorScheme(.dark)
     }
 }
 
@@ -55,7 +51,7 @@ struct Success_Previews: PreviewProvider {
         
         /// Unwrapped view for meaningful view debugging with: `Editor > Canvas > Show Selection`
         Success()
-        .previewDisplayName("Unwrapped")
+            .previewDisplayName("Unwrapped")
         
     }
 }
