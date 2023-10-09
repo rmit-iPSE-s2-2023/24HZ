@@ -64,6 +64,7 @@ struct NewTokenEventStruct {
     
     var blockNumber: String
     var blockHash: String
+    var timestamp: Date
     var txHash: String
     
     /// MO: ``NewTokenEvent`` attribute/s

@@ -15,8 +15,9 @@ struct Main: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(coredataProvider: coreDataProvider)
                 .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+//                .environmentObject(coreDataProvider)
         }
     }
 }

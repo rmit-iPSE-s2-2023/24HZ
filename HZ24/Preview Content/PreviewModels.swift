@@ -11,6 +11,80 @@ import Foundation
 import CoreData
 
 class PreviewModels {
+    /// Add ``NewTokenListener`` for Coins
+    static var newERC20Listener: NewTokenListener {
+        let viewContext = CoreDataProvider.preview.container.viewContext
+        let newListener = NewTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        newListener.createdAt = Date()
+        newListener.displayTitle = ERCInterfaceId.erc20.displayTitle
+        newListener.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        newListener.ercInterfaceId = ERCInterfaceId.erc20.rawValue
+        return newListener
+    }
+    
+    static var newERC721Listener: NewTokenListener {
+        let viewContext = CoreDataProvider.preview.container.viewContext
+        let newListener = NewTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        newListener.createdAt = Date()
+        newListener.displayTitle = ERCInterfaceId.erc721.displayTitle
+        newListener.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        newListener.ercInterfaceId = ERCInterfaceId.erc721.rawValue
+        return newListener
+    }
+    
+    static var newERC1155Listener: NewTokenListener {
+        let viewContext = CoreDataProvider.preview.container.viewContext
+        let newListener = NewTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        newListener.createdAt = Date()
+        newListener.displayTitle = ERCInterfaceId.erc1155.displayTitle
+        newListener.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        newListener.ercInterfaceId = ERCInterfaceId.erc1155.rawValue
+        return newListener
+    }
+    
+    @discardableResult
+    static func makePreviewNewTokenListeners(viewContext: NSManagedObjectContext) -> [Listener] {
+        var listeners: [Listener] = []
+        
+        /// ERC20 Listener
+        let newListener = NewTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        newListener.createdAt = Date()
+        newListener.displayTitle = ERCInterfaceId.erc20.displayTitle
+        newListener.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        newListener.ercInterfaceId = ERCInterfaceId.erc20.rawValue
+        listeners.append(newListener)
+        
+        /// ERC721 Listener
+        let newListener2 = NewTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        newListener2.createdAt = Date()
+        newListener2.displayTitle = ERCInterfaceId.erc721.displayTitle
+        newListener2.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        newListener2.ercInterfaceId = ERCInterfaceId.erc721.rawValue
+        listeners.append(newListener2)
+        
+        /// ERC1155 Listener
+        let newListener3 = NewTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        newListener3.createdAt = Date()
+        newListener3.displayTitle = ERCInterfaceId.erc1155.displayTitle
+        newListener3.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        newListener3.ercInterfaceId = ERCInterfaceId.erc1155.rawValue
+        listeners.append(newListener3)
+        
+        return listeners
+    }
+    
     static var metadataEvent: MetadataEvent {
         let events = self.makeMetadataEvents(1)
         return events[0]

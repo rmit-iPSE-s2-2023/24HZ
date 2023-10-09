@@ -86,7 +86,9 @@ extension DefaultEventsProvider {
         /// Filter txReceipts checking if its contractAddress is a key in tokenContracts
         let newTokenEvents: [NewTokenEventStruct] = deployTxReceipts.compactMap { txReceipt -> NewTokenEventStruct? in
             if let interfaceInfo = tokenContracts[txReceipt.contractAddress] {
-                let newTokenEvent = NewTokenEventStruct(ercInterfaceId: interfaceInfo.ercInterfaceId, contractAddress: txReceipt.contractAddress, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, txHash: txReceipt.transactionHash, deployerAddress: txReceipt.from)
+                let blockObject = blockObjects.first(where: { $0.number == txReceipt.blockNumber })!
+                let timestamp = blockObject.timestamp
+                let newTokenEvent = NewTokenEventStruct(ercInterfaceId: interfaceInfo.ercInterfaceId, contractAddress: txReceipt.contractAddress, blockNumber: txReceipt.blockNumber, blockHash: txReceipt.blockHash, timestamp: timestamp, txHash: txReceipt.transactionHash, deployerAddress: txReceipt.from)
                 return newTokenEvent
             } else {
                 return nil
