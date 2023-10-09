@@ -2,6 +2,10 @@
 
 This repository houses the *24HZ* codebase, an iOS App built with SwiftUI.
 
+## RMIT Assessment 2
+
+Miro board: https://miro.com/app/board/uXjVMpMwtAc=/?share_link_id=916731394061
+
 ## Description
 *24HZ* is an iOS app that alerts users about events on the Zora blockchain.
 
