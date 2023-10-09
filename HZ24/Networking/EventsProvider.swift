@@ -101,15 +101,16 @@ struct MintCommentEventStruct {
     var contractAddress: String
     var tokenName: String?
     var tokenSymbol: String?
-    var blockNumber: String
+    var blockNumber: Int64
     var blockHash: String?
+    var timestamp: Date
     var txHash: String?
     
     /// MO: ``MintComment`` attribute/s
     var abiEventName: String
-    var mintComment: String?
+    var mintComment: String
     var quantity: Int64?
-    var sender: String?
+    var sender: String
 }
 
 // Currently out of scope
