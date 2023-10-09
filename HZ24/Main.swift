@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 
+/// Entry point of the 24HZ app.
 @main
 struct Main: App {
     
@@ -17,7 +18,6 @@ struct Main: App {
         WindowGroup {
             ContentView(coredataProvider: coreDataProvider)
                 .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
-//                .environmentObject(coreDataProvider)
         }
     }
 }
