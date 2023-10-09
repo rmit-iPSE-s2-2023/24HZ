@@ -192,6 +192,10 @@ extension DefaultEventsProvider {
         let signatures = try abiEventTypes.map { abiEventType in
             return try abiEventType.signature()
         }
+        /// RPC Call1: Get ``BlockObject``s for given block range
+        guard let blockObjects = try? await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock) else {
+            throw EventsProviderError.rpcError(message: "rpc.getBlocksInRange failed.")
+        }
         /// Array of encoded contract addresses for contracts
         var encodedContractAddresses = [String]()
         if let validContracts = contracts {
@@ -209,22 +213,27 @@ extension DefaultEventsProvider {
         let result = try await client.getEvents(addresses: [], orTopics: orTopics, fromBlock: EthereumBlock(rawValue: fromBlock), toBlock: EthereumBlock(rawValue: toBlock), eventTypes: abiEventTypes)
         /// Array of filtered ABIEvents
         let events = result.events
+        
         // FIXME: Debugging
         print("getMintCommentEvents result.events.count: \(events.count)")
         print("getMintCommentEvents result.logs.count: \(result.logs.count)")
         let mintCommentEvents: [MintCommentEventStruct] = events.compactMap { event -> MintCommentEventStruct? in
-            /// Downcast ABIEvent to subtypes to access instance properties:
-            /// - get comment
-            /// - get quantity
-            var mintCommentEventStruct = MintCommentEventStruct(contractAddress: "", blockNumber: event.log.blockNumber.stringValue, abiEventName: "")
-            /// Try downcast `ABIEvent` to ``MintCommentEventABI/MintComment``
+            /// Try downcast `ABIEvent` to ``MintCommentEventABI/MintComment`` to access instance properties:
+            /// - comment
+            /// - quantity
+            /// - sender
             if let mintCommentEvent: MintCommentEventABI.MintComment = event as? MintCommentEventABI.MintComment {
-                mintCommentEventStruct.contractAddress = mintCommentEvent.tokenContract.asString()
-                mintCommentEventStruct.mintComment = mintCommentEvent.comment
-                mintCommentEventStruct.quantity = Int64(exactly: mintCommentEvent.quantity)
-                mintCommentEventStruct.abiEventName = MintCommentEventABI.MintComment.name
-                mintCommentEventStruct.sender = mintCommentEvent.sender.asString()
-                return mintCommentEventStruct
+                let blockObject = blockObjects.first(where: { $0.hash == event.log.blockHash })!
+                let timestamp = blockObject.timestamp
+                let blockHash = event.log.blockHash
+                let blockNumber = Int64(event.log.blockNumber.intValue!)
+                let contractAddress = mintCommentEvent.tokenContract.asString()
+                let mintComment = mintCommentEvent.comment
+                let quantity = Int64(exactly: mintCommentEvent.quantity)
+                let abiEventName = MintCommentEventABI.MintComment.name
+                let sender = mintCommentEvent.sender.asString()
+                let txHash = event.log.transactionHash
+                return MintCommentEventStruct(contractAddress: contractAddress, blockNumber: blockNumber, blockHash: blockHash, timestamp: timestamp, txHash: txHash, abiEventName: abiEventName, mintComment: mintComment, quantity: quantity, sender: sender)
             } else {
                 /// Otherwise, don't include in map
                 return nil
