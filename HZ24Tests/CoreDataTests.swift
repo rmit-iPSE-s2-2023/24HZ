@@ -106,8 +106,8 @@ final class CoreDataTests: XCTestCase {
         listeners = try context.fetch(.init(entityName: "NewTokenListener"))
         XCTAssertEqual(listeners.count, 3)
         /// Copying values for newTokenListener2 before saving
-        let copiedId = newTokenListener2.objectID
-        let copiedIsListening = newTokenListener2.isListening
+//        let copiedId = newTokenListener2.objectID
+//        let copiedIsListening = newTokenListener2.isListening
         /// Save the "second" listener
         try context.save()
         listeners = try context.fetch(.init(entityName: "NewTokenListener"))
@@ -179,12 +179,15 @@ final class CoreDataTests: XCTestCase {
     }
     
     func testFetchData() async throws {
+        let listener = ExistingTokenListener(context: self.context)
+        listener.contractAddress = "0x8fcfdad5ebdd1ce815aa769bbd7499091ac056d1"
+        listener.listeningForMetadataEvents = true
+        listener.isListening = true
+        listener.listeningForMintCommentEvents = true
+        try context.save()
         try await coreDataProvider.fetchData()
+        let events = try context.fetch(.init(entityName: "Event"))
+        print(events)
     }
     
-    func testFetchDataWithNewTokenListener() async throws {
-//        let newTokenListener = NewTokenListener(context: self.context)
-//        newTokenListener.
-        try await coreDataProvider.fetchData()
-    }
 }
