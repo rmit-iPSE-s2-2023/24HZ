@@ -33,11 +33,6 @@ struct SavedTab: View {
                 // Display the list of saved events.
                 ScrollView {
                     VStack(alignment: .leading) {
-                        Text("Your Saved Events")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding(.horizontal)
                         
                         ForEach(savedEvents, id: \.id) { event in
                             EventRowItem(event: event)

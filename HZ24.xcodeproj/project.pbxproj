@@ -12,6 +12,7 @@
 		A2AEBE8D2AD24F5E0056AB1F /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8C2AD24F5E0056AB1F /* PageControl.swift */; };
 		A2AEBE8F2AD254260056AB1F /* Tutorials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8E2AD254250056AB1F /* Tutorials.swift */; };
 		A2AEBF202AD42DF20056AB1F /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A2AEBF1F2AD42DF20056AB1F /* web3.swift */; };
+		B137A4AC2AD4B9D500A06727 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B137A4AB2AD4B9D500A06727 /* web3.swift */; };
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
 		B1AD3B8F2AC4370700912CF5 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */; };
@@ -177,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B137A4AC2AD4B9D500A06727 /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +437,7 @@
 			);
 			name = HZ24Tests;
 			packageProductDependencies = (
+				B137A4AB2AD4B9D500A06727 /* web3.swift */,
 			);
 			productName = 24HZTests;
 			productReference = B1BE377F2AC01BE900104A4A /* HZ24Tests.xctest */;
@@ -861,6 +864,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		A2AEBF1F2AD42DF20056AB1F /* web3.swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2AEBF1E2AD42DF20056AB1F /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
+		};
+		B137A4AB2AD4B9D500A06727 /* web3.swift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A2AEBF1E2AD42DF20056AB1F /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;
