@@ -9,8 +9,10 @@ import SwiftUI
 
 struct PageView: View {
     var body: some View {
-        PageViewController()
-        PageControl()    }
+        //        PageViewController()
+        //        PageControl()
+        EmptyView()
+    }
 }
 
 struct PageView_Previews: PreviewProvider {
