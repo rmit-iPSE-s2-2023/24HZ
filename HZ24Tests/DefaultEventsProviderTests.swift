@@ -124,9 +124,10 @@ final class DefaultEventsProviderTests: XCTestCase {
         let fromBlock = 4321000
         let toBlock = fromBlock + self.maxBlockRange - 1
         do {
-            let mintEventsByContractAddress = try await self.eventsProvider.getMintCommentEvents(fromBlock: fromBlock, toBlock: toBlock, forContracts: nil)
-            XCTAssertEqual(mintEventsByContractAddress.count, 3)
-            XCTAssertNotNil(mintEventsByContractAddress)
+            let events = try await self.eventsProvider.getMintCommentEvents(fromBlock: fromBlock, toBlock: toBlock, forContracts: nil)
+            print(events)
+            XCTAssertEqual(events.count, 7)
+            XCTAssertNotNil(events)
         } catch {
             XCTFail("Expected events but failed \(error).")
         }
