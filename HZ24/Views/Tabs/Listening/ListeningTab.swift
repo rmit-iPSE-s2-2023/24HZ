@@ -34,13 +34,9 @@ struct ListeningTab: View {
     // State to manage navigation to a custom view.
     // Triggered when the user wants to navigate to a custom screen.
     @State private var navigateToCustom = false
+    //test
+    @State var isEditingMode: Bool = false
     
-    // Icon display state variables
-    @State private var showTrashIcon = false
-    @State private var showGearIcon = false
-    
-    @State private var circleOffset: CGFloat = 0
-    @State private var circleScale: CGFloat = 0
     
     
     // MARK: Return body
@@ -50,22 +46,34 @@ struct ListeningTab: View {
             VStack {
                 
                 // MARK: Tab header
-                /// User's name
-                HStack {
-                    Text(user.name + ",")
+                    /// User's name
+                    HStack {
+                        Text(user.name + ",")
+                            .multilineTextAlignment(.leading)
+                            .font(.largeTitle.bold())
+                            .foregroundColor(.orange)
+                            .padding(.leading, 10)
+                        Spacer()
+                    }
+                
+                if !isEditingMode {
+                    /// Tab heading
+                    HStack {
+                        Text("here is what you're listening to...")
+                            .multilineTextAlignment(.leading)
+                            .font(.largeTitle.bold())
+                            .padding(.leading, 10)
+                        Spacer()
+                    }
+                } else {
+                    HStack {
+                    Text("swipe right to navigate to the settings page.")
+                        .foregroundColor(.red)
                         .multilineTextAlignment(.leading)
                         .font(.largeTitle.bold())
-                        .foregroundColor(.orange)
                         .padding(.leading, 10)
-                    Spacer()
+                        Spacer()
                 }
-                /// Tab heading
-                HStack {
-                    Text("here is what you're listening to...")
-                        .multilineTextAlignment(.leading)
-                        .font(.largeTitle.bold())
-                        .padding(.leading, 10)
-                    Spacer()
                 }
                 
                 // MARK: Listeners
@@ -73,12 +81,25 @@ struct ListeningTab: View {
                     /// List of listeners
                     ForEach(Array(listeners.enumerated()), id: \.element) { index, listener in
                         GenericListenerView(
-                            listener: listener,
-                            showTrashIcon: $showTrashIcon,
-                            showGearIcon: $showGearIcon,
-                            circleOffset: $circleOffset,
-                            circleScale: $circleScale
+                            listener: listener, isEditingMode: $isEditingMode
                         )
+                    }
+                    .contentShape(Rectangle())
+                    .onLongPressGesture {
+                        self.isEditingMode.toggle()
+                    }
+                    //Go back
+                    if isEditingMode {
+                        Button(action: {
+                            self.isEditingMode = false
+                        }) {
+                            Text("Go Back")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(8)
+                        }
+                        .padding()
                     }
                     
                 } else {
@@ -99,119 +120,124 @@ struct ListeningTab: View {
                 
                 Spacer()
                 
-                // MARK: AddListenerButton
-                /// Navigate user to root of `AddEventListener` flow
-                NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToNext) {
-                    HStack {
-                        Spacer()
-                        AddListenerButton()
-                            .offset(y: -20)
-                            .padding(.bottom, 20)
-                            .padding(.trailing, 20)
+                if !isEditingMode {
+                    // MARK: AddListenerButton
+                    /// Navigate user to root of `AddEventListener` flow
+                    NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToNext) {
+                        HStack {
+                            Spacer()
+                            AddListenerButton()
+                                .offset(y: -20)
+                                .padding(.bottom, 20)
+                                .padding(.trailing, 20)
+                        }
                     }
-                }
-                .isDetailLink(false)
-            }
-            
-            // TODO: Describe this part of UI
-            HStack {
-                // Trash icon located at the bottom
-                if showTrashIcon {
-                    Circle()
-                        .fill(Color.red)
-                        .frame(width: 100, height: 100)
-                        .overlay(
-                            Image(systemName: "trash")
-                                .foregroundColor(.white)
-                        )
-                        .scaleEffect(circleScale)
-                        .offset(x: circleOffset / 2)
-                        .transition(.scale)
+                    .isDetailLink(false)
                 }
                 
-                Spacer()
-                
-                // Gear icon located at the bottom
-                if showGearIcon {
-                    Circle()
-                        .fill(Color.green)
-                        .frame(width: 100, height: 100)
-                        .overlay(
-                            Image(systemName: "gearshape")
-                                .foregroundColor(.white)
-                        )
-                        .scaleEffect(circleScale)
-                        .offset(x: circleOffset / 2)
-                        .transition(.scale)
-                }
             }
-            .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
         }
         .preferredColorScheme(.dark)
     }
 }
 
-/// ``GenericListenerView`` represents a single listener in the list, with swipe actions for editing and deletion.
+/// ``GenericListenerView`` represents a single listener in the list, with swipe actions for editing.
 struct GenericListenerView: View {
     @Environment(\.managedObjectContext) var viewContext
-    
+    /// The listener being represented by this view
     var listener: Listener
-    
+    /// The offset for the swipe gesture.
     @State private var offset = CGSize.zero
-    @State private var isRemoved = false
+    /// A binding to determine if the app is in editing mode
+    @Binding var isEditingMode: Bool
+    @State private var showGearIcon = false
+    @State private var animateDance = false
     @State private var navigateToSetting = false
-    @Binding var showTrashIcon: Bool
-    @Binding var showGearIcon: Bool
     
-    @Binding var circleOffset: CGFloat
-    @Binding var circleScale: CGFloat
+    /// Trigger for the Items animation
+    @State var danceTrigger = false
     
-    // MARK: Return body
     var body: some View {
         ZStack {
+            // NavigationLink for gear icon
             NavigationLink("", destination: ListenerSettings(listener: listener), isActive: $navigateToSetting)
                 .opacity(0)
             
-            ListenerRowItem(listener: listener)
-        }
-        .offset(x: offset.width, y: offset.height)
-        .rotationEffect(Angle(degrees: Double(offset.width / 10)))
-        .gesture(
-            DragGesture()
-                .onChanged { gesture in
-                    offset = gesture.translation
-                    showTrashIcon = gesture.translation.width < 0 // trash
-                    showGearIcon = gesture.translation.width > 0   // gear
-                    circleOffset = -gesture.translation.width
-                    circleScale = max(0, min(abs(gesture.translation.width) / 50, 1))
-                }
-                .onEnded { gesture in
-                    let swipeThreshold: CGFloat = 100.0
-                    if gesture.translation.width < -swipeThreshold {
-                        offset = CGSize(width: -1000, height: 0)
-                        // TODO: The current gesture implementation has issues and requires further development.
-                        // TODO: Fix the issue where the block disappears when swiping right to enter the settings view.
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            // Remove the listener from CoreData
-                            viewContext.delete(listener)
-                            try? viewContext.save()
-                        }
-                    } else if gesture.translation.width > swipeThreshold {
-                        offset = CGSize(width: 1000, height: 0)
-                        navigateToSetting = true
-                    } else {
-                        offset = .zero
+            // Displaying the gear icon with its green background
+            HStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .foregroundColor(showGearIcon ? .green : .clear)
+                    .frame(width: abs(offset.width + 30), height: 70)
+                    .overlay(
+                        Image(systemName: "gearshape")
+                            .foregroundColor(.white)
+                            .font(.system(size: 30, weight: .bold))
+                            .opacity(showGearIcon ? 1 : 0)
+                    )
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        // Animate the item back to its original position smoothly when the gear icon is clicked
+                        self.offset = .zero
+                        self.showGearIcon = false
                     }
-                    showTrashIcon = false // hide
-                    showGearIcon = false  // hide
-                    circleOffset = 0
-                    circleScale = 0
-                    // TODO: Ensure interaction with the icon only leads to deletion or entering the settings view (when the block touches the icon).
+                    
+                    // After the animation completes, navigate to ListenerSettingsView
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.navigateToSetting = true
+                    }
                 }
-        )
-        .animation(.easeInOut, value: offset)
+            Spacer() // Pushes the gear icon to the left
+        }
+            ///Editing Mode
+            if isEditingMode {
+                ListenerRowItem(listener: listener)
+                    .offset(x: offset.width) // Offset the view based on the swipe gesture's width.
+                    .rotationEffect(isEditingMode ? Angle(degrees: danceTrigger ? 1 : -1) : Angle(degrees: 0)) // Rotate the view slightly for a 'dancing' effect when in editing mode.
+                    .animation(Animation.easeInOut(duration: 0.2).repeatForever(autoreverses: true), value: danceTrigger) // Apply the 'dancing' animation.
+                    .onAppear {
+                        danceTrigger = isEditingMode // Start the 'dancing' animation when the view appears if in editing mode.
+                    }
+                    .onChange(of: isEditingMode) { newValue in
+                        danceTrigger = newValue // Update the 'dancing' animation state based on the editing mode.
+                    }
+                    .gesture(
+                        DragGesture()
+                            .onChanged { gesture in
+                                if isEditingMode {
+                                    if gesture.translation.width > 0 {
+                                        offset.width = gesture.translation.width // Update the offset based on the user's swipe.
+                                        showGearIcon = true // Show the gear icon when swiped.
+                                    }
+                                }
+                            }
+                            .onEnded { gesture in
+                                let swipeThreshold: CGFloat = 100.0
+                                if gesture.translation.width > swipeThreshold {
+                                    offset.width = 50 // Set the offset to show the gear icon completely.
+                                    showGearIcon = true
+                                } else {
+                                    offset = .zero // Reset the offset if the swipe is less than the threshold.
+                                    showGearIcon = false // Hide the gear icon if the swipe is less than the threshold.
+                                }
+                            }
+                    )
+                    .onTapGesture {
+                        offset = .zero
+                        isEditingMode = false
+                        showGearIcon = false
+                    }
+            } else {
+                ListenerRowItem(listener: listener)
+                    .onAppear {
+                        showGearIcon = false
+                        danceTrigger = false
+                        offset = .zero // Reset position and states when the view reappears.
+                    }
+            }
+        }
     }
 }
+
 
 // MARK: - Previews
 struct ListeningTab_Previews: PreviewProvider {
@@ -225,6 +251,7 @@ struct ListeningTab_Previews: PreviewProvider {
         }
     }
 }
+
 
 func AddListenerButton() -> some View {
     // '+' symbol
