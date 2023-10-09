@@ -48,9 +48,9 @@ struct EnterContractAddress: View {
             Form {
                 TextField("0x", text: $contractAddress)
                     .textFieldStyle(.roundedBorder)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .textFieldStyle(.plain)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .textFieldStyle(PlainTextFieldStyle())
                     .padding(8)
 
                 Button {
