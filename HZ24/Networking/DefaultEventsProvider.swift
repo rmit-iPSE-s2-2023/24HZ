@@ -179,13 +179,6 @@ extension DefaultEventsProvider {
             }
             return metadataEventStruct
         }
-        /// Create dictionary to return results keyed by contract address
-//        var eventsDict: [String: [MetadataEventStruct]] = [:]
-//
-//        metadataUpdateEvents.forEach { metadataUpdateEvent in
-//            eventsDict[metadataUpdateEvent.contractAddress, default: []].append(metadataUpdateEvent)
-//        }
-//        return eventsDict
         return metadataEventStructs
         /// Note: tokenName and tokenSymbol should be fetched when user adds new listener for a specified contract address.
     }
@@ -211,8 +204,9 @@ extension DefaultEventsProvider {
         }
         /// orTopics array
         let orTopics = [signatures, [], encodedContractAddresses]
+
         /// RPC Call to get relevant events
-        let result = try await client.getEvents(addresses: nil, orTopics: orTopics, fromBlock: EthereumBlock(rawValue: fromBlock), toBlock: EthereumBlock(rawValue: toBlock), eventTypes: abiEventTypes)
+        let result = try await client.getEvents(addresses: [], orTopics: orTopics, fromBlock: EthereumBlock(rawValue: fromBlock), toBlock: EthereumBlock(rawValue: toBlock), eventTypes: abiEventTypes)
         /// Array of filtered ABIEvents
         let events = result.events
         // FIXME: Debugging
@@ -222,30 +216,28 @@ extension DefaultEventsProvider {
             /// Downcast ABIEvent to subtypes to access instance properties:
             /// - get comment
             /// - get quantity
-            var mintCommentEventStruct = MintCommentEventStruct(contractAddress: event.log.address.asString(), blockNumber: event.log.blockNumber.stringValue, abiEventName: "")
+            var mintCommentEventStruct = MintCommentEventStruct(contractAddress: "", blockNumber: event.log.blockNumber.stringValue, abiEventName: "")
+            /// Try downcast `ABIEvent` to ``MintCommentEventABI/MintComment``
             if let mintCommentEvent: MintCommentEventABI.MintComment = event as? MintCommentEventABI.MintComment {
+                mintCommentEventStruct.contractAddress = mintCommentEvent.tokenContract.asString()
                 mintCommentEventStruct.mintComment = mintCommentEvent.comment
                 mintCommentEventStruct.quantity = Int64(exactly: mintCommentEvent.quantity)
                 mintCommentEventStruct.abiEventName = MintCommentEventABI.MintComment.name
+                mintCommentEventStruct.sender = mintCommentEvent.sender.asString()
                 return mintCommentEventStruct
             } else {
+                /// Otherwise, don't include in map
                 return nil
             }
         }
         return mintCommentEvents
-        /// Create dictionary to return results keyed by contract address
-//        var eventsDict: [String: [MintCommentEventStruct]] = [:]
-//
-//        mintCommentEvents.forEach { mintCommentEvent in
-//            eventsDict[mintCommentEvent.contractAddress, default: []].append(mintCommentEvent)
-//        }
-//        return eventsDict
-        /// Note: tokenName and tokenSymbol should be fetched when user adds new listener for a specified contract address.
     }
 }
 
 extension DefaultEventsProvider {
-    // MARK: Private method/s
+    
+    // MARK: Test methods for debugging
+    
     private func getTokenInfoViaMulticall(newDeploymentEvents: [NewTokenEventStruct]) async throws -> [NewTokenEventStruct] {
         /// Create a Multicall to get the token name and symbol for each newly deployed contract address
         /// Note: Multicall only seems to work with ABI functions (`eth_call`) and not any old RPC call
