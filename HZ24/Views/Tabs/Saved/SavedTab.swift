@@ -6,18 +6,15 @@
 //
 
 import SwiftUI
-import AVKit
 
-/// Represents the view for the 'Saved' tab in the app.
-/// This tab shows saved events, tutorial pages, and a tutorial video.
 struct SavedTab: View {
+    // Fetch saved events from Core Data
+    @FetchRequest(entity: Event.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \Event.timestamp, ascending: false)],
+                  predicate: NSPredicate(format: "saved == %@", NSNumber(value: true)))
+    private var savedEvents: FetchedResults<Event>
     
-    // Sample data for the saved events.
-    // TODO: Replace with real saved events data later.
-    let savedEvents = getEventData() ?? []
-    
-    /// Represents the currently selected event for detailed viewing.
-    @State private var selectedEvent: EventData?
+    @State private var selectedEvent: Event?
     
     var body: some View {
         ZStack {
@@ -32,22 +29,7 @@ struct SavedTab: View {
                         .padding(.leading, 10)
                     Spacer()
                 }
-                
-                // Display tutorial pages for the user.
-                PageView(pages: tutorials.map { Tutorials(tutorial: $0) })
-                    .aspectRatio(3 / 2, contentMode: .fit)
-                
-                // Display a tutorial video if available.
-                if let videoURL = Bundle.main.url(forResource: "sample-video", withExtension: "mp4") {
-                    VideoPlayerView(videoURL: videoURL)
-                        .frame(width: 330, height: 200)
-                } else {
-                    Text("Tutorial - Video not found")
-                        .foregroundColor(.white)
-                        .frame(width: 330, height: 200)
-                        .background(Color.gray.opacity(0.5))
-                }
-                
+
                 // Display the list of saved events.
                 ScrollView {
                     VStack(alignment: .leading) {
@@ -58,7 +40,7 @@ struct SavedTab: View {
                             .padding(.horizontal)
                         
                         ForEach(savedEvents, id: \.id) { event in
-                            CapturedEventBlock(eventData: event)
+                            EventRowItem(event: event)
                                 .onTapGesture {
                                     self.selectedEvent = event
                                 }
@@ -68,9 +50,8 @@ struct SavedTab: View {
                         }
                     }
                 }
-                // Displays the details of a selected event.
                 .sheet(item: $selectedEvent) { event in
-                    EventDetailView(event: event)
+                    EventDetailViewWithCoreData(event: event)
                 }
                 
                 Spacer()
@@ -78,20 +59,6 @@ struct SavedTab: View {
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
     }
-}
-
-/// Represents a view for playing a video using `AVPlayerViewController` within SwiftUI.
-struct VideoPlayerView: UIViewControllerRepresentable {
-    let videoURL: URL
-    
-    func makeUIViewController(context: Context) -> AVPlayerViewController {
-        let player = AVPlayer(url: videoURL)
-        let controller = AVPlayerViewController()
-        controller.player = player
-        return controller
-    }
-    
-    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) { }
 }
 
 struct SavedTab_Previews: PreviewProvider {
