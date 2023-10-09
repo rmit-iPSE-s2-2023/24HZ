@@ -109,6 +109,7 @@ struct MintCommentEventStruct {
     var abiEventName: String
     var mintComment: String?
     var quantity: Int64?
+    var sender: String?
 }
 
 // Currently out of scope
