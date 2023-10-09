@@ -9,8 +9,9 @@ import SwiftUI
 import CoreData
 import Combine
 
+/// `ListeningTab` is the main view responsible for displaying the list of listeners for the user.
 struct ListeningTab: View {
-    
+    // Reference to the CoreData's context
     @Environment(\.managedObjectContext) private var viewContext
     // MARK: - Properties
     
@@ -32,6 +33,13 @@ struct ListeningTab: View {
     // State to manage navigation to a custom view.
     // Triggered when the user wants to navigate to a custom screen.
     @State private var navigateToCustom = false
+    
+    // Icon display state variables
+    @State private var showTrashIcon = false
+    @State private var showGearIcon = false
+    
+    @State private var circleOffset: CGFloat = 0
+    @State private var circleScale: CGFloat = 0
     
     
     
@@ -60,10 +68,14 @@ struct ListeningTab: View {
                 
                 if !listeners.isEmpty {
                     /// List of listeners
-                    ForEach(listeners, id: \.self) { listener in
-                        NavigationLink(destination: ListenerSettings(listener: listener)) {
-                            ListenerRowItem(listener: listener)
-                        }
+                    ForEach(Array(listeners.enumerated()), id: \.element) { index, listener in
+                        GenericListenerView(
+                            listener: listener,
+                            showTrashIcon: $showTrashIcon,
+                            showGearIcon: $showGearIcon,
+                            circleOffset: $circleOffset,
+                            circleScale: $circleScale
+                        )
                     }
 
                 } else {
@@ -91,9 +103,105 @@ struct ListeningTab: View {
                 }
                 .isDetailLink(false)
             }
+            
+            
+            HStack {
+                // Trash icon located at the bottom
+                if showTrashIcon {
+                    Circle()
+                        .fill(Color.red)
+                        .frame(width: 100, height: 100)
+                        .overlay(
+                            Image(systemName: "trash")
+                                .foregroundColor(.white)
+                        )
+                        .scaleEffect(circleScale)
+                        .offset(x: circleOffset / 2)
+                        .transition(.scale)
+                }
+                
+                Spacer()
+                
+                // Gear icon located at the bottom
+                if showGearIcon {
+                    Circle()
+                        .fill(Color.green)
+                        .frame(width: 100, height: 100)
+                        .overlay(
+                            Image(systemName: "gearshape")
+                                .foregroundColor(.white)
+                        )
+                        .scaleEffect(circleScale)
+                        .offset(x: circleOffset / 2)
+                        .transition(.scale)
+                }
+            }
+            .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
         }
     }
 }
+
+/// `GenericListenerView` represents a single listener in the list, with swipe actions for editing and deletion.
+struct GenericListenerView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    
+    var listener: Listener
+
+    @State private var offset = CGSize.zero
+    @State private var isRemoved = false
+    @State private var navigateToSetting = false
+    @Binding var showTrashIcon: Bool
+    @Binding var showGearIcon: Bool
+    
+    @Binding var circleOffset: CGFloat
+    @Binding var circleScale: CGFloat
+    
+    var body: some View {
+        ZStack {
+            NavigationLink("", destination: ListenerSettings(listener: listener), isActive: $navigateToSetting)
+                .opacity(0)
+            
+            ListenerRowItem(listener: listener)
+        }
+        .offset(x: offset.width, y: offset.height)
+        .rotationEffect(Angle(degrees: Double(offset.width / 10)))
+        .gesture(
+            DragGesture()
+                .onChanged { gesture in
+                    offset = gesture.translation
+                    showTrashIcon = gesture.translation.width < 0 // trash
+                    showGearIcon = gesture.translation.width > 0   // gear
+                    circleOffset = -gesture.translation.width
+                    circleScale = max(0, min(abs(gesture.translation.width) / 50, 1))
+                }
+                .onEnded { gesture in
+                    let swipeThreshold: CGFloat = 100.0
+                    if gesture.translation.width < -swipeThreshold {
+                        offset = CGSize(width: -1000, height: 0)
+                        // TODO: The current gesture implementation has issues and requires further development.
+                        // TODO: Fix the issue where the block disappears when swiping right to enter the settings view.
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            // Remove the listener from CoreData
+                            viewContext.delete(listener)
+                            try? viewContext.save()
+                        }
+                    } else if gesture.translation.width > swipeThreshold {
+                        offset = CGSize(width: 1000, height: 0)
+                        navigateToSetting = true
+                    } else {
+                        offset = .zero
+                    }
+                    showTrashIcon = false // hide
+                    showGearIcon = false  // hide
+                    circleOffset = 0
+                    circleScale = 0
+                    // TODO: Ensure interaction with the icon only leads to deletion or entering the settings view (when the block touches the icon).
+                }
+        )
+        .animation(.easeInOut, value: offset)
+    }
+}
+
 
 // MARK: - Previews
 struct ListeningTab_Previews: PreviewProvider {
