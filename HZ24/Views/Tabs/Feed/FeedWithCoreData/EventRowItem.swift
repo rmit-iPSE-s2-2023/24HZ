@@ -1,15 +1,17 @@
 //
+//  EventRowItem.swift
+//
+//  Originally:
 //  CapturedEventBlock.swift
 //  a1-s3713342
 //
 //  Created by Jin on 2023-08-24.
 //
-/// Similar to CaptureEventBlock. This struct does not specify a leading padding for indentation.
-/// Instead, the indentation for display in TimeSegment is calculated by use of a custom layout.
-///
+
 
 import SwiftUI
 
+/// Displays an event at a glance. Suitable for use as a row item in a list.
 struct EventRowItem: View {
     
     let event: Event
@@ -76,7 +78,7 @@ struct EventRowItem: View {
         .padding(8)
         .background(Color.orange)
         .cornerRadius(10)
-        .preferredColorScheme(.dark)
+
     }
 }
 
@@ -88,9 +90,11 @@ struct EventRowItem_Previews: PreviewProvider {
     
     static var previews: some View {
         EventRowItem(event: newTokenEvent)
+            .preferredColorScheme(.dark)
             .previewDisplayName("NewTokenEvent")
         
         EventRowItem(event: metadataEvent)
+            .preferredColorScheme(.dark)
             .previewDisplayName("MetadataEvent")
 
     }
