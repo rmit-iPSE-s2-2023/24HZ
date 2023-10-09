@@ -13,8 +13,8 @@ import Combine
 struct ListeningTab: View {
     // Reference to the CoreData's context
     @Environment(\.managedObjectContext) private var viewContext
-    // MARK: - Properties
     
+    // MARK: - FetchRequest
     // Binding to an array of blocks that the user has added.
     // This will be a shared state between different views.
     // TODO: This should be Core Data ``Listener``s
@@ -23,7 +23,8 @@ struct ListeningTab: View {
     
     // TODO: Get rid of this, no user info will be stored
     @Binding var user: User
-
+    
+    // MARK: - State
     // State to manage navigation to the next view.
     // Triggered when the user wants to navigate to the next screen in a sequence.
     // TODO: Is this needed?
@@ -42,12 +43,14 @@ struct ListeningTab: View {
     @State private var circleScale: CGFloat = 0
     
     
-    
+    // MARK: Return body
     var body: some View {
+        
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
             VStack {
                 
+                // MARK: Tab header
+                /// User's name
                 HStack {
                     Text(user.name + ",")
                         .multilineTextAlignment(.leading)
@@ -56,16 +59,16 @@ struct ListeningTab: View {
                         .padding(.leading, 10)
                     Spacer()
                 }
-                
+                /// Tab heading
                 HStack {
                     Text("here is what you're listening to...")
                         .multilineTextAlignment(.leading)
                         .font(.largeTitle.bold())
-                        .foregroundColor(.white)
                         .padding(.leading, 10)
                     Spacer()
                 }
                 
+                // MARK: Listeners
                 if !listeners.isEmpty {
                     /// List of listeners
                     ForEach(Array(listeners.enumerated()), id: \.element) { index, listener in
@@ -77,7 +80,7 @@ struct ListeningTab: View {
                             circleScale: $circleScale
                         )
                     }
-
+                    
                 } else {
                     /// Placeholder if user has no listeners
                     VStack {
@@ -85,12 +88,18 @@ struct ListeningTab: View {
                         Text("No listeners added")
                             .font(.title2)
                             .foregroundColor(.gray)
+                        NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToNext) {
+                            Text("Add a listener")
+                                .padding()
+                        }
+                        .isDetailLink(false)
                         Spacer()
                     }
                 }
                 
                 Spacer()
                 
+                // MARK: AddListenerButton
                 /// Navigate user to root of `AddEventListener` flow
                 NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToNext) {
                     HStack {
@@ -104,7 +113,7 @@ struct ListeningTab: View {
                 .isDetailLink(false)
             }
             
-            
+            // TODO: Describe this part of UI
             HStack {
                 // Trash icon located at the bottom
                 if showTrashIcon {
@@ -138,15 +147,16 @@ struct ListeningTab: View {
             }
             .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
         }
+        .preferredColorScheme(.dark)
     }
 }
 
-/// `GenericListenerView` represents a single listener in the list, with swipe actions for editing and deletion.
+/// ``GenericListenerView`` represents a single listener in the list, with swipe actions for editing and deletion.
 struct GenericListenerView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     var listener: Listener
-
+    
     @State private var offset = CGSize.zero
     @State private var isRemoved = false
     @State private var navigateToSetting = false
@@ -156,6 +166,7 @@ struct GenericListenerView: View {
     @Binding var circleOffset: CGFloat
     @Binding var circleScale: CGFloat
     
+    // MARK: Return body
     var body: some View {
         ZStack {
             NavigationLink("", destination: ListenerSettings(listener: listener), isActive: $navigateToSetting)
@@ -202,7 +213,6 @@ struct GenericListenerView: View {
     }
 }
 
-
 // MARK: - Previews
 struct ListeningTab_Previews: PreviewProvider {
     static let coreDataProvider = CoreDataProvider.preview
@@ -210,7 +220,8 @@ struct ListeningTab_Previews: PreviewProvider {
     static var previews: some View {
         // Must wrap in NavigationView to prevent "No entity found" warnings
         NavigationView {
-            ListeningTab(user: .constant(user))        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+            ListeningTab(user: .constant(user))
+                .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         }
     }
 }
@@ -221,14 +232,10 @@ func AddListenerButton() -> some View {
         .font(.system(size: 40))
         .frame(width: 60, height: 60)
         .foregroundColor(.white)
-        .background(Color.black)
         .overlay(
             // Circular border
             Circle()
                 .stroke(Color.white, lineWidth: 2)
         )
 }
-
-
-
 
