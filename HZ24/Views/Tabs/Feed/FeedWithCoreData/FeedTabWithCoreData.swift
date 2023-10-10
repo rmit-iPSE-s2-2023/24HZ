@@ -27,7 +27,6 @@ struct FeedTabWithCoreData: View {
                 Text("Events captured in the Last 24 Hours")
                     .multilineTextAlignment(.leading)
                     .font(.largeTitle.bold())
-                    .padding(.leading, 10)
                 Spacer()
             }
             
@@ -53,6 +52,7 @@ struct FeedTabWithCoreData: View {
                 }
             }
         }
+        .padding()
         .preferredColorScheme(.dark)
     }
 }
