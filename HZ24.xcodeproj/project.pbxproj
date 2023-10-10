@@ -17,8 +17,6 @@
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
 		B1AD3B8F2AC4370700912CF5 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */; };
-		B1B504A92AC5A3B600DA66B7 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504682AC5A3B600DA66B7 /* constants.swift */; };
-		B1B504AA2AC5A3B600DA66B7 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504692AC5A3B600DA66B7 /* DataModel.swift */; };
 		B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046B2AC5A3B600DA66B7 /* CoreDataProvider.swift */; };
 		B1B504AC2AC5A3B600DA66B7 /* NSFetchRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046C2AC5A3B600DA66B7 /* NSFetchRequests.swift */; };
 		B1B504AD2AC5A3B600DA66B7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046D2AC5A3B600DA66B7 /* Model.xcdatamodeld */; };
@@ -48,7 +46,6 @@
 		B1B504C52AC5A3B600DA66B7 /* EventLogs.json in Resources */ = {isa = PBXBuildFile; fileRef = B1B5048A2AC5A3B600DA66B7 /* EventLogs.json */; };
 		B1B504C62AC5A3B600DA66B7 /* NotifcationType.json in Resources */ = {isa = PBXBuildFile; fileRef = B1B5048B2AC5A3B600DA66B7 /* NotifcationType.json */; };
 		B1B504C72AC5A3B600DA66B7 /* EventSubscriptions.json in Resources */ = {isa = PBXBuildFile; fileRef = B1B5048C2AC5A3B600DA66B7 /* EventSubscriptions.json */; };
-		B1B504C82AC5A3B600DA66B7 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048D2AC5A3B600DA66B7 /* JSON.swift */; };
 		B1B504C92AC5A3B600DA66B7 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048E2AC5A3B600DA66B7 /* utils.swift */; };
 		B1B504CA2AC5A3B600DA66B7 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048F2AC5A3B600DA66B7 /* Main.swift */; };
 		B1B504CB2AC5A3B600DA66B7 /* SavedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504932AC5A3B600DA66B7 /* SavedTab.swift */; };
@@ -97,8 +94,6 @@
 		B140E9082AD15C7500519526 /* PreviewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewModels.swift; sourceTree = "<group>"; };
 		B19E75132A99694B008E9FF4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
-		B1B504682AC5A3B600DA66B7 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
-		B1B504692AC5A3B600DA66B7 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		B1B5046B2AC5A3B600DA66B7 /* CoreDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
 		B1B5046C2AC5A3B600DA66B7 /* NSFetchRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSFetchRequests.swift; sourceTree = "<group>"; };
 		B1B5046E2AC5A3B600DA66B7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -128,7 +123,6 @@
 		B1B5048A2AC5A3B600DA66B7 /* EventLogs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EventLogs.json; sourceTree = "<group>"; };
 		B1B5048B2AC5A3B600DA66B7 /* NotifcationType.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotifcationType.json; sourceTree = "<group>"; };
 		B1B5048C2AC5A3B600DA66B7 /* EventSubscriptions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EventSubscriptions.json; sourceTree = "<group>"; };
-		B1B5048D2AC5A3B600DA66B7 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		B1B5048E2AC5A3B600DA66B7 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		B1B5048F2AC5A3B600DA66B7 /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		B1B504932AC5A3B600DA66B7 /* SavedTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTab.swift; sourceTree = "<group>"; };
@@ -208,9 +202,6 @@
 				B1B504842AC5A3B600DA66B7 /* Preview Content */,
 				B1B504902AC5A3B600DA66B7 /* Views */,
 				B1B5047A2AC5A3B600DA66B7 /* Assets.xcassets */,
-				B1B504682AC5A3B600DA66B7 /* constants.swift */,
-				B1B504692AC5A3B600DA66B7 /* DataModel.swift */,
-				B1B5048D2AC5A3B600DA66B7 /* JSON.swift */,
 				B1B5048E2AC5A3B600DA66B7 /* utils.swift */,
 			);
 			path = HZ24;
@@ -505,11 +496,9 @@
 			files = (
 				B1DE66002AD0143E00BED08E /* SelectEventTypes.swift in Sources */,
 				B1B504D22AC5A3B600DA66B7 /* utility.swift in Sources */,
-				B1B504A92AC5A3B600DA66B7 /* constants.swift in Sources */,
 				B1B504CF2AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift in Sources */,
 				B137A4AE2AD4E63D00A06727 /* ListenerRowItem.swift in Sources */,
 				B1B504BD2AC5A3B600DA66B7 /* EventLog.swift in Sources */,
-				B1B504AA2AC5A3B600DA66B7 /* DataModel.swift in Sources */,
 				B1B504CB2AC5A3B600DA66B7 /* SavedTab.swift in Sources */,
 				A2AEBE892AD24EE10056AB1F /* PageView.swift in Sources */,
 				B1B504B02AC5A3B600DA66B7 /* ThirdWebRPC.swift in Sources */,
@@ -532,7 +521,6 @@
 				B1B504CD2AC5A3B600DA66B7 /* Success.swift in Sources */,
 				B1B504CC2AC5A3B600DA66B7 /* TokenTypeSelection.swift in Sources */,
 				B1DE66072AD1028A00BED08E /* HorizontalDivider.swift in Sources */,
-				B1B504C82AC5A3B600DA66B7 /* JSON.swift in Sources */,
 				B1B504B22AC5A3B600DA66B7 /* MetadataEventABI.swift in Sources */,
 				B1B504C92AC5A3B600DA66B7 /* utils.swift in Sources */,
 				B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */,
