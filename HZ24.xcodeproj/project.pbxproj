@@ -46,7 +46,7 @@
 		B1B504C52AC5A3B600DA66B7 /* EventLogs.json in Resources */ = {isa = PBXBuildFile; fileRef = B1B5048A2AC5A3B600DA66B7 /* EventLogs.json */; };
 		B1B504C62AC5A3B600DA66B7 /* NotifcationType.json in Resources */ = {isa = PBXBuildFile; fileRef = B1B5048B2AC5A3B600DA66B7 /* NotifcationType.json */; };
 		B1B504C72AC5A3B600DA66B7 /* EventSubscriptions.json in Resources */ = {isa = PBXBuildFile; fileRef = B1B5048C2AC5A3B600DA66B7 /* EventSubscriptions.json */; };
-		B1B504C92AC5A3B600DA66B7 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048E2AC5A3B600DA66B7 /* utils.swift */; };
+		B1B504C92AC5A3B600DA66B7 /* DateUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048E2AC5A3B600DA66B7 /* DateUtilities.swift */; };
 		B1B504CA2AC5A3B600DA66B7 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5048F2AC5A3B600DA66B7 /* Main.swift */; };
 		B1B504CB2AC5A3B600DA66B7 /* SavedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504932AC5A3B600DA66B7 /* SavedTab.swift */; };
 		B1B504CC2AC5A3B600DA66B7 /* TokenTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504952AC5A3B600DA66B7 /* TokenTypeSelection.swift */; };
@@ -123,7 +123,7 @@
 		B1B5048A2AC5A3B600DA66B7 /* EventLogs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EventLogs.json; sourceTree = "<group>"; };
 		B1B5048B2AC5A3B600DA66B7 /* NotifcationType.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotifcationType.json; sourceTree = "<group>"; };
 		B1B5048C2AC5A3B600DA66B7 /* EventSubscriptions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EventSubscriptions.json; sourceTree = "<group>"; };
-		B1B5048E2AC5A3B600DA66B7 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		B1B5048E2AC5A3B600DA66B7 /* DateUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtilities.swift; sourceTree = "<group>"; };
 		B1B5048F2AC5A3B600DA66B7 /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		B1B504932AC5A3B600DA66B7 /* SavedTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTab.swift; sourceTree = "<group>"; };
 		B1B504952AC5A3B600DA66B7 /* TokenTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTypeSelection.swift; sourceTree = "<group>"; };
@@ -202,7 +202,6 @@
 				B1B504842AC5A3B600DA66B7 /* Preview Content */,
 				B1B504902AC5A3B600DA66B7 /* Views */,
 				B1B5047A2AC5A3B600DA66B7 /* Assets.xcassets */,
-				B1B5048E2AC5A3B600DA66B7 /* utils.swift */,
 			);
 			path = HZ24;
 			sourceTree = "<group>";
@@ -325,6 +324,7 @@
 				B1DE66032AD1023200BED08E /* FeedWithCoreData */,
 				B1B504A02AC5A3B600DA66B7 /* Hourmark.swift */,
 				B1DE66062AD1028A00BED08E /* HorizontalDivider.swift */,
+				B1B5048E2AC5A3B600DA66B7 /* DateUtilities.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -522,7 +522,7 @@
 				B1B504CC2AC5A3B600DA66B7 /* TokenTypeSelection.swift in Sources */,
 				B1DE66072AD1028A00BED08E /* HorizontalDivider.swift in Sources */,
 				B1B504B22AC5A3B600DA66B7 /* MetadataEventABI.swift in Sources */,
-				B1B504C92AC5A3B600DA66B7 /* utils.swift in Sources */,
+				B1B504C92AC5A3B600DA66B7 /* DateUtilities.swift in Sources */,
 				B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */,
 				A2AEBE8F2AD254260056AB1F /* Tutorials.swift in Sources */,
 				B1DE65FC2AC9329D00BED08E /* ListenerEnable.swift in Sources */,
