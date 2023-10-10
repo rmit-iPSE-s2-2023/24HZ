@@ -51,12 +51,10 @@
 		B1B504CC2AC5A3B600DA66B7 /* TokenTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504952AC5A3B600DA66B7 /* TokenTypeSelection.swift */; };
 		B1B504CD2AC5A3B600DA66B7 /* Success.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504962AC5A3B600DA66B7 /* Success.swift */; };
 		B1B504CE2AC5A3B600DA66B7 /* ListenerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504972AC5A3B600DA66B7 /* ListenerSettings.swift */; };
-		B1B504CF2AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504982AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift */; };
 		B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504992AC5A3B600DA66B7 /* ListeningTab.swift */; };
 		B1B504D12AC5A3B600DA66B7 /* NotificationSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049A2AC5A3B600DA66B7 /* NotificationSelection.swift */; };
 		B1B504D22AC5A3B600DA66B7 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049B2AC5A3B600DA66B7 /* utility.swift */; };
 		B1B504D32AC5A3B600DA66B7 /* ListenerTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049C2AC5A3B600DA66B7 /* ListenerTypeSelection.swift */; };
-		B1B504D42AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5049D2AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift */; };
 		B1B504D62AC5A3B600DA66B7 /* Hourmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504A02AC5A3B600DA66B7 /* Hourmark.swift */; };
 		B1B504DB2AC5A3B600DA66B7 /* SwipeNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504A52AC5A3B600DA66B7 /* SwipeNavigation.swift */; };
 		B1B504DC2AC5A3B600DA66B7 /* IndentedWithHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B504A72AC5A3B600DA66B7 /* IndentedWithHeaderLayout.swift */; };
@@ -127,12 +125,10 @@
 		B1B504952AC5A3B600DA66B7 /* TokenTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenTypeSelection.swift; sourceTree = "<group>"; };
 		B1B504962AC5A3B600DA66B7 /* Success.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Success.swift; sourceTree = "<group>"; };
 		B1B504972AC5A3B600DA66B7 /* ListenerSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenerSettings.swift; sourceTree = "<group>"; };
-		B1B504982AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowCustom2.swift; sourceTree = "<group>"; };
 		B1B504992AC5A3B600DA66B7 /* ListeningTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListeningTab.swift; sourceTree = "<group>"; };
 		B1B5049A2AC5A3B600DA66B7 /* NotificationSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSelection.swift; sourceTree = "<group>"; };
 		B1B5049B2AC5A3B600DA66B7 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
 		B1B5049C2AC5A3B600DA66B7 /* ListenerTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenerTypeSelection.swift; sourceTree = "<group>"; };
-		B1B5049D2AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListenerFlowCustom1.swift; sourceTree = "<group>"; };
 		B1B504A02AC5A3B600DA66B7 /* Hourmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hourmark.swift; sourceTree = "<group>"; };
 		B1B504A52AC5A3B600DA66B7 /* SwipeNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeNavigation.swift; sourceTree = "<group>"; };
 		B1B504A72AC5A3B600DA66B7 /* IndentedWithHeaderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndentedWithHeaderLayout.swift; sourceTree = "<group>"; };
@@ -305,11 +301,9 @@
 			children = (
 				B1B504DE2AC65EDF00DA66B7 /* AddListenerFlow */,
 				B1B504972AC5A3B600DA66B7 /* ListenerSettings.swift */,
-				B1B504982AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift */,
 				B1B504992AC5A3B600DA66B7 /* ListeningTab.swift */,
 				B137A4AD2AD4E63D00A06727 /* ListenerRowItem.swift */,
 				B1B5049B2AC5A3B600DA66B7 /* utility.swift */,
-				B1B5049D2AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift */,
 				B1DE65FB2AC9329D00BED08E /* ListenerEnable.swift */,
 			);
 			path = Listening;
@@ -493,7 +487,6 @@
 			files = (
 				B1DE66002AD0143E00BED08E /* SelectEventTypes.swift in Sources */,
 				B1B504D22AC5A3B600DA66B7 /* utility.swift in Sources */,
-				B1B504CF2AC5A3B600DA66B7 /* AddListenerFlowCustom2.swift in Sources */,
 				B137A4AE2AD4E63D00A06727 /* ListenerRowItem.swift in Sources */,
 				B1B504BD2AC5A3B600DA66B7 /* EventLog.swift in Sources */,
 				B1B504CB2AC5A3B600DA66B7 /* SavedTab.swift in Sources */,
@@ -503,7 +496,6 @@
 				B1B504BB2AC5A3B600DA66B7 /* EventType.swift in Sources */,
 				B1B504AD2AC5A3B600DA66B7 /* Model.xcdatamodeld in Sources */,
 				B1B504D12AC5A3B600DA66B7 /* NotificationSelection.swift in Sources */,
-				B1B504D42AC5A3B600DA66B7 /* AddListenerFlowCustom1.swift in Sources */,
 				B1DE66052AD1024E00BED08E /* TimeSegmentWithCoreData.swift in Sources */,
 				B1B504AF2AC5A3B600DA66B7 /* DefaultEventsProvider.swift in Sources */,
 				B1B504B12AC5A3B600DA66B7 /* EventsProvider.swift in Sources */,
