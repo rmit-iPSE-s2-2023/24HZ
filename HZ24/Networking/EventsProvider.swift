@@ -6,53 +6,68 @@
 // 
 
 
-
 import Foundation
 
-/// Protocol for providing events to a data layer (like Core Data). Adopters should use appropriate RPCProtocol conformers, third-party libraries, and/or their own methods to collect events and format for consumer.
-/// - should not know anything about how data is managed
-/// - just provide the correct data in the correct format
+/// Protocol for providing blockchain events to a data layer like Core Data.
+///
+/// Adopters should use appropriate ``RPCProtocol`` conformers, third-party libraries, and/or their own methods to collect events via the network and format for consumer.
 protocol EventsProvider {
     
-    // MARK: Protocol property/s
+    // MARK: - Properties
     var chainId: ChainID { get set }
     
-    // MARK: Protocol method/s
-    
-    /// Returns the current block number for set chainId
+    // MARK: - Methods
+    /// A method to return the current block number.
+    ///
+    /// Should be used to identify the most recent block number to query for events.
+    ///
+    /// - Returns: Block number as an `Int` value.
     func getCurrentBlockNumber() async throws -> Int
     
-    /// Returns all ``NewTokenEventStruct``/s in given block range for specified interfaceIds
+    // TODO: Can refactor forInterfaces data type to be ERCInterfaceId type and convert to useful type in implementation
+    /// A method to retrieve new token contract deployment events.
+    ///
     /// - Parameters:
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
     ///   - forInterfaces: ``ERCInterfaceId`` to query for
-    // TODO: Can refactor forInterfaces data type to be ERCInterfaceId type and convert to useful type in implementation
+    ///
+    /// - Returns: Useful information about newly deployed token contracts in given block range.
     func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEventStruct]
     
-    /// Returns all ``MetadataEventStruct``/s in given block range for specified contract addresses
+    /// A method to retrieve events related to metadata updates for given token contracts.
+    ///
     /// - Parameters:
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
     ///   - forContracts: Contract addresses to query for
+    ///
+    /// - Returns: Objects containing information about metadata update events.
     func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataEventStruct]
     
-    /// Returns all ``MintCommentEventStruct``/s in given block range for specified contract addresses
+    /// A method to retrieve mint events where the minter included a comment.
+    ///
     /// - Parameters:
     ///   - fromBlock: The lower bound of block range (inclusive)
     ///   - toBlock: The upper bound of block range (inclusive)
     ///   - forContracts: Contract addresses to query for
+    ///
+    /// - Returns: Objects containing information about mint with comment events.
     func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEventStruct]
 
     // Currently out of scope
 //    func getSalesUpdateEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [SalesUpdateEvent]
 }
 
+/// The number identifier of an EVM-compatible chain..
 enum ChainID : Int {
     case eth = 1
     case zora = 7777777
 }
 
+/// A struct that contains useful information about a token contract deployment event.
+///
+/// Should be used to create ``NewTokenEvent`` in Core Data layer.
 struct NewTokenEventStruct {
     
     /// MO: ``Event`` attribute/s
@@ -71,6 +86,9 @@ struct NewTokenEventStruct {
     var deployerAddress: String
 }
 
+/// A struct that contains useful information about an event related to metadata updates.
+///
+/// Should be used to create ``MetadataEvent`` in Core Data layer.
 struct MetadataEventStruct {
 
     /// MO ``Event`` attribute/s
@@ -96,6 +114,9 @@ struct MetadataEventStruct {
     
 }
 
+/// A struct that contains useful information about en event where the user included a comment.
+///
+/// Should be used to create ``MintCommentEvent`` in Core Data layer.
 struct MintCommentEventStruct {
     /// MO ``Event`` attribute/s
     var contractAddress: String
