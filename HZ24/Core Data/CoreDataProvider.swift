@@ -92,7 +92,7 @@ class CoreDataProvider {
     // MARK: Initializer
     init(inMemory: Bool = false) {
         self.inMemory = inMemory
-        eventsProvider = DefaultEventsProvider.zora
+        eventsProvider = DefaultEventsProvider<ThirdWebRPC>.zora()
     }
 }
 
@@ -109,6 +109,13 @@ extension CoreDataProvider {
     // FIXME: At the moment, it just assumes there is no events fetched at all. This must be fixed to only query blocks that have not been queried already.
     func fetchData() async throws {
         let context = self.container.viewContext
+        
+        // FIXME: Should only fetch events for the blocks that haven't been queried, but we are just deleting all events and fetching events in the last 1000 blocks for simplicity
+        /// Delete all events
+        let events: [Event] = try context.fetch(.init(entityName: "Event"))
+        for event in events {
+            context.delete(event)
+        }
         
         // MARK: Block range
         /// Firstly, establish the block range to query for new events

@@ -62,7 +62,7 @@ struct EnterContractAddress: View {
                     if isValid {
                         // Download contract info
                         // FIXME: Use dependency injection and insert RPC provider into context in App entrypoint
-                        let rpc = ThirdWebRPC(chainName: "zora")
+                        let rpc = ThirdWebRPC(chainName: ThirdWebRPC.ThirdWebChainName.zora)
                         Task {
                             do {
                                 let tokenInfos = try await rpc.getTokenInfos(contractAddresses: [contractAddress])
