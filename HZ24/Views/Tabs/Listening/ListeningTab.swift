@@ -97,7 +97,8 @@ struct ListeningTab_Previews: PreviewProvider {
     static var previews: some View {
         // Must wrap in NavigationView to prevent "No entity found" warnings
         NavigationView {
-            ListeningTab()        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+            ListeningTab()
+                .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         }
         .preferredColorScheme(.dark)
     }
