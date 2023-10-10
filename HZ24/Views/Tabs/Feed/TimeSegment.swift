@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct TimeSegmentWithCoreData: View {
+struct TimeSegment: View {
 
     var hourmarkLabel: String
     var events: [Event]
@@ -60,20 +60,20 @@ struct TimeSegmentWithCoreData: View {
             }
         }
         .sheet(item: $selectedEvent) { event in
-            EventDetailViewWithCoreData(event: event)
+            EventDetails(event: event)
         }
         .preferredColorScheme(.dark)
     }
 
 }
 
-struct TimeSegmentWithCoreData_Previews: PreviewProvider {
+struct TimeSegment_Previews: PreviewProvider {
     
     static let coredataProvider = CoreDataProvider.preview
     static let events: [Event] = PreviewModels.makeNewTokenEvents(3)
     
     static var previews: some View {
-        TimeSegmentWithCoreData(hourmarkLabel: "11:00", events: events)
+        TimeSegment(hourmarkLabel: "11:00", events: events)
             .environment(\.managedObjectContext, coredataProvider.container.viewContext)
     }
 }

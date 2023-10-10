@@ -39,7 +39,7 @@ struct ContentView: View {
                             .tag(0)
                         
                         /// Feed Tab
-                        FeedTabWithCoreData()
+                        FeedTab()
                             .tag(1)
                             .refreshable {
                                 await fetchData()

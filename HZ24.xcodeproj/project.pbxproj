@@ -65,10 +65,10 @@
 		B1DE65FC2AC9329D00BED08E /* ListenerEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FB2AC9329D00BED08E /* ListenerEnable.swift */; };
 		B1DE65FE2ACF522500BED08E /* EnterContractAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FD2ACF522500BED08E /* EnterContractAddress.swift */; };
 		B1DE66002AD0143E00BED08E /* SelectEventTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE65FF2AD0143E00BED08E /* SelectEventTypes.swift */; };
-		B1DE66022AD1015200BED08E /* FeedTabWithCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66012AD1015200BED08E /* FeedTabWithCoreData.swift */; };
-		B1DE66052AD1024E00BED08E /* TimeSegmentWithCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66042AD1024E00BED08E /* TimeSegmentWithCoreData.swift */; };
+		B1DE66022AD1015200BED08E /* FeedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66012AD1015200BED08E /* FeedTab.swift */; };
+		B1DE66052AD1024E00BED08E /* TimeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66042AD1024E00BED08E /* TimeSegment.swift */; };
 		B1DE66072AD1028A00BED08E /* HorizontalDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66062AD1028A00BED08E /* HorizontalDivider.swift */; };
-		B1DE66092AD10B3000BED08E /* EventDetailViewWithCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66082AD10B3000BED08E /* EventDetailViewWithCoreData.swift */; };
+		B1DE66092AD10B3000BED08E /* EventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE66082AD10B3000BED08E /* EventDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,10 +141,10 @@
 		B1DE65FB2AC9329D00BED08E /* ListenerEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerEnable.swift; sourceTree = "<group>"; };
 		B1DE65FD2ACF522500BED08E /* EnterContractAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterContractAddress.swift; sourceTree = "<group>"; };
 		B1DE65FF2AD0143E00BED08E /* SelectEventTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEventTypes.swift; sourceTree = "<group>"; };
-		B1DE66012AD1015200BED08E /* FeedTabWithCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTabWithCoreData.swift; sourceTree = "<group>"; };
-		B1DE66042AD1024E00BED08E /* TimeSegmentWithCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSegmentWithCoreData.swift; sourceTree = "<group>"; };
+		B1DE66012AD1015200BED08E /* FeedTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTab.swift; sourceTree = "<group>"; };
+		B1DE66042AD1024E00BED08E /* TimeSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSegment.swift; sourceTree = "<group>"; };
 		B1DE66062AD1028A00BED08E /* HorizontalDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalDivider.swift; sourceTree = "<group>"; };
-		B1DE66082AD10B3000BED08E /* EventDetailViewWithCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewWithCoreData.swift; sourceTree = "<group>"; };
+		B1DE66082AD10B3000BED08E /* EventDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,8 +315,11 @@
 		B1B5049E2AC5A3B600DA66B7 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				B1DE66032AD1023200BED08E /* FeedWithCoreData */,
+				B1DE66012AD1015200BED08E /* FeedTab.swift */,
 				B1B504A02AC5A3B600DA66B7 /* Hourmark.swift */,
+				B140E9062AD1143700519526 /* EventRowItem.swift */,
+				B1DE66082AD10B3000BED08E /* EventDetails.swift */,
+				B1DE66042AD1024E00BED08E /* TimeSegment.swift */,
 				B1DE66062AD1028A00BED08E /* HorizontalDivider.swift */,
 				B1B5048E2AC5A3B600DA66B7 /* DateUtilities.swift */,
 			);
@@ -359,17 +362,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B1DE66032AD1023200BED08E /* FeedWithCoreData */ = {
-			isa = PBXGroup;
-			children = (
-				B140E9062AD1143700519526 /* EventRowItem.swift */,
-				B1DE66082AD10B3000BED08E /* EventDetailViewWithCoreData.swift */,
-				B1DE66042AD1024E00BED08E /* TimeSegmentWithCoreData.swift */,
-				B1DE66012AD1015200BED08E /* FeedTabWithCoreData.swift */,
-			);
-			path = FeedWithCoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,14 +491,14 @@
 				B1B504BB2AC5A3B600DA66B7 /* EventType.swift in Sources */,
 				B1B504AD2AC5A3B600DA66B7 /* Model.xcdatamodeld in Sources */,
 				B1B504D12AC5A3B600DA66B7 /* NotificationSelection.swift in Sources */,
-				B1DE66052AD1024E00BED08E /* TimeSegmentWithCoreData.swift in Sources */,
+				B1DE66052AD1024E00BED08E /* TimeSegment.swift in Sources */,
 				B1B504AF2AC5A3B600DA66B7 /* DefaultEventsProvider.swift in Sources */,
 				B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */,
 				B1B504B12AC5A3B600DA66B7 /* EventsProvider.swift in Sources */,
 				B1B504AE2AC5A3B600DA66B7 /* RPCProtocol.swift in Sources */,
 				B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */,
 				B1B504B62AC5A3B600DA66B7 /* EventListenerType.swift in Sources */,
-				B1DE66092AD10B3000BED08E /* EventDetailViewWithCoreData.swift in Sources */,
+				B1DE66092AD10B3000BED08E /* EventDetails.swift in Sources */,
 				B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */,
 				B140E9072AD1143700519526 /* EventRowItem.swift in Sources */,
 				B1B504DB2AC5A3B600DA66B7 /* SwipeNavigation.swift in Sources */,
@@ -518,7 +510,7 @@
 				B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */,
 				A2AEBE8F2AD254260056AB1F /* Tutorials.swift in Sources */,
 				B1DE65FC2AC9329D00BED08E /* ListenerEnable.swift in Sources */,
-				B1DE66022AD1015200BED08E /* FeedTabWithCoreData.swift in Sources */,
+				B1DE66022AD1015200BED08E /* FeedTab.swift in Sources */,
 				B1B504B82AC5A3B600DA66B7 /* SavedEvent.swift in Sources */,
 				B1B504B42AC5A3B600DA66B7 /* GenericListenerType.swift in Sources */,
 				B1B504BE2AC5A3B600DA66B7 /* EventSubscription.swift in Sources */,

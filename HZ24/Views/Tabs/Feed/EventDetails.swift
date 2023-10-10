@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EventDetailViewWithCoreData: View {
+struct EventDetails: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -277,7 +277,7 @@ struct EventDetailViewWithCoreData: View {
     }
 }
 
-struct EventDetailViewWithCoreData_Previews: PreviewProvider {
+struct EventDetails_Previews: PreviewProvider {
     static let coredataProvider = CoreDataProvider.preview
     //    static let event = NewTokenEvent(context: coredataProvider.container.viewContext)
     static let newTokenEvent = PreviewModels.newTokenEvent
@@ -288,7 +288,7 @@ struct EventDetailViewWithCoreData_Previews: PreviewProvider {
         NavigationView {
             Text("Parent View")
                 .sheet(item: .constant(newTokenEvent)) { event in
-                    EventDetailViewWithCoreData(event: event)
+                    EventDetails(event: event)
                     
                 }
                 .preferredColorScheme(.dark)
@@ -298,7 +298,7 @@ struct EventDetailViewWithCoreData_Previews: PreviewProvider {
         
         Text("Parent View")
             .sheet(item: .constant(metadataEvent)) { event in
-                EventDetailViewWithCoreData(event: event)
+                EventDetails(event: event)
                 
             }
             .preferredColorScheme(.dark)

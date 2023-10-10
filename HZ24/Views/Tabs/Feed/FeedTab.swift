@@ -7,11 +7,14 @@
 
 import SwiftUI
 
-struct FeedTabWithCoreData: View {
+/// A View that displays Events that have been captured by the Listeners that the user has added.
+///
+/// For use in a TabView. Should show all the events that has been "captured" in the last 24 hours.
+struct FeedTab: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    /// Get an array of `Date`/s to segment events by hour blocks
+    /// An array of `Date`/s to segment events by hour blocks.
     private var dateIntervals = getDateIntervalsForPast24Hours(fromDate: Date())
     
     /// Fetch ``Event``/s in descending order
@@ -22,7 +25,7 @@ struct FeedTabWithCoreData: View {
     var body: some View {
         VStack {
             
-            // MARK: Tab title
+            // MARK: Tab header
             HStack {
                 Text("Events captured in the Last 24 Hours")
                     .multilineTextAlignment(.leading)
@@ -45,7 +48,7 @@ struct FeedTabWithCoreData: View {
                             
                             return fromDate <= eventDate && eventDate < toDate
                         }
-                        TimeSegmentWithCoreData(hourmarkLabel: hourmarkLabel, events: filteredEvents)
+                        TimeSegment(hourmarkLabel: hourmarkLabel, events: filteredEvents)
                     }
                     
                     Spacer()
@@ -53,18 +56,18 @@ struct FeedTabWithCoreData: View {
             }
         }
         .padding()
-        .preferredColorScheme(.dark)
     }
 }
 
-struct FeedTabWithCoreData_Previews: PreviewProvider {
+struct FeedTab_Previews: PreviewProvider {
     
     static let coredataProvider = CoreDataProvider.preview
     
     static var previews: some View {
         NavigationView {
-            FeedTabWithCoreData()
+            FeedTab()
                 .environment(\.managedObjectContext, coredataProvider.container.viewContext)
         }
+        .preferredColorScheme(.dark)
     }
 }

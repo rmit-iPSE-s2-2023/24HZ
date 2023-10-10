@@ -9,7 +9,7 @@ import SwiftUI
 
 /// This View displays Events that have been explicitly saved by the user.
 ///
-/// For use in a TabView
+/// For use in a TabView.
 struct SavedTab: View {
     
     // Fetch saved events from Core Data
@@ -59,7 +59,7 @@ struct SavedTab: View {
             }
             .sheet(item: $selectedEvent) { event in
                 // TODO: If an Event has already been saved, this should be reflected in the detail view. e.g. button disabled or display differently to indicate it's already been saved. Maybe replace "Save" text with "Saved" or "Unsave" even..
-                EventDetailViewWithCoreData(event: event)
+                EventDetails(event: event)
             }
             
             Spacer()
