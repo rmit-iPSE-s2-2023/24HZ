@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2A819832AD5767A004E7AF5 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A2A819822AD5767A004E7AF5 /* web3.swift */; };
+		A2A8198D2AD58B82004E7AF5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A8198C2AD58B82004E7AF5 /* WidgetKit.framework */; };
+		A2A8198F2AD58B82004E7AF5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A8198E2AD58B82004E7AF5 /* SwiftUI.framework */; };
+		A2A819922AD58B82004E7AF5 /* HZ24Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A819912AD58B82004E7AF5 /* HZ24Widget.swift */; };
+		A2A819952AD58B86004E7AF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2A819942AD58B86004E7AF5 /* Assets.xcassets */; };
+		A2A819972AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A2A819932AD58B82004E7AF5 /* HZ24Widget.intentdefinition */; };
+		A2A819982AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = A2A819932AD58B82004E7AF5 /* HZ24Widget.intentdefinition */; };
+		A2A8199B2AD58B86004E7AF5 /* HZ24WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A2A8198B2AD58B82004E7AF5 /* HZ24WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A2A819AD2AD59716004E7AF5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046D2AC5A3B600DA66B7 /* Model.xcdatamodeld */; };
+		A2A819AF2AD599BF004E7AF5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A819AE2AD599BF004E7AF5 /* Persistence.swift */; };
+		A2A819B02AD599BF004E7AF5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A819AE2AD599BF004E7AF5 /* Persistence.swift */; };
+		A2A819B72AD5D81A004E7AF5 /* HZ24EventProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A819B62AD5D81A004E7AF5 /* HZ24EventProvider.swift */; };
+		A2A819B92AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A819B82AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift */; };
 		A2AEBE892AD24EE10056AB1F /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE882AD24EE00056AB1F /* PageView.swift */; };
 		A2AEBE8B2AD24F3F0056AB1F /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8A2AD24F3F0056AB1F /* PageViewController.swift */; };
 		A2AEBE8D2AD24F5E0056AB1F /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8C2AD24F5E0056AB1F /* PageControl.swift */; };
 		A2AEBE8F2AD254260056AB1F /* Tutorials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8E2AD254250056AB1F /* Tutorials.swift */; };
-		A2AEBF202AD42DF20056AB1F /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A2AEBF1F2AD42DF20056AB1F /* web3.swift */; };
-		B137A4AC2AD4B9D500A06727 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B137A4AB2AD4B9D500A06727 /* web3.swift */; };
 		B137A4AE2AD4E63D00A06727 /* ListenerRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AD2AD4E63D00A06727 /* ListenerRowItem.swift */; };
 		B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AF2AD564CA00A06727 /* AddListenerButton.swift */; };
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
@@ -72,6 +83,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A2A819992AD58B86004E7AF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A22074572A7D5FF0002FD6CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2A8198A2AD58B82004E7AF5;
+			remoteInfo = HZ24WidgetExtension;
+		};
 		B1BE37832AC01BE900104A4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A22074572A7D5FF0002FD6CB /* Project object */;
@@ -81,8 +99,34 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A2A8199F2AD58B86004E7AF5 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A2A8199B2AD58B86004E7AF5 /* HZ24WidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A220745F2A7D5FF0002FD6CB /* HZ24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZ24.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A819842AD57A63004E7AF5 /* HZ24.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HZ24.entitlements; sourceTree = "<group>"; };
+		A2A8198B2AD58B82004E7AF5 /* HZ24WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HZ24WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A8198C2AD58B82004E7AF5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		A2A8198E2AD58B82004E7AF5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		A2A819912AD58B82004E7AF5 /* HZ24Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZ24Widget.swift; sourceTree = "<group>"; };
+		A2A819932AD58B82004E7AF5 /* HZ24Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = HZ24Widget.intentdefinition; sourceTree = "<group>"; };
+		A2A819942AD58B86004E7AF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A2A819962AD58B86004E7AF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2A819AA2AD596AF004E7AF5 /* HZ24WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HZ24WidgetExtension.entitlements; sourceTree = "<group>"; };
+		A2A819AE2AD599BF004E7AF5 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		A2A819B62AD5D81A004E7AF5 /* HZ24EventProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZ24EventProvider.swift; sourceTree = "<group>"; };
+		A2A819B82AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZ24WidgetEntryView.swift; sourceTree = "<group>"; };
 		A2AEBE882AD24EE00056AB1F /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		A2AEBE8A2AD24F3F0056AB1F /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		A2AEBE8C2AD24F5E0056AB1F /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
@@ -152,7 +196,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2AEBF202AD42DF20056AB1F /* web3.swift in Frameworks */,
+				A2A819832AD5767A004E7AF5 /* web3.swift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A819882AD58B82004E7AF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2A8198F2AD58B82004E7AF5 /* SwiftUI.framework in Frameworks */,
+				A2A8198D2AD58B82004E7AF5 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +213,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B137A4AC2AD4B9D500A06727 /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,9 +222,11 @@
 		A22074562A7D5FF0002FD6CB = {
 			isa = PBXGroup;
 			children = (
+				A2A819AA2AD596AF004E7AF5 /* HZ24WidgetExtension.entitlements */,
 				B1B504672AC5A3B600DA66B7 /* HZ24 */,
 				B19E75132A99694B008E9FF4 /* README.md */,
 				B1BE37802AC01BE900104A4A /* HZ24Tests */,
+				A2A819902AD58B82004E7AF5 /* HZ24Widget */,
 				A22074602A7D5FF0002FD6CB /* Products */,
 				B1BE37912AC03F9300104A4A /* Frameworks */,
 			);
@@ -183,13 +237,28 @@
 			children = (
 				A220745F2A7D5FF0002FD6CB /* HZ24.app */,
 				B1BE377F2AC01BE900104A4A /* HZ24Tests.xctest */,
+				A2A8198B2AD58B82004E7AF5 /* HZ24WidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A2A819902AD58B82004E7AF5 /* HZ24Widget */ = {
+			isa = PBXGroup;
+			children = (
+				A2A819912AD58B82004E7AF5 /* HZ24Widget.swift */,
+				A2A819B62AD5D81A004E7AF5 /* HZ24EventProvider.swift */,
+				A2A819B82AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift */,
+				A2A819932AD58B82004E7AF5 /* HZ24Widget.intentdefinition */,
+				A2A819942AD58B86004E7AF5 /* Assets.xcassets */,
+				A2A819962AD58B86004E7AF5 /* Info.plist */,
+			);
+			path = HZ24Widget;
 			sourceTree = "<group>";
 		};
 		B1B504672AC5A3B600DA66B7 /* HZ24 */ = {
 			isa = PBXGroup;
 			children = (
+				A2A819842AD57A63004E7AF5 /* HZ24.entitlements */,
 				B1B5048F2AC5A3B600DA66B7 /* Main.swift */,
 				B1B5046A2AC5A3B600DA66B7 /* Core Data */,
 				B1B5046F2AC5A3B600DA66B7 /* Networking */,
@@ -206,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				B1B5046B2AC5A3B600DA66B7 /* CoreDataProvider.swift */,
+				A2A819AE2AD599BF004E7AF5 /* Persistence.swift */,
 				B1B5046C2AC5A3B600DA66B7 /* NSFetchRequests.swift */,
 				B1B5046D2AC5A3B600DA66B7 /* Model.xcdatamodeld */,
 			);
@@ -360,6 +430,8 @@
 		B1BE37912AC03F9300104A4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2A8198C2AD58B82004E7AF5 /* WidgetKit.framework */,
+				A2A8198E2AD58B82004E7AF5 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -374,18 +446,37 @@
 				A220745B2A7D5FF0002FD6CB /* Sources */,
 				A220745C2A7D5FF0002FD6CB /* Frameworks */,
 				A220745D2A7D5FF0002FD6CB /* Resources */,
+				A2A8199F2AD58B86004E7AF5 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A2A8199A2AD58B86004E7AF5 /* PBXTargetDependency */,
+			);
+			name = HZ24;
+			packageProductDependencies = (
+				A2A819822AD5767A004E7AF5 /* web3.swift */,
+			);
+			productName = "a1-s3713342";
+			productReference = A220745F2A7D5FF0002FD6CB /* HZ24.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A2A8198A2AD58B82004E7AF5 /* HZ24WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2A8199C2AD58B86004E7AF5 /* Build configuration list for PBXNativeTarget "HZ24WidgetExtension" */;
+			buildPhases = (
+				A2A819872AD58B82004E7AF5 /* Sources */,
+				A2A819882AD58B82004E7AF5 /* Frameworks */,
+				A2A819892AD58B82004E7AF5 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = HZ24;
-			packageProductDependencies = (
-				A2AEBF1F2AD42DF20056AB1F /* web3.swift */,
-			);
-			productName = "a1-s3713342";
-			productReference = A220745F2A7D5FF0002FD6CB /* HZ24.app */;
-			productType = "com.apple.product-type.application";
+			name = HZ24WidgetExtension;
+			productName = HZ24WidgetExtension;
+			productReference = A2A8198B2AD58B82004E7AF5 /* HZ24WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		B1BE377E2AC01BE900104A4A /* HZ24Tests */ = {
 			isa = PBXNativeTarget;
@@ -402,7 +493,6 @@
 			);
 			name = HZ24Tests;
 			packageProductDependencies = (
-				B137A4AB2AD4B9D500A06727 /* web3.swift */,
 			);
 			productName = 24HZTests;
 			productReference = B1BE377F2AC01BE900104A4A /* HZ24Tests.xctest */;
@@ -415,10 +505,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					A220745E2A7D5FF0002FD6CB = {
+						CreatedOnToolsVersion = 13.2;
+					};
+					A2A8198A2AD58B82004E7AF5 = {
 						CreatedOnToolsVersion = 13.2;
 					};
 					B1BE377E2AC01BE900104A4A = {
@@ -437,7 +530,7 @@
 			);
 			mainGroup = A22074562A7D5FF0002FD6CB;
 			packageReferences = (
-				A2AEBF1E2AD42DF20056AB1F /* XCRemoteSwiftPackageReference "web3" */,
+				A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */,
 			);
 			productRefGroup = A22074602A7D5FF0002FD6CB /* Products */;
 			projectDirPath = "";
@@ -445,6 +538,7 @@
 			targets = (
 				A220745E2A7D5FF0002FD6CB /* HZ24 */,
 				B1BE377E2AC01BE900104A4A /* HZ24Tests */,
+				A2A8198A2AD58B82004E7AF5 /* HZ24WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -463,6 +557,14 @@
 				B1B504C42AC5A3B600DA66B7 /* Preview Assets.xcassets in Resources */,
 				B1B504C72AC5A3B600DA66B7 /* EventSubscriptions.json in Resources */,
 				B1B504C12AC5A3B600DA66B7 /* SmartContracts.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A819892AD58B82004E7AF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2A819952AD58B86004E7AF5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +596,7 @@
 				B1DE66052AD1024E00BED08E /* TimeSegment.swift in Sources */,
 				B1B504AF2AC5A3B600DA66B7 /* DefaultEventsProvider.swift in Sources */,
 				B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */,
+				A2A819982AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */,
 				B1B504B12AC5A3B600DA66B7 /* EventsProvider.swift in Sources */,
 				B1B504AE2AC5A3B600DA66B7 /* RPCProtocol.swift in Sources */,
 				B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */,
@@ -515,6 +618,7 @@
 				B1B504B42AC5A3B600DA66B7 /* GenericListenerType.swift in Sources */,
 				B1B504BE2AC5A3B600DA66B7 /* EventSubscription.swift in Sources */,
 				B1DE65FE2ACF522500BED08E /* EnterContractAddress.swift in Sources */,
+				A2A819AF2AD599BF004E7AF5 /* Persistence.swift in Sources */,
 				B1B504AC2AC5A3B600DA66B7 /* NSFetchRequests.swift in Sources */,
 				B1B504CE2AC5A3B600DA66B7 /* ListenerSettings.swift in Sources */,
 				B1B504DD2AC5A3B600DA66B7 /* ContentView.swift in Sources */,
@@ -531,6 +635,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A2A819872AD58B82004E7AF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2A819972AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */,
+				A2A819922AD58B82004E7AF5 /* HZ24Widget.swift in Sources */,
+				A2A819AD2AD59716004E7AF5 /* Model.xcdatamodeld in Sources */,
+				A2A819B92AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift in Sources */,
+				A2A819B02AD599BF004E7AF5 /* Persistence.swift in Sources */,
+				A2A819B72AD5D81A004E7AF5 /* HZ24EventProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1BE377B2AC01BE900104A4A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -544,6 +661,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A2A8199A2AD58B86004E7AF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2A8198A2AD58B82004E7AF5 /* HZ24WidgetExtension */;
+			targetProxy = A2A819992AD58B86004E7AF5 /* PBXContainerItemProxy */;
+		};
 		B1BE37842AC01BE900104A4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A220745E2A7D5FF0002FD6CB /* HZ24 */;
@@ -671,12 +793,14 @@
 		A220746E2A7D5FF3002FD6CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HZ24/HZ24.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "HZ24/Preview\\ Content";
-				DEVELOPMENT_TEAM = 3KK2DSH34L;
+				DEVELOPMENT_TEAM = U6V5MXK3VE;
 				ENABLE_PREVIEWS = YES;
 				"EXCLUDED_SOURCE_FILE_NAMES[arch=*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -690,7 +814,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = None.24HZ;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Min-Jin.24HZ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -701,12 +825,14 @@
 		A220746F2A7D5FF3002FD6CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HZ24/HZ24.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "HZ24/Preview\\ Content";
-				DEVELOPMENT_TEAM = 3KK2DSH34L;
+				DEVELOPMENT_TEAM = U6V5MXK3VE;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -719,8 +845,64 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = None.24HZ;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Min-Jin.24HZ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A2A8199D2AD58B86004E7AF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HZ24WidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U6V5MXK3VE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HZ24Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HZ24Widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Min-Jin.24HZ.HZ24Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A2A8199E2AD58B86004E7AF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HZ24WidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U6V5MXK3VE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HZ24Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HZ24Widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Min-Jin.24HZ.HZ24Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -796,6 +978,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		A2A8199C2AD58B86004E7AF5 /* Build configuration list for PBXNativeTarget "HZ24WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2A8199D2AD58B86004E7AF5 /* Debug */,
+				A2A8199E2AD58B86004E7AF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B1BE37852AC01BE900104A4A /* Build configuration list for PBXNativeTarget "HZ24Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -808,7 +999,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A2AEBF1E2AD42DF20056AB1F /* XCRemoteSwiftPackageReference "web3" */ = {
+		A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/argentlabs/web3.swift";
 			requirement = {
@@ -819,14 +1010,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A2AEBF1F2AD42DF20056AB1F /* web3.swift */ = {
+		A2A819822AD5767A004E7AF5 /* web3.swift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A2AEBF1E2AD42DF20056AB1F /* XCRemoteSwiftPackageReference "web3" */;
-			productName = web3.swift;
-		};
-		B137A4AB2AD4B9D500A06727 /* web3.swift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A2AEBF1E2AD42DF20056AB1F /* XCRemoteSwiftPackageReference "web3" */;
+			package = A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;
 		};
 /* End XCSwiftPackageProductDependency section */
