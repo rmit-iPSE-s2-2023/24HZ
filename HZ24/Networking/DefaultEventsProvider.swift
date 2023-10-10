@@ -9,32 +9,43 @@
 import Foundation
 import web3
 
-/// Default implementation of ``EventsProvider``
-/// This implementation of ``EventsProvider`` uses the `web3.swift` Swift Package for some Ethereum convenience methods:
-/// - Encoding/decoding hex data; hexadecimal (base-16) format
-/// - ABIType abstractions
-/// - RPC call abstractions
+/// Provides blockchain events for data layer.
+///
+/// This is the default implementation of ``EventsProvider`` that uses an internal RPC client and web3.swift's `EthereumHttpClient` for blockchain data retrieval.
+///
+/// The `web3.swift` Swift Package is used for Ethereum convenience methods, such as encoding/decoding hex data (hexadecimal (base-16) format), ABIType abstractions, and RPC call abstractions.
+///
 /// Most RPC calls are made using custom batch JSON-RPC methods provided by an ``RPCProtocol`` adopter
-class DefaultEventsProvider : EventsProvider {
+class DefaultEventsProvider<T: RPCProtocol> : EventsProvider {
     
     // MARK: Property/s
+    /// Number identifer of the chain this provider is configured for.
     var chainId: ChainID
     
+    /// web3.swift Client.
     private let client: EthereumHttpClient
-    private let rpc: RPCProtocol
+    /// A service that makes RPC calls.
+    private let rpc: T
     
     // MARK: Singleton/s
-    static let zora = DefaultEventsProvider(chain: "zora")
-    static let eth = DefaultEventsProvider(chain: "ethereum")
+    /// Creates an instace configured for the Zora network.
+    static func zora() -> DefaultEventsProvider<ThirdWebRPC> {
+        return DefaultEventsProvider<ThirdWebRPC>(chainId: ChainID.zora, rpcClient: ThirdWebRPC(chainName: ThirdWebRPC.ThirdWebChainName.zora), urlForWeb3: "https://zora.rpc.thirdweb.com")
+    }
+    
+    /// Creates an instace configured for the Ethereum network.
+    static func eth() -> DefaultEventsProvider<ThirdWebRPC> {
+        return DefaultEventsProvider<ThirdWebRPC>(chainId: ChainID.eth, rpcClient: ThirdWebRPC(chainName: ThirdWebRPC.ThirdWebChainName.eth), urlForWeb3: "https://eth.rpc.thirdweb.com")
+    }
     
     // MARK: Initializer
-    private init(chain: String) {
-        guard let clientUrl = URL(string: "https://\(chain).rpc.thirdweb.com") else {
+    private init(chainId: ChainID, rpcClient: T, urlForWeb3 clientUrl: String) {
+        self.chainId = chainId
+        guard let clientUrl = URL(string: clientUrl) else {
             fatalError("Invalid URL for Ethereum client")
         }
-        chainId = ChainID.zora
-        client = EthereumHttpClient(url: clientUrl)
-        rpc = ThirdWebRPC(chainName: "zora")
+        self.client = EthereumHttpClient(url: clientUrl)
+        self.rpc = rpcClient
     }
 }
 
@@ -49,13 +60,12 @@ extension DefaultEventsProvider {
 
 extension DefaultEventsProvider {
     // MARK: Protocol method implementation/s
-    ///Default implementation of ``EventsProvider/getCurrentBlockNumber()``
+
     func getCurrentBlockNumber() async throws -> Int {
         let currentBlock = try await self.client.eth_blockNumber()
         return currentBlock
     }
     
-    /// Default implementation of ``EventsProvider/getNewTokenEvents(fromBlock:toBlock:forInterfaces:)``
     func getNewTokenEvents(fromBlock: Int, toBlock: Int, forInterfaces interfaceIds: [Data]) async throws -> [NewTokenEventStruct] {
         /// RPC Call1: Get ``BlockObject``s for given block range
         guard let blockObjects = try? await rpc.getBlocksInRange(fromBlock: fromBlock, toBlock: toBlock) else {
@@ -119,7 +129,6 @@ extension DefaultEventsProvider {
         return newTokenEventsWithTokenInfo
     }
     
-    /// Default Implementation of ``EventsProvider/getMetadataEvents(fromBlock:toBlock:forContracts:)``
     func getMetadataEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MetadataEventStruct] {
         /// Create an array of relevant event types conforming to ``ABIEvent``
         var abiEventTypes: [ABIEvent.Type] = []
@@ -186,7 +195,6 @@ extension DefaultEventsProvider {
         /// Note: tokenName and tokenSymbol should be fetched when user adds new listener for a specified contract address.
     }
     
-    /// Default Implementation of ``EventsProvider/getMintCommentEvents(fromBlock:toBlock:forContracts:)``
     func getMintCommentEvents(fromBlock: Int, toBlock: Int, forContracts contracts: [String]?) async throws -> [MintCommentEventStruct] {
         /// ABIEvent types that are relevant to Mint with Comments
         var abiEventTypes = [ABIEvent.Type]()
