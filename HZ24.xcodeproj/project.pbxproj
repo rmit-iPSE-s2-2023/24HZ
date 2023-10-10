@@ -26,6 +26,7 @@
 		A2AEBE8F2AD254260056AB1F /* Tutorials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8E2AD254250056AB1F /* Tutorials.swift */; };
 		B137A4AE2AD4E63D00A06727 /* ListenerRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AD2AD4E63D00A06727 /* ListenerRowItem.swift */; };
 		B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AF2AD564CA00A06727 /* AddListenerButton.swift */; };
+		B137A4B22AD61C0500A06727 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B137A4B12AD61C0500A06727 /* web3.swift */; };
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
 		B1AD3B8F2AC4370700912CF5 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */; };
@@ -213,6 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B137A4B22AD61C0500A06727 /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +511,7 @@
 			);
 			name = HZ24Tests;
 			packageProductDependencies = (
+				B137A4B12AD61C0500A06727 /* web3.swift */,
 			);
 			productName = 24HZTests;
 			productReference = B1BE377F2AC01BE900104A4A /* HZ24Tests.xctest */;
@@ -933,11 +936,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3KK2DSH34L;
+				DEVELOPMENT_TEAM = U6V5MXK3VE;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "rmit-iPSE-s2-2023.-4HZTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Min-Jin.24HZTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -957,11 +960,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3KK2DSH34L;
+				DEVELOPMENT_TEAM = U6V5MXK3VE;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "rmit-iPSE-s2-2023.-4HZTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Min-Jin.24HZTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1027,6 +1030,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		A2A819822AD5767A004E7AF5 /* web3.swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
+		};
+		B137A4B12AD61C0500A06727 /* web3.swift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;
