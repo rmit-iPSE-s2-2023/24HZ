@@ -74,7 +74,7 @@ struct EventRowItem: View {
             }
             
         }
-        .frame(height: 80)
+        .frame(height: 60)
         .padding(8)
         .background(Color.orange)
         .cornerRadius(10)
