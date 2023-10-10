@@ -10,7 +10,6 @@ import SwiftUI
 // MARK: - Final Step of AddListenerFlow
 struct Success: View {
     
-    let user = getDummyUser() // Create a constant user for preview
     @State private var goToNextScreen = false
     
     var body: some View {
