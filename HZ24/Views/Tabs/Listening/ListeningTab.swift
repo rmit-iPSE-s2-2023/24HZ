@@ -20,9 +20,6 @@ struct ListeningTab: View {
     @FetchRequest(entity: Listener.entity(), sortDescriptors: [])
     private var listeners: FetchedResults<Listener>
     
-    // TODO: Get rid of this, no user info will be stored
-    @Binding var user: User
-    
     // State to manage navigation to the next view.
     // Triggered when the user wants to navigate to the next screen in a sequence.
     // TODO: Is this needed?
@@ -37,7 +34,7 @@ struct ListeningTab: View {
         VStack {
             
             HStack {
-                Text(user.name + ",")
+                Text("Alice" + ",")
                     .multilineTextAlignment(.leading)
                     .font(.largeTitle.bold())
                     .foregroundColor(.orange)
@@ -94,19 +91,6 @@ struct ListeningTab: View {
     }
 }
 
-// MARK: - Previews
-struct ListeningTab_Previews: PreviewProvider {
-    static let coreDataProvider = CoreDataProvider.preview
-    static let user = getDummyUser() // Create a constant user for preview
-    static var previews: some View {
-        // Must wrap in NavigationView to prevent "No entity found" warnings
-        NavigationView {
-            ListeningTab(user: .constant(user))        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
-        }
-        .preferredColorScheme(.dark)
-    }
-}
-
 func AddListenerButton() -> some View {
     // '+' symbol
     Image(systemName: "plus")
@@ -120,4 +104,17 @@ func AddListenerButton() -> some View {
                 .stroke(Color.white, lineWidth: 2)
         )
 }
+
+// MARK: - Previews
+struct ListeningTab_Previews: PreviewProvider {
+    static let coreDataProvider = CoreDataProvider.preview
+    static var previews: some View {
+        // Must wrap in NavigationView to prevent "No entity found" warnings
+        NavigationView {
+            ListeningTab()        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+        }
+        .preferredColorScheme(.dark)
+    }
+}
+
 

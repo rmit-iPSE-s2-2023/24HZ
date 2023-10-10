@@ -11,9 +11,6 @@ struct ContentView: View {
     
     var coredataProvider: CoreDataProvider = .shared
     
-    // FIXME: Should be removed
-    @State private var user: User = getDummyUser()
-    
     /// State for `TabView`
     /// - keeps track of which tab the user is currently viewing
     @State private var selectedTab = 0
@@ -38,7 +35,7 @@ struct ContentView: View {
                     TabView(selection: $selectedTab) {
                         
                         /// Listening Tab
-                        ListeningTab(user: $user)
+                        ListeningTab()
                             .tag(0)
                         
                         /// Feed Tab
