@@ -48,6 +48,22 @@ class PreviewModels {
         return newListener
     }
     
+    static var enjoyEthereumListener: ExistingTokenListener {
+        let viewContext = CoreDataProvider.preview.container.viewContext
+        let newListener = ExistingTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        newListener.createdAt = Date()
+        newListener.displayTitle = "Opepen Threadition"
+        newListener.isListening = true
+        /// ``ExistingTokenListener`` attribute/s
+        newListener.contractAddress = "0xc51bA90509E1d3a5CB5A78E21705A844ABfb8172"
+        newListener.listeningForMetadataEvents = true
+        newListener.listeningForMintCommentEvents = true
+        newListener.tokenName = "Enjoy Ethereum+"
+        newListener.tokenSymbol = "ZZO"
+        return newListener
+    }
+    
     @discardableResult
     static func makePreviewNewTokenListeners(viewContext: NSManagedObjectContext) -> [Listener] {
         var listeners: [Listener] = []
