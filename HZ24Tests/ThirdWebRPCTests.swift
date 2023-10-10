@@ -30,7 +30,7 @@ final class ThirdWebRPCTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        rpc = ThirdWebRPC(chainName: "zora")
+        rpc = ThirdWebRPC(chainName: ThirdWebRPC.ThirdWebChainName.zora)
     }
     
     /// Testing ThirdWebRPC.getBlocksInRange
