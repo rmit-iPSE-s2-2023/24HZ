@@ -50,4 +50,25 @@ struct Provider: TimelineProvider {
     }
 }
 
+func eventDescription(for event: Event) -> String {
+    if event is NewTokenEvent {
+        return "new token event"
+    } else if event is MetadataEvent {
+        return "metadata event"
+    } else if event is MintCommentEvent {
+        return "mint comment event"
+    } else {
+        return "unknown event"
+    }
+}
+
+func eventTimestamp(for event: Event) -> String {
+    if let date = event.timestamp {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        return formatter.string(from: date)
+    } else {
+        return "Unknown"
+    }
+}
 
