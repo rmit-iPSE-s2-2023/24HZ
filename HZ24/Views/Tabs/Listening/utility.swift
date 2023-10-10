@@ -7,38 +7,6 @@
 
 import SwiftUI
 
-/// Listener displayed as a row item in a `List` view
-/// Parameters:
-/// - listener: Core Data managed object: ``Listener``
-func ListenerRowItem(listener: Listener) -> some View {
-    return ZStack {
-        // Rounded Rectangle with white border
-        RoundedRectangle(cornerRadius: 15)
-            .stroke(Color.white, lineWidth: 2)
-            .frame(width: 350, height: 70)
-            .overlay(
-                // Block title
-                Text(listener.displayTitle ?? "Unknown")
-                    .font(.largeTitle)
-                    .padding(.leading, 10),
-                alignment: .leading
-            )
-            .overlay(
-                // 'Generic' label at top-right
-                ZStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(LinearGradient(gradient: Gradient(colors: [Color.pink, Color.purple]), startPoint: .leading, endPoint: .trailing))
-                        .frame(width: 60, height: 20)
-                    
-                    Text("Generic")
-                        .font(.caption)
-                }
-                .padding([.top, .trailing], 10),
-                alignment: .topTrailing
-            )
-    }
-}
-
 
 
 // Function for creating a '+' button
