@@ -13,7 +13,7 @@ import XCTest
 final class DefaultEventsProviderTests: XCTestCase {
 
     let maxBlockRange = 1000
-    var eventsProvider: DefaultEventsProvider!
+    var eventsProvider: DefaultEventsProvider<ThirdWebRPC>!
     
     /// Example MetadataEvent contracts
     let metadataTestData = [
@@ -28,7 +28,7 @@ final class DefaultEventsProviderTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        eventsProvider = DefaultEventsProvider.zora
+        eventsProvider = DefaultEventsProvider<ThirdWebRPC>.zora()
     }
     
     /// Testing getCurrentBlockNumber
