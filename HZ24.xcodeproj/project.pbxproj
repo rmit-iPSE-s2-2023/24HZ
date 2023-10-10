@@ -245,14 +245,30 @@
 		A2A819902AD58B82004E7AF5 /* HZ24Widget */ = {
 			isa = PBXGroup;
 			children = (
-				A2A819912AD58B82004E7AF5 /* HZ24Widget.swift */,
-				A2A819B62AD5D81A004E7AF5 /* HZ24EventProvider.swift */,
-				A2A819B82AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift */,
+				A2A819BA2AD5DEFE004E7AF5 /* Widget */,
+				A2A819BB2AD5DF12004E7AF5 /* VIew */,
 				A2A819932AD58B82004E7AF5 /* HZ24Widget.intentdefinition */,
 				A2A819942AD58B86004E7AF5 /* Assets.xcassets */,
 				A2A819962AD58B86004E7AF5 /* Info.plist */,
 			);
 			path = HZ24Widget;
+			sourceTree = "<group>";
+		};
+		A2A819BA2AD5DEFE004E7AF5 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				A2A819B62AD5D81A004E7AF5 /* HZ24EventProvider.swift */,
+				A2A819912AD58B82004E7AF5 /* HZ24Widget.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		A2A819BB2AD5DF12004E7AF5 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				A2A819B82AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift */,
+			);
+			path = VIew;
 			sourceTree = "<group>";
 		};
 		B1B504672AC5A3B600DA66B7 /* HZ24 */ = {
