@@ -62,7 +62,9 @@ struct HZ24WidgetsEntryView: View {
 
 struct HZ24Widgets_Previews: PreviewProvider {
     static var previews: some View {
-        HZ24WidgetsEntryView(entry: SimpleEntry(date: Date(), event: try? Provider().getLatestEvent()))
+        let context = PersistenceController.preview.container.viewContext
+        let event = try? Provider().getLatestEvent(from: context)
+        return HZ24WidgetsEntryView(entry: SimpleEntry(date: Date(), event: event))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
