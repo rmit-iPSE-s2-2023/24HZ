@@ -9,25 +9,27 @@ import SwiftUI
 import CoreData
 import Combine
 
+/// A view that displays all the event listeners the user has added.
+///
+/// For use in a TabView.
 struct ListeningTab: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    // MARK: - Properties
     
-    // Binding to an array of blocks that the user has added.
-    // This will be a shared state between different views.
-    // TODO: This should be Core Data ``Listener``s
     @FetchRequest(entity: Listener.entity(), sortDescriptors: [])
     private var listeners: FetchedResults<Listener>
     
-    // State to manage navigation to the next view.
-    // Triggered when the user wants to navigate to the next screen in a sequence.
     // TODO: Is this needed?
+    /// State to manage navigation to the next view.
+    ///
+    /// Triggered when the user wants to navigate to the next screen in a sequence.
     @State private var navigateToAddListenerFlow = false
     
+    // MARK: - Return body
     var body: some View {
         VStack {
             
+            // MARK: Tab header
             HStack {
                 Text("Alice" + ",")
                     .multilineTextAlignment(.leading)
@@ -35,7 +37,6 @@ struct ListeningTab: View {
                     .foregroundColor(.orange)
                 Spacer()
             }
-            
             HStack {
                 Text("here is what you're listening to...")
                     .multilineTextAlignment(.leading)
@@ -43,6 +44,7 @@ struct ListeningTab: View {
                 Spacer()
             }
             
+            // MARK: Listeners
             if !listeners.isEmpty {
                 /// List of listeners
                 ForEach(listeners, id: \.self) { listener in
@@ -70,6 +72,7 @@ struct ListeningTab: View {
             
             Spacer()
             
+            // MARK: Add listener button
             /// Navigate user to root of `AddEventListener` flow
             NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
                 HStack {
@@ -78,6 +81,7 @@ struct ListeningTab: View {
                         .offset(y: -20)
                         .padding(.bottom, 20)
                         .padding(.trailing, 20)
+                        .foregroundColor(.white)
                 }
             }
             .isDetailLink(false)
@@ -86,19 +90,6 @@ struct ListeningTab: View {
     }
 }
 
-func AddListenerButton() -> some View {
-    // '+' symbol
-    Image(systemName: "plus")
-        .font(.system(size: 40))
-        .frame(width: 60, height: 60)
-        .foregroundColor(.white)
-        .background(Color.black)
-        .overlay(
-            // Circular border
-            Circle()
-                .stroke(Color.white, lineWidth: 2)
-        )
-}
 
 // MARK: - Previews
 struct ListeningTab_Previews: PreviewProvider {
