@@ -23,12 +23,7 @@ struct ListeningTab: View {
     // State to manage navigation to the next view.
     // Triggered when the user wants to navigate to the next screen in a sequence.
     // TODO: Is this needed?
-    @State private var navigateToNext = false
-    
-    // TODO: Is this needed?
-    // State to manage navigation to a custom view.
-    // Triggered when the user wants to navigate to a custom screen.
-    @State private var navigateToCustom = false
+    @State private var navigateToAddListenerFlow = false
     
     var body: some View {
         VStack {
@@ -64,7 +59,7 @@ struct ListeningTab: View {
                     Text("No listeners added")
                         .font(.title2)
                         .foregroundColor(.gray)
-                    NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToNext) {
+                    NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
                         Text("Add a listener")
                             .padding()
                     }
@@ -76,7 +71,7 @@ struct ListeningTab: View {
             Spacer()
             
             /// Navigate user to root of `AddEventListener` flow
-            NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToNext) {
+            NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
                 HStack {
                     Spacer()
                     AddListenerButton()
