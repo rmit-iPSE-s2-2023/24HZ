@@ -9,22 +9,31 @@
 import Foundation
 import web3
 
-/// An implementation of ``RPCProtocol``
-/// This implementation uses RPC endpoints provided by Third Web
-/// Dependencies: web3.swift (to encode ABI functions)
-/// References:
-/// Third Web: https://thirdweb.com/dashboard/infrastructure/rpc-edge
-/// web3.swift: https://github.com/argentlabs/web3.swift
+/// A service to retrieve useful blockchain data using Third Web's public RPC Edge.
+///
+/// This is an implementation of ``RPCProtocol`` that uses RPC endpoints provided by Third Web.
+///
+/// See: [](https://thirdweb.com/dashboard/infrastructure/rpc-edge)
+///
+/// Dependencies: [web3.swift](https://github.com/argentlabs/web3.swift) (for decoding/encoding ABI functions)
 struct ThirdWebRPC : RPCProtocol {
+    /// URL of the RPC endpoint
     var url: URL
     
+    /// Max size of a JSON-RPC batch request
     static let maxBatchSize = 1000  // Max batch size limit is 1000 for Third Web RPC Edge
     
-    init(chainName: String) {
+    init(chainName: ThirdWebChainName) {
         guard let url = URL(string: "https://\(chainName).rpc.thirdweb.com") else {
             fatalError("Invalid URL for RPC client")
         }
         self.url = url
+    }
+    
+    /// Name of chain used as the subdomain of Third Web RPC endpoint
+    enum ThirdWebChainName: String {
+        case eth
+        case zora
     }
 }
 
@@ -42,8 +51,6 @@ extension ThirdWebRPC {
 
 extension ThirdWebRPC {
     // MARK: Protocol method implementation/s
-    
-    /// Get block headers for a given block range to access transactions and look for contract creation transactions
     func getBlocksInRange(fromBlock: Int, toBlock: Int) async throws -> [BlockObject] {
         /// Make sure block range is valid
         guard toBlock - fromBlock + 1 <= ThirdWebRPC.maxBatchSize else {
@@ -86,8 +93,6 @@ extension ThirdWebRPC {
         return decodedData
     }
     
-    /// To get the **contract address** of new contract deployments:
-    /// - after filtering `BlockObject`s for new contract deployments; any transaction in a block whose `to` field is `nil`, we need to get the **transaction receipts** of every transaction to get the **contract address** of these new contract deployments
     func getTransactionReceipts(txHashes: [String]) async throws -> [TransactionReceiptObject] {
         /// Form JSON-RPC request body
         let jsonRpcRequests: [[String: Any]] = txHashes.map { txHash in
@@ -127,7 +132,6 @@ extension ThirdWebRPC {
         return decodedData
     }
 
-    
     // TODO: Need to filter for contracts that supports erc-20/721/1155 interface
     func getTokenInfos(contractAddresses: [String]) async throws -> [TokenInfo] {
         /// return empty array if no contractAddresses given
@@ -239,7 +243,7 @@ extension ThirdWebRPC {
 
 extension ThirdWebRPC {
     
-    // MARK: Private method/s
+    // MARK: Test method/s
     func filterContractsWithInterfaceSupport(contractAddresses: [String], interfaceIds: [Data]) async throws -> [String: InterfaceInfo] {
         // TODO: For each contract, check for interface support on 20/721/1155. Aggregate responses by true results and return a dictionary keyed by contract address for object with contract address and its ERCType/ERCInterfaceId
         let jsonRpcRequests: [[String: Any]] = contractAddresses.flatMap { contractAddress -> [[String: Any]] in
@@ -369,6 +373,7 @@ extension ThirdWebRPC {
         return supportsInterfaceResult.supported
         
     }
+    
     func getTokenName(contractAddress: String) async throws -> String {
         /// Create encoder to encode ABI function
         let encoder = ABIFunctionEncoder("name")
