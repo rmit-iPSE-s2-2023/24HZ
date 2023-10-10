@@ -105,9 +105,12 @@ extension DefaultEventsProvider {
             }
             let tokenInfos = try await rpc.getTokenInfos(contractAddresses: newTokenAddresses)
             newTokenEventsWithTokenInfo = newTokenEvents.map({ newTokenEvent in
+                let tokenInfo = tokenInfos.first(where: { tokenInfo in
+                    return tokenInfo.contractAddress == newTokenEvent.contractAddress
+                })!
                 var newTokenEventWithTokenInfo = newTokenEvent
-                newTokenEventWithTokenInfo.tokenName = tokenInfos[newTokenEvent.contractAddress]?.name
-                newTokenEventWithTokenInfo.tokenSymbol = tokenInfos[newTokenEvent.contractAddress]?.symbol
+                newTokenEventWithTokenInfo.tokenName = tokenInfo.name
+                newTokenEventWithTokenInfo.tokenSymbol = tokenInfo.symbol
                 return newTokenEventWithTokenInfo
             })
         case ChainID.eth:

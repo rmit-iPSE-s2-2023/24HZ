@@ -52,11 +52,11 @@ struct EnterContractAddress: View {
                     .autocapitalization(.none)
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding(8)
-
+                
                 Button {
                     // Validate input string
                     // FIXME: Debugging
-//                    let isValid = isValidEthereumAddress(contractAddress)
+                    //                    let isValid = isValidEthereumAddress(contractAddress)
                     
                     let isValid = isValidEthereumAddress(contractAddress)
                     if isValid {
@@ -66,7 +66,9 @@ struct EnterContractAddress: View {
                         Task {
                             do {
                                 let tokenInfos = try await rpc.getTokenInfos(contractAddresses: [contractAddress])
-                                guard let info = tokenInfos[contractAddress] else {
+                                guard let info = tokenInfos.first(where: { tokenInfo in
+                                    return tokenInfo.contractAddress == contractAddress
+                                }) else {
                                     // FIXME:
                                     print("Unable to find TokenInfo")
                                     fatalError("")
@@ -84,7 +86,7 @@ struct EnterContractAddress: View {
                                 existingTokenListener.isListening = true
                                 newListener = existingTokenListener
                                 showSheet.toggle()
-
+                                
                             } catch {
                                 print("Network Error")
                                 errorMsg = "Network Error"
@@ -128,7 +130,7 @@ struct EnterContractAddress: View {
                     .font(.title)
                 Text(tokenInfo?.symbol ?? "")
                     .font(.title2)
-
+                
                 Button {
                     showSheet.toggle()
                     goToNextScreen.toggle()
@@ -152,55 +154,11 @@ struct EnterContractAddress: View {
                             }
                         }
                 }
-
+                
             }
-
+            
         })
         .preferredColorScheme(.dark)
-
-
-//        .overlay(
-//                    VStack {
-//                        if showAlert {
-//                            VStack {
-//                                HStack(alignment: .firstTextBaseline) {
-//                                    Image(systemName: "exclamationmark.triangle.fill")
-//                                    VStack(alignment: .leading) {
-//                                        Text(model?.title ?? "")
-//                                            .font(.headline)
-//                                        if let message = model?.message {
-//                                            Text(message)
-//                                                .font(.footnote)
-//                                        }
-//                                    }
-//                                }
-//                                .padding()
-//                                .frame(minWidth: 0, maxWidth: .infinity)
-//                                .foregroundColor(.white)
-//                                .background(Color.red)
-//                                .cornerRadius(10)
-//                                .shadow(radius: 10)
-//                                Spacer()
-//                            }
-//                            .padding()
-//                            .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-//                            .onTapGesture {
-//                                withAnimation {
-//                                    model = nil
-//                                }
-//                            }
-//                            .gesture(
-//                                DragGesture()
-//                                    .onChanged { _ in
-//                                        withAnimation {
-//                                            model = nil
-//                                        }
-//                                    }
-//                            )
-//                        }
-//                    }
-//                    .animation(.easeInOut)         // << here !!
-//                )
     }
     
     private func isValidEthereumAddress(_ address: String) -> Bool {

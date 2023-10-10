@@ -129,10 +129,10 @@ extension ThirdWebRPC {
 
     
     // TODO: Need to filter for contracts that supports erc-20/721/1155 interface
-    func getTokenInfos(contractAddresses: [String]) async throws -> [String: TokenInfo] {
+    func getTokenInfos(contractAddresses: [String]) async throws -> [TokenInfo] {
         /// return empty array if no contractAddresses given
         if contractAddresses.isEmpty {
-            return [:]
+            return []
         }
         /// Create encoder to encode name function
         let nameEncoder = ABIFunctionEncoder("name")
@@ -233,7 +233,7 @@ extension ThirdWebRPC {
                 throw ThirdWebRPCError.dictionarySaveError
             }
         }
-        return tokenInfos
+        return Array(tokenInfos.values)
     }
 }
 
@@ -474,16 +474,4 @@ struct RPCResponseData: Codable {
     let result: String?
     let error: String?
     let id: String
-}
-
-struct TokenInfo: Identifiable {
-    let id = UUID()
-    let contractAddress: String
-    var name: String?
-    var symbol: String?
-}
-
-struct InterfaceInfo {
-    let contractAddress: String
-    var ercInterfaceId: ERCInterfaceId
 }
