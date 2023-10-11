@@ -81,7 +81,7 @@ struct ListeningTab: View {
                 }
                 .isDetailLink(false)
             }
-            .padding(.bottom, 16)
+            .padding(.bottom, 32)
             .padding(.trailing, 16)
             
 
