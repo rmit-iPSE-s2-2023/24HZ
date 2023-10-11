@@ -94,10 +94,10 @@ struct NotificationSelection: View {
 
 // MARK: - NotificationSetting options
 enum NotificationSetting: String, CaseIterable {
-    case eventsFeed = "I want events on my **24HZ Feed**"
-    case onceADayEmail = "I also want **Once-a-Day Email**"
-    case emailEveryEvent = "I also want an **Email for Every Event**"
-    case mobileNotifications = "I also want **Mobile Notifications**"
+    case eventsFeed = "via my **24HZ Feed**"
+    case onceADayEmail = "**Once-a-Day Email**"
+    case emailEveryEvent = "an **Email for Every Event**"
+    case mobileNotifications = "**Push Notifications**"
 }
 
 // MARK: - Previews
