@@ -33,8 +33,12 @@ struct TokenTypeSelection: View {
             Spacer()
             
             /// Form question
-            Text("What would you like to listen for?")
-                .font(.title)
+            HStack {
+                Text("What type of tokens are you interested in?")
+                    .font(.title)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
             
             /// ``NewTokenListener``'s ``ERCInterfaceId`` options
             /// Note: ``ERCInterfaceId``/s for ``NewtokenListener``/s that user has already opted in to should be pre-selected here
@@ -50,6 +54,7 @@ struct TokenTypeSelection: View {
             NavigationLink("Continue", isActive: Binding<Bool>(get: { goToNextScreen }, set: { goToNextScreen = $0; print("Navigating to next screen"); createNewTokenListeners() })) {
                 NotificationSelection()
             }
+            
         }
         // FIXME: Not sure if .alert is the right way to inform user here..
         .alert("Already listening", isPresented: $showAlert, presenting: "hello") { details in
@@ -59,9 +64,10 @@ struct TokenTypeSelection: View {
                 Text("OK")
             }
         }
-        .preferredColorScheme(.dark)
+        .padding(.horizontal, 16)
         .navigationTitle("Select token type")
         .navigationBarTitleDisplayMode(.inline)
+        // End of VStack (parent)
     }
     
     // MARK: Validations
@@ -106,8 +112,7 @@ struct TokenTypeSelection: View {
                 toggleState.wrappedValue.toggle()
             }
         }) {
-            CheckableFormOption(isChecked: alreadyListeningTo(ercInterfaceIds: ercInterfaceIds) || toggleState.wrappedValue)
-                .overlay(Text(try! AttributedString(markdown: markdown)).font(.title3).foregroundColor(.black))
+            FormOption(optionText: markdown, isSelected: toggleState.wrappedValue)
         }
     }
 }

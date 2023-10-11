@@ -52,10 +52,10 @@ struct NotificationSelection: View {
             Spacer()
             
         }
-        .padding()
-        .preferredColorScheme(.dark)
+        .padding(.horizontal, 16)
         .navigationTitle("Select notifications")
         .navigationBarTitleDisplayMode(.inline)
+        // End of VStack (parent)
     }
     
     // MARK: Core Data
@@ -79,8 +79,7 @@ struct NotificationSelection: View {
                 showAlert.toggle()
             }
         }) {
-            CheckableFormOption(isChecked: selectedNotificationSettings.contains(option))
-                .overlay(Text(try! AttributedString(markdown: option.rawValue)).font(.title3).foregroundColor(.black))
+            FormOption(optionText: option.rawValue, isSelected: selectedNotificationSettings.contains(option))
         }
         .opacity(option == NotificationSetting.eventsFeed ? 1 : 0.5)
         .alert("Currently not supported", isPresented: $showAlert, presenting: "hello") { details in

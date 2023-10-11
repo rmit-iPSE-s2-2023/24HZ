@@ -12,21 +12,26 @@ import SwiftUI
 /// Here, the user selects either the the flow for adding a ``NewTokenListener`` or ``ExistingTokenListener``
 struct ListenerTypeSelection: View {
     
+    // MARK: - Return body
     var body: some View {
 
         VStack {
             Spacer()
             
             /// Form question
-            Text("What kind of listener would you like to add?")
-                .font(.title)
+            HStack {
+                Text("What kind of listener would you like to add?")
+                    .font(.title)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
             
             /// Option to add ``NewTokenListener``
             NavigationLink {
                 /// Navigate user to add ``NewTokenListener`` root
                 TokenTypeSelection()
             } label: {
-                FormOption(markdown: "Listen for **new token** releases")
+                FormOption(optionText: "Listen for **NEW TOKENS**", isSelected: false)
             }
             
             /// Option to add ``ExistingTokenListener``
@@ -34,22 +39,23 @@ struct ListenerTypeSelection: View {
                 /// Navigate user to add ``ExistingTokenListener`` root
                 EnterContractAddress()
             } label: {
-                FormOption(markdown: "Listen to events for an **existing token**")
+                FormOption(optionText: "Listen to **EXISTING TOKENS**", isSelected: false)
             }
 
             Spacer()
         }
-        .preferredColorScheme(.dark)
+        .padding(.horizontal, 16)
         .navigationTitle("Select listener type")
         .navigationBarTitleDisplayMode(.inline)
+        // End of VStack (parent)
 
     }
     
     /// Form Option button
-    private func FormOption(markdown: String) -> some View {
-        CheckableFormOption(isChecked: false)
-            .overlay(Text(try! AttributedString(markdown: markdown)).font(.title3).foregroundColor(.black))
-    }
+//    private func FormOption(markdown: String) -> some View {
+//        CheckableFormOption(isChecked: false)
+//            .overlay(Text(try! AttributedString(markdown: markdown)).font(.title3).foregroundColor(.black))
+//    }
 }
 
 struct AddListenerFlowRoot_Previews: PreviewProvider {
