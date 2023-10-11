@@ -7,26 +7,30 @@
 
 import SwiftUI
 
+/// A view to configure preferences for an event Listener, such as disabling it, or deleting it.
 struct ListenerSettings: View {
     
     @Environment(\.managedObjectContext) var viewContext
     
-    /// Core Data MO: ``Listener``
+    // MARK: Parameters
     var listener: Listener
     
+    // MARK: State
     @State private var deleteAlert = false  // To control the alert visibility
     
-    ///
+    /// Preference for ``Listener``
     @State private var isListening: Bool
     /// Preferences for ``ExistingTokenListener``
     @State private var listenForMetadataEvents: Bool
     @State private var listenForMintCommentEvents: Bool
-    
+    // TODO: Implement email/push notification functionality
+    /// Notifications
     @State private var eventsOnFeed: Bool = true
     @State private var dailyEmail: Bool = false
     @State private var everyEventEmail: Bool = false
     @State private var pushNotifications: Bool = false
     
+    // MARK: Initializer
     init(listener: Listener) {
         self.listener = listener
         _isListening = State(initialValue: listener.isListening)
@@ -39,11 +43,12 @@ struct ListenerSettings: View {
         }
     }
     
+    // MARK: - Return body
     var body: some View {
         
         VStack {
             
-            /// Title of ``Listener``
+            // MARK: Listener title
             HStack {
                 Text(listener.displayTitle ?? "Unknown")
                     .font(.largeTitle)
@@ -53,6 +58,7 @@ struct ListenerSettings: View {
             }
             .padding(.bottom, 8)
             
+            /// Display contract address for ``existingTokenListener``
             if let listener = listener as? ExistingTokenListener {
                 HStack {
                     Text("\(listener.contractAddress ?? "")")
@@ -63,6 +69,7 @@ struct ListenerSettings: View {
                 }
             }
             
+            // MARK: Listener preferences
             List {
                 /// Setting to enable/mute the ``Listener``
                 Section {
@@ -75,23 +82,8 @@ struct ListenerSettings: View {
                         }
                     }
                 }
-//                List {
-//                    Toggle(isOn: $isListening) {
-//                        Text("Listener")
-//                    }
-//                    .onChange(of: isListening) { newValue in
-//                        /// Update MO
-//                        listener.isListening = newValue
-//                        do {
-//                            try viewContext.save()
-//                        } catch {
-//                            print(error)
-//                        }
-//                    }
-//                }
-//                .navigationTitle("Listener")
-//                .navigationBarTitleDisplayMode(.inline)
-                /// ABI Event Type Preferences
+                
+                /// ABI Event Type Preferences for ``ExistingTokenListener``
                 if let listener = listener as? ExistingTokenListener {
                     Section("Event Types") {
                         Toggle(isOn: $listenForMetadataEvents) {
@@ -119,8 +111,7 @@ struct ListenerSettings: View {
                     }
                 }
 
-                
-                /// Notificaiton Settings
+                /// Notificaiton preferences
                 Section("Notifications") {
                     Toggle(isOn: $eventsOnFeed) {
                         Text("Feed")
@@ -142,6 +133,7 @@ struct ListenerSettings: View {
             
             Spacer()
 
+            // MARK: Delete button
             /// Delete button to remove ``Listener`` from store
             // DeleteListenerButton
             Button {
