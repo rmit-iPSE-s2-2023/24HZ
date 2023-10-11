@@ -43,50 +43,56 @@ struct ListeningTab: View {
                 Spacer()
             }
             
-            // MARK: Listeners
-            if !listeners.isEmpty {
-                /// List of listeners
-                ForEach(listeners, id: \.self) { listener in
-                    NavigationLink(destination: ListenerSettings(listener: listener)) {
-                        ListenerRowItem(listener: listener)
+            ScrollView {
+                // MARK: Listeners
+                if !listeners.isEmpty {
+                    /// List of listeners
+                    ForEach(listeners, id: \.self) { listener in
+                        NavigationLink(destination: ListenerSettings(listener: listener)) {
+                            ListenerRowItem(listener: listener)
+                        }
+                        .foregroundColor(.primary)
                     }
-                    .foregroundColor(.primary)
-                }
-                
-            } else {
-                /// Placeholder if user has no listeners
-                VStack {
-                    Spacer()
-                    Text("No listeners added")
-                        .font(.title2)
-                        .foregroundColor(.gray)
-                    NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
-                        Text("Add a listener")
-                            .padding()
+                    
+                } else {
+                    /// Placeholder if user has no listeners
+                    VStack {
+                        Spacer()
+                        Text("No listeners added")
+                            .font(.title2)
+                            .foregroundColor(.gray)
+                        NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
+                            Text("Add a listener")
+                                .padding()
+                        }
+                        .isDetailLink(false)
+                        Spacer()
                     }
-                    .isDetailLink(false)
-                    Spacer()
                 }
             }
             
             Spacer()
-            
-            // MARK: Add listener button
-            /// Navigate user to root of `AddEventListener` flow
-            HStack {
-                Spacer()
-                NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
-                    AddListenerButton()
-                        .foregroundColor(.primary)
-                }
-                .isDetailLink(false)
-            }
-            .padding(.bottom, 32)
-            .padding(.trailing, 16)
-            
 
         }
         .padding(.horizontal, 8)
+        .overlay(
+            VStack {
+                Spacer()
+                // MARK: Add listener button
+                /// Navigate user to root of `AddEventListener` flow
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
+                        AddListenerButton()
+                            .foregroundColor(.primary)
+                    }
+                    .isDetailLink(false)
+                }
+                .padding(.bottom, 32)
+                .padding(.trailing, 16)
+            }
+
+        )
         // End of VStack (parent)
     }
 }
