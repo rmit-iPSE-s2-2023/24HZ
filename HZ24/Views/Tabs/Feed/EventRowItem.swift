@@ -18,7 +18,8 @@ struct EventRowItem: View {
     
     private func subheadline() -> String {
         if let event = event as? NewTokenEvent {
-            return ERCInterfaceId(rawValue: event.ercInterfaceId!)?.displayTitle ?? ""
+            //            return ERCInterfaceId(rawValue: event.ercInterfaceId!)?.displayTitle ?? ""
+                        return ERCInterfaceId(rawValue: event.ercInterfaceId ?? "")?.displayTitle ?? "Unknown Interface"
         } else {
             return event.tokenName ?? "Unknown Token"
         }
