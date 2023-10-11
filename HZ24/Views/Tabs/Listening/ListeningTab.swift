@@ -73,17 +73,18 @@ struct ListeningTab: View {
             
             // MARK: Add listener button
             /// Navigate user to root of `AddEventListener` flow
-            NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
-                HStack {
-                    Spacer()
+            HStack {
+                Spacer()
+                NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
                     AddListenerButton()
-                        .offset(y: -20)
-                        .padding(.bottom, 20)
-                        .padding(.trailing, 20)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                 }
+                .isDetailLink(false)
             }
-            .isDetailLink(false)
+            .padding(.bottom, 16)
+            .padding(.trailing, 16)
+            
+
         }
         .padding(.horizontal, 8)
         // End of VStack (parent)
@@ -101,6 +102,9 @@ struct ListeningTab_Previews: PreviewProvider {
                 .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         }
         .preferredColorScheme(.dark)
+        
+        ListeningTab()
+            .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
     }
 }
 
