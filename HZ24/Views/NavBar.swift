@@ -10,7 +10,7 @@ import SwiftUI
 /// This view represents a navigation bar.
 ///
 /// Should be used alongside a TabView.
-struct SwipeNavigation: View {
+struct NavBar: View {
     
     /// Binding that represents the user's current tab selection
     @Binding var tabSelection: Int
@@ -66,7 +66,7 @@ struct SwipeNavigation: View {
 // MARK: - Previews
 struct SwipeNavigation_Previews: PreviewProvider {
     static var previews: some View {
-        SwipeNavigation(tabSelection: .constant(0))
+        NavBar(tabSelection: .constant(0))
     }
 }
 

@@ -28,7 +28,7 @@ struct ContentView: View {
     var body: some View {
         VStack() {
             // MARK: Nav bar
-            SwipeNavigation(tabSelection: $selectedTab)
+            NavBar(tabSelection: $selectedTab)
             
             // MARK: Tab contents
             TabView(selection: $selectedTab) {
