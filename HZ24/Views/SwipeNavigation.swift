@@ -7,65 +7,66 @@
 
 import SwiftUI
 
+/// This view represents a navigation bar.
+///
+/// Should be used alongside a TabView.
 struct SwipeNavigation: View {
-    @Binding var viewSelection: Int
     
+    /// Binding that represents the user's current tab selection
+    @Binding var tabSelection: Int
+    
+    // MARK: - Return body
     var body: some View {
         HStack {
             Text("Listening")
-                .foregroundColor(viewSelection == 0 ? .white : .gray)
+                .foregroundColor(tabSelection == 0 ? .primary : .secondary)
                 .overlay(
                     Rectangle()
-                        .frame(width: 60, height: 2)
-                        .foregroundColor(viewSelection == 0 ? .blue : .clear)
-                        .offset(y: 10),
+                        .frame(width: .infinity, height: 2)
+                        .foregroundColor(tabSelection == 0 ? .accentColor : .clear)
+                        .offset(y: 8),
                     alignment: .bottom
                 )
-                .onTapGesture { // click to move
-                    viewSelection = 0
+                .onTapGesture {
+                    tabSelection = 0
                 }
             
             Text("Feed")
-                .foregroundColor(viewSelection == 1 ? .white : .gray)
+                .foregroundColor(tabSelection == 1 ? .primary : .secondary)
                 .overlay(
                     Rectangle()
-                        .frame(width: 60, height: 2)
-                        .foregroundColor(viewSelection == 1 ? .blue : .clear)
-                        .offset(y: 10),
+                        .frame(width: .infinity, height: 2)
+                        .foregroundColor(tabSelection == 1 ? .accentColor : .clear)
+                        .offset(y: 8),
                     alignment: .bottom
                 )
-                .onTapGesture { // click to move
-                    viewSelection = 1
+                .onTapGesture {
+                    tabSelection = 1
                 }
             
             Text("Saved")
-                .foregroundColor(viewSelection == 2 ? .white : .gray)
+                .foregroundColor(tabSelection == 2 ? .primary : .secondary)
                 .overlay(
                     Rectangle()
-                        .frame(width: 60, height: 2)
-                        .foregroundColor(viewSelection == 2 ? .blue : .clear)
-                        .offset(y: 10),
+                        .frame(width: .infinity, height: 2)
+                        .foregroundColor(tabSelection == 2 ? .accentColor : .clear)
+                        .offset(y: 8),
                     alignment: .bottom
                 )
-                .onTapGesture { // click to move
-                    viewSelection = 2
+                .onTapGesture {
+                    tabSelection = 2
                 }
         }
         .font(.headline)
         .padding()
+        // End of HStack (parent)
     }
 }
 
-
-
+// MARK: - Previews
 struct SwipeNavigation_Previews: PreviewProvider {
     static var previews: some View {
-        SwipeNavigation(viewSelection: .constant(0))
-            .background(Color.black)
-            .previewLayout(.sizeThatFits)
+        SwipeNavigation(tabSelection: .constant(0))
     }
 }
-
-
-
 
