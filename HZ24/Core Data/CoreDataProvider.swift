@@ -20,20 +20,12 @@ class CoreDataProvider {
     /// - managed object model
     /// - persistent store (persistentStoreDescriptions)
     lazy var container: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Model")
-        guard let description = container.persistentStoreDescriptions.first else {
-            fatalError("Failed to retrieve a persistent store description.")
-        }
-        if self.inMemory {
-            description.url = URL(fileURLWithPath: "/dev/null")
-        }
-        container.loadPersistentStores { storeDescription, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
+           if self.inMemory {
+               return PersistenceController.preview.container
+           } else {
+               return PersistenceController.shared.container
+           }
+       }()
     
     /// APIs to retrieve new data
     let eventsProvider: EventsProvider

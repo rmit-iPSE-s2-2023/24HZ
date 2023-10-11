@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A2A819832AD5767A004E7AF5 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A2A819822AD5767A004E7AF5 /* web3.swift */; };
+		A208631B2AD70F7500FC938D /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A208631A2AD70F7500FC938D /* web3.swift */; };
 		A2A8198D2AD58B82004E7AF5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A8198C2AD58B82004E7AF5 /* WidgetKit.framework */; };
 		A2A8198F2AD58B82004E7AF5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A8198E2AD58B82004E7AF5 /* SwiftUI.framework */; };
 		A2A819922AD58B82004E7AF5 /* HZ24Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A819912AD58B82004E7AF5 /* HZ24Widget.swift */; };
@@ -26,7 +26,6 @@
 		A2AEBE8F2AD254260056AB1F /* Tutorials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8E2AD254250056AB1F /* Tutorials.swift */; };
 		B137A4AE2AD4E63D00A06727 /* ListenerRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AD2AD4E63D00A06727 /* ListenerRowItem.swift */; };
 		B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AF2AD564CA00A06727 /* AddListenerButton.swift */; };
-		B137A4B22AD61C0500A06727 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B137A4B12AD61C0500A06727 /* web3.swift */; };
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
 		B1ACC15E2AD6BD57001AAFC1 /* FormOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC15D2AD6BD57001AAFC1 /* FormOption.swift */; };
@@ -185,7 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2A819832AD5767A004E7AF5 /* web3.swift in Frameworks */,
+				A208631B2AD70F7500FC938D /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +201,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B137A4B22AD61C0500A06727 /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +267,6 @@
 				B1B5046A2AC5A3B600DA66B7 /* Core Data */,
 				B1B5046F2AC5A3B600DA66B7 /* Networking */,
 				B1B504742AC5A3B600DA66B7 /* Enums */,
-				B1B5047B2AC5A3B600DA66B7 /* Models */,
 				B1B504842AC5A3B600DA66B7 /* Preview Content */,
 				B1B504902AC5A3B600DA66B7 /* Views */,
 				B1B5047A2AC5A3B600DA66B7 /* Assets.xcassets */,
@@ -309,13 +306,6 @@
 				B1B504792AC5A3B600DA66B7 /* EventListenerType.swift */,
 			);
 			path = Enums;
-			sourceTree = "<group>";
-		};
-		B1B5047B2AC5A3B600DA66B7 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		B1B504842AC5A3B600DA66B7 /* Preview Content */ = {
@@ -455,7 +445,7 @@
 			);
 			name = HZ24;
 			packageProductDependencies = (
-				A2A819822AD5767A004E7AF5 /* web3.swift */,
+				A208631A2AD70F7500FC938D /* web3.swift */,
 			);
 			productName = "a1-s3713342";
 			productReference = A220745F2A7D5FF0002FD6CB /* HZ24.app */;
@@ -493,7 +483,6 @@
 			);
 			name = HZ24Tests;
 			packageProductDependencies = (
-				B137A4B12AD61C0500A06727 /* web3.swift */,
 			);
 			productName = 24HZTests;
 			productReference = B1BE377F2AC01BE900104A4A /* HZ24Tests.xctest */;
@@ -531,7 +520,7 @@
 			);
 			mainGroup = A22074562A7D5FF0002FD6CB;
 			packageReferences = (
-				A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */,
+				A20863192AD70F7500FC938D /* XCRemoteSwiftPackageReference "web3" */,
 			);
 			productRefGroup = A22074602A7D5FF0002FD6CB /* Products */;
 			projectDirPath = "";
@@ -994,7 +983,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */ = {
+		A20863192AD70F7500FC938D /* XCRemoteSwiftPackageReference "web3" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/argentlabs/web3.swift";
 			requirement = {
@@ -1005,14 +994,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A2A819822AD5767A004E7AF5 /* web3.swift */ = {
+		A208631A2AD70F7500FC938D /* web3.swift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */;
-			productName = web3.swift;
-		};
-		B137A4B12AD61C0500A06727 /* web3.swift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A2A819812AD5767A004E7AF5 /* XCRemoteSwiftPackageReference "web3" */;
+			package = A20863192AD70F7500FC938D /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;
 		};
 /* End XCSwiftPackageProductDependency section */
