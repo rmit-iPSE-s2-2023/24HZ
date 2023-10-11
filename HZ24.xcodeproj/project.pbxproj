@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A208631B2AD70F7500FC938D /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = A208631A2AD70F7500FC938D /* web3.swift */; };
+		A208631C2AD7137300FC938D /* NSFetchRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046C2AC5A3B600DA66B7 /* NSFetchRequests.swift */; };
 		A2A8198D2AD58B82004E7AF5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A8198C2AD58B82004E7AF5 /* WidgetKit.framework */; };
 		A2A8198F2AD58B82004E7AF5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A8198E2AD58B82004E7AF5 /* SwiftUI.framework */; };
 		A2A819922AD58B82004E7AF5 /* HZ24Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A819912AD58B82004E7AF5 /* HZ24Widget.swift */; };
@@ -624,6 +625,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2A819972AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */,
+				A208631C2AD7137300FC938D /* NSFetchRequests.swift in Sources */,
 				A2A819922AD58B82004E7AF5 /* HZ24Widget.swift in Sources */,
 				A2A819AD2AD59716004E7AF5 /* Model.xcdatamodeld in Sources */,
 				A2A819B92AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift in Sources */,
