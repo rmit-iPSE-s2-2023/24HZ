@@ -31,8 +31,8 @@ struct NotificationSelection: View {
             /// Form question
             HStack {
                 Text("How would you like to be notified?")
-                    .foregroundColor(.white)
                     .font(.title)
+                    .multilineTextAlignment(.leading)
                 Spacer()
             }
             
