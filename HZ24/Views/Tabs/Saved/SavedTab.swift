@@ -64,7 +64,8 @@ struct SavedTab: View {
             
             Spacer()
         }
-        .padding()
+        .padding(.horizontal, 8)
+        // End of VStack (parent)
     }
 }
 

@@ -39,7 +39,7 @@ struct ListeningTab: View {
             HStack {
                 Text("here is what you're listening to...")
                     .multilineTextAlignment(.leading)
-                    .font(.title.bold())
+                    .font(.largeTitle.bold())
                 Spacer()
             }
             

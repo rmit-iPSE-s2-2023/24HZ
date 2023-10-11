@@ -55,7 +55,8 @@ struct FeedTab: View {
                 }
             }
         }
-        .padding()
+        .padding(.horizontal, 8)
+        // End of VStack (parent)
     }
 }
 
@@ -68,6 +69,5 @@ struct FeedTab_Previews: PreviewProvider {
             FeedTab()
                 .environment(\.managedObjectContext, coredataProvider.container.viewContext)
         }
-        .preferredColorScheme(.dark)
     }
 }
