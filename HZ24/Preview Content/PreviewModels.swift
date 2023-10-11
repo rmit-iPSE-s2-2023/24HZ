@@ -65,6 +65,20 @@ class PreviewModels {
     }
     
     @discardableResult
+    static func makePreviewERC20Listener(viewContext: NSManagedObjectContext) -> Listener {
+        /// ERC20 Listener
+        let newListener = NewTokenListener(context: viewContext)
+        /// ``Listener`` parent entity attribute/s
+        newListener.createdAt = Date()
+        newListener.displayTitle = ERCInterfaceId.erc20.displayTitle
+        newListener.isListening = true
+        /// ``NewTokenListener`` attribute/s
+        newListener.ercInterfaceId = ERCInterfaceId.erc20.rawValue
+        
+        return newListener
+    }
+    
+    @discardableResult
     static func makePreviewNewTokenListeners(viewContext: NSManagedObjectContext) -> [Listener] {
         var listeners: [Listener] = []
         
