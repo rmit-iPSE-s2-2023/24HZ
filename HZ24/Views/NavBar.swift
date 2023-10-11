@@ -22,7 +22,7 @@ struct NavBar: View {
                 .foregroundColor(tabSelection == 0 ? .primary : .secondary)
                 .overlay(
                     Rectangle()
-                        .frame(width: .infinity, height: 2)
+                        .frame(width: nil, height: 2)
                         .foregroundColor(tabSelection == 0 ? .accentColor : .clear)
                         .offset(y: 8),
                     alignment: .bottom
@@ -35,7 +35,7 @@ struct NavBar: View {
                 .foregroundColor(tabSelection == 1 ? .primary : .secondary)
                 .overlay(
                     Rectangle()
-                        .frame(width: .infinity, height: 2)
+                        .frame(width: nil, height: 2)
                         .foregroundColor(tabSelection == 1 ? .accentColor : .clear)
                         .offset(y: 8),
                     alignment: .bottom
@@ -48,7 +48,7 @@ struct NavBar: View {
                 .foregroundColor(tabSelection == 2 ? .primary : .secondary)
                 .overlay(
                     Rectangle()
-                        .frame(width: .infinity, height: 2)
+                        .frame(width: nil, height: 2)
                         .foregroundColor(tabSelection == 2 ? .accentColor : .clear)
                         .offset(y: 8),
                     alignment: .bottom
