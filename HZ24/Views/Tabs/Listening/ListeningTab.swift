@@ -31,16 +31,15 @@ struct ListeningTab: View {
             
             // MARK: Tab header
             HStack {
-                Text("Alice" + ",")
-                    .multilineTextAlignment(.leading)
+                Text("Hey" + ",")
                     .font(.largeTitle.bold())
-                    .foregroundColor(.orange)
+                    .foregroundColor(.accentColor)
                 Spacer()
             }
             HStack {
                 Text("here is what you're listening to...")
                     .multilineTextAlignment(.leading)
-                    .font(.largeTitle.bold())
+                    .font(.title.bold())
                 Spacer()
             }
             
@@ -86,7 +85,8 @@ struct ListeningTab: View {
             }
             .isDetailLink(false)
         }
-        .padding()
+        .padding(.horizontal, 8)
+        // End of VStack (parent)
     }
 }
 
