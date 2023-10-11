@@ -50,7 +50,7 @@ struct ListeningTab: View {
                     NavigationLink(destination: ListenerSettings(listener: listener)) {
                         ListenerRowItem(listener: listener)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                 }
                 
             } else {
@@ -101,7 +101,6 @@ struct ListeningTab_Previews: PreviewProvider {
             ListeningTab()
                 .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         }
-        .preferredColorScheme(.dark)
         
         ListeningTab()
             .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
