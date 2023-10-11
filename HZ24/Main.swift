@@ -16,8 +16,10 @@ struct Main: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(coredataProvider: coreDataProvider)
-                .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+            NavigationView {
+                ContentView(coredataProvider: coreDataProvider)
+                    .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+            }
         }
     }
 }

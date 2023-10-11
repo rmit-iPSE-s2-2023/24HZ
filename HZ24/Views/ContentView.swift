@@ -7,14 +7,15 @@
 
 import SwiftUI
 
+/// The root view of the 24HZ app.
 struct ContentView: View {
     
     var coredataProvider: CoreDataProvider = .shared
     
-    /// State for `TabView`
-    /// - keeps track of which tab the user is currently viewing
+    /// State to keep track of which tab the user is currently viewing
     @State private var selectedTab = 0
     
+    /// A method for fetching event data and updating the Core Data store.
     private func fetchData() async {
         do {
             try await coredataProvider.fetchData()
@@ -23,41 +24,40 @@ struct ContentView: View {
         }
     }
     
+    // MARK: - Return body
     var body: some View {
-        NavigationView {
+        VStack() {
+            // MARK: Nav bar
+            SwipeNavigation(tabSelection: $selectedTab)
+            
+            // MARK: Tab contents
+            TabView(selection: $selectedTab) {
                 
-                VStack {
-                    
-                    // MARK: Nav bar
-                    SwipeNavigation(viewSelection: $selectedTab)
-                    
-                    // MARK: Tab contents
-                    TabView(selection: $selectedTab) {
-                        
-                        /// Listening Tab
-                        ListeningTab()
-                            .tag(0)
-                        
-                        /// Feed Tab
-                        FeedTab()
-                            .tag(1)
-                            .refreshable {
-                                await fetchData()
-                            }
-                        
-                        /// Saved Tab
-                        SavedTab()
-                            .tag(2)
-                        
+                /// Listening Tab
+                ListeningTab()
+                    .tag(0)
+                
+                /// Feed Tab
+                FeedTab()
+                    .tag(1)
+                    .refreshable {
+                        await fetchData()
                     }
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                }
-                .navigationBarHidden(true)  // Hide the default navigation bar
+                
+                /// Saved Tab
+                SavedTab()
+                    .tag(2)
+                
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
+        // End of VStack (parent)
+        .navigationBarHidden(true)  // Hide the default navigation bar
         .preferredColorScheme(.dark)
         .task {
             await fetchData()
         }
+        
     }
 }
 
@@ -67,6 +67,13 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(coredataProvider: coreDataProvider)
             .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+            .previewDisplayName("ContentView (unwrapped)")
+        
+        NavigationView {
+            ContentView(coredataProvider: coreDataProvider)
+                .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+        }
+        .previewDisplayName("ContentView (wrapped in nav")
     }
 }
 
