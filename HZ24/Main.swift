@@ -18,8 +18,8 @@ struct Main: App {
         WindowGroup {
             NavigationView {
                 ContentView(coredataProvider: coreDataProvider)
-                    .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
             }
+            .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         }
     }
 }
