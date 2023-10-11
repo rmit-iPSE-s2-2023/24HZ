@@ -52,7 +52,7 @@ class CoreDataProvider {
         
         // TODO: Create dummy ``Event``/s e.g. fetch events from last 1000 blocks?
         /// Add preview ``NewTokenListener``/s
-        PreviewModels.makePreviewNewTokenListeners(viewContext: viewContext)
+        PreviewModels.makePreviewERC20Listener(viewContext: viewContext)
 
         /// Add sample ``ExistingTokenListener``
         let existingTokenListener = ExistingTokenListener(context: viewContext)
