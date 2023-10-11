@@ -23,26 +23,3 @@ func customContinueButton() -> some View {
         .cornerRadius(10)
 }
 
-// Function for creating a custom check button
-func CheckableFormOption(isChecked: Bool = false) -> some View {
-    ZStack {
-        // Background rectangle with rounded corners
-        RoundedRectangle(cornerRadius: 10)
-            .fill(isChecked ? Color.green : Color.white)
-            .frame(height: 100)
-        
-        if isChecked {
-            // Small circle at top-right
-            Circle()
-                .fill(Color.black)
-                .frame(width: 30, height: 30)
-                .offset(x: 180, y: -30)
-            
-            // Checkmark icon
-            Image(systemName: "checkmark")
-                .foregroundColor(.green)
-                .offset(x: 180, y: -30)
-        }
-    }
-}
-
