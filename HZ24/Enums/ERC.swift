@@ -7,12 +7,6 @@
 
 import Foundation
 
-// TODO: Make this a computed property of ERCInterfaceId
-enum ERCType: String {
-    case erc721 = "ERC-721"
-    case erc20 = "ERC-20"
-    case erc1155 = "ERC-1155"
-}
 
 enum ERCInterfaceId: String, CaseIterable {
     case erc20 = "0x36372b07"
