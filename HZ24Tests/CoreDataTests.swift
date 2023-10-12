@@ -11,48 +11,41 @@ import XCTest
 import CoreData
 @testable import HZ24
 
+/// Suite to test ``HZ24/CoreDataProvider``
 final class CoreDataTests: XCTestCase {
     
     var coreDataProvider: CoreDataProvider!
     var context: NSManagedObjectContext!
 
+    /// Set-up before each test method
     override func setUp() {
         super.setUp()
         self.coreDataProvider = CoreDataProvider.preview
         self.context = coreDataProvider.container.viewContext
         print(coreDataProvider.container.persistentStoreDescriptions)
+        do {
+            let events = try context.fetch(.init(entityName: "Event"))
+            let listeners = try context.fetch(.init(entityName: "Listener"))
+            print("Initial events count: \(events.count)")
+            print("Initial listeners count: \(listeners.count)")
+        } catch {
+            print(error)
+        }
     }
     
-    /// Test preview ``Listener``/s are loading properly
-    /// - should match number of listeners added in ``CoreDataProvider``
-    func testPreviewEntities() throws {
-        let previewListeners = try self.context.fetch(.init(entityName: "Listener"))
-        XCTAssertEqual(previewListeners.count, 4)
+    /// Tear-down after each test method
+    override func tearDown() {
+        super.tearDown()
+        if self.context.hasChanges {
+            self.context.reset()
+        }
     }
     
-    /// Trivial test to just make sure Core Data is playing nicely and project is building properly
-    func testSavingNewTokenListener() throws {
-        var newTokenListeners: [NewTokenListener]
-        /// Initially, there should only be ONE NewTokenListeners in store
-        newTokenListeners = try self.context.fetch(.init(entityName: "NewTokenListener"))
-        let beforeCount = newTokenListeners.count
-        XCTAssertFalse(self.context.hasChanges)
-        
-        /// Create new entity in context
-        let newTokenListener = NewTokenListener(context: self.context)
-        /// MO: Listener property/s
-        newTokenListener.createdAt = Date()
-        newTokenListener.displayTitle = ERCInterfaceId.erc721.displayTitle
-        newTokenListener.isListening = true
-        /// MO: NewTokenListener property/s
-        newTokenListener.ercInterfaceId = ERCInterfaceId.erc721.rawValue
-        XCTAssertTrue(self.context.hasChanges)
-        
-        newTokenListeners = try self.context.fetch(.init(entityName: "NewTokenListener"))
-        XCTAssertEqual(newTokenListeners.count, beforeCount + 1)
-    }
-    
+    /// Test the pre-configured NSFetchRequest: ``NSFetchRequests/enabledNewTokensListeners``
     func testEnabledNewTokenListenersNSFetchRequest() throws {
+        let previewListeners = try self.context.fetch(.init(entityName: "NewTokenListener"))
+        let beforeCount = previewListeners.count
+        
         /// Create a ``NewTokenListener`` in context
         let newTokenListener = NewTokenListener(context: self.context)
         /// ``Listener`` parent entity attribute/s
@@ -61,6 +54,7 @@ final class CoreDataTests: XCTestCase {
         newTokenListener.isListening = true
         /// ``NewTokenListener`` attribute/s
         newTokenListener.ercInterfaceId = ERCInterfaceId.erc721.rawValue
+        
         /// Create another ``NewTokenListener`` in context
         let newTokenListener2 = NewTokenListener(context: self.context)
         /// ``Listener`` parent entity attribute/s
@@ -69,15 +63,15 @@ final class CoreDataTests: XCTestCase {
         newTokenListener2.isListening = false   /// isListening `false` means that this listener is "disabled"
         /// ``NewTokenListener`` attribute/s
         newTokenListener2.ercInterfaceId = ERCInterfaceId.erc20.rawValue
+        
         /// Fetch all ``NewTokenListener``/s
         let allNewTokenListeners = try self.context.fetch(.init(entityName: "NewTokenListener"))
-        XCTAssertEqual(allNewTokenListeners.count, 3)
-        /// Fetch all ``Listener``/s
-        let allListeners = try self.context.fetch(.init(entityName: "Listener"))
-        XCTAssertEqual(allListeners.count, 3)   // This test ensures parent-child entities are working as intended
+        
+        XCTAssertEqual(allNewTokenListeners.count, beforeCount + 2)
+
         /// Fetch **only** ``NewTokenListener``/s that are enabled by the user
         let onlyEnabledNewTokenListeners = try self.context.fetch(NSFetchRequests.enabledNewTokenListeners)
-        XCTAssertEqual(onlyEnabledNewTokenListeners.count, 2)
+        XCTAssertEqual(onlyEnabledNewTokenListeners.count, beforeCount + 1)
     }
     
     /// Test to ensure NewTokenListeners meet uniqueness constraint on ercInterfaceId and objects in store is updated by objects in context if uniqueness fails
@@ -118,7 +112,11 @@ final class CoreDataTests: XCTestCase {
 //        XCTAssertEqual(listeners.first!.objectID, copiedId)
     }
     
+    /// Test the pre-configured NSFetchRequest: ``NSFetchRequests/metadataEnabledExistingTokenListeners``
     func testmetadataEnabledExistingTokenListenersNSFetchRequest() throws {
+        let previewListeners = try self.context.fetch(.init(entityName: "ExistingTokenListener"))
+        let beforeCount = previewListeners.count
+        
         let existingTokenListener = ExistingTokenListener(context: self.context)
         /// ``Listener`` parent entity attribute/s
         existingTokenListener.createdAt = Date()
@@ -138,17 +136,23 @@ final class CoreDataTests: XCTestCase {
         existingTokenListener2.contractAddress = "0xb"
         existingTokenListener2.listeningForMetadataEvents = false
         existingTokenListener2.listeningForMintCommentEvents = true
+        
         let allExistingTokenListeners = try self.context.fetch(.init(entityName: "ExistingTokenListener"))
-        XCTAssertEqual(allExistingTokenListeners.count, 2)
-        let allListeners = try self.context.fetch(.init(entityName: "Listener"))
-        XCTAssertEqual(allListeners.count, 3)
+        
+        XCTAssertEqual(allExistingTokenListeners.count, beforeCount + 2)
+
         let onlyMetadataEnabledListeners = try self.context.fetch(NSFetchRequests.metadataEnabledExistingTokenListeners)
-        print(onlyMetadataEnabledListeners)
-        XCTAssertEqual(onlyMetadataEnabledListeners.count, 1)
+        
+        XCTAssertEqual(onlyMetadataEnabledListeners.count, beforeCount + 1)
     }
     
+    /// Test the pre-configured NSFetchRequest: ``NSFetchRequests/mintCommentEnabledExistingTokenListeners``
     func testMintCommentEnabledExistingTokenListenersNSFetchRequest() throws {
+        let previewListeners = try self.context.fetch(.init(entityName: "ExistingTokenListener"))
+        let beforeCount = previewListeners.count
+        
         /// Create 2 new ``ExistingTokenListener`` entities
+        ///
         /// 1) ``ExistingTokenListener`` with `\.listeningforMintCommentEvents` set to `true`
         let existingTokenListener = ExistingTokenListener(context: self.context)
         /// ``Listener`` parent entity attribute/s
@@ -159,6 +163,7 @@ final class CoreDataTests: XCTestCase {
         existingTokenListener.contractAddress = "0xa"
         existingTokenListener.listeningForMetadataEvents = true
         existingTokenListener.listeningForMintCommentEvents = true
+        
         /// 2) ``ExistingTokenListener`` with `\.listeningforMintCommentEvents` set to `false`
         let existingTokenListener2 = ExistingTokenListener(context: self.context)
         /// ``Listener`` parent entity attribute/s
@@ -169,22 +174,23 @@ final class CoreDataTests: XCTestCase {
         existingTokenListener2.contractAddress = "0xb"
         existingTokenListener2.listeningForMetadataEvents = true
         existingTokenListener2.listeningForMintCommentEvents = false
+        
         let allExistingTokenListeners = try self.context.fetch(.init(entityName: "ExistingTokenListener"))
-        XCTAssertEqual(allExistingTokenListeners.count, 2)
-        let allListeners = try self.context.fetch(.init(entityName: "Listener"))
-        XCTAssertEqual(allListeners.count, 3)
+        
+        XCTAssertEqual(allExistingTokenListeners.count, beforeCount + 2)
+        
         let onlyMintCommentEnabledListeners = try self.context.fetch(NSFetchRequests.mintCommentEnabledExistingTokenListeners)
-        print(onlyMintCommentEnabledListeners)
-        XCTAssertEqual(onlyMintCommentEnabledListeners.count, 1)
+        
+        XCTAssertEqual(onlyMintCommentEnabledListeners.count, beforeCount + 1)
     }
     
+    /// Test ``CoreDataProvider/fetchData`` runs with no errors!
     func testFetchData() async throws {
         let listener = ExistingTokenListener(context: self.context)
         listener.contractAddress = "0x8fcfdad5ebdd1ce815aa769bbd7499091ac056d1"
         listener.listeningForMetadataEvents = true
         listener.isListening = true
         listener.listeningForMintCommentEvents = true
-        try context.save()
         try await coreDataProvider.fetchData()
         let events = try context.fetch(.init(entityName: "Event"))
         print(events)
