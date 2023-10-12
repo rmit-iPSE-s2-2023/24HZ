@@ -115,6 +115,40 @@ class PreviewModels {
         return listeners
     }
     
+    static var mintCommentEvent: MintCommentEvent {
+        let events = self.makeMintCommentEvents(1)
+        return events[0]
+    }
+    
+    @discardableResult
+    static func makeMintCommentEvents(_ count: Int) -> [MintCommentEvent] {
+        var events: [MintCommentEvent] = []
+        let viewContext = CoreDataProvider.preview.container.viewContext
+        for index in 0..<count {
+            let event = MintCommentEvent(context: viewContext)
+            /// ``Event`` parent entity attribute/s
+            event.blockHash = "0x\(index)"
+            event.blockNumber = Int64(index)
+            event.contractAddress = "0x\(index)\(index)"
+            event.ercInterfaceId = ERCInterfaceId.random().rawValue
+            event.id = UUID()
+            event.saved = false
+            event.timestamp = Date().addingTimeInterval(Double(index) * -1800)
+            event.tokenName = "Preview Token \(index)"
+            event.tokenSymbol = "PRE\(index)"
+            event.transactionHash = "0x\(index)\(index)\(index)"
+            /// ``MintCommentEvent`` attribute/s
+            /// Note: this is a sample subset, it can have different attributes set based on the ``MintCommentEventABI`` type
+            event.abiEventName = MintCommentEventABI.MintComment.name
+            event.mintComment = "I just love the number \(index)"
+            event.quantity = Int64.random(in: 0..<5)
+            event.sender = "0x\(index)\(index)\(index)"
+            
+            events.append(event)
+        }
+        return events
+    }
+    
     static var metadataEvent: MetadataEvent {
         let events = self.makeMetadataEvents(1)
         return events[0]
