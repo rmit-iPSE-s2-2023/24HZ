@@ -21,11 +21,11 @@ struct EventDetails: View {
     @State private var showAdditionalInfo = false
     
     private func navTitle() -> String {
-        if let _ = event as? NewTokenEvent {
+        if event is NewTokenEvent {
             return "New Token"
-        } else if let event = event as? MetadataEvent {
+        } else if event is MetadataEvent {
             return "Metadata Update"
-        } else if let event = event as? MintCommentEvent {
+        } else if event is MintCommentEvent {
             return "Mint w/ Comment"
         } else {
             return event.entity.name ?? "Event"
