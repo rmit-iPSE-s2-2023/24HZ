@@ -31,6 +31,10 @@
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
 		B1ACC15E2AD6BD57001AAFC1 /* FormOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC15D2AD6BD57001AAFC1 /* FormOption.swift */; };
 		B1ACC1682AD77962001AAFC1 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B1ACC1672AD77962001AAFC1 /* web3.swift */; };
+		B1ACC16A2AD794F0001AAFC1 /* NewTokenEventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC1692AD794F0001AAFC1 /* NewTokenEventDetails.swift */; };
+		B1ACC16C2AD79814001AAFC1 /* MetadataEventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC16B2AD79814001AAFC1 /* MetadataEventDetails.swift */; };
+		B1ACC16E2AD79ECF001AAFC1 /* BlockchainInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC16D2AD79ECF001AAFC1 /* BlockchainInfo.swift */; };
+		B1ACC1702AD7C217001AAFC1 /* MintCommentEventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC16F2AD7C217001AAFC1 /* MintCommentEventDetails.swift */; };
 		B1AD3B8F2AC4370700912CF5 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */; };
 		B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046B2AC5A3B600DA66B7 /* CoreDataProvider.swift */; };
 		B1B504AC2AC5A3B600DA66B7 /* NSFetchRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046C2AC5A3B600DA66B7 /* NSFetchRequests.swift */; };
@@ -133,6 +137,10 @@
 		B140E9082AD15C7500519526 /* PreviewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewModels.swift; sourceTree = "<group>"; };
 		B19E75132A99694B008E9FF4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B1ACC15D2AD6BD57001AAFC1 /* FormOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormOption.swift; sourceTree = "<group>"; };
+		B1ACC1692AD794F0001AAFC1 /* NewTokenEventDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTokenEventDetails.swift; sourceTree = "<group>"; };
+		B1ACC16B2AD79814001AAFC1 /* MetadataEventDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataEventDetails.swift; sourceTree = "<group>"; };
+		B1ACC16D2AD79ECF001AAFC1 /* BlockchainInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainInfo.swift; sourceTree = "<group>"; };
+		B1ACC16F2AD7C217001AAFC1 /* MintCommentEventDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MintCommentEventDetails.swift; sourceTree = "<group>"; };
 		B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		B1B5046B2AC5A3B600DA66B7 /* CoreDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
 		B1B5046C2AC5A3B600DA66B7 /* NSFetchRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSFetchRequests.swift; sourceTree = "<group>"; };
@@ -262,6 +270,18 @@
 			path = VIew;
 			sourceTree = "<group>";
 		};
+		B1ACC1712AD7D1B9001AAFC1 /* EventDetails */ = {
+			isa = PBXGroup;
+			children = (
+				B1DE66082AD10B3000BED08E /* EventDetails.swift */,
+				B1ACC1692AD794F0001AAFC1 /* NewTokenEventDetails.swift */,
+				B1ACC16B2AD79814001AAFC1 /* MetadataEventDetails.swift */,
+				B1ACC16F2AD7C217001AAFC1 /* MintCommentEventDetails.swift */,
+				B1ACC16D2AD79ECF001AAFC1 /* BlockchainInfo.swift */,
+			);
+			path = EventDetails;
+			sourceTree = "<group>";
+		};
 		B1B504672AC5A3B600DA66B7 /* HZ24 */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,10 +397,10 @@
 		B1B5049E2AC5A3B600DA66B7 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				B1ACC1712AD7D1B9001AAFC1 /* EventDetails */,
 				B1DE66012AD1015200BED08E /* FeedTab.swift */,
 				B1B504A02AC5A3B600DA66B7 /* Hourmark.swift */,
 				B140E9062AD1143700519526 /* EventRowItem.swift */,
-				B1DE66082AD10B3000BED08E /* EventDetails.swift */,
 				B1DE66042AD1024E00BED08E /* TimeSegment.swift */,
 				B1DE66062AD1028A00BED08E /* HorizontalDivider.swift */,
 				B1B5048E2AC5A3B600DA66B7 /* DateUtilities.swift */,
@@ -587,9 +607,11 @@
 				B1DE66052AD1024E00BED08E /* TimeSegment.swift in Sources */,
 				B1B504AF2AC5A3B600DA66B7 /* DefaultEventsProvider.swift in Sources */,
 				B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */,
+				B1ACC1702AD7C217001AAFC1 /* MintCommentEventDetails.swift in Sources */,
 				A2A819982AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */,
 				B1B504B12AC5A3B600DA66B7 /* EventsProvider.swift in Sources */,
 				B1B504AE2AC5A3B600DA66B7 /* RPCProtocol.swift in Sources */,
+				B1ACC16C2AD79814001AAFC1 /* MetadataEventDetails.swift in Sources */,
 				B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */,
 				B1B504B62AC5A3B600DA66B7 /* EventListenerType.swift in Sources */,
 				B1DE66092AD10B3000BED08E /* EventDetails.swift in Sources */,
@@ -597,12 +619,14 @@
 				B140E9072AD1143700519526 /* EventRowItem.swift in Sources */,
 				B1B504DB2AC5A3B600DA66B7 /* NavBar.swift in Sources */,
 				B1B504CD2AC5A3B600DA66B7 /* Success.swift in Sources */,
+				B1ACC16E2AD79ECF001AAFC1 /* BlockchainInfo.swift in Sources */,
 				B1B504CC2AC5A3B600DA66B7 /* TokenTypeSelection.swift in Sources */,
 				B1DE66072AD1028A00BED08E /* HorizontalDivider.swift in Sources */,
 				B1B504B22AC5A3B600DA66B7 /* MetadataEventABI.swift in Sources */,
 				B1B504C92AC5A3B600DA66B7 /* DateUtilities.swift in Sources */,
 				B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */,
 				A2AEBE8F2AD254260056AB1F /* Tutorials.swift in Sources */,
+				B1ACC16A2AD794F0001AAFC1 /* NewTokenEventDetails.swift in Sources */,
 				B1DE65FC2AC9329D00BED08E /* ListenerEnable.swift in Sources */,
 				B1ACC15E2AD6BD57001AAFC1 /* FormOption.swift in Sources */,
 				B1DE66022AD1015200BED08E /* FeedTab.swift in Sources */,
