@@ -30,6 +30,7 @@
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
 		B1ACC15E2AD6BD57001AAFC1 /* FormOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC15D2AD6BD57001AAFC1 /* FormOption.swift */; };
+		B1ACC1682AD77962001AAFC1 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B1ACC1672AD77962001AAFC1 /* web3.swift */; };
 		B1AD3B8F2AC4370700912CF5 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AD3B8E2AC4370700912CF5 /* CoreDataTests.swift */; };
 		B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046B2AC5A3B600DA66B7 /* CoreDataProvider.swift */; };
 		B1B504AC2AC5A3B600DA66B7 /* NSFetchRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5046C2AC5A3B600DA66B7 /* NSFetchRequests.swift */; };
@@ -202,6 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1ACC1682AD77962001AAFC1 /* web3.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +486,7 @@
 			);
 			name = HZ24Tests;
 			packageProductDependencies = (
+				B1ACC1672AD77962001AAFC1 /* web3.swift */,
 			);
 			productName = 24HZTests;
 			productReference = B1BE377F2AC01BE900104A4A /* HZ24Tests.xctest */;
@@ -997,6 +1000,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		A208631A2AD70F7500FC938D /* web3.swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A20863192AD70F7500FC938D /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
+		};
+		B1ACC1672AD77962001AAFC1 /* web3.swift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A20863192AD70F7500FC938D /* XCRemoteSwiftPackageReference "web3" */;
 			productName = web3.swift;
