@@ -46,7 +46,7 @@ struct EventDetails: View {
     
     private func saveEvent() -> Void {
         /// Save event
-        event.saved = true
+        event.saved.toggle()
         dismiss()
         do {
             try viewContext.save()
@@ -144,7 +144,11 @@ struct EventDetails: View {
             // MARK: Toolbar
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Text("")
+                    // MARK: Save button
+                    Button(action: saveEvent) {
+                        Text(event.saved ? "Unsave" : "Save")
+                    }
+//                    .buttonStyle(.bordered)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -158,13 +162,6 @@ struct EventDetails: View {
             .navigationBarTitleDisplayMode(.inline)
 
         }
-        .overlay(alignment: .bottom, content: {
-            // MARK: Save button
-            Button(action: saveEvent) {
-                Label("Save", systemImage: "bookmark")
-            }
-            .buttonStyle(.bordered)
-        })
         .preferredColorScheme(.dark)
         // End of NavigationView (parent)
     }
