@@ -25,10 +25,15 @@
 		A2AEBE8B2AD24F3F0056AB1F /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8A2AD24F3F0056AB1F /* PageViewController.swift */; };
 		A2AEBE8D2AD24F5E0056AB1F /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8C2AD24F5E0056AB1F /* PageControl.swift */; };
 		A2AEBE8F2AD254260056AB1F /* Tutorials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AEBE8E2AD254250056AB1F /* Tutorials.swift */; };
+		B135DC392AD8C73D00DA3639 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B135DC352AD8C72C00DA3639 /* Event+CoreDataClass.swift */; };
+		B135DC3A2AD8C73E00DA3639 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B135DC352AD8C72C00DA3639 /* Event+CoreDataClass.swift */; };
+		B135DC3D2AD8C74600DA3639 /* Listener+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B135DC372AD8C72C00DA3639 /* Listener+CoreDataClass.swift */; };
+		B135DC3E2AD8C74700DA3639 /* Listener+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B135DC372AD8C72C00DA3639 /* Listener+CoreDataClass.swift */; };
 		B137A4AE2AD4E63D00A06727 /* ListenerRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AD2AD4E63D00A06727 /* ListenerRowItem.swift */; };
 		B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AF2AD564CA00A06727 /* AddListenerButton.swift */; };
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
+		B1A1098F2AD8B7B300FDEE8B /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = B1A1098E2AD8AE6800FDEE8B /* Documentation.docc */; };
 		B1ACC15E2AD6BD57001AAFC1 /* FormOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC15D2AD6BD57001AAFC1 /* FormOption.swift */; };
 		B1ACC1682AD77962001AAFC1 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B1ACC1672AD77962001AAFC1 /* web3.swift */; };
 		B1ACC16A2AD794F0001AAFC1 /* NewTokenEventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC1692AD794F0001AAFC1 /* NewTokenEventDetails.swift */; };
@@ -129,6 +134,8 @@
 		A2AEBE8A2AD24F3F0056AB1F /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		A2AEBE8C2AD24F5E0056AB1F /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		A2AEBE8E2AD254250056AB1F /* Tutorials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutorials.swift; sourceTree = "<group>"; };
+		B135DC352AD8C72C00DA3639 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B135DC372AD8C72C00DA3639 /* Listener+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Listener+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B137A4AD2AD4E63D00A06727 /* ListenerRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerRowItem.swift; sourceTree = "<group>"; };
 		B137A4AF2AD564CA00A06727 /* AddListenerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListenerButton.swift; sourceTree = "<group>"; };
 		B140E9062AD1143700519526 /* EventRowItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRowItem.swift; sourceTree = "<group>"; };
@@ -218,7 +225,6 @@
 		A22074562A7D5FF0002FD6CB = {
 			isa = PBXGroup;
 			children = (
-				B1A1098E2AD8AE6800FDEE8B /* Documentation.docc */,
 				A2A819AA2AD596AF004E7AF5 /* HZ24WidgetExtension.entitlements */,
 				B1B504672AC5A3B600DA66B7 /* HZ24 */,
 				B19E75132A99694B008E9FF4 /* README.md */,
@@ -283,6 +289,7 @@
 		B1B504672AC5A3B600DA66B7 /* HZ24 */ = {
 			isa = PBXGroup;
 			children = (
+				B1A1098E2AD8AE6800FDEE8B /* Documentation.docc */,
 				A2A819842AD57A63004E7AF5 /* HZ24.entitlements */,
 				B1B5048F2AC5A3B600DA66B7 /* Main.swift */,
 				B1B5046A2AC5A3B600DA66B7 /* Core Data */,
@@ -302,6 +309,8 @@
 				A2A819AE2AD599BF004E7AF5 /* Persistence.swift */,
 				B1B5046C2AC5A3B600DA66B7 /* NSFetchRequests.swift */,
 				B1B5046D2AC5A3B600DA66B7 /* Model.xcdatamodeld */,
+				B135DC352AD8C72C00DA3639 /* Event+CoreDataClass.swift */,
+				B135DC372AD8C72C00DA3639 /* Listener+CoreDataClass.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -602,6 +611,7 @@
 				B1B504D12AC5A3B600DA66B7 /* NotificationSelection.swift in Sources */,
 				B1DE66052AD1024E00BED08E /* TimeSegment.swift in Sources */,
 				B1B504AF2AC5A3B600DA66B7 /* DefaultEventsProvider.swift in Sources */,
+				B135DC392AD8C73D00DA3639 /* Event+CoreDataClass.swift in Sources */,
 				B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */,
 				B1ACC1702AD7C217001AAFC1 /* MintCommentEventDetails.swift in Sources */,
 				A2A819982AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */,
@@ -611,6 +621,7 @@
 				B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */,
 				B1DE66092AD10B3000BED08E /* EventDetails.swift in Sources */,
 				B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */,
+				B1A1098F2AD8B7B300FDEE8B /* Documentation.docc in Sources */,
 				B140E9072AD1143700519526 /* EventRowItem.swift in Sources */,
 				B1B504DB2AC5A3B600DA66B7 /* NavBar.swift in Sources */,
 				B1B504CD2AC5A3B600DA66B7 /* Success.swift in Sources */,
@@ -638,6 +649,7 @@
 				B1B504D62AC5A3B600DA66B7 /* Hourmark.swift in Sources */,
 				B1B504D32AC5A3B600DA66B7 /* ListenerTypeSelection.swift in Sources */,
 				B1B504DC2AC5A3B600DA66B7 /* IndentedWithHeaderLayout.swift in Sources */,
+				B135DC3D2AD8C74600DA3639 /* Listener+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,11 +659,13 @@
 			files = (
 				A2A819972AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */,
 				A208631C2AD7137300FC938D /* NSFetchRequests.swift in Sources */,
+				B135DC3A2AD8C73E00DA3639 /* Event+CoreDataClass.swift in Sources */,
 				A2A819922AD58B82004E7AF5 /* HZ24Widget.swift in Sources */,
 				A2A819AD2AD59716004E7AF5 /* Model.xcdatamodeld in Sources */,
 				A2A819B92AD5D8F4004E7AF5 /* HZ24WidgetEntryView.swift in Sources */,
 				A2A819B02AD599BF004E7AF5 /* Persistence.swift in Sources */,
 				A2A819B72AD5D81A004E7AF5 /* HZ24EventProvider.swift in Sources */,
+				B135DC3E2AD8C74700DA3639 /* Listener+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
