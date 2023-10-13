@@ -10,15 +10,16 @@
 import Foundation
 import CoreData
 
+/// This class manages Core Data entities and fetches useful data from the network layer.
+///
+/// This class represents the data layer of the app. An NSPersistentContainer is created upon initialization and thus its reference to the viewContext is to be injected into the app's environment to be available in all subviews.
+///
+/// This class utilizes the Singleton pattern to allow for the creation of an instance configured for persistent data (``CoreDataProvider/shared``) or in-memory data (``CoreDataProvider/preview``).
 class CoreDataProvider {
     // MARK: Core Data
     private let inMemory: Bool
     
-    /// NSPersistentContainer contains:
-    /// - managed object context (viewContext)
-    /// - persistent store coordinator
-    /// - managed object model
-    /// - persistent store (persistentStoreDescriptions)
+    /// An instance of NSPersistentContainer.
     lazy var container: NSPersistentContainer = {
            if self.inMemory {
                return PersistenceController.preview.container
@@ -29,24 +30,26 @@ class CoreDataProvider {
     
     /// APIs to retrieve new data
     let eventsProvider: EventsProvider
-    /// Number of blocks to query for a full fetch
+    /// Number of blocks to query for a full fetch.
+    ///
     /// Note: In production, this should equate to 24 hours. With limitations of using a free API, 1000 is set as it is the max batch JSON-RPC size limit for ``ThirdWebRPC``
     let fullFetchBlockRange: Int = 1000
     
     // MARK: Singleton/s
-    /// Shared singleton (on-disk)
+    /// Shared singleton (on-disk).
     static let shared = CoreDataProvider()
-    /// Preview singleton (in-memory)
-    /// - to add test data for preview
+    /// Preview singleton (in-memory).
+    ///
+    /// For use in Xcode previews.
     static var preview: CoreDataProvider = {
         let provider = CoreDataProvider(inMemory: true)
         let viewContext = provider.container.viewContext
         
         // TODO: Create dummy ``Event``/s e.g. fetch events from last 1000 blocks?
-        /// Add preview ``NewTokenListener``/s
+        // Add preview NewTokenListeners
         PreviewModels.makePreviewERC20Listener(viewContext: viewContext)
 
-        /// Add sample ``ExistingTokenListener``
+        // Add preview ExistingTokenListener
         let existingTokenListener = ExistingTokenListener(context: viewContext)
         /// ``Listener`` parent entity attribute/s
         existingTokenListener.createdAt = Date()
@@ -59,7 +62,7 @@ class CoreDataProvider {
         existingTokenListener.tokenName = "Opepen Threadition"
         existingTokenListener.tokenSymbol = ""
         
-        /// Add sample ``NewTokenEvent``
+        // Add sample NewTokenEvent
         let newTokenEvent = NewTokenEvent(context: viewContext)
         /// ``Event`` parent entity attribute/s
         newTokenEvent.blockHash = "0x"
@@ -75,9 +78,8 @@ class CoreDataProvider {
         /// ``NewTokenEvent`` attribute/s
         newTokenEvent.deployerAddress = "0xdeployer"
         
-        /// Save to store
+        // Save to store
         try! viewContext.save()
-        // e.g. CapturedEvent.makePreviews()
         return provider
     }()
     
@@ -97,8 +99,8 @@ extension CoreDataProvider {
 }
 
 extension CoreDataProvider {
-    /// Fetches events for all event listeners that the user is listening to, and imports it into Core Data.
     // FIXME: At the moment, it just assumes there is no events fetched at all. This must be fixed to only query blocks that have not been queried already.
+    /// Fetches events for all event listeners that the user is listening to, and imports it into Core Data.
     func fetchData() async throws {
         let context = self.container.viewContext
         
@@ -136,6 +138,7 @@ extension CoreDataProvider {
         }
     }
     
+    /// Method to fetch ``NewTokenEvent``/s from the network layer.
     private func fetchNewTokenEvents(_ upToBlock: Int?) async throws {
         let context = self.container.viewContext
         
@@ -198,6 +201,7 @@ extension CoreDataProvider {
         }
     }
     
+    /// Method to fetch ``MetadataEvent``/s from the network layer.
     private func fetchMetadataEvents(_ upToBlock: Int?) async throws {
         let context = self.container.viewContext
 
@@ -265,6 +269,7 @@ extension CoreDataProvider {
         }
     }
     
+    /// Method to fetch ``MintCommentEvent``/s from the network layer.
     private func fetchMintCommentEvents(_ upToBlock: Int?) async throws {
         let context = self.container.viewContext
         
