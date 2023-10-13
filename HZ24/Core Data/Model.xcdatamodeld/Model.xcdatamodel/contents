@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="class">
+    <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="category">
         <attribute name="blockHash" attributeType="String"/>
         <attribute name="blockNumber" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="contractAddress" attributeType="String"/>
@@ -20,7 +20,7 @@
         <attribute name="tokenName" optional="YES" attributeType="String"/>
         <attribute name="tokenSymbol" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Listener" representedClassName="Listener" syncable="YES" codeGenerationType="class">
+    <entity name="Listener" representedClassName="Listener" syncable="YES" codeGenerationType="category">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="displayTitle" optional="YES" attributeType="String"/>
         <attribute name="isListening" attributeType="Boolean" usesScalarValueType="YES"/>
