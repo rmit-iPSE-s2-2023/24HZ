@@ -9,6 +9,8 @@ import SwiftUI
 import CoreData
 
 /// Entry point of the 24HZ app.
+///
+/// An instance of ``CoreDataProvider`` is initialized and injected into the ``ContentView``. The Core Data viewContext is injected into app's environment.
 @main
 struct Main: App {
     
