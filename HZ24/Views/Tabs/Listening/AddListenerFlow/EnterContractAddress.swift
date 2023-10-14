@@ -54,9 +54,9 @@ struct EnterContractAddress: View {
         }
     }
 
-    /// A method to check if the contract address the user provided is for a token contract.
+    /// A method to fetch information for a token contract address the user provided and create a new MO if valid token is found.
     ///
-    /// If a valid token contract is found, show the sheet to confirm the retrieved token contract details with user.
+    /// This method creates an async Task to fetch token contract information. If a valid token contract is found, show the sheet to confirm the retrieved token contract details with user.
     ///
     /// If the given contract is not a token contract, show user a warning message.
     private func downloadContractInfo(address: String) -> Void {
@@ -94,8 +94,6 @@ struct EnterContractAddress: View {
                     print("token name not found")
                     invalidAddress()
                 }
-
-                
             } catch {
                 print("Network Error")
                 errorMsg = "Network Error"

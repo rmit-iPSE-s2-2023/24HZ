@@ -20,6 +20,8 @@ Miro board: https://miro.com/app/board/uXjVMpMwtAc=/?share_link_id=916731394061
 
 > The minimum deployment target for this project is iOS 15.2
 
+> Please refer to the Documentation Catalog (`Documentation.docc`) in the codebase for more detailed information on getting started as well as conceptual guidance on domain-specific knowledge.
+
 ## Running Tests
 Make sure to link any dependencies in test target:
 1. Go to project settings
@@ -33,20 +35,17 @@ Make sure to link any dependencies in test target:
 
 ## Project Architecture
 
-The current project architecture is similar to the Container pattern found in React projects. However, this will be updated to an MV pattern to leverage the SwiftUI framework. This README will reflect the change in project architecture.
+The current project architecture is using the MV pattern.
 
 ### Current Repo Structure
-- `a1_s3713342App.swift`: App entry point
+- `Main.swift`: App entry point
 - `ContentView.swift`: Root UI View
-- Models: contains data models of database objects
-- Enums: contains useful enums
-- Tabs: contains relevant views for each Tab
-- Layouts: contains custom layouts
-- Preview Content: contains dummy JSON data for prototyping purposes
-- `JSON.swift`: contains dummy data fetching code
-- `utils.swift`: contains utility code e.g. TimeInterval conversions
-- `constants.swift`: contains useful constants
-- `Assets.xcassets`: contains Static assets for the project
+- Validation: contains code to validate Ethereum addresses
+- Enums: contains useful enums for the project
+- Scanner: contains UIKit integration for QR code scanning functionality
+- Core Data: contains code to manage the Core Data stack
+- Preview Content: contains code to create preview objects for debugging purposes
+- Views: contains code related to creating UI components
 
 ## Contributors
 - Jin Heock Huh
@@ -56,6 +55,7 @@ The current project architecture is similar to the Container pattern found in Re
 - Hacking with Swift for Swift best practices (https://www.hackingwithswift.com/)
 - *Apple* for the useful [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/)
 - AzamSharp for SwiftUI design pattern analyses (https://azamsharp.com/)
+- Konstantin for tutorial on creating a QR code scanning feature for a SwiftUI app (https://blog.devgenius.io/camera-preview-and-a-qr-code-scanner-in-swiftui-48b111155c66)
 
 ## Acknowledgements
 - Shekhar Kalra for approving our initial app idea and motivation

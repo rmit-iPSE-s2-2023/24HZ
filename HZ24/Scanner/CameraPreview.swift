@@ -4,7 +4,10 @@
 // 
 // Created by jin on 2023-10-14
 // 
-
+// Credits: Konstantin
+//
+// This file contains adaptations from "Camera preview and a QR-code Scanner in SwiftUI"
+// Original tutorial: https://blog.devgenius.io/camera-preview-and-a-qr-code-scanner-in-swiftui-48b111155c66
 
 
 import Foundation
