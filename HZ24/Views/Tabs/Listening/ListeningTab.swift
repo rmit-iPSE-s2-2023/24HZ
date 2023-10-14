@@ -25,22 +25,31 @@ struct ListeningTab: View {
     /// Triggered when the user wants to navigate to the next screen in a sequence.
     @State private var navigateToAddListenerFlow = false
     
+    @State var isEditingMode: Bool = false
+    
     // MARK: - Return body
     var body: some View {
         VStack {
             
             // MARK: Tab header
-            HStack {
-                Text("Hey" + ",")
-                    .font(.largeTitle.bold())
-                    .foregroundColor(.accentColor)
-                Spacer()
-            }
-            HStack {
-                Text("here is what you're listening to...")
+            if !isEditingMode {
+                HStack {
+                    Text("here is what you're listening to...")
+                        .multilineTextAlignment(.leading)
+                        .font(.largeTitle.bold())
+                        .padding(.leading, 10)
+                    Spacer()
+                }
+            } else {
+                /// Tab heading
+                HStack {
+                Text("swipe right to navigate to the settings page.")
+                    .foregroundColor(.red)
                     .multilineTextAlignment(.leading)
                     .font(.largeTitle.bold())
-                Spacer()
+                    .padding(.leading, 10)
+                    Spacer()
+            }
             }
             
             ScrollView {
@@ -118,7 +127,52 @@ struct GenericListenerView: View {
             //TODO: GEAR ICON to navigate Listener settings
             // Displaying the gear icon with its green background
             HStack {
-                //TODO: Complex gesture
+                ///Editing Mode
+                if isEditingMode {
+                    ListenerRowItem(listener: listener)
+                        .offset(x: offset.width) // Offset the view based on the swipe gesture's width.
+                        .rotationEffect(isEditingMode ? Angle(degrees: danceTrigger ? 1 : -1) : Angle(degrees: 0)) // Rotate the view slightly for a 'dancing' effect when in editing mode.
+                        .animation(Animation.easeInOut(duration: 0.2).repeatForever(autoreverses: true), value: danceTrigger) // Apply the 'dancing' animation.
+                        .onAppear {
+                            danceTrigger = isEditingMode // Start the 'dancing' animation when the view appears if in editing mode.
+                        }
+                        .onChange(of: isEditingMode) { newValue in
+                            danceTrigger = newValue // Update the 'dancing' animation state based on the editing mode.
+                        }
+                        .gesture(
+                            DragGesture()
+                                .onChanged { gesture in
+                                    if isEditingMode {
+                                        if gesture.translation.width > 0 {
+                                            offset.width = gesture.translation.width // Update the offset based on the user's swipe.
+                                            showGearIcon = true // Show the gear icon when swiped.
+                                        }
+                                    }
+                                }
+                                .onEnded { gesture in
+                                    let swipeThreshold: CGFloat = 100.0
+                                    if gesture.translation.width > swipeThreshold {
+                                        offset.width = 50 // Set the offset to show the gear icon completely.
+                                        showGearIcon = true
+                                    } else {
+                                        offset = .zero // Reset the offset if the swipe is less than the threshold.
+                                        showGearIcon = false // Hide the gear icon if the swipe is less than the threshold.
+                                    }
+                                }
+                        )
+                        .onTapGesture {
+                            offset = .zero
+                            isEditingMode = false
+                            showGearIcon = false
+                        }
+                } else {
+                    ListenerRowItem(listener: listener)
+                        .onAppear {
+                            showGearIcon = false
+                            danceTrigger = false
+                            offset = .zero // Reset position and states when the view reappears.
+                        }
+                }
             }
         }
     }
