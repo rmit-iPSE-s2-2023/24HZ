@@ -159,55 +159,80 @@ struct GenericListenerView: View {
     
     var body: some View {
         ZStack {
-            //TODO: GEAR ICON to navigate Listener settings
+            // NavigationLink for gear icon
+            NavigationLink("", destination: ListenerSettings(listener: listener), isActive: $navigateToSetting)
+                .opacity(0)
+            
             // Displaying the gear icon with its green background
             HStack {
-                ///Editing Mode
-                if isEditingMode {
-                    ListenerRowItem(listener: listener)
-                        .offset(x: offset.width) // Offset the view based on the swipe gesture's width.
-                        .rotationEffect(isEditingMode ? Angle(degrees: danceTrigger ? 1 : 1) : Angle(degrees: 0)) // Rotate the view slightly for a 'dancing' effect when in editing mode.
-                        .animation(Animation.easeInOut(duration: 0.2).repeatForever(autoreverses: true), value: danceTrigger) // Apply the 'dancing' animation.
-                        .onAppear {
-                            danceTrigger = isEditingMode // Start the 'dancing' animation when the view appears if in editing mode.
-                        }
-                        .onChange(of: isEditingMode) { newValue in
-                            danceTrigger = newValue // Update the 'dancing' animation state based on the editing mode.
-                        }
-                        .gesture(
-                            DragGesture()
-                                .onChanged { gesture in
-                                    if isEditingMode {
-                                        if gesture.translation.width > 0 {
-                                            offset.width = gesture.translation.width // Update the offset based on the user's swipe.
-                                            showGearIcon = true // Show the gear icon when swiped.
-                                        }
-                                    }
-                                }
-                                .onEnded { gesture in
-                                    let swipeThreshold: CGFloat = 100.0
-                                    if gesture.translation.width > swipeThreshold {
-                                        offset.width = 50 // Set the offset to show the gear icon completely.
-                                        showGearIcon = true
-                                    } else {
-                                        offset = .zero // Reset the offset if the swipe is less than the threshold.
-                                        showGearIcon = false // Hide the gear icon if the swipe is less than the threshold.
-                                    }
-                                }
-                        )
-                        .onTapGesture {
-                            offset = .zero
-                            isEditingMode = false
-                            showGearIcon = false
-                        }
-                } else {
-                    ListenerRowItem(listener: listener)
-                        .onAppear {
-                            showGearIcon = false
-                            danceTrigger = false
-                            offset = .zero // Reset position and states when the view reappears.
-                        }
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(showGearIcon ? Color.green : .clear)
+                    .frame(width: abs(offset.width - 5), height: 60)
+                    .overlay(
+                        Image(systemName: "gearshape")
+                            .foregroundColor(.white)
+                            .font(.system(size: 25, weight: .bold))
+                            .opacity(showGearIcon ? 1 : 0)
+                    )
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        // Animate the item back to its original position smoothly when the gear icon is clicked
+                        self.offset = .zero
+                        self.showGearIcon = false
+                    }
+                    
+                    // After the animation completes, navigate to ListenerSettingsView
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.navigateToSetting = true
+                    }
                 }
+            Spacer() // Pushes the gear icon to the left
+        }
+            ///Editing Mode
+            if isEditingMode {
+                ListenerRowItem(listener: listener)
+                    .offset(x: offset.width) // Offset the view based on the swipe gesture's width.
+                    .rotationEffect(isEditingMode ? Angle(degrees: danceTrigger ? 1 : -1) : Angle(degrees: 0)) // rotate the view slightly for a 'dancing' effect when in editing mode.
+                    .animation(Animation.easeInOut(duration: 0.2).repeatForever(autoreverses: true), value: danceTrigger) // Apply the 'dancing' animation.
+                    .onAppear {
+                        danceTrigger = isEditingMode // Start the 'dancing' animation when the view appears if in editing mode.
+                    }
+                    .onChange(of: isEditingMode) { newValue in
+                        danceTrigger = newValue // Update the 'dancing' animation state based on the editing mode.
+                    }
+                    .gesture(
+                        DragGesture()
+                            .onChanged { gesture in
+                                if isEditingMode {
+                                    if gesture.translation.width > 0 {
+                                        offset.width = gesture.translation.width // Update the offset based on the user's swipe.
+                                        showGearIcon = true // Show the gear icon when swiped.
+                                    }
+                                }
+                            }
+                            .onEnded { gesture in
+                                let swipeThreshold: CGFloat = 100.0
+                                if gesture.translation.width > swipeThreshold {
+                                    offset.width = 60 // Set the offset to show the gear icon completely.
+                                    showGearIcon = true
+                                } else {
+                                    offset = .zero // Reset the offset if the swipe is less than the threshold.
+                                    showGearIcon = false // Hide the gear icon if the swipe is less than the threshold.
+                                }
+                            }
+                    )
+                    .onTapGesture {
+                        offset = .zero
+                        isEditingMode = false
+                        showGearIcon = false
+                    }
+            } else {
+                ListenerRowItem(listener: listener)
+                    .onAppear {
+                        showGearIcon = false
+                        danceTrigger = false
+                        offset = .zero // Reset position and states when the view reappears.
+                    }
             }
         }
     }
