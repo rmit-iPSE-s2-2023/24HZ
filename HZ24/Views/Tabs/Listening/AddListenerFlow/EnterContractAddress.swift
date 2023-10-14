@@ -19,6 +19,9 @@ struct EnterContractAddress: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
+    @ObservedObject var scanner = Scanner()
+    @State private var showScannerView = false
+    
     // MARK: State
     @State private var contractAddress = ""
     @State private var tokenName = ""
@@ -33,38 +36,65 @@ struct EnterContractAddress: View {
 
     @State private var tokenInfo: TokenInfo? = nil
     @State private var newListener: ExistingTokenListener?
+    
+    /// A method that is called when the user provides an invalid address when asked for a token contract address.
+    ///
+    /// This method should react accordingly by displaying some feedback to the user.
+    private func invalidAddress() -> Void {
+        withAnimation {
+            errorMsg = "Invalid contract address. Please try again."
+            contractAddress = ""
+            showBanner.toggle()
+        }
+        // Toggle back after 3 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            withAnimation {
+                showBanner = false
+            }
+        }
+    }
 
     /// A method to check if the contract address the user provided is for a token contract.
     ///
     /// If a valid token contract is found, show the sheet to confirm the retrieved token contract details with user.
     ///
     /// If the given contract is not a token contract, show user a warning message.
-    private func downloadContractInfo() -> Void {
+    private func downloadContractInfo(address: String) -> Void {
         let rpc = ThirdWebRPC(chainName: ThirdWebRPC.ThirdWebChainName.zora)
         Task {
             do {
-                let tokenInfos = try await rpc.getTokenInfos(contractAddresses: [contractAddress])
+                let tokenInfos = try await rpc.getTokenInfos(contractAddresses: [address])
                 guard let info = tokenInfos.first(where: { tokenInfo in
-                    return tokenInfo.contractAddress == contractAddress
+                    return tokenInfo.contractAddress == address
                 }) else {
                     // FIXME: Remove fatalError and replace by throwing custom Error
                     print("Unable to find TokenInfo")
                     fatalError("")
                 }
-                tokenInfo = info
-                showTokenInfo.toggle()
-                
-                // FIXME: Should the MO be created here..?
-                /// Create new ``Listener`` managed object
-                let existingTokenListener = ExistingTokenListener(context: viewContext)
-                existingTokenListener.tokenName = info.name
-                existingTokenListener.tokenSymbol = info.symbol
-                existingTokenListener.createdAt = Date()
-                existingTokenListener.contractAddress = contractAddress
-                existingTokenListener.displayTitle = info.name
-                existingTokenListener.isListening = true
-                newListener = existingTokenListener
-                showSheet.toggle()
+                // If tokenName is found:
+                if let name = info.name, !name.isEmpty {
+                    print("token name found")
+                    print(info.name ?? "")
+                    tokenInfo = info
+                    showTokenInfo.toggle()
+                    
+                    // FIXME: Should the MO be created here..?
+                    /// Create new ``Listener`` managed object
+                    let existingTokenListener = ExistingTokenListener(context: viewContext)
+                    existingTokenListener.tokenName = info.name
+                    existingTokenListener.tokenSymbol = info.symbol
+                    existingTokenListener.createdAt = Date()
+                    existingTokenListener.contractAddress = address
+                    existingTokenListener.displayTitle = info.name
+                    existingTokenListener.isListening = true
+                    newListener = existingTokenListener
+                    showSheet.toggle()
+                } else {
+                    // if tokenName is not found:
+                    print("token name not found")
+                    invalidAddress()
+                }
+
                 
             } catch {
                 print("Network Error")
@@ -107,29 +137,20 @@ struct EnterContractAddress: View {
                         .autocapitalization(.none)
                     .padding(8)
 //                    Spacer()
-                    Image(systemName: "qrcode")
-                        .overlay {
-                            NavigationLink("", destination: Text("QR Scanner"))
-                                .opacity(0)
-                        }
+                    Button {
+                        showScannerView.toggle()
+                    } label: {
+                        Image(systemName: "qrcode")
+                    }
                 }
                 
                 Button {
                     // Validate input string
-                    let isValid = isValidEthereumAddress(contractAddress)
-                    if isValid {
-                        downloadContractInfo()
+                    if isValidEthereumAddress(contractAddress) {
+                        downloadContractInfo(address: contractAddress)
                     } else {
-                        withAnimation {
-                            errorMsg = "Invalid contract address."
-                            showBanner.toggle()
-                        }
-                        // Toggle back after 3 seconds
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            withAnimation {
-                                showBanner = false
-                            }
-                        }
+                        invalidAddress()
+
                     }
                 } label: {
                     Text("Continue")
@@ -151,6 +172,32 @@ struct EnterContractAddress: View {
             .frame(maxHeight: 450)
             // End of Form
         }
+        .fullScreenCover(isPresented: $showScannerView, content: {
+            ScannerView(scanner: scanner)
+        })
+        .onChange(of: scanner.lastQrCode, perform: { newValue in
+            // Validate input string
+            print("Okay it changed!")
+            if isValidEthereumAddress(newValue) {
+                do {
+                    let cleaned = try cleanEthAddress(newValue)
+                    downloadContractInfo(address: cleaned)
+                } catch {
+                    print(error)
+                }
+            } else {
+                withAnimation {
+                    errorMsg = "Invalid contract address."
+                    showBanner.toggle()
+                }
+                // Toggle back after 3 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation {
+                        showBanner = false
+                    }
+                }
+            }
+        })
         // End of Return body
         .sheet(isPresented: $showSheet, content: {
             VStack {
@@ -196,29 +243,6 @@ struct EnterContractAddress: View {
         .navigationTitle("Listen to an existing token")
         .navigationBarTitleDisplayMode(.inline)
     }
-    
-    private func isValidEthereumAddress(_ address: String) -> Bool {
-        // Check for empty string
-        guard !address.isEmpty else {
-            return false
-        }
-        
-        // Check for '0x' prefix
-        guard address.hasPrefix("0x") else {
-            return false
-        }
-        let cleanedAddress = address.dropFirst(2)
-        
-        // Check for valid hexadecimal string
-        let isHex = cleanedAddress.range(of: "^[0-9a-fA-F]+$", options: .regularExpression) != nil
-        guard isHex else {
-            return false
-        }
-        
-        // Check for correct length (42 characters)
-        let isCorrectLength = address.count == 42
-        return isCorrectLength
-    }
 }
 
 struct EnterContractAddress_Previews: PreviewProvider {
@@ -226,11 +250,12 @@ struct EnterContractAddress_Previews: PreviewProvider {
     static var previews: some View {
         EnterContractAddress()
             .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
-        
+            .previewDisplayName("Unwrapped")
 
         NavigationView {
             EnterContractAddress()
-                .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
         }
+        .environment(\.managedObjectContext, coreDataProvider.container.viewContext)
+        .previewDisplayName("Wrapped")
     }
 }
