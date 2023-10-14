@@ -7,7 +7,9 @@
 
 import Foundation
 
-
+/// Types of ERC interfaces.
+///
+/// This enum's raw value represents the ERC interface signatures. A computed property is implemented for display purposes.
 enum ERCInterfaceId: String, CaseIterable {
     case erc20 = "0x36372b07"
     case erc721 = "0x80ac58cd"
@@ -15,6 +17,7 @@ enum ERCInterfaceId: String, CaseIterable {
     /// For future reference:
     //    case erc721metadata = "0x5b5e139f"
     
+    /// A display value for an ERC interface.
     var displayTitle: String {
           switch self {
           case .erc20:
