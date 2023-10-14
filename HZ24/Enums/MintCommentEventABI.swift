@@ -11,7 +11,8 @@ import Foundation
 import web3
 import BigInt
 
-/// Types conforming to ``ABIEvent`` related to Mints for a ERC-721 or ERC-1155 token contract
+/// Types conforming to `web3/ABIEvent` related to mint with comment events for a ERC-721 or ERC-1155 token contract
+///
 /// Dependencies: web3, BigInt
 enum MintCommentEventABI {
     /// Event from ERC721Drop ABI (Zora 721) & ZoraCreatorFixedPriceStrategy (Zora 1155)
