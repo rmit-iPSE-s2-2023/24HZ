@@ -63,17 +63,17 @@ struct ListeningTab: View {
                 if !listeners.isEmpty {
                     /// List of listeners
                     ForEach(listeners, id: \.self) { listener in
-                        NavigationLink(destination: ListenerSettings(listener: listener)) {
-                            ListenerRowItem(listener: listener)
-                        }
-                        .foregroundColor(.primary)
-                        .contentShape(Rectangle())
-                        .onLongPressGesture {
-                            self.isEditingMode.toggle()
-                        }
+                        GenericListenerView(
+                            listener: listener, isEditingMode: $isEditingMode
+                        )
+                    }
+                    .foregroundColor(.primary)
+                    .contentShape(Rectangle())
+                    .onLongPressGesture {
+                        self.isEditingMode.toggle()
                     }
                     
-                    // Go back button
+                    /// Go back button
                     if isEditingMode {
                         Button(action: {
                             self.isEditingMode = false
