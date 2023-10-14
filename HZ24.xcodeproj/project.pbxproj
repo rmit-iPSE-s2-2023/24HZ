@@ -33,6 +33,12 @@
 		B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137A4AF2AD564CA00A06727 /* AddListenerButton.swift */; };
 		B140E9072AD1143700519526 /* EventRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9062AD1143700519526 /* EventRowItem.swift */; };
 		B140E9092AD15C7500519526 /* PreviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140E9082AD15C7500519526 /* PreviewModels.swift */; };
+		B15322792ADA20E600B0B43C /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15322782ADA20E600B0B43C /* Scanner.swift */; };
+		B153227B2ADA219500B0B43C /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153227A2ADA219500B0B43C /* ScannerView.swift */; };
+		B153227D2ADA22C300B0B43C /* CameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153227C2ADA22C300B0B43C /* CameraDelegate.swift */; };
+		B153227F2ADA247000B0B43C /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153227E2ADA247000B0B43C /* CameraPreview.swift */; };
+		B15322822ADA28A400B0B43C /* CameraPreviewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15322812ADA28A400B0B43C /* CameraPreviewRepresentable.swift */; };
+		B15322852ADA30E600B0B43C /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15322842ADA30E600B0B43C /* Validation.swift */; };
 		B1A1098F2AD8B7B300FDEE8B /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = B1A1098E2AD8AE6800FDEE8B /* Documentation.docc */; };
 		B1ACC15E2AD6BD57001AAFC1 /* FormOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACC15D2AD6BD57001AAFC1 /* FormOption.swift */; };
 		B1ACC1682AD77962001AAFC1 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = B1ACC1672AD77962001AAFC1 /* web3.swift */; };
@@ -140,6 +146,13 @@
 		B137A4AF2AD564CA00A06727 /* AddListenerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListenerButton.swift; sourceTree = "<group>"; };
 		B140E9062AD1143700519526 /* EventRowItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRowItem.swift; sourceTree = "<group>"; };
 		B140E9082AD15C7500519526 /* PreviewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewModels.swift; sourceTree = "<group>"; };
+		B15322782ADA20E600B0B43C /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
+		B153227A2ADA219500B0B43C /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		B153227C2ADA22C300B0B43C /* CameraDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDelegate.swift; sourceTree = "<group>"; };
+		B153227E2ADA247000B0B43C /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		B15322802ADA284C00B0B43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B15322812ADA28A400B0B43C /* CameraPreviewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewRepresentable.swift; sourceTree = "<group>"; };
+		B15322842ADA30E600B0B43C /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		B19E75132A99694B008E9FF4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B1A1098E2AD8AE6800FDEE8B /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		B1ACC15D2AD6BD57001AAFC1 /* FormOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormOption.swift; sourceTree = "<group>"; };
@@ -274,6 +287,26 @@
 			path = VIew;
 			sourceTree = "<group>";
 		};
+		B15322772ADA20CD00B0B43C /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				B15322782ADA20E600B0B43C /* Scanner.swift */,
+				B153227A2ADA219500B0B43C /* ScannerView.swift */,
+				B153227C2ADA22C300B0B43C /* CameraDelegate.swift */,
+				B153227E2ADA247000B0B43C /* CameraPreview.swift */,
+				B15322812ADA28A400B0B43C /* CameraPreviewRepresentable.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		B15322832ADA30DA00B0B43C /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				B15322842ADA30E600B0B43C /* Validation.swift */,
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
 		B1ACC1712AD7D1B9001AAFC1 /* EventDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +322,9 @@
 		B1B504672AC5A3B600DA66B7 /* HZ24 */ = {
 			isa = PBXGroup;
 			children = (
+				B15322832ADA30DA00B0B43C /* Validation */,
+				B15322802ADA284C00B0B43C /* Info.plist */,
+				B15322772ADA20CD00B0B43C /* Scanner */,
 				B1A1098E2AD8AE6800FDEE8B /* Documentation.docc */,
 				A2A819842AD57A63004E7AF5 /* HZ24.entitlements */,
 				B1B5048F2AC5A3B600DA66B7 /* Main.swift */,
@@ -604,25 +640,31 @@
 				B1DE66002AD0143E00BED08E /* SelectEventTypes.swift in Sources */,
 				B1B504D22AC5A3B600DA66B7 /* utility.swift in Sources */,
 				B137A4AE2AD4E63D00A06727 /* ListenerRowItem.swift in Sources */,
+				B153227B2ADA219500B0B43C /* ScannerView.swift in Sources */,
 				B1B504CB2AC5A3B600DA66B7 /* SavedTab.swift in Sources */,
 				A2AEBE892AD24EE10056AB1F /* PageView.swift in Sources */,
 				B1B504B02AC5A3B600DA66B7 /* ThirdWebRPC.swift in Sources */,
 				B1B504AD2AC5A3B600DA66B7 /* Model.xcdatamodeld in Sources */,
 				B1B504D12AC5A3B600DA66B7 /* NotificationSelection.swift in Sources */,
+				B15322792ADA20E600B0B43C /* Scanner.swift in Sources */,
 				B1DE66052AD1024E00BED08E /* TimeSegment.swift in Sources */,
 				B1B504AF2AC5A3B600DA66B7 /* DefaultEventsProvider.swift in Sources */,
 				B135DC392AD8C73D00DA3639 /* Event+CoreDataClass.swift in Sources */,
+				B15322852ADA30E600B0B43C /* Validation.swift in Sources */,
 				B137A4B02AD564CA00A06727 /* AddListenerButton.swift in Sources */,
 				B1ACC1702AD7C217001AAFC1 /* MintCommentEventDetails.swift in Sources */,
+				B153227D2ADA22C300B0B43C /* CameraDelegate.swift in Sources */,
 				A2A819982AD58B86004E7AF5 /* HZ24Widget.intentdefinition in Sources */,
 				B1B504B12AC5A3B600DA66B7 /* EventsProvider.swift in Sources */,
 				B1B504AE2AC5A3B600DA66B7 /* RPCProtocol.swift in Sources */,
 				B1ACC16C2AD79814001AAFC1 /* MetadataEventDetails.swift in Sources */,
 				B1B504AB2AC5A3B600DA66B7 /* CoreDataProvider.swift in Sources */,
+				B153227F2ADA247000B0B43C /* CameraPreview.swift in Sources */,
 				B1DE66092AD10B3000BED08E /* EventDetails.swift in Sources */,
 				B1B504D02AC5A3B600DA66B7 /* ListeningTab.swift in Sources */,
 				B1A1098F2AD8B7B300FDEE8B /* Documentation.docc in Sources */,
 				B140E9072AD1143700519526 /* EventRowItem.swift in Sources */,
+				B15322822ADA28A400B0B43C /* CameraPreviewRepresentable.swift in Sources */,
 				B1B504DB2AC5A3B600DA66B7 /* NavBar.swift in Sources */,
 				B1B504CD2AC5A3B600DA66B7 /* Success.swift in Sources */,
 				B1ACC16E2AD79ECF001AAFC1 /* BlockchainInfo.swift in Sources */,
@@ -825,6 +867,8 @@
 				ENABLE_PREVIEWS = YES;
 				"EXCLUDED_SOURCE_FILE_NAMES[arch=*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HZ24/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access required to scan QR code.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -857,6 +901,8 @@
 				DEVELOPMENT_TEAM = U6V5MXK3VE;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HZ24/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access required to scan QR code.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
