@@ -53,7 +53,7 @@ struct ListeningTab: View {
                     .foregroundColor(.red)
                     .multilineTextAlignment(.leading)
                     .font(.largeTitle.bold())
-                    .padding(.leading, 10)
+                    .padding(.leading, 1)
                     Spacer()
             }
             }
@@ -63,15 +63,24 @@ struct ListeningTab: View {
                 if !listeners.isEmpty {
                     /// List of listeners
                     ForEach(listeners, id: \.self) { listener in
-                        GenericListenerView(
-                            listener: listener, isEditingMode: $isEditingMode
-                        )
-                    }
-                    .foregroundColor(.primary)
-                    .contentShape(Rectangle())
-                    .onLongPressGesture {
+                        if !isEditingMode {
+                            NavigationLink(destination: ListenerSettings(listener: listener)) {
+                                GenericListenerView(listener: listener, isEditingMode: $isEditingMode)
+                            }
+                            .foregroundColor(.primary)
+                    } else {
+                         // In editing mode, we only display the listener view without navigation capability
+                         GenericListenerView(listener: listener, isEditingMode: $isEditingMode)
+                             .contentShape(Rectangle())
+                             .onTapGesture {
+                                 // No action on tap when in editing mode
+                             }
+                     }
+                 }
+                    // Long press gesture to toggle editing mode
+                    .simultaneousGesture(LongPressGesture().onEnded { _ in
                         self.isEditingMode.toggle()
-                    }
+                    })
                     
                     /// Go back button
                     if isEditingMode {
@@ -157,7 +166,7 @@ struct GenericListenerView: View {
                 if isEditingMode {
                     ListenerRowItem(listener: listener)
                         .offset(x: offset.width) // Offset the view based on the swipe gesture's width.
-                        .rotationEffect(isEditingMode ? Angle(degrees: danceTrigger ? 1 : -1) : Angle(degrees: 0)) // Rotate the view slightly for a 'dancing' effect when in editing mode.
+                        .rotationEffect(isEditingMode ? Angle(degrees: danceTrigger ? 1 : 1) : Angle(degrees: 0)) // Rotate the view slightly for a 'dancing' effect when in editing mode.
                         .animation(Animation.easeInOut(duration: 0.2).repeatForever(autoreverses: true), value: danceTrigger) // Apply the 'dancing' animation.
                         .onAppear {
                             danceTrigger = isEditingMode // Start the 'dancing' animation when the view appears if in editing mode.
