@@ -30,18 +30,24 @@ struct ListeningTab: View {
     // MARK: - Return body
     var body: some View {
         VStack {
-            
-            // MARK: Tab header
+
+                // MARK: Tab header
+                HStack {
+                    Text("Hey" + ",")
+                        .font(.largeTitle.bold())
+                        .foregroundColor(.accentColor)
+                    Spacer()
+                }
             if !isEditingMode {
                 HStack {
                     Text("here is what you're listening to...")
                         .multilineTextAlignment(.leading)
                         .font(.largeTitle.bold())
-                        .padding(.leading, 10)
+                        .padding(.leading, 1)
                     Spacer()
                 }
             } else {
-                /// Tab heading
+                /// Tab heading in editing mode
                 HStack {
                 Text("swipe right to navigate to the settings page.")
                     .foregroundColor(.red)
@@ -61,6 +67,24 @@ struct ListeningTab: View {
                             ListenerRowItem(listener: listener)
                         }
                         .foregroundColor(.primary)
+                        .contentShape(Rectangle())
+                        .onLongPressGesture {
+                            self.isEditingMode.toggle()
+                        }
+                    }
+                    
+                    // Go back button
+                    if isEditingMode {
+                        Button(action: {
+                            self.isEditingMode = false
+                        }) {
+                            Text("Go Back")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(8)
+                        }
+                        .padding()
                     }
                     
                 } else {
@@ -88,7 +112,8 @@ struct ListeningTab: View {
             VStack {
                 Spacer()
                 // MARK: Add listener button
-                /// Navigate user to root of `AddEventListener` flow
+                if !isEditingMode {
+                    /// Navigate user to root of `AddEventListener` flow
                 HStack {
                     Spacer()
                     NavigationLink(destination: ListenerTypeSelection(), isActive: $navigateToAddListenerFlow) {
@@ -99,6 +124,7 @@ struct ListeningTab: View {
                 }
                 .padding(.bottom, 32)
                 .padding(.trailing, 16)
+            }
             }
             
         )
