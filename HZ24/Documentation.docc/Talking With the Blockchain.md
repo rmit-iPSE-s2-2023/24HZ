@@ -12,7 +12,7 @@ There are 2 main ways of talking with the blockchain. One way is setting up a no
 
 ### JSON-RPC
 
-The JSON-RPC specification is the interface implemented by Ethereum nodes so that people (or computers) that want to read Ethereum blockchain data, they have a common way of gathering the necessary information. Similar to a REST API call, you make a JSON-RPC request that adheres to this specification for the kind of information that you'd like to retrieve.
+The JSON-RPC specification is the interface implemented by Ethereum nodes so that people (or computers) that want to read Ethereum blockchain data have a common way of gathering the necessary information. Similar to a REST API call, you make a JSON-RPC request that adheres to this specification for the kind of information that you'd like to retrieve.
 
 For example, to obtain the current block number, you form a JSON-RPC request for the method called `eth_blockNumber` to any node that adheres to the JSON-RPC specification, and it will return a response with the current block number.
 
@@ -31,8 +31,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id
 
 For a detailed explanation of this interface, see the official Ethereum documentation on [JSON-RPC API](https://ethereum.org/en/developers/docs/apis/json-rpc/).
 
-> What's noteworthy about this particular JSON-RPC specification is that you can use this interface for many different networks, not just Ethereum. Any network that also use this ever-so-wonderful JSON-RPC specification is referred to as **EVM-compatible** chains. _Zora_ is one example of an EVM-compatible chain because it implements this same JSON-RPC specification. So, when we make this request to a **Zora node**, it will also return the current block number, but this time the current block number for the Zora network, instead of the Ethereum network.
+> Tip: What's noteworthy about this particular JSON-RPC specification is that you can use this interface for many different networks, not just Ethereum. Any network that also use this ever-so-wonderful JSON-RPC specification is referred to as **EVM-compatible** chains. _Zora_ is one example of an EVM-compatible chain because it implements this same JSON-RPC specification. So, when we make this request to a **Zora node**, it will also return the current block number, but this time the current block number for the Zora network, instead of the Ethereum network.
 
-> Terms like "API", "Specification", "Interface", and "Protocol" can be used interchangebly to refer to this common set of methods JSON-RPC methods.
+> Terms like "API", "Specification", "Interface", and "Protocol" are often used interchangebly to refer to this common set of JSON-RPC methods.
 
 
