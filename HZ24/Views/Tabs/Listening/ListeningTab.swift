@@ -72,7 +72,7 @@ struct ListeningTab: View {
             }
             
             Spacer()
-
+            
         }
         .padding(.horizontal, 8)
         .overlay(
@@ -91,9 +91,36 @@ struct ListeningTab: View {
                 .padding(.bottom, 32)
                 .padding(.trailing, 16)
             }
-
+            
         )
         // End of VStack (parent)
+    }
+}
+
+/// ``GenericListenerView`` represents a single listener in the list, with swipe actions for editing.
+struct GenericListenerView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    /// The listener being represented by this view
+    var listener: Listener
+    /// The offset for the swipe gesture.
+    @State private var offset = CGSize.zero
+    /// A binding to determine if the app is in editing mode
+    @Binding var isEditingMode: Bool
+    @State private var showGearIcon = false
+    @State private var animateDance = false
+    @State private var navigateToSetting = false
+    
+    /// Trigger for the Items animation
+    @State var danceTrigger = false
+    
+    var body: some View {
+        ZStack {
+            //TODO: GEAR ICON to navigate Listener settings
+            // Displaying the gear icon with its green background
+            HStack {
+                //TODO: Complex gesture
+            }
+        }
     }
 }
 
