@@ -12,7 +12,7 @@ import web3
 import BigInt
 
 /// Dependencies: web3, BigInt
-/// Types conforming to ``ABIEvent`` related to Metadata updates for a ERC-721 or ERC-1155 token contract
+/// Types conforming to `web3/ABIEvent` related to Metadata updates for a ERC-721 or ERC-1155 token contract
 enum MetadataEventABI {
     /// Events from EditionMetadataRenderer ABI (Zora 721)
     public struct DescriptionUpdated: ABIEvent {
