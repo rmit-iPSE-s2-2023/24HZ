@@ -26,6 +26,8 @@ struct NotificationSelection: View {
     var body: some View {
         
         VStack {
+            // MARK: Progress bar
+            ProgressView(value: 1)
             Spacer()
             
             /// Form question

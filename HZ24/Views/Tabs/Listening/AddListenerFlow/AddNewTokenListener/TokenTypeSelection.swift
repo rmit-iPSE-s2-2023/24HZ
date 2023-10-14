@@ -30,6 +30,8 @@ struct TokenTypeSelection: View {
     var body: some View {
         
         VStack {
+            // MARK: Progress bar
+            ProgressView(value: 0.5)
             Spacer()
             
             /// Form question

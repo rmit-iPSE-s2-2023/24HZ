@@ -26,7 +26,6 @@ struct SelectEventTypes: View {
             Text("Select events to listen to")
                 .font(.largeTitle.bold())
             Button {
-                print(newListener)
                 newListener?.listeningForMetadataEvents.toggle()
                 listenToMetadataEvents.toggle()
             } label: {
