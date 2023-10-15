@@ -10,6 +10,7 @@
 import XCTest
 @testable import HZ24
 
+/// Test suite for `DefaultsEventsProvider`
 final class DefaultEventsProviderTests: XCTestCase {
 
     let maxBlockRange = 1000
@@ -45,24 +46,27 @@ final class DefaultEventsProviderTests: XCTestCase {
     }
     
     // MARK: - NewTokenEvent/s
-    /// Testing ``DefaultEventsProvider.getNewTokenEvents``
+    /// Testing `DefaultEventsProvider.getNewTokenEvents`
+    ///
+    /// Test that there were a specific number of new token contract deployments in the given block range.
     func testGetNewTokenEvents() async throws {
-        /// DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
+        // DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
         let fromBlock = 4047777
         let toBlock = fromBlock + self.maxBlockRange - 1
         
         let interfaceIds = [ERCInterfaceId.erc1155.rawValue.web3.hexData!, ERCInterfaceId.erc20.rawValue.web3.hexData!, ERCInterfaceId.erc721.rawValue.web3.hexData!]
         do {
             let newDeploymentEvents = try await eventsProvider.getNewTokenEvents(fromBlock: fromBlock, toBlock: toBlock, forInterfaces: interfaceIds)
-            print(newDeploymentEvents)
+            XCTAssertEqual(newDeploymentEvents.count, 1)
         } catch {
             XCTFail("Expected new deployment events but failed: \(error).")
         }
     }
     
     // MARK: - MetadataEvent/s
-    /// Testing ``DefaultEventsProvider.getMetadataEvents``
-    /// Should return a dictionary keyed by contract addresses
+    /// Testing `DefaultEventsProvider.getMetadataEvents`
+    ///
+    /// Tests that there were a specific number of metadata related events in the given block range for any contract.
     /// Note: This test is not providing any contract addresses to filter by. In real use, this code will always be called with contract address/es to filter by.
     func testGetMetadataEventsWithNoContractFilter() async throws {
         /// DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
@@ -77,6 +81,9 @@ final class DefaultEventsProviderTests: XCTestCase {
         }
     }
     
+    /// Testing that `getMetadataEvents` can be called without throwing.
+    ///
+    /// This test is handy when looking for contract addresses use when adding existing token listeners for a demo.
     func testGetMetadataEventsWithNoContractFilterCurrentBlock() async throws {
         let toBlock = try await eventsProvider.getCurrentBlockNumber()
         let fromBlock = toBlock - self.maxBlockRange + 1
@@ -89,6 +96,9 @@ final class DefaultEventsProviderTests: XCTestCase {
         }
     }
     
+    /// Testing that `getMetadataEvents` gets the correct number of metadata events in given block range and contract addresses.
+    ///
+    /// Test method should not throw.
     func testGetMetadataEventsWithContractFilter() async throws {
         /// DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
         let fromBlock = metadataTestData["fromBlock"] as! Int
@@ -96,19 +106,18 @@ final class DefaultEventsProviderTests: XCTestCase {
         let contracts = metadataTestData["contracts"] as! [String]
         do {
             let metadataUpdateEventsByContractAddress = try await self.eventsProvider.getMetadataEvents(fromBlock: fromBlock, toBlock: toBlock, forContracts: contracts)
-            XCTAssertNotNil(metadataUpdateEventsByContractAddress)
+            XCTAssertEqual(metadataUpdateEventsByContractAddress.count, 3)
         } catch {
             XCTFail("Expected events but failed \(error).")
         }
     }
     
     // MARK: - MintCommentEvent/s
-    /// Testing it is capturing _some_ `MintComment` events in the last 1000 blocks by using the current block
-    /// Note: Useful if we want to note **active contracts for demoing**
+    /// Testing it is capturing _some_ `MintComment` events in the last 1000 blocks for a specified contract address
     func testGetMintCommentEventsWithContractFilter() async throws {
         let toBlock = try await eventsProvider.getCurrentBlockNumber()
         let fromBlock = toBlock - self.maxBlockRange + 1
-        /// First run `testGetMintCommentEventsWithoutContractFilterCurrentBlock`, get some example contract addresses from output and include in this array.
+        /// First run `testGetMintCommentEventsWithoutContractFilterCurrentBlock` to get some example (active) contract addresses from output and include in this array.
         let contracts = ["0xc51ba90509e1d3a5cb5a78e21705a844abfb8172"]
         do {
             let events = try await self.eventsProvider.getMintCommentEvents(fromBlock: fromBlock, toBlock: toBlock, forContracts: contracts)
@@ -119,8 +128,9 @@ final class DefaultEventsProviderTests: XCTestCase {
         }
     }
     
+    /// A test to make sure the `getMintCommentEvents` function returns the correct amount of mint comment events in given block range without filtering by contract addresses.
     func testGetMintCommentEventsWithoutContractFilter() async throws {
-        /// DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
+        // DO NOT CHANGE: TESTING FOR THIS SPECIFIC BLOCK RANGE
         let fromBlock = 4321000
         let toBlock = fromBlock + self.maxBlockRange - 1
         do {
@@ -133,7 +143,8 @@ final class DefaultEventsProviderTests: XCTestCase {
         }
     }
     
-    /// Testing it is capturing _some_ `MintComment` events in the last 1000 blocks by using the current block
+    /// Testing it is capturing _some_ `MintComment` events in the last 1000 blocks without a contract filter.
+    ///
     /// Note: Useful if we want to note **active contracts for demoing**
     func testGetMintCommentEventsWithoutContractFilterCurrentBlock() async throws {
         let toBlock = try await eventsProvider.getCurrentBlockNumber()
