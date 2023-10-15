@@ -11,6 +11,7 @@ import XCTest
 import web3
 @testable import HZ24
 
+/// Test suite for `ThirdWebRPC`
 final class ThirdWebRPCTests: XCTestCase {
 
     var rpc: ThirdWebRPC!
