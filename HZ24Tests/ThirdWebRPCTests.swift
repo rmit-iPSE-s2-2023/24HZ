@@ -15,12 +15,12 @@ final class ThirdWebRPCTests: XCTestCase {
 
     var rpc: ThirdWebRPC!
     
-    /// Example Zora Contracts
-    /// 1155
+    // MARK: Example Zora Contracts
+    /// Example ERC 1155 token contract
     let opepenThreadition = "0x6d2C45390B2A0c24d278825c5900A1B1580f9722"
-    /// 721
+    /// Example ERC 721 token contract
     let allure = "0x53cb0B849491590CaB2cc44AF8c20e68e21fc36D"
-    /// 20
+    /// Example ERC 20 token contract
     enum ERC20ExampleContracts: String {
         case merk = "0xD838D5b87439e17B0194fd43e37300cD99Aa3DE0"
         case mara = "0x661d1Fa0aAE29e6608a877627e49A058CAaE0285"
@@ -33,7 +33,8 @@ final class ThirdWebRPCTests: XCTestCase {
         rpc = ThirdWebRPC(chainName: ThirdWebRPC.ThirdWebChainName.zora)
     }
     
-    /// Testing ThirdWebRPC.getBlocksInRange
+    /// Testing `ThirdWebRPC/getBlocksInRange`
+    ///
     /// Test cases:
     /// 1. Should always return an array of BlockObjects - empty or not - OR throw
     /// 2. Returns the correct amount of BlockObjects i.e. for the given block range
@@ -51,7 +52,8 @@ final class ThirdWebRPCTests: XCTestCase {
             XCTFail("Expected block objects but failed: \(error).")
         }
     }
-    /// Testing ThirdWebRPC.getBlocksInRange
+    /// Testing `ThirdWebRPC.getBlocksInRange`
+    ///
     /// Test cases:
     /// 1. Should throw when block range is too big
     func testBlocksInRangeTooBig() async throws {
@@ -67,6 +69,7 @@ final class ThirdWebRPCTests: XCTestCase {
     }
     
     /// Testing finding new contract deployments within give block range
+    ///
     /// Test cases:
     /// 1. Number of new contract deployments found in given block range is correct
     /// 2. `to` field in `TransactionObject` is `nil` (as it should be for transactions that created new contracts)
@@ -93,6 +96,7 @@ final class ThirdWebRPCTests: XCTestCase {
     }
     
     /// Testing finding new contract deployments within give block range
+    ///
     /// Test cases:
     /// 1. Number of `TransactionReceiptObject` returned matches number of deploy transactions found in given block range
     /// 2. `to
@@ -123,6 +127,9 @@ final class ThirdWebRPCTests: XCTestCase {
         }
     }
     
+    /// A test used to debug getTokenName
+    ///
+    /// Test succeeds if the async code does not throw.
     func testTokenName() async throws {
         do {
             let tokenName = try await rpc.getTokenName(contractAddress: self.allure)
@@ -133,9 +140,9 @@ final class ThirdWebRPCTests: XCTestCase {
     }
     
     /// Testing getting the token name and symbol for a given array of contract addresses
-    /// Return object should be a dictionary with the contract addresses as keys
+    ///
     /// Test cases:
-    /// 1. Number of dictionary keys should match the number of contracts included in array
+    /// 1. Number of tokenInfos must be same as contract addresses passed in
     func testTokenInfo() async throws {
         let contractAddresses = [allure, opepenThreadition]
         do {
@@ -147,6 +154,7 @@ final class ThirdWebRPCTests: XCTestCase {
         }
     }
     
+    /// A test to check that `ThirdWebRPC/checksSupportInterface` works for an ERC 721 token contract
     func testInterfaceSupportFor721() async throws {
         let interfaceId = ERCInterfaceId.erc721.rawValue.web3.hexData!
         do {
@@ -157,6 +165,8 @@ final class ThirdWebRPCTests: XCTestCase {
             XCTFail("Expected check interface support but failed: \(error)")
         }
     }
+    
+    /// A test to check that `ThirdWebRPC/checksSupportInterface` works for an ERC 1155 token contract
     func testInterfaceSupportFor1155() async throws {
         let interfaceId = ERCInterfaceId.erc1155.rawValue.web3.hexData!
         do {
@@ -167,6 +177,8 @@ final class ThirdWebRPCTests: XCTestCase {
             XCTFail("Expected check interface support but failed: \(error)")
         }
     }
+    
+    /// A test to check that `ThirdWebRPC/checksSupportInterface` works for an ERC 20 token contract
     func testInterfaceSupportFor20() async throws {
         let contractAddress = ERC20ExampleContracts.dlgate.rawValue
         let interfaceId20 = ERCInterfaceId.erc20.rawValue.web3.hexData!
@@ -194,7 +206,7 @@ final class ThirdWebRPCTests: XCTestCase {
         }
     }
     
-    
+    /// A test to check that `ThirdWebRPC/filterContractWithInterfaceSupport` correctly filters contracts for certain ERC types.
     func testFilterContractsWithInterfaceSupport() async throws {
         let interfaceIds = [ERCInterfaceId.erc1155.rawValue.web3.hexData!, ERCInterfaceId.erc20.rawValue.web3.hexData!, ERCInterfaceId.erc721.rawValue.web3.hexData!]
         do {
